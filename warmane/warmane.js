@@ -48,3 +48,8 @@
             // Wait for authentication and load character selection interface; 等待进入角色选择画面
             <Wait 500>
 
+
+
+
+<Hotkey ScrollLockOn Ctrl Alt S>
+    <LaunchAndRenameWoW1ToWoW5>

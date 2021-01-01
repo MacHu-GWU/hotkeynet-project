@@ -2,7 +2,7 @@
 hotkeynet_venv/
 hotkeynet.egg-info/
 hotkeynet-*/
-
+credentials.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

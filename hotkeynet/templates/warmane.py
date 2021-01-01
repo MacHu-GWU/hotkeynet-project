@@ -101,8 +101,39 @@ cmd_EnterUsernamePasssword = Command(
     content=_cmd_EnterUsernamePasssword_tpl,
 )
 
-
 cmd_LaunchAndRenameGameClientWindow = None # type: Command
+
+
+_cmd_BatchLoginFatmulti1To5_tpl = f"""
+    <Wait 3000> // 等待一段时间
+    <{cmd_EnterUsernamePasssword} WoW1 {config.fatmulti1_username} {config.fatmulti1_password}>
+    <{cmd_EnterUsernamePasssword} WoW2 {config.fatmulti2_username} {config.fatmulti2_password}>
+    <{cmd_EnterUsernamePasssword} WoW3 {config.fatmulti3_username} {config.fatmulti3_password}>
+    <{cmd_EnterUsernamePasssword} WoW4 {config.fatmulti4_username} {config.fatmulti4_password}>
+    <{cmd_EnterUsernamePasssword} WoW5 {config.fatmulti5_username} {config.fatmulti5_password}>
+    <{cmd_EnterUsernamePasssword} WoW6 {config.fitsheep_username} {config.fitsheep_password}>
+    <{cmd_EnterUsernamePasssword} WoW7 {config.fatmulti6_username} {config.fatmulti6_password}>
+    <{cmd_EnterUsernamePasssword} WoW8 {config.fatmulti8_username} {config.fatmulti8_password}>
+    <{cmd_EnterUsernamePasssword} WoW9 {config.fatmulti9_username} {config.fatmulti9_password}>
+    <{cmd_EnterUsernamePasssword} WoW10 {config.fatmulti10_username} {config.fatmulti10_password}>
+    <{cmd_EnterUsernamePasssword} WoW11 {config.fatmulti11_username} {config.fatmulti11_password}>
+    <{cmd_EnterUsernamePasssword} WoW12 {config.fatmulti12_username} {config.fatmulti12_password}>
+    <{cmd_EnterUsernamePasssword} WoW13 {config.fatmulti13_username} {config.fatmulti13_password}>
+    <{cmd_EnterUsernamePasssword} WoW14 {config.fatmulti14_username} {config.fatmulti14_password}>
+    <{cmd_EnterUsernamePasssword} WoW15 {config.fatmulti15_username} {config.fatmulti15_password}>
+    <{cmd_EnterUsernamePasssword} WoW16 {config.fatmulti16_username} {config.fatmulti16_password}>
+    <{cmd_EnterUsernamePasssword} WoW17 {config.fatmulti17_username} {config.fatmulti17_password}>
+    <{cmd_EnterUsernamePasssword} WoW18 {config.fatmulti18_username} {config.fatmulti18_password}>
+    <Restore>
+"""
+
+cmd_BatchLoginFatmulti1To5 = Command(
+
+)
+
+
+cmd_BatchLogin = None # type: Command
+
 
 
 def create_base_script() -> Script:
