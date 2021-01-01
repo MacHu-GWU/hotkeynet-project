@@ -1,29 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from ..script import Script, Command, Hotkey, render_template
+from ..script import (
+    Script, Command, Hotkey,
+    Action, Key, Mouse, SendLabel, CallCommand,
+)
+from ..utils import render_template
 from .. import keyname
+from .warmane_config import Config
 
-# Use Monkey Patch to replace this value
-WOW_EXE_PATH = r"D:\HSH\Games\WOW Private\Client\World of Warcraft 3.3.5 enUS (Warman wod models)\Wow.exe"
-WRONG_PASSWORD_POP_UP_X_AT_1920_1080 = 890
-WRONG_PASSWORD_POP_UP_Y_AT_1920_1080 = 565
-WRONG_PASSWORD_POP_UP_X_AT_1600_900 = 792
-WRONG_PASSWORD_POP_UP_Y_AT_1600_900 = 502
-USERNAME_INPUT_BOX_X_AT_1920_1080 = 900
-USERNAME_INPUT_BOX_Y_AT_1920_1080 = 505
-USERNAME_INPUT_BOX_X_AT_1600_900 = 788
-USERNAME_INPUT_BOX_Y_AT_1600_900 = 451
-
-wrong_password_pop_up_x = WRONG_PASSWORD_POP_UP_X_AT_1600_900
-wrong_password_pop_up_y = WRONG_PASSWORD_POP_UP_Y_AT_1600_900
-username_input_box_x = USERNAME_INPUT_BOX_X_AT_1600_900
-username_input_box_y = USERNAME_INPUT_BOX_Y_AT_1600_900
-
-script = Script()
 
 _cmd_LaunchAndRename_tpl = f"""
     <SendPC %1%>
-        <Run "{WOW_EXE_PATH}">
+        <Run "{Config.WOW_EXE_PATH}">
             <RenameWin "World of Warcraft" %2%>
 """
 
@@ -102,10 +90,10 @@ _cmd_EnterUsernamePasssword_tpl = """
             // Wait for authentication and load character selection interface; 等待进入角色选择画面
             <Wait 500>
 """.format(
-    wrong_password_pop_up_x=wrong_password_pop_up_x,
-    wrong_password_pop_up_y=wrong_password_pop_up_y,
-    username_input_box_x=username_input_box_x,
-    username_input_box_y=username_input_box_y,
+    wrong_password_pop_up_x=Config.WRONG_PASSWORD_POP_UP_X,
+    wrong_password_pop_up_y=Config.WRONG_PASSWORD_POP_UP_Y,
+    username_input_box_x=Config.USERNAME_INPUT_BOX_X,
+    username_input_box_y=Config.USERNAME_INPUT_BOX_Y,
 )
 
 cmd_EnterUsernamePasssword = Command(
@@ -114,7 +102,25 @@ cmd_EnterUsernamePasssword = Command(
 )
 
 
-hk_LaunchAndRenameGameClientWindow = Hotkey(
-    name="LaunchAndRenameGameClientWindow",
+cmd_LaunchAndRenameGameClientWindow = None # type: Command
 
-)
+
+def create_base_script() -> Script:
+    script = Script()
+
+    script.add_command(cmd_LaunchAndRename)
+    script.add_command(cmd_LaunchAndRenameGameClientWindow)
+    script.add_command(cmd_EnterUsernamePasssword)
+
+    #--- hotkey
+    hk_LaunchAndRenameGameClientWindow = Hotkey(
+        name="LaunchAndRenameGameClientWindow",
+        key=keyname.SCROLOCK_ON(keyname.CTRL_ALT_(keyname.S)),
+        actions=[
+            CallCommand(
+                cmd=cmd_LaunchAndRenameGameClientWindow,
+            )
+        ]
+    )
+    script.add_hotkey(hk_LaunchAndRenameGameClientWindow)
+    return script

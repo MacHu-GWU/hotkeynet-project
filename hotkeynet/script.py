@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import attr
+import typing
 from collections import OrderedDict
-import jinja2
+
+import attr
 from pathlib_mate import PathCls as Path
 
-from . import keyname
-from .utils import render_template, remove_comments
-
+from .utils import render_template
 
 TPL_DIR = Path(__file__).change(new_basename="templates")
-
 
 _ScriptTemplate = Path(TPL_DIR, "Script.tpl").read_text(encoding="utf-8")
 
@@ -56,7 +54,7 @@ class Command:
         if self.script is not None:
             self.script.add_command(self)
 
-    def call(self, *args):
+    def call(self, *args) -> str:
         """
         渲染 Command 被调用的代码块, 形如:
 
@@ -70,12 +68,13 @@ class Command:
             " " + " ".join(args) if len(args) else ""
         )
 
-    def dump(self):
+    def dump(self) -> str:
         """
         渲染整个 Command 代码块
 
         :return:
         """
+        print(f"dump Command({self.name}) ...")
         return render_template(_CommandTemplate, command=self)
 
 
@@ -89,68 +88,86 @@ class Template:
             self.script.add_template(self)
 
 
+_HotkeyTemplate = Path(TPL_DIR, "Hotkey.tpl").read_text(encoding="utf-8")
+
+
 @attr.s
 class Hotkey:
     name: str = attr.ib()
     key: str = attr.ib()
     script: 'Script' = attr.ib(default=None)
+    actions = attr.ib(factory=list)  # type: typing.List[Action]
 
     def __attrs_post_init__(self):
         if self.script is not None:
             self.script.add_hotkey(self)
 
     @property
-    def title(self):
+    def title(self) -> str:
         return f"<Hotkey {self.key}>"
 
-    def dump(self):
-        return "<Hotkey>"
+    def dump(self) -> str:
+        print(f"dump Hotkey({self.key}) ...")
+        return render_template(
+            _HotkeyTemplate,
+            hotkey=self,
+            render_action=render_action,
+        )
+
+
+# --- Action ---
+@attr.s
+class Action:
+    def dump(self) -> str:
+        raise NotImplementedError
 
 
 @attr.s
-class KeyboardMouseAction:
-    pass
-
-
-@attr.s
-class Key(KeyboardMouseAction):
+class Key(Action):
     name = attr.ib()
 
-    def dump(self):
+    def dump(self) -> str:
         return "<Key {name}>".format(
             name=self.name,
         )
 
+
 @attr.s
-class KeyUp(KeyboardMouseAction):
+class KeyUp(Action):
     name = attr.ib()
 
-    def dump(self):
+    def dump(self) -> str:
         return "<KeyUp {name}>".format(
             name=self.name,
         )
 
+
 @attr.s
-class KeyDown(KeyboardMouseAction):
+class KeyDown(Action):
     name = attr.ib()
 
-    def dump(self):
+    def dump(self) -> str:
         return "<KeyDown {name}>".format(
             name=self.name,
         )
 
+
 @attr.s
-class Mouse(KeyboardMouseAction):
+class Mouse(Action):
     """
     reference: http://hotkeynet.com/ref/clickmouse.html
     """
-    button = attr.ib()
-    stroke = attr.ib(default="") # Down, Up, Both, or NoClick
-    target = attr.ib(default="") # Window or Screen
-    mode = attr.ib(default="") # NoMove, # #, Dupe, Scale, #% #%, ±# ±#
-    restore = attr.ib(default="") # Restore or NoRestore
+    button = attr.ib()  # type: str
+    # Down, Up, Both, or NoClick
+    stroke = attr.ib(default="")  # type: str
+    # Window or Screen
+    target = attr.ib(default="")  # type: str
+    # NoMove, # #, Dupe, Scale, #% #%, ±# ±#
+    mode = attr.ib(default="")  # type: str
+    # Restore or NoRestore
+    restore = attr.ib(default="")  # type: str
 
-    def dump(self):
+    def dump(self) -> str:
         return "<ClickMouse {}>".format(
             "{button}{stroke}{target}{mode}{restore}".format(
                 button=(self.button + " ").lstrip(),
@@ -162,18 +179,39 @@ class Mouse(KeyboardMouseAction):
         )
 
 
-
-
 _SendLabelTemplate = Path(TPL_DIR, "SendLabel.tpl").read_text(encoding="utf-8")
 
+
 @attr.s
-class SendLabel:
-    to = attr.ib(factory=list)
-    actions = attr.ib(factory=list)
+class SendLabel(Action):
+    to = attr.ib(factory=list)  # type: typing.List[str]
+    actions = attr.ib(factory=list)  # type: typing.List[Action]
 
     @property
-    def targets(self):
+    def targets(self) -> str:
         return ", ".join(self.to)
 
-    def dump(self):
+    @property
+    def title(self) -> str:
+        return f"<SendLabel {self.targets}>"
+
+    def dump(self) -> str:
         return render_template(_SendLabelTemplate, send_label=self)
+
+
+@attr.s
+class CallCommand(Action):
+    cmd = attr.ib(validator=attr.validators.instance_of(Command))  # type: Command
+    args = attr.ib(factory=tuple)  # type: tuple
+
+    def dump(self) -> str:
+        return self.cmd.call(*self.args)
+
+
+def render_action(action: typing.Union[Action, str]):
+    if isinstance(action, Action):
+        return action.dump()
+    elif isinstance(action, str):
+        return action
+    else:
+        raise TypeError
