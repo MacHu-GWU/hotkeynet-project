@@ -3,6 +3,8 @@ hotkeynet_venv/
 hotkeynet.egg-info/
 hotkeynet-*/
 credentials.json
+warmane/*.js
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

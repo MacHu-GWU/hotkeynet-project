@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from hotkeynet.script import Hotkey, Key, SendLabel
+from hotkeynet.script import Hotkey, Key, SendLabel, Command
 from hotkeynet import keyname
 
 
@@ -14,6 +14,12 @@ test_dump_result_1 = """
         <Key Numpad2>
         <Key 2>
     <Key 3>
+""".strip()
+
+
+test_dump_result_2 = """
+<Hotkey ScrollLockOn Space>
+    <TestCommand>
 """.strip()
 
 
@@ -48,6 +54,20 @@ class TestHotkey:
             ]
         )
         assert hk.dump().strip() == test_dump_result_1
+
+        cmd = Command(
+            name="TestCommand",
+            content=""
+        )
+        hk = Hotkey(
+            name="Test",
+            key=keyname.SCROLOCK_ON(keyname.SPACE),
+            actions=[
+                cmd.call(),
+            ]
+        )
+
+        assert hk.dump().strip() == test_dump_result_2
 
 
 if __name__ == "__main__":

@@ -1,69 +1,10 @@
 
-.. image:: https://travis-ci.org/MacHu-GWU/hotkeynet-project.svg?branch=master
-    :target: https://travis-ci.org/MacHu-GWU/hotkeynet-project?branch=master
-
-.. image:: https://codecov.io/gh/MacHu-GWU/hotkeynet-project/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/MacHu-GWU/hotkeynet-project
-
-.. image:: https://img.shields.io/pypi/v/hotkeynet.svg
-    :target: https://pypi.python.org/pypi/hotkeynet
-
-.. image:: https://img.shields.io/pypi/l/hotkeynet.svg
-    :target: https://pypi.python.org/pypi/hotkeynet
-
-.. image:: https://img.shields.io/pypi/pyversions/hotkeynet.svg
-    :target: https://pypi.python.org/pypi/hotkeynet
-
-.. image:: https://img.shields.io/badge/STAR_Me_on_GitHub!--None.svg?style=social
-    :target: https://github.com/MacHu-GWU/hotkeynet-project
-
-------
-
-
-.. image:: https://img.shields.io/badge/Link-Document-blue.svg
-    :target: http://hotkeynet.my-docs.com/index.html
-
-.. image:: https://img.shields.io/badge/Link-API-blue.svg
-    :target: http://hotkeynet.my-docs.com/py-modindex.html
-
-.. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
-    :target: http://hotkeynet.my-docs.com/py-modindex.html
-
-.. image:: https://img.shields.io/badge/Link-Install-blue.svg
-    :target: `install`_
-
-.. image:: https://img.shields.io/badge/Link-GitHub-blue.svg
-    :target: https://github.com/MacHu-GWU/hotkeynet-project
-
-.. image:: https://img.shields.io/badge/Link-Submit_Issue-blue.svg
-    :target: https://github.com/MacHu-GWU/hotkeynet-project/issues
-
-.. image:: https://img.shields.io/badge/Link-Request_Feature-blue.svg
-    :target: https://github.com/MacHu-GWU/hotkeynet-project/issues
-
-.. image:: https://img.shields.io/badge/Link-Download-blue.svg
-    :target: https://pypi.org/pypi/hotkeynet#files
-
-
 Welcome to ``hotkeynet`` Documentation
 ==============================================================================
 
-Documentation for ``hotkeynet``.
+``hotkeynet`` 是一款很不错的多开游戏键盘鼠标同步器软件, 它的脚本语言是类似 XML 的标记语言.
+
+但是由于语言设计过于简单, 所以导致代码复用变得非常困难. 所以开发了此项目, 用 Python 来定义 HotkeyNet 中的概念, 然后生成 HotkeyNet 脚本.
 
 
-.. _install:
-
-Install
-------------------------------------------------------------------------------
-
-``hotkeynet`` is released on PyPI, so all you need is:
-
-.. code-block:: console
-
-    $ pip install hotkeynet
-
-To upgrade to latest version:
-
-.. code-block:: console
-
-    $ pip install --upgrade hotkeynet
+运行 ``warmane/generate_script.py`` 可生成一个 ``warmane/warmane.js`` 脚本文件给 HotkeyNet 使用.

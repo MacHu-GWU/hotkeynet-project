@@ -33,3 +33,18 @@ def remove_comments(content: str) -> str:
 
     new_content = "\n".join(lines_new)
     return new_content
+
+
+def remove_empty_line(content: str) -> str:
+    """
+    Remove all full empty line
+    """
+    lines = content.split("\n")
+
+    lines_new = list()
+    for line in lines:
+        if line.strip():
+            lines_new.append(line)
+
+    new_content = "\n".join(lines_new)
+    return new_content

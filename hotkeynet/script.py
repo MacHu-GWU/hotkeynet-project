@@ -6,7 +6,7 @@ from collections import OrderedDict
 import attr
 from pathlib_mate import PathCls as Path
 
-from .utils import render_template
+from .utils import render_template, remove_empty_line
 
 TPL_DIR = Path(__file__).change(new_basename="templates")
 
@@ -32,10 +32,10 @@ class Script:
         self.templates[template.name] = template
 
     def add_hotkey(self, hotkey: 'Hotkey', ignore_duplicate=False):
-        if hotkey.name in self.commands:
+        if hotkey.key in self.hotkeys:
             if not ignore_duplicate:
                 raise ValueError(f"Duplicate hotkey name found {hotkey.name}")
-        self.hotkeys[hotkey.name] = hotkey
+        self.hotkeys[hotkey.key] = hotkey
 
     def dump(self):
         return render_template(_ScriptTemplate, script=self)
@@ -75,7 +75,12 @@ class Command:
         :return:
         """
         print(f"dump Command({self.name}) ...")
-        return render_template(_CommandTemplate, command=self)
+        return remove_empty_line(
+            render_template(
+                _CommandTemplate,
+                command=self
+            )
+        )
 
 
 @attr.s
@@ -96,7 +101,7 @@ class Hotkey:
     name: str = attr.ib()
     key: str = attr.ib()
     script: 'Script' = attr.ib(default=None)
-    actions = attr.ib(factory=list)  # type: typing.List[Action]
+    actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
 
     def __attrs_post_init__(self):
         if self.script is not None:
@@ -107,12 +112,12 @@ class Hotkey:
         return f"<Hotkey {self.key}>"
 
     def dump(self) -> str:
-        print(f"dump Hotkey({self.key}) ...")
-        return render_template(
+        print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")
+        return remove_empty_line(render_template(
             _HotkeyTemplate,
             hotkey=self,
             render_action=render_action,
-        )
+        ))
 
 
 # --- Action ---

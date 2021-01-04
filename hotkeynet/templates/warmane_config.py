@@ -76,3 +76,24 @@ class Config:
 
     fatmulti18_username = "fatmulti18"
     fatmulti18_password = credentials["fatmulti18"]
+
+    credentials = [
+        dict(username=fatmulti1_username, password=fatmulti1_password),
+        dict(username=fatmulti2_username, password=fatmulti2_password),
+        dict(username=fatmulti3_username, password=fatmulti3_password),
+        dict(username=fatmulti4_username, password=fatmulti4_password),
+        dict(username=fatmulti5_username, password=fatmulti5_password),
+        dict(username=fitsheep_username, password=fitsheep_password),
+        dict(username=fatmulti6_username, password=fatmulti6_password),
+        dict(username=fatmulti8_username, password=fatmulti8_password),
+        dict(username=fatmulti9_username, password=fatmulti9_password),
+        dict(username=fatmulti10_username, password=fatmulti10_password),
+        dict(username=fatmulti11_username, password=fatmulti11_password),
+        dict(username=fatmulti12_username, password=fatmulti12_password),
+        dict(username=fatmulti13_username, password=fatmulti13_password),
+        dict(username=fatmulti14_username, password=fatmulti14_password),
+        dict(username=fatmulti15_username, password=fatmulti15_password),
+        dict(username=fatmulti16_username, password=fatmulti16_password),
+        dict(username=fatmulti17_username, password=fatmulti17_password),
+        dict(username=fatmulti18_username, password=fatmulti18_password),
+    ]

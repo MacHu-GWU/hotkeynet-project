@@ -165,6 +165,13 @@ def CAPSLOCK_ON(key):
     return "CapsLockOn {}".format(key)
 
 
+class Multibox:
+    f1_to_f18 = [
+        F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
+        INSERT, HOME, PAGE_UP, DELETE, END, PAGE_DOWN,
+    ]
+
+
 class Paladin:
     ALL_SPEC_DIVINE_PLEA = MOUSE_MButton # 神圣恩求 (回蓝技能)
     ALL_SPEC_AVENGING_WRATH = SHIFT_(F) # 复仇之怒 (爆发技能)
