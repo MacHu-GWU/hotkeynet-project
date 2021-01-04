@@ -1,4 +1,4 @@
 {{ send_label.title }}
     {%- for action in send_label.actions %}
-        {{ action.dump() }}
+    {{ render_action(action) }}
     {%- endfor %}

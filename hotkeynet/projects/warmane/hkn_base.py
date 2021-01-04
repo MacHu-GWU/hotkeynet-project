@@ -2,13 +2,13 @@
 
 import typing
 
-from .warmane_config import Config
-from .. import keyname
-from ..script import (
+from .config import Config
+from ... import keyname
+from ...script import (
     Script, Command, Hotkey,
     CallCommand,
 )
-from ..utils import render_template
+from ...utils import render_template
 
 TAB = " " * 4
 
@@ -327,7 +327,7 @@ hk_ToggleToSpecificWindow_list = None  # type: typing.List[Hotkey]
 
 
 # ---
-def create_base_script() -> Script:
+def create_script() -> Script:
     script = Script()
 
     script.add_command(cmd_LaunchAndRename)

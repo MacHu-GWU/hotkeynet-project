@@ -47,7 +47,7 @@ _CommandTemplate = Path(TPL_DIR, "Command.tpl").read_text(encoding="utf-8")
 @attr.s
 class Command:
     name: str = attr.ib()
-    content: str = attr.ib()
+    actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
     script: 'Script' = attr.ib(default=None)
 
     def __attrs_post_init__(self):
@@ -78,7 +78,8 @@ class Command:
         return remove_empty_line(
             render_template(
                 _CommandTemplate,
-                command=self
+                command=self,
+                render_action=render_action,
             )
         )
 
@@ -100,8 +101,8 @@ _HotkeyTemplate = Path(TPL_DIR, "Hotkey.tpl").read_text(encoding="utf-8")
 class Hotkey:
     name: str = attr.ib()
     key: str = attr.ib()
-    script: 'Script' = attr.ib(default=None)
     actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
+    script: 'Script' = attr.ib(default=None)
 
     def __attrs_post_init__(self):
         if self.script is not None:
@@ -201,7 +202,16 @@ class SendLabel(Action):
         return f"<SendLabel {self.targets}>"
 
     def dump(self) -> str:
-        return render_template(_SendLabelTemplate, send_label=self)
+        if len(self.to) and len(self.actions):
+            return remove_empty_line(
+                render_template(
+                    _SendLabelTemplate,
+                    send_label=self,
+                    render_action=render_action,
+                )
+            )
+        else:
+            return ""
 
 
 @attr.s
