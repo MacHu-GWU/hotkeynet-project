@@ -48,3 +48,25 @@ def remove_empty_line(content: str) -> str:
 
     new_content = "\n".join(lines_new)
     return new_content
+
+
+def remove_indent(content: str) -> str:
+    """
+    Allow developer to write inline string like:
+
+    content = '''
+    <div>
+        <strong></strong>
+    </div>
+    '''
+
+    and remove left whitespace cased by python script indentation.
+    """
+    lines = content.split("\n")[1:-1]
+    values = list()
+    for line in lines:
+        if line.strip():
+            unindent = len(line) - len(line.lstrip())
+            values.append(unindent)
+    unindent = min(values)
+    return "\n".join([line[unindent:] for line in lines])

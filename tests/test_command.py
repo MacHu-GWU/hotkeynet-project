@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from hotkeynet.script import Command, Key
+
 from hotkeynet import keyname
+from hotkeynet.script import Command, Key
+from hotkeynet.utils import remove_indent
 
 class TestCommand:
+    def test_title(self):
+        cmd = Command("MyCommand")
+        assert cmd.title == "<Command MyCommand>"
+
     def test_call(self):
-        cmd = Command("MyCommand", content="")
+        cmd = Command("MyCommand")
         assert cmd.call() == "<MyCommand>"
         assert cmd.call("arg1", "arg2") == "<MyCommand arg1 arg2>"
 
@@ -18,13 +24,11 @@ class TestCommand:
                 "<Key 2>",
             ],
         )
-
-        print(cmd.dump())
-        # assert cmd.dump() == "\n".join([
-        #     "<Command MyCommand>",
-        #     "    <Key 1>",
-        #     "    <Key 2>",
-        # ])
+        assert cmd.dump() == remove_indent("""
+        <Command MyCommand>
+            <Key 1>
+            <Key 2>
+        """)
 
 
 if __name__ == "__main__":

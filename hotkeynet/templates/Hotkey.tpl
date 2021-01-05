@@ -1,4 +1,4 @@
 {{ hotkey.title }}
-    {%- for action in hotkey.actions %}
-    {{ render_action(action) }}
-    {%- endfor %}
+{%- for action in hotkey.actions %}
+{{ render_action(action)|indent(4, True) }}
+{%- endfor %}

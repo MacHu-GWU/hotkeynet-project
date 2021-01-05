@@ -41,18 +41,21 @@ class Script:
         return render_template(_ScriptTemplate, script=self)
 
 
-_CommandTemplate = Path(TPL_DIR, "Command.tpl").read_text(encoding="utf-8")
-
-
 @attr.s
 class Command:
-    name: str = attr.ib()
+    name: str = attr.ib(validator=attr.validators.instance_of(str))
     actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
-    script: 'Script' = attr.ib(default=None)
+    script: 'Script' = attr.ib(default=None, validator=attr.validators.optional(attr.validators.instance_of(Script)))
+
+    _template = Path(TPL_DIR, "Command.tpl").read_text(encoding="utf-8")
 
     def __attrs_post_init__(self):
         if self.script is not None:
             self.script.add_command(self)
+
+    @property
+    def title(self):
+        return f"<Command {self.name}>"
 
     def call(self, *args) -> str:
         """
@@ -77,7 +80,7 @@ class Command:
         print(f"dump Command({self.name}) ...")
         return remove_empty_line(
             render_template(
-                _CommandTemplate,
+                self._template,
                 command=self,
                 render_action=render_action,
             )
@@ -87,14 +90,11 @@ class Command:
 @attr.s
 class Template:
     name: str = attr.ib()
-    script: 'Script' = attr.ib(default=None)
+    script: 'Script' = attr.ib(default=None, validator=attr.validators.optional(attr.validators.instance_of(Script)))
 
     def __attrs_post_init__(self):
         if self.script is not None:
             self.script.add_template(self)
-
-
-_HotkeyTemplate = Path(TPL_DIR, "Hotkey.tpl").read_text(encoding="utf-8")
 
 
 @attr.s
@@ -102,7 +102,9 @@ class Hotkey:
     name: str = attr.ib()
     key: str = attr.ib()
     actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
-    script: 'Script' = attr.ib(default=None)
+    script: 'Script' = attr.ib(default=None, validator=attr.validators.optional(attr.validators.instance_of(Script)))
+
+    _template = Path(TPL_DIR, "Hotkey.tpl").read_text(encoding="utf-8")
 
     def __attrs_post_init__(self):
         if self.script is not None:
@@ -115,7 +117,7 @@ class Hotkey:
     def dump(self) -> str:
         print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")
         return remove_empty_line(render_template(
-            _HotkeyTemplate,
+            self._template,
             hotkey=self,
             render_action=render_action,
         ))
@@ -185,13 +187,12 @@ class Mouse(Action):
         )
 
 
-_SendLabelTemplate = Path(TPL_DIR, "SendLabel.tpl").read_text(encoding="utf-8")
-
-
 @attr.s
 class SendLabel(Action):
     to = attr.ib(factory=list)  # type: typing.List[str]
     actions = attr.ib(factory=list)  # type: typing.List[Action]
+
+    _template = Path(TPL_DIR, "SendLabel.tpl").read_text(encoding="utf-8")
 
     @property
     def targets(self) -> str:
@@ -205,7 +206,7 @@ class SendLabel(Action):
         if len(self.to) and len(self.actions):
             return remove_empty_line(
                 render_template(
-                    _SendLabelTemplate,
+                    self._template,
                     send_label=self,
                     render_action=render_action,
                 )
@@ -216,8 +217,13 @@ class SendLabel(Action):
 
 @attr.s
 class CallCommand(Action):
-    cmd = attr.ib(validator=attr.validators.instance_of(Command))  # type: Command
+    cmd = attr.ib()  # type: typing.Union[Command, str]
     args = attr.ib(factory=tuple)  # type: tuple
+
+    @cmd.validator
+    def check_cmd(self, attribute, value):
+        if not isinstance(value, (Command, str)):
+            raise TypeError
 
     def dump(self) -> str:
         return self.cmd.call(*self.args)
