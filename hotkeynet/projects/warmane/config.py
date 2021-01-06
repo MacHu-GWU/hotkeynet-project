@@ -7,6 +7,14 @@ from pathlib_mate import PathCls as Path
 credentials_file = Path(__file__).parent.parent.parent.change(new_basename="credentials.json")
 credentials = json.loads(credentials_file.read_text(encoding="utf-8"))
 
+def _to_labels(indices):
+    return ["w{}".format(ind) for ind in indices]
+
+def _remove_labels(indices1, indices2):
+    l = list(set(indices1).difference(set(indices2)))
+    l.sort()
+    return _to_labels(l)
+
 class Config:
     wow_exe_path = r"D:\HSH\Games\WOW Private\Client\World of Warcraft 3.3.5 enUS (Warman wod models)\Wow.exe"
     combat_mode = None
@@ -219,7 +227,28 @@ class Config:
         cls.Windows.toggle_round_robin_windows = list(range(1, 10+1))
         cls.Windows.toggle_specific_windows = list(range(1, 10+1))
 
-        cls.SendLabelTo.all = ["w{}".format(i) for i in range(1, 10+1)]
+        cls.SendLabelTo.all = _to_labels(range(1, 10+1))
+        cls.SendLabelTo.leader_1 = _to_labels([1, ])
+        cls.SendLabelTo.non_leader_2 = _remove_labels(range(1, 10 + 1), [1, ])
+        cls.SendLabelTo.leader_1 = _to_labels([10, ])
+        cls.SendLabelTo.non_leader_2 = _remove_labels(range(1, 10 + 1), [10, ])
+
+        cls.SendLabelTo.all_protect_pala = _to_labels([1, ])
+        cls.SendLabelTo.all_holy_pala = _to_labels([9, ])
+
+        cls.SendLabelTo.all_unholy_tank_dk = _to_labels([10, ])
+
+        cls.SendLabelTo.all_marksman_hunter = _to_labels([7, ])
+
+        cls.SendLabelTo.all_elemental_shaman = _to_labels([3, ])
+
+        cls.SendLabelTo.all_boomkin_druid = _to_labels([2, ])
+        cls.SendLabelTo.all_resto_druid = _to_labels([8, ])
+
+        cls.SendLabelTo.all_arcane_mage = _to_labels([4, ])
+        cls.SendLabelTo.all_demonic_warlock = _to_labels([6, ])
+        cls.SendLabelTo.all_shadow_priest = _to_labels([5, ])
+
 
     @classmethod
     def set_mode_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(cls):
@@ -231,3 +260,17 @@ class Config:
         cls.Windows.toggle_specific_windows = list(range(1, 18+1))
 
         cls.SendLabelTo.all = ["w{}".format(i) for i in range(1, 18 + 1)]
+        cls.SendLabelTo.leader_1 = _to_labels([6, ])
+        cls.SendLabelTo.non_leader_2 = _to_labels( _remove_labels(range(1, 18+1), [6, ]) )
+
+
+        cls.SendLabelTo.all_holy_pala = _to_labels([9, ])
+
+        cls.SendLabelTo.all_unholy_tank_dk = _to_labels([10, ])
+
+        cls.SendLabelTo.all_marksman_hunter = _to_labels([7, ])
+
+        cls.SendLabelTo.all_boomkin_druid = _to_labels([11,12,13,14,15,16,17,18])
+        cls.SendLabelTo.all_resto_druid = _to_labels([8, ])
+
+        cls.SendLabelTo.all_demonic_warlock = _to_labels([1,2,3,4,5,6])

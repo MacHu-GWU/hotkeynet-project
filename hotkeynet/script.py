@@ -118,11 +118,15 @@ class Hotkey:
     def dump(self) -> str:
         print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")
         if len(self.actions):
-            content remove_empty_line(render_template(
+            content = remove_empty_line(render_template(
                 self._template,
                 hotkey=self,
                 render_action=render_action,
             ))
+            if content.count("\n") == 0:
+                return ""
+            else:
+                return content
         else:
             return ""
 

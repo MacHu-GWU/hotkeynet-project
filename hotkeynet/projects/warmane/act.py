@@ -396,6 +396,9 @@ class Hunter:
     ALL_SPEC_ASPECT_OF_VIPER_OR_DRAGON_HAWK = SHIFT_(G)  # 蝮蛇 和 龙鹰 守护相互切换
     ALL_SPEC_TRUE_SHOT_AURA = KEY_9  # 强击光环
 
+    MAKSSMAN_SPEC_DPS_ROTATE_MACRO = KEY_2 # 射击猎人 用于 dps 循环的宏
+    """
+    """
     MARKSMAN_SPEC_CHIMERA_SHOT = KEY_3  # 奇美拉射击
     MARKSMAN_SPEC_SILENCING_SHOT = R  # 沉默射击
 

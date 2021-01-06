@@ -73,9 +73,8 @@ class TestHotkey:
                 )
             ]
         )
+        assert hk.dump() == ""
 
-        print("")
-        print(hk.dump())
 
 if __name__ == "__main__":
     import os
