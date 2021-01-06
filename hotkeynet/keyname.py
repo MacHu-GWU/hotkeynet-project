@@ -94,7 +94,6 @@ UP = "Up"
 RIGHT = "Right"
 DOWN = "Down"
 
-NUMPAD_0 = "Numpad0"
 NUMPAD_1 = "Numpad1"
 NUMPAD_2 = "Numpad2"
 NUMPAD_3 = "Numpad3"
@@ -104,6 +103,7 @@ NUMPAD_6 = "Numpad6"
 NUMPAD_7 = "Numpad7"
 NUMPAD_8 = "Numpad8"
 NUMPAD_9 = "Numpad9"
+NUMPAD_0 = "Numpad0"
 NUMPAD_11_DIVIDE = "Divide"
 NUMPAD_12_MULTIPLY = "Multiply"
 
@@ -127,6 +127,28 @@ MOUSE_RButton = "RButton"
 MOUSE_MButton = "MButton"
 MOUSE_Button4 = "Button4"
 MOUSE_Button5 = "Button5"
+
+F1_to_F18 = [
+    F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
+    INSERT, HOME, PAGE_UP, DELETE, END, PAGE_DOWN,
+]
+
+KEY_1_to_12 = [
+    KEY_1, KEY_2, KEY_3, KEY_4, KEY_5, KEY_6,
+    KEY_7, KEY_8, KEY_9, KEY_0, KEY_11_MINUS, KEY_12_PLUS,
+]
+
+NUMPAD_1_to_12 = [
+    NUMPAD_1, NUMPAD_2, NUMPAD_3, NUMPAD_4, NUMPAD_5, NUMPAD_6,
+    NUMPAD_7, NUMPAD_8, NUMPAD_9, NUMPAD_0, NUMPAD_11_DIVIDE, NUMPAD_12_MULTIPLY,
+]
+
+SHIFT_NUMPAD_1_to_9 = [
+    NUMPAD_SHIFT_1_END, NUMPAD_SHIFT_2_DOWN, NUMPAD_SHIFT_3_PAGE_DOWN,
+    NUMPAD_SHIFT_4_LEFT, NUMPAD_SHIFT_5_CLEAR, NUMPAD_SHIFT_6_RIGHT,
+    NUMPAD_SHIFT_7_HOME, NUMPAD_SHIFT_8_UP, NUMPAD_SHIFT_9_PAGE_UP,
+
+]
 
 
 def CTRL_(*keys):
@@ -163,5 +185,3 @@ def SCROLOCK_ON(key):
 
 def CAPSLOCK_ON(key):
     return "CapsLockOn {}".format(key)
-
-

@@ -92,8 +92,8 @@ class Config:
 
         all = [
             dict(username=fatmulti1_username, password=fatmulti1_password),
-            dict(username=fatmulti2_username, password=fatmulti2_password),
             dict(username=fatmulti3_username, password=fatmulti3_password),
+            dict(username=fatmulti2_username, password=fatmulti2_password),
             dict(username=fatmulti4_username, password=fatmulti4_password),
             dict(username=fatmulti5_username, password=fatmulti5_password),
             dict(username=fitsheep_username, password=fitsheep_password),

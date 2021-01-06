@@ -35,7 +35,7 @@ hk_RoundRobinToggleWindow = Hotkey(
 
 
 #---
-for key, window in zip(keyname.Multibox.f1_to_f18, Config.Windows.toggle_specific_windows):
+for key, window in zip(keyname.F1_to_F18, Config.Windows.toggle_specific_windows):
     hk = Hotkey(
         name=f"ToggleToSpecificWindowWoW{window}",
         key=keyname.SCROLOCK_ON(keyname.CTRL_(key)),
@@ -72,7 +72,7 @@ hk_BatchLogin = Hotkey(
 
 #---
 for key, window, account in zip(
-        keyname.Multibox.f1_to_f18,
+        keyname.F1_to_F18,
         Config.Windows.batch_login_windows,
         Config.Windows.batch_login_accounts
 ):
