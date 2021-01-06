@@ -7,6 +7,7 @@ import attr
 from pathlib_mate import PathCls as Path
 
 from .utils import render_template, remove_empty_line
+from . import keyname
 
 TPL_DIR = Path(__file__).change(new_basename="templates")
 
@@ -116,11 +117,14 @@ class Hotkey:
 
     def dump(self) -> str:
         print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")
-        return remove_empty_line(render_template(
-            self._template,
-            hotkey=self,
-            render_action=render_action,
-        ))
+        if len(self.actions):
+            return remove_empty_line(render_template(
+                self._template,
+                hotkey=self,
+                render_action=render_action,
+            ))
+        else:
+            return ""
 
 
 # --- Action ---
@@ -132,7 +136,7 @@ class Action:
 
 @attr.s
 class Key(Action):
-    name = attr.ib()
+    name = attr.ib(validator=attr.validators.instance_of(str))
 
     def dump(self) -> str:
         return "<Key {name}>".format(
@@ -142,7 +146,7 @@ class Key(Action):
 
 @attr.s
 class KeyUp(Action):
-    name = attr.ib()
+    name = attr.ib(validator=attr.validators.instance_of(str))
 
     def dump(self) -> str:
         return "<KeyUp {name}>".format(
@@ -152,7 +156,7 @@ class KeyUp(Action):
 
 @attr.s
 class KeyDown(Action):
-    name = attr.ib()
+    name = attr.ib(validator=attr.validators.instance_of(str))
 
     def dump(self) -> str:
         return "<KeyDown {name}>".format(
@@ -165,15 +169,15 @@ class Mouse(Action):
     """
     reference: http://hotkeynet.com/ref/clickmouse.html
     """
-    button = attr.ib()  # type: str
+    button = attr.ib(validator=attr.validators.instance_of(str))  # type: str
     # Down, Up, Both, or NoClick
-    stroke = attr.ib(default="")  # type: str
+    stroke = attr.ib(default="", validator=attr.validators.instance_of(str))  # type: str
     # Window or Screen
-    target = attr.ib(default="")  # type: str
+    target = attr.ib(default="", validator=attr.validators.instance_of(str))  # type: str
     # NoMove, # #, Dupe, Scale, #% #%, ±# ±#
-    mode = attr.ib(default="")  # type: str
+    mode = attr.ib(default="", validator=attr.validators.instance_of(str))  # type: str
     # Restore or NoRestore
-    restore = attr.ib(default="")  # type: str
+    restore = attr.ib(default="", validator=attr.validators.instance_of(str))  # type: str
 
     def dump(self) -> str:
         return "<ClickMouse {}>".format(
@@ -187,10 +191,67 @@ class Mouse(Action):
         )
 
 
+def _build_modified_mouse_click(modifier, button):
+    return "\n".join([
+        action.dump()
+        for action in [
+            KeyDown(name=modifier),
+            Mouse(button=button, stroke="Down"),
+            Mouse(button=button, stroke="Up"),
+            KeyUp(name=modifier),
+        ]
+    ])
+
+
+@attr.s
+class ModifiedMouseClick(Action):
+    modifier = attr.ib()
+    button = attr.ib()
+
+    def dump(self) -> str:
+        return _build_modified_mouse_click(modifier=self.modifier, button=self.button)
+
+    @classmethod
+    def shift_left_click(cls):
+        return cls(modifier=keyname.SHIFT, button=keyname.MOUSE_LButton)
+
+    @classmethod
+    def shift_right_click(cls):
+        return cls(modifier=keyname.SHIFT, button=keyname.MOUSE_LButton)
+
+    @classmethod
+    def shift_middle_click(cls):
+        return cls(modifier=keyname.SHIFT, button=keyname.MOUSE_MButton)
+
+    @classmethod
+    def alt_left_click(cls):
+        return cls(modifier=keyname.ALT, button=keyname.MOUSE_LButton)
+
+    @classmethod
+    def alt_right_click(cls):
+        return cls(modifier=keyname.ALT, button=keyname.MOUSE_LButton)
+
+    @classmethod
+    def alt_middle_click(cls):
+        return cls(modifier=keyname.ALT, button=keyname.MOUSE_MButton)
+
+    @classmethod
+    def ctrl_left_click(cls):
+        return cls(modifier=keyname.CTRL, button=keyname.MOUSE_LButton)
+
+    @classmethod
+    def ctrl_right_click(cls):
+        return cls(modifier=keyname.CTRL, button=keyname.MOUSE_LButton)
+
+    @classmethod
+    def ctrl_middle_click(cls):
+        return cls(modifier=keyname.CTRL, button=keyname.MOUSE_MButton)
+
+
 @attr.s
 class SendLabel(Action):
     to = attr.ib(factory=list)  # type: typing.List[str]
-    actions = attr.ib(factory=list)  # type: typing.List[Action]
+    actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
 
     _template = Path(TPL_DIR, "SendLabel.tpl").read_text(encoding="utf-8")
 

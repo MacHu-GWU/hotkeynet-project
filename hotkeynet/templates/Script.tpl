@@ -1,4 +1,4 @@
-{%- for command in script.commands.values() %}
+{% for command in script.commands.values() %}
 {{ command.dump() }}
 {% endfor %}
 
@@ -26,6 +26,6 @@
 <Label w17 Local SendWinM WoW17>
 <Label w18 Local SendWinM WoW18>
 
-{%- for hotkey in script.hotkeys.values() %}
+{% for hotkey in script.hotkeys.values() %}
 {{ hotkey.dump() }}
 {% endfor %}

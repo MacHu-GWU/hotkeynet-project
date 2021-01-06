@@ -117,6 +117,10 @@ class Config:
         from_1_to_18 = list(range(1, 18+1))
 
         launch_and_rename_windows = None
+        batch_login_windows = None
+        batch_login_accounts = None
+        toggle_round_robin_windows = None
+        toggle_specific_windows = None
 
 
     class SendLabelTo:
@@ -210,8 +214,20 @@ class Config:
     def set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid(cls):
         cls.use_1920_1080_resolution()
         cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_10
+        cls.Windows.batch_login_windows = list(range(1, 10+1))
+        cls.Windows.batch_login_accounts = list(range(1, 10+1))
+        cls.Windows.toggle_round_robin_windows = list(range(1, 10+1))
+        cls.Windows.toggle_specific_windows = list(range(1, 10+1))
+
+        cls.SendLabelTo.all = ["w{}".format(i) for i in range(1, 10+1)]
 
     @classmethod
     def set_mode_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(cls):
         cls.use_1600_900_resolution()
-        cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_10
+        cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_18
+        cls.Windows.batch_login_windows = list(range(1, 18+1))
+        cls.Windows.batch_login_accounts = list(range(1, 18+1))
+        cls.Windows.toggle_round_robin_windows = list(range(1, 18+1))
+        cls.Windows.toggle_specific_windows = list(range(1, 18+1))
+
+        cls.SendLabelTo.all = ["w{}".format(i) for i in range(1, 18 + 1)]
