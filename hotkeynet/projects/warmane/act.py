@@ -1,18 +1,16 @@
 # -*- coding: utf-8 -*-
 
+"""
+本模块定义了各个人物, 职业的详细动作条设置. 哪个技能以及哪个宏应该绑定什么快捷键.
+
+要使得此脚本按照预期工作, 必须按照本模块中的定义绑定技能和快捷键.
+"""
+
 from ...keyname import *
 from ...script import (
     Key, Mouse, ModifiedMouseClick
 )
 
-
-# class Multibox:
-#     f1_to_f18 = [
-#         F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
-#         INSERT, HOME, PAGE_UP, DELETE, END, PAGE_DOWN,
-#     ]
-#
-#
 
 def convert_to_key_action(cls):
     for key, value in cls.__dict__.items():

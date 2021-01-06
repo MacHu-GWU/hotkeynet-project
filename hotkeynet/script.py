@@ -118,7 +118,7 @@ class Hotkey:
     def dump(self) -> str:
         print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")
         if len(self.actions):
-            return remove_empty_line(render_template(
+            content remove_empty_line(render_template(
                 self._template,
                 hotkey=self,
                 render_action=render_action,
@@ -142,6 +142,10 @@ class Key(Action):
         return "<Key {name}>".format(
             name=self.name,
         )
+
+    @classmethod
+    def trigger(cls):
+        return cls(name="%Trigger%")
 
 
 @attr.s

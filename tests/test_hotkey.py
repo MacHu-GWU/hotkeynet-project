@@ -54,6 +54,28 @@ class TestHotkey:
             <MyCommand>
         """)
 
+    def test_dump_no_action(self):
+        hk = Hotkey(
+            name="Test",
+            key=keyname.KEY_1,
+        )
+        assert hk.dump() == ""
+
+        hk = Hotkey(
+            name="Test",
+            key=keyname.KEY_1,
+            actions=[
+                SendLabel(
+                    to=[],
+                    actions=[
+                        Key(name=keyname.KEY_1)
+                    ]
+                )
+            ]
+        )
+
+        print("")
+        print(hk.dump())
 
 if __name__ == "__main__":
     import os

@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from . import act
 from .script import script
 from .config import Config
 from ... import keyname
@@ -48,16 +49,53 @@ hk_numpad9_SyncRightClick = Hotkey(
 """
 
 hk_numpad0_AllFollowFocus= Hotkey(
-    name="SyncRightClick",
+    name="AllFollowFocus",
     key=keyname.SCROLOCK_ON(keyname.NUMPAD_0),
     actions=[
         SendLabel(
             to=Config.SendLabelTo.all,
             actions=[
-                Mouse(button=keyname.MOUSE_RButton),
+                act.General.FOLLOW_FOCUS,
             ]
         )
     ],
     script=script,
 )
+"""
+将跟随焦点目标的宏 ``/follow focus`` 放在 Numpad0 键位上.
+"""
 
+hk_numpad11_mount_up= Hotkey(
+    name="AllMountUp",
+    key=keyname.SCROLOCK_ON(keyname.NUMPAD_11_DIVIDE),
+    actions=[
+        SendLabel(
+            to=Config.SendLabelTo.all,
+            actions=[
+                act.General.MOUNT_UP,
+            ]
+        )
+    ],
+    script=script,
+)
+"""
+所有人上马, 需要将上马宏放在 Numpad11 键位上. 具体的宏请参考 ``act.General.MOUNT_UP``.
+"""
+
+hk_numpad12_interact= Hotkey(
+    name="AllInteractFocusTarget",
+    key=keyname.SCROLOCK_ON(keyname.NUMPAD_12_MULTIPLY),
+    actions=[
+        SendLabel(
+            to=Config.SendLabelTo.all,
+            actions=[
+                act.General.TARGET_FOCUS_TARGET,
+                act.General.INTERACT_WITH_TARGET,
+            ]
+        )
+    ],
+    script=script,
+)
+"""
+跟焦点的目标右键点击互动, 常用于接任务, 剥皮. 该键位于 MMO 鼠标的右下角 12 号(Multiply) 位置, 比较好按.
+"""
