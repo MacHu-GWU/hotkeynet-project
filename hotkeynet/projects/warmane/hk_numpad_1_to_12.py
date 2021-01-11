@@ -15,6 +15,7 @@ hk_numpad8_SyncLeftClick = Hotkey(
     key=keyname.SCROLOCK_ON(keyname.NUMPAD_8),
     actions=[
         SendLabel(
+            name="all",
             to=Config.SendLabelTo.all,
             actions=[
                 Mouse(button=keyname.MOUSE_LButton),
@@ -34,6 +35,7 @@ hk_numpad9_SyncRightClick = Hotkey(
     key=keyname.SCROLOCK_ON(keyname.NUMPAD_9),
     actions=[
         SendLabel(
+            name="all",
             to=Config.SendLabelTo.all,
             actions=[
                 Mouse(button=keyname.MOUSE_RButton),
@@ -53,6 +55,7 @@ hk_numpad0_AllFollowFocus= Hotkey(
     key=keyname.SCROLOCK_ON(keyname.NUMPAD_0),
     actions=[
         SendLabel(
+            name="all",
             to=Config.SendLabelTo.all,
             actions=[
                 act.General.FOLLOW_FOCUS,
@@ -70,6 +73,7 @@ hk_numpad11_mount_up= Hotkey(
     key=keyname.SCROLOCK_ON(keyname.NUMPAD_11_DIVIDE),
     actions=[
         SendLabel(
+            name="all",
             to=Config.SendLabelTo.all,
             actions=[
                 act.General.MOUNT_UP,
@@ -87,6 +91,7 @@ hk_numpad12_interact= Hotkey(
     key=keyname.SCROLOCK_ON(keyname.NUMPAD_12_MULTIPLY),
     actions=[
         SendLabel(
+            name="all",
             to=Config.SendLabelTo.all,
             actions=[
                 act.General.TARGET_FOCUS_TARGET,

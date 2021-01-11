@@ -20,10 +20,13 @@ def convert_to_key_action(cls):
 
 
 class General:
+    """
+    通用类功能的按键绑定. 所有职业都需要按照这个设置.
+    """
     TARGET_ENEMY = TAB
     TARGET_SELF = F1
 
-    TARGST_FOCUS = NUMPAD_1
+    TARGET_FOCUS = NUMPAD_1
     """
     The ``MB-TgtFcs`` Macro::
 
@@ -111,6 +114,26 @@ class General:
 
         /follow focus
     """
+    BUFF_SELF_MACRO = KEY_8
+    """
+    用于给自己刷 Buff 的宏或技能
+    """
+
+    BUFF_RAID_MACRO = KEY_9
+    """
+    用于给团队刷 Buff 的宏或技能
+    """
+
+    SHORT_DURATION_BUFF = KEY_0
+    """
+    持续时间较短的, 需要经常补的技能. 例如
+    
+    - 战士的怒吼
+    - 防骑, 惩戒骑的圣洁护盾, 奶骑的圣光道标
+    - 死亡骑士的凛冬号角
+    - 萨满的电盾水盾
+    - 牧师的心灵之火
+    """
 
     TARGET_BATLEFURY = KEY_1
     TARGET_LITGOATSSA = KEY_1
@@ -155,6 +178,9 @@ convert_to_key_action(General)
 
 
 class Movement:
+    """
+    移动类的按键绑定. 所有职业都需要按照这个设置.
+    """
     MOVE_LEFT = Q  # 往左平移
     MOVE_RIGHT = E  # 往右平移
     MOVE_FORWARD = UP  # 往前
@@ -172,6 +198,9 @@ convert_to_key_action(Movement)
 
 
 class PetAction:
+    """
+    操作宠物的按键绑定. 所有职业都需要按照这个设置.
+    """
     ATTACK = CTRL_(KEY_1)  # 宠物攻击主人的目标
     FOLLOW = CTRL_(KEY_2)  # 宠物跟随主人
     STAY = CTRL_(KEY_3)  # 宠物停留
@@ -184,10 +213,16 @@ convert_to_key_action(PetAction)
 
 
 class Warrior:
+    """
+    战士职业的按键绑定.
+    """
     pass
 
 
 class Paladin:
+    """
+    圣骑士职业的按键绑定.
+    """
     ALL_SPEC_DIVINE_PLEA = Mouse(button=MOUSE_MButton)  # 神圣恩求 (回蓝技能)
     ALL_SPEC_AVENGING_WRATH = SHIFT_(F)  # 复仇之怒 (爆发技能)
 
@@ -239,7 +274,7 @@ class Paladin:
     RETRIBUTION_SPEC_RIGHTEOUS_DEFENCE = ALT_(F)  # 正义防护 (群体嘲讽)
 
     # --- 神圣天赋下专属键位 ---
-    HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_KEY_1 = KEY_1
+    HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_1 = KEY_1
     """
     以1分钟为一个循环 (根据你的急速) 的治疗宏
     以 /castsequence reset=30 为起始, 以 4 圣闪 1 圣光 或者 3闪 1 光, 或是 2 闪 2 光
@@ -248,9 +283,9 @@ class Paladin:
 
     /castsequence reset=30 Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Divine Plea,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,
     """
-    HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_KEY_2 = KEY_2
+    HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_2 = KEY_2
 
-    HOLY_SPEC_PERIODICAL_BEACON_OF_LIGHT_ON_FOCUS = KEY_3
+    HOLY_SPEC_PERIODICAL_BEACON_OF_LIGHT_ON_FOCUS_MACRO = KEY_3
     """
     每 1.5 分钟一次的给焦点刷新圣光道标宏
 
@@ -269,7 +304,7 @@ class Paladin:
     /castsequence Judgement of Light,Judgement of Light,Sacred Shield
     """
     HOLY_SPEC_HOLY_LIGHT_KEY_5 = KEY_5  # 圣光术, 只有在神圣天赋下该键位有效
-    HOLY_SPEC_FLASH_OF_LIGHT = KEY_6  # 圣光闪现, 只有在神圣天赋下该键位有效
+    HOLY_SPEC_FLASH_OF_LIGHT_KEY_6 = KEY_6  # 圣光闪现, 只有在神圣天赋下该键位有效
     HOLY_SPEC_HOLY_LIGHT_KEY_7 = KEY_7  # 圣光术, 只有在神圣天赋下该键位有效
     HOLY_SPEC_HOLY_SHOCK = Z  # 神圣震击 (神圣 31 点天赋技能)
     HOLY_SPEC_FOCUS_JUDGEMENT = R
@@ -308,6 +343,9 @@ convert_to_key_action(Paladin)
 
 
 class DK:
+    """
+    死亡骑士职业的按键绑定.
+    """
     ALL_SPEC_BLOOD_STRIKE = KEY_1  # 鲜血打击
     ALL_SPEC_HEART_STRIKE = KEY_1  # 心脏打击 (血天赋)
 
@@ -362,6 +400,9 @@ convert_to_key_action(DK)
 
 
 class Hunter:
+    """
+    猎人职业的按键绑定.
+    """
     ALL_SPEC_HUNTERS_MARK = CTRL_(G)  # 猎人印记
 
     ALL_SPEC_SERPENT_STING = KEY_1  # 毒蛇钉刺 (Dot 伤害)
@@ -396,18 +437,27 @@ class Hunter:
     ALL_SPEC_ASPECT_OF_VIPER_OR_DRAGON_HAWK = SHIFT_(G)  # 蝮蛇 和 龙鹰 守护相互切换
     ALL_SPEC_TRUE_SHOT_AURA = KEY_9  # 强击光环
 
-    MAKSSMAN_SPEC_DPS_ROTATE_MACRO = KEY_2 # 射击猎人 用于 dps 循环的宏
+    MARKSMAN_SPEC_DPS_ROTATE_MACRO = KEY_2 # 射击猎人 用于 dps 循环的宏
     """
     """
     MARKSMAN_SPEC_CHIMERA_SHOT = KEY_3  # 奇美拉射击
     MARKSMAN_SPEC_SILENCING_SHOT = R  # 沉默射击
+    MARKSMAN_SPEC_HUNTERS_MARK = KEY_6 # 猎人印记
 
+    SURVIVAL_SPEC_DPS_ROTATE_MACRO = KEY_2 # 生存猎人 用于 dps 循环的宏
+    """
+    """
     SURVIVAL_SPEC_WYVERN_STING = KEY_1  # 翼龙钉刺 (使目标沉睡)
     SURVIVAL_SPEC_BLACK_ARROW = KEY_1  # 黑噬箭 (debuff 使你对该目标的伤害获得加成)
     SURVIVAL_SPEC_EXPLOSIVE_ARROW = KEY_1  # // 爆裂箭 (debuff 使你对该目标的每次攻击都会造成爆炸额外伤害)
+    SURVIVAL_SPEC_HUNTERS_MARK = KEY_6  # 猎人印记
 
+    BEAST_SPEC_DPS_ROTATE_MACRO = KEY_1  # 生存猎人 用于 dps 循环的宏
+    """
+    """
     BEAST_SPEC_INTIMIDATION = KEY_1  # 胁迫 (兽王天赋 宝宝昏迷目标, 并造成大量威胁值)
     BEAST_SPEC_BESTIAL_WRATH = KEY_1  # 狂野怒火 (兽王天赋 宝宝和自身免疫控制, 提高造成的伤害)
+    BEAST_SPEC_HUNTER_MARK = KEY_6  # 猎人印记
 
     HEAL_BOT_MISDIECTION = MOUSE_RButton  # 对团队框架的目标施放误导
 
@@ -416,6 +466,9 @@ convert_to_key_action(Hunter)
 
 
 class Shaman:
+    """
+    萨满职业的按键绑定.
+    """
     ALL_SPEC_CALL_OF_THE_ELEMENTS = SHIFT_(OEM3_WAVE)  # 远古呼唤, 同时召唤 4 个图腾
 
     # earth totem
@@ -471,9 +524,13 @@ class Shaman:
     RESTO_SPEC_MANA_TIDE_TOTEM = ALT_(E)  # 法力之潮图腾 (恢复系天赋 团队恢复大量法力)
     RESTO_SPEC_NATURE_SWIFTNESS = MOUSE_MButton  # 自然迅捷 (恢复系天赋 下一个技能瞬发)
 
+    ELEMENTAL_SPEC_DPS_ROTATE_MACRO = KEY_2 # 元素萨满 输出循环
+    """
+    """
     ELEMENTAL_SPEC_ELEMENTAL_MASTERY = SHIFT_(C)  # 元素精通
     ELEMENTAL_SPEC_THUNDER_STORM = ALT_(F)  # 雷霆风暴
 
+    ENHANCEMENT_SPEC_DPS_ROTATE_MACRO = KEY_2  # 增强萨满 输出循环
     ENHANCEMENT_SPEC_FERAL_SPIRIT = SHIFT_(C)  # 野性之魂
     ENHANCEMENT_SPEC_SHAMANISTIC_RAGE = ALT_(F)  # 萨满之怒
 
@@ -494,10 +551,16 @@ convert_to_key_action(Shaman)
 
 
 class Rogue:
+    """
+    盗贼职业的按键绑定.
+    """
     pass
 
 
 class Druid:
+    """
+    德鲁伊职业的按键绑定.
+    """
     ALL_SPEC_ENTANGLING_ROOTS = CTRL_(E)  # 纠缠根须
     ALL_SPEC_REJUVENATION = Z  # 回春
     ALL_SPEC_REVIVE = KEY_1  # 复活
@@ -519,16 +582,18 @@ class Druid:
     SHAPE_SHIFT_TREE_OF_LIFE_FORM = SHIFT_(E)  # 生命之树形态
     SHAPE_SHIFT_FLIGHT_FORM = NUMPAD_11_DIVIDE  # 飞行形态
 
-    BALANCE_SPEC_MOON_FIRE = KEY_1  # 月火术 (Dot)
-    BALANCE_SPEC_WRATH = KEY_2  # 愤怒 (施法较快的直接攻击法术)
-    BALANCE_SPEC_STAR_FIRE = KEY_3  # 星火术 (施法较快的直接攻击法术)
-    BALANCE_SPEC_INSECT_SWARM = KEY_4  # 虫群 (Dot, 天赋技能)
-    BALANCE_SPEC_HURRICANE = KEY_5  # 飓风 (主力 AOE 技能)
-    BALANCE_SPEC_STAR_FALL = ALT_(F)  # 星落 (强力 AOE 技能, 天赋技能)
-    BALANCE_SPEC_TYPHOON = G  # 台风 (击退面前的敌人)
+
+    BALANCE_SPEC_MOON_FIRE_KEY_1 = KEY_1  # 月火术 (Dot)
+    BALANCE_SPEC_WRATH_KEY_2 = KEY_2  # 愤怒 (施法较快的直接攻击法术)
+    BALANCE_SPEC_STAR_FIRE_KEY_3 = KEY_3  # 星火术 (施法较快的直接攻击法术)
+    BALANCE_SPEC_INSECT_SWARM_KEY_4 = KEY_4  # 虫群 (Dot, 天赋技能)
+    BALANCE_SPEC_HURRICANE_KEY_5 = KEY_5  # 飓风 (主力 AOE 技能)
+    BALANCE_SPEC_FAERI_FIRE_KEY_6 = KEY_6 # 精灵之火
+    BALANCE_SPEC_STAR_FALL_ALT_F = ALT_(F)  # 星落 (强力 AOE 技能, 天赋技能)
+    BALANCE_SPEC_TYPHOON_KEY_G = G  # 台风 (击退面前的敌人)
     BALANCE_SPEC_FORCE_OF_NATURE = Mouse(button=MOUSE_LButton)  # 自然之力 (召唤树人)
 
-    BALANCE_SPEC_DPS_ROTATE_MACRO = KEY_5
+    BALANCE_SPEC_DPS_ROTATE_MACRO = KEY_2
     """
     一键 DPS 循环宏::
     
@@ -552,10 +617,13 @@ class Druid:
         /castsequence reset=30 野性生长, 回春, 回春, 回春, 回春, 回春
     """
 
-    RESTO_SPEC_NOURISH = KEY_3  # 滋养
-    RESTO_SPEC_REGROWTH = ALT_(KEY_3)  # 愈合
-    RESTO_SPEC_SWIFT_MEND = KEY_4  # 迅捷治愈
-    RESTO_SPEC_WILD_GROUTH = KEY_5  # 野性生长 (恢复系 51 天赋)
+    RESTO_SPEC_NOURISH_KEY_3 = KEY_3  # 滋养
+    RESTO_SPEC_REGROWTH_KEY3 = ALT_(KEY_3)  # 愈合
+    RESTO_SPEC_SWIFT_MEND_KEY_4 = KEY_4  # 迅捷治愈
+    RESTO_SPEC_WILD_GROWTH_KEY_5 = KEY_5  # 野性生长 (恢复系 51 天赋)
+    RESTO_SPEC_REJUVENATION_KEY_6 = KEY_6  # 回春术
+    RESTO_SPEC_NOURISH_KEY_7 = KEY_7 # 滋养
+
     RESTO_SPEC_LIFE_BLOOM = KEY_1  # 自然之花
     RESTO_SPEC_NATURE_SWIFTNESS = Mouse(button=MOUSE_MButton)  # 自然迅捷
     RESTO_SPEC_HEALING_TOUCH = KEY_1  # 治疗之触
@@ -582,6 +650,9 @@ convert_to_key_action(Druid)
 
 
 class Mage:
+    """
+    法师职业的按键绑定.
+    """
     ALL_SPEC_ICE_BLOCK = SHIFT_(F1)  # 寒冰屏障 (冰箱)
     ALL_SPEC_MIRROR_IMAGE = SHIFT_(F2)  # 镜像术 (暂时丢失仇恨)
     ALL_SPEC_BLINK = SHIFT_(R)  # 闪现
@@ -625,8 +696,9 @@ class Mage:
         #showtooltip
         /castsequence reset=15 [nochanneling] Arcane Blast, Arcane Blast, Arcane Blast, Arcane Missiles
     """
-    ARCANE_SPEC_ARCANE_MISSLE = KEY_1  # 奥术飞弹
-    ARCANE_SPEC_ARCANE_BLAST = KEY_2  # 奥术冲击
+    ARCANE_SPEC_ARCANE_MISSLE_KEY_1 = KEY_1  # 奥术飞弹
+    ARCANE_SPEC_ARCANE_BLAST_KEY_2 = KEY_2  # 奥术冲击
+    ARCANE_SPEC_SLOW_KEY_6 = KEY_6  # 减速术 (奥系天赋 减少 移动, 施法, 远程攻击速度)
     ARCANE_SPEC_ARCANE_BARRAGE = ALT_(F)  # 奥术弹幕
     ARCANE_SPEC_ARCANE_POWER = ALT_(G)  # 奥术强化
     ARCANE_SPEC_ICY_VEINS = SHIFT_(C)  # 冰冷血脉 (冰系天赋 短时间内提高施法速度, 施法无法不受伤害影响)
@@ -657,6 +729,9 @@ convert_to_key_action(Mage)
 
 
 class Warlock:
+    """
+    术士职业的按键绑定.
+    """
     # curse
     ALL_SPEC_CURSE_OF_AGONY = KEY_1  # 痛苦诅咒
     ALL_SPEC_CURSE_OF_DOOM = ALT_(E)  # 厄运诅咒
@@ -729,6 +804,9 @@ convert_to_key_action(Warlock)
 
 
 class Priest:
+    """
+    牧师职业的按键绑定.
+    """
     ALL_SPEC_FADE = SHIFT_(R)  # 渐隐术
     ALL_SPEC_FEAR_WARD = SHIFT_(F)  # 反恐惧结界
     ALL_SPEC_MANA_BURN = SHIFT_(G)  # 法力燃烧
@@ -753,11 +831,13 @@ class Priest:
     ALL_SPEC_PHYCHIC_SCREAM = Mouse(button=MOUSE_MButton)  # 心灵尖啸 (群体恐惧)
 
     # 暗影天赋下
+    SHADOW_SPEC_DPS_ROTATE_SPEC = KEY_2 # 暗牧 一键输出循环宏
     SHADOW_SPEC_DISPERSION = ALT_(F)  # 影散 (暗影系 51点天赋, 大量减伤, 回蓝)
     SHADOW_SPEC_SILENCE = SHIFT_(C)  # 沉默
     SHADOW_SPEC_PSYCHIC_HORROR = ALT_(E)  # 心灵恐惧
     SHADOW_SPEC_SHASOW_FORM = KEY_1  # 暗影形态
 
+    SHADOW_SPEC_SHADOW_WORD_PAIN = KEY_6 # 暗言术: 痛
     SHADOW_SPEC_DEVOURING_PLAGUE = KEY_1  # 噬灵瘟疫
     SHADOW_SPEC_VAMPIRIC_TOUCH = KEY_1  # 吸血鬼之触
     SHADOW_SPEC_VAMPRIC_EMBRACE = KEY_1  # 吸血鬼之吻
@@ -767,6 +847,16 @@ class Priest:
     DISC_SPEC_INNER_FOCUS = SHIFT_(C)  # 心灵专注
     DISC_SPEC_PAIN_SUPPRESSION = ALT_(F)  # 痛苦压制
     DISC_SPEC_PENANCE = KEY_1  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
+    DISC_SPEC_HEAL_RAID_MACRO = KEY_2
+    """
+    全团套盾宏::
+        
+        #showtooltip
+        # 1是戒律,2是神圣
+        /targetraid
+        /castsequence [spec:1] 真言术盾
+        /castsequence [spec:2] reset=6, 治疗之环,真言术盾,真言术盾,真言术盾,真言术盾 
+    """
 
     HOLY_SPEC_GUARDIAN_SPIRIT = KEY_1  # 守护天使
     HOLY_SPEC_RENEW = KEY_1  # 恢复
@@ -776,6 +866,16 @@ class Priest:
     HOLY_SPEC_BINDING_HEAL = KEY_1  # 联结治疗 (治疗目标和你自己)
     HOLY_SPEC_LIGHT_WELL = KEY_1  # 治疗之泉
     HOLY_SPEC_CIRCLE_OF_HEALING = KEY_1  # 治疗之环
+    HOLY_SPEC_HEAL_RAID_MACRO = KEY_2
+    """
+    全团治疗宏::
+    
+        #showtooltip
+        # 1是戒律,2是神圣
+        /targetraid
+        /castsequence [spec:1] 真言术盾
+        /castsequence [spec:2] reset=6, 治疗之环,真言术盾,真言术盾,真言术盾,真言术盾 
+    """
 
     # Left | Right | Middle
     HEAL_BOT_TARGET_RAID_FRAME = Mouse(button=MOUSE_LButton)  # 选择团队框架成员

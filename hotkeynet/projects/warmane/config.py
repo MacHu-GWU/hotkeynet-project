@@ -2,18 +2,31 @@
 
 import json
 import typing
+
 from pathlib_mate import PathCls as Path
 
 credentials_file = Path(__file__).parent.parent.parent.change(new_basename="credentials.json")
 credentials = json.loads(credentials_file.read_text(encoding="utf-8"))
 
-def _to_labels(indices):
+
+def indice_to_labels(indices):
     return ["w{}".format(ind) for ind in indices]
 
-def _remove_labels(indices1, indices2):
+
+def different_labels(indices1, indices2):
+    indices1, indices2 = list(indices1), list(indices2)
     l = list(set(indices1).difference(set(indices2)))
     l.sort()
-    return _to_labels(l)
+    convertion_flag = False
+    for ind in (indices1 + indices2):
+        if isinstance(ind, int):
+            convertion_flag = True
+            break
+    if convertion_flag:
+        return indice_to_labels(l)
+    else:
+        return convertion_flag
+
 
 class Config:
     wow_exe_path = r"D:\HSH\Games\WOW Private\Client\World of Warcraft 3.3.5 enUS (Warman wod models)\Wow.exe"
@@ -117,12 +130,12 @@ class Config:
             dict(username=fatmulti16_username, password=fatmulti16_password),
             dict(username=fatmulti17_username, password=fatmulti17_password),
             dict(username=fatmulti18_username, password=fatmulti18_password),
-        ] # type: typing.List[typing.Dict[str, str]]
+        ]  # type: typing.List[typing.Dict[str, str]]
 
     class Windows:
         from_1_to_5 = list(range(1, 5 + 1))
         from_1_to_10 = list(range(1, 10 + 1))
-        from_1_to_18 = list(range(1, 18+1))
+        from_1_to_18 = list(range(1, 18 + 1))
 
         launch_and_rename_windows = None
         batch_login_windows = None
@@ -130,71 +143,70 @@ class Config:
         toggle_round_robin_windows = None
         toggle_specific_windows = None
 
-
     class SendLabelTo:
-        all = [] # type: typing.List[str]
-        all_tank = [] # type: typing.List[str]
-        non_tank = [] # type: typing.List[str]
-        all_dps = [] # type: typing.List[str]
-        non_dps = [] # type: typing.List[str]
-        all_healer = [] # type: typing.List[str]
-        non_healer = [] # type: typing.List[str]
+        all = []  # type: typing.List[str]
+        all_tank = []  # type: typing.List[str]
+        non_tank = []  # type: typing.List[str]
+        all_dps = []  # type: typing.List[str]
+        non_dps = []  # type: typing.List[str]
+        all_healer = []  # type: typing.List[str]
+        non_healer = []  # type: typing.List[str]
 
         # 1. war
-        all_protect_war = [] # type: typing.List[str]
-        all_arms_war = [] # type: typing.List[str]
-        all_fury_war = [] # type: typing.List[str]
+        all_protect_war = []  # type: typing.List[str]
+        all_arms_war = []  # type: typing.List[str]
+        all_fury_war = []  # type: typing.List[str]
 
         # 2. pala
-        all_protect_pala = [] # type: typing.List[str]
-        all_retri_pala = [] # type: typing.List[str]
-        all_holy_pala = [] # type: typing.List[str]
+        all_protect_pala = []  # type: typing.List[str]
+        all_retri_pala = []  # type: typing.List[str]
+        all_holy_pala = []  # type: typing.List[str]
 
         # 3. dk
-        all_blood_tank_dk = [] # type: typing.List[str]
-        all_unholy_tank_dk = [] # type: typing.List[str]
-        all_frost_tank_dk = [] # type: typing.List[str]
+        all_blood_tank_dk = []  # type: typing.List[str]
+        all_unholy_tank_dk = []  # type: typing.List[str]
+        all_frost_tank_dk = []  # type: typing.List[str]
 
         # 4. hunter
-        all_marksman_hunter = [] # type: typing.List[str]
-        all_survival_hunter = [] # type: typing.List[str]
-        all_beast_hunter = [] # type: typing.List[str]
+        all_marksman_hunter = []  # type: typing.List[str]
+        all_survival_hunter = []  # type: typing.List[str]
+        all_beast_hunter = []  # type: typing.List[str]
 
         # 5. shaman
-        all_resto_shaman = [] # type: typing.List[str]
-        all_elemental_shaman = [] # type: typing.List[str]
-        all_enhancement_shaman = [] # type: typing.List[str]
+        all_resto_shaman = []  # type: typing.List[str]
+        all_elemental_shaman = []  # type: typing.List[str]
+        all_enhancement_shaman = []  # type: typing.List[str]
 
         # 6. rogue
-        all_combat_rogue = [] # type: typing.List[str]
-        all_assass_rogue = [] # type: typing.List[str]
-        all_subtlety_rogue = [] # type: typing.List[str]
+        all_combat_rogue = []  # type: typing.List[str]
+        all_assass_rogue = []  # type: typing.List[str]
+        all_subtlety_rogue = []  # type: typing.List[str]
 
         # 7. druid
-        all_boomkin_druid = [] # type: typing.List[str]
-        all_resto_druid = [] # type: typing.List[str]
-        all_bear_druid = [] # type: typing.List[str]
-        all_cat_druid = [] # type: typing.List[str]
+        all_boomkin_druid = []  # type: typing.List[str]
+        all_resto_druid = []  # type: typing.List[str]
+        all_bear_druid = []  # type: typing.List[str]
+        all_cat_druid = []  # type: typing.List[str]
 
         # 8. mage
-        all_fire_mage = [] # type: typing.List[str]
-        all_arcane_mage = [] # type: typing.List[str]
-        all_frost_mage = [] # type: typing.List[str]
+        all_fire_mage = []  # type: typing.List[str]
+        all_arcane_mage = []  # type: typing.List[str]
+        all_frost_mage = []  # type: typing.List[str]
 
         # 9. warlock
-        all_demonic_warlock = [] # type: typing.List[str]
-        all_affiliate_warlock = [] # type: typing.List[str]
-        all_destruction_warlock = [] # type: typing.List[str]
+        all_demonic_warlock = []  # type: typing.List[str]
+        all_affiliate_warlock = []  # type: typing.List[str]
+        all_destruction_warlock = []  # type: typing.List[str]
 
         # 10. priest
-        all_shadow_priest = [] # type: typing.List[str]
-        all_disco_priest = [] # type: typing.List[str]
-        all_holy_priest = [] # type: typing.List[str]
+        all_shadow_priest = []  # type: typing.List[str]
+        all_disco_priest = []  # type: typing.List[str]
+        all_holy_priest = []  # type: typing.List[str]
 
-        leader_1 = [] # type: typing.List[str]
-        non_leader_1 = [] # type: typing.List[str]
-        leader_2 = [] # type: typing.List[str]
-        non_leader_2 = [] # type: typing.List[str]
+        leader_1 = []  # type: typing.List[str]
+        non_leader_1 = []  # type: typing.List[str]
+        leader_2 = []  # type: typing.List[str]
+        non_leader_2 = []  # type: typing.List[str]
 
     @classmethod
     def use_1920_1080_resolution(cls):
@@ -222,55 +234,53 @@ class Config:
     def set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid(cls):
         cls.use_1920_1080_resolution()
         cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_10
-        cls.Windows.batch_login_windows = list(range(1, 10+1))
-        cls.Windows.batch_login_accounts = list(range(1, 10+1))
-        cls.Windows.toggle_round_robin_windows = list(range(1, 10+1))
-        cls.Windows.toggle_specific_windows = list(range(1, 10+1))
+        cls.Windows.batch_login_windows = list(range(1, 10 + 1))
+        cls.Windows.batch_login_accounts = list(range(1, 10 + 1))
+        cls.Windows.toggle_round_robin_windows = list(range(1, 10 + 1))
+        cls.Windows.toggle_specific_windows = list(range(1, 10 + 1))
 
-        cls.SendLabelTo.all = _to_labels(range(1, 10+1))
-        cls.SendLabelTo.leader_1 = _to_labels([1, ])
-        cls.SendLabelTo.non_leader_2 = _remove_labels(range(1, 10 + 1), [1, ])
-        cls.SendLabelTo.leader_1 = _to_labels([10, ])
-        cls.SendLabelTo.non_leader_2 = _remove_labels(range(1, 10 + 1), [10, ])
+        cls.SendLabelTo.all = indice_to_labels(range(1, 10 + 1))
+        cls.SendLabelTo.leader_1 = indice_to_labels([1, ])
+        cls.SendLabelTo.non_leader_2 = different_labels(range(1, 10 + 1), [1, ])
+        cls.SendLabelTo.leader_1 = indice_to_labels([10, ])
+        cls.SendLabelTo.non_leader_2 = different_labels(range(1, 10 + 1), [10, ])
 
-        cls.SendLabelTo.all_protect_pala = _to_labels([1, ])
-        cls.SendLabelTo.all_holy_pala = _to_labels([9, ])
+        cls.SendLabelTo.all_protect_pala = indice_to_labels([1, ])
+        cls.SendLabelTo.all_holy_pala = indice_to_labels([9, ])
 
-        cls.SendLabelTo.all_unholy_tank_dk = _to_labels([10, ])
+        cls.SendLabelTo.all_unholy_tank_dk = indice_to_labels([10, ])
 
-        cls.SendLabelTo.all_marksman_hunter = _to_labels([7, ])
+        cls.SendLabelTo.all_marksman_hunter = indice_to_labels([7, ])
 
-        cls.SendLabelTo.all_elemental_shaman = _to_labels([3, ])
+        cls.SendLabelTo.all_elemental_shaman = indice_to_labels([3, ])
 
-        cls.SendLabelTo.all_boomkin_druid = _to_labels([2, ])
-        cls.SendLabelTo.all_resto_druid = _to_labels([8, ])
+        cls.SendLabelTo.all_boomkin_druid = indice_to_labels([2, ])
+        cls.SendLabelTo.all_resto_druid = indice_to_labels([8, ])
 
-        cls.SendLabelTo.all_arcane_mage = _to_labels([4, ])
-        cls.SendLabelTo.all_demonic_warlock = _to_labels([6, ])
-        cls.SendLabelTo.all_shadow_priest = _to_labels([5, ])
-
+        cls.SendLabelTo.all_arcane_mage = indice_to_labels([4, ])
+        cls.SendLabelTo.all_demonic_warlock = indice_to_labels([6, ])
+        cls.SendLabelTo.all_shadow_priest = indice_to_labels([5, ])
 
     @classmethod
     def set_mode_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(cls):
         cls.use_1600_900_resolution()
         cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_18
-        cls.Windows.batch_login_windows = list(range(1, 18+1))
-        cls.Windows.batch_login_accounts = list(range(1, 18+1))
-        cls.Windows.toggle_round_robin_windows = list(range(1, 18+1))
-        cls.Windows.toggle_specific_windows = list(range(1, 18+1))
+        cls.Windows.batch_login_windows = list(range(1, 18 + 1))
+        cls.Windows.batch_login_accounts = list(range(1, 18 + 1))
+        cls.Windows.toggle_round_robin_windows = list(range(1, 18 + 1))
+        cls.Windows.toggle_specific_windows = list(range(1, 18 + 1))
 
         cls.SendLabelTo.all = ["w{}".format(i) for i in range(1, 18 + 1)]
-        cls.SendLabelTo.leader_1 = _to_labels([6, ])
-        cls.SendLabelTo.non_leader_2 = _to_labels( _remove_labels(range(1, 18+1), [6, ]) )
+        cls.SendLabelTo.leader_1 = indice_to_labels([6, ])
+        cls.SendLabelTo.non_leader_2 = indice_to_labels(different_labels(range(1, 18 + 1), [6, ]))
 
+        cls.SendLabelTo.all_holy_pala = indice_to_labels([9, ])
 
-        cls.SendLabelTo.all_holy_pala = _to_labels([9, ])
+        cls.SendLabelTo.all_unholy_tank_dk = indice_to_labels([10, ])
 
-        cls.SendLabelTo.all_unholy_tank_dk = _to_labels([10, ])
+        cls.SendLabelTo.all_marksman_hunter = indice_to_labels([7, ])
 
-        cls.SendLabelTo.all_marksman_hunter = _to_labels([7, ])
+        cls.SendLabelTo.all_boomkin_druid = indice_to_labels([11, 12, 13, 14, 15, 16, 17, 18])
+        cls.SendLabelTo.all_resto_druid = indice_to_labels([8, ])
 
-        cls.SendLabelTo.all_boomkin_druid = _to_labels([11,12,13,14,15,16,17,18])
-        cls.SendLabelTo.all_resto_druid = _to_labels([8, ])
-
-        cls.SendLabelTo.all_demonic_warlock = _to_labels([1,2,3,4,5,6])
+        cls.SendLabelTo.all_demonic_warlock = indice_to_labels([1, 2, 3, 4, 5, 6])

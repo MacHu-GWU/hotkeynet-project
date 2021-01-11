@@ -6,8 +6,8 @@ from collections import OrderedDict
 import attr
 from pathlib_mate import PathCls as Path
 
-from .utils import render_template, remove_empty_line
 from . import keyname
+from .utils import render_template, remove_empty_line
 
 TPL_DIR = Path(__file__).change(new_basename="templates")
 
@@ -115,8 +115,20 @@ class Hotkey:
     def title(self) -> str:
         return f"<Hotkey {self.key}>"
 
+    def validate(self):
+        # don't allow duplicate label in SendLabel actions.
+        for action in self.actions :
+            if isinstance(action, SendLabel):
+                for label in action.to:
+                    for _action in self.actions:
+                        if isinstance(_action, SendLabel) \
+                            and (action.name != _action.name) \
+                            and (label in _action.to):
+                            raise ValueError(f"label {label} in {action} conflicts with {_action}")
+
     def dump(self) -> str:
         print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")
+        self.validate()
         if len(self.actions):
             content = remove_empty_line(render_template(
                 self._template,
@@ -258,9 +270,9 @@ class ModifiedMouseClick(Action):
 
 @attr.s
 class SendLabel(Action):
+    name = attr.ib(validator=attr.validators.instance_of(str))
     to = attr.ib(factory=list)  # type: typing.List[str]
     actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
-
     _template = Path(TPL_DIR, "SendLabel.tpl").read_text(encoding="utf-8")
 
     @property
