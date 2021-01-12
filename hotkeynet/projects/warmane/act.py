@@ -23,6 +23,7 @@ class General:
     """
     通用类功能的按键绑定. 所有职业都需要按照这个设置.
     """
+    #--- TARGETING
     TARGET_ENEMY = TAB
     TARGET_SELF = F1
 
@@ -135,11 +136,22 @@ class General:
     - 牧师的心灵之火
     """
 
+    # w1
     TARGET_BATLEFURY = KEY_1
     TARGET_LITGOATSSA = KEY_1
     TARGET_LITGOATDKA = KEY_1
+
+    # w2
     TARGET_OPIITOU = KEY_1
+
+    # w6
+    TARGET_KINDHEARTED = KEY_1
+    TARGET_SWEETMONK = KEY_1
+
+    # w10
     TARGET_LUXIAOFENG = KEY_1
+
+    # w11
     TARGET_LITGUGUA = KEY_1
 
     INTERACT_WITH_TARGET = J

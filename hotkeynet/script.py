@@ -136,11 +136,19 @@ class Hotkey:
                 render_action=render_action,
             ))
             if content.count("\n") == 0:
+                print("    no action, skip")
                 return ""
             else:
                 return content
         else:
+            print("    no action, skip")
             return ""
+
+@attr.s
+class MovementHotkey(Hotkey):
+    @property
+    def title(self) -> str:
+        return f"<MovementHotkey {self.key}>"
 
 
 # --- Action ---

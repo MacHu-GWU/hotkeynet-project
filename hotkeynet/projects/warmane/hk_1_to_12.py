@@ -1,5 +1,20 @@
 # -*- coding: utf-8 -*-
 
+"""
+
+该如何给 1-12 (10 是 0, 11 是 minus, 12 是 plus) 按键分配技能.
+
+
+首先有一个原则, 当你发 Hotkey 然后向窗口广播的时候, 我们希望由 Hotkey 发送的按键越少越好. 因为如果按键过多, 会导致更高的延时.
+
+Hotkeynet 可以发送非常特殊的 Numpad Up, Down, Left, Right, 以及 End, Home, PgUp, PgDn, Clear, 这些对应着 Shift + Numpad1-9.
+这些按键是无法作为快捷键在游戏中进行设置的, 但却能作为 Hotkeynet 的触发器. 换言之, 我们可以用 Shift + Numpad1-9 设置特殊的功能.
+
+小键盘
+
+
+
+"""
 from . import act
 from .config import Config, different_labels
 from .script import script
@@ -1314,7 +1329,8 @@ def build_hk_8():
                     act.General.BUFF_SELF_MACRO
                 ]
             )
-        ]
+        ],
+        script=script,
     )
 
 hk_8 = build_hk_8()
@@ -1335,7 +1351,8 @@ def build_hk_9():
                     act.General.BUFF_RAID_MACRO
                 ]
             )
-        ]
+        ],
+        script=script,
     )
 
 hk_9 = build_hk_9()
@@ -1365,8 +1382,37 @@ def build_hk_10():
                     act.Paladin.HOLY_SPEC_BEACON_OF_LIGHT,
                 ]
             ),
-        ]
+        ],
+        script=script,
     )
 
-hk_8 = build_hk_8()
-    # paladin
+hk_10 = build_hk_10()
+
+
+def build_hk_11():
+    return Hotkey(
+        name="Key11_minus",
+        key=keyname.SCROLOCK_ON(keyname.KEY_11_MINUS),
+        actions=[
+            SendLabel(
+                name="",
+                to=Config.SendLabelTo.non_leader_1,
+            )
+        ],
+        script=script,
+    )
+
+Hotkey(
+    name="A",
+    key=keyname.SCROLOCK_ON(keyname.S),
+    actions=[
+        SendLabel(
+            name="",
+            to=Config.SendLabelTo.all,
+            actions=[
+                Key(name=keyname.SPACE)
+            ]
+        )
+    ],
+    script=script,
+)

@@ -25,7 +25,7 @@ def different_labels(indices1, indices2):
     if convertion_flag:
         return indice_to_labels(l)
     else:
-        return convertion_flag
+        return l
 
 
 class Config:
@@ -145,12 +145,24 @@ class Config:
 
     class SendLabelTo:
         all = []  # type: typing.List[str]
+
         all_tank = []  # type: typing.List[str]
-        non_tank = []  # type: typing.List[str]
+
+        @classmethod
+        def non_tank(cls) -> typing.List[str]:
+            return different_labels(cls.all, cls.all_tank)
+
         all_dps = []  # type: typing.List[str]
-        non_dps = []  # type: typing.List[str]
+
+        @classmethod
+        def non_dps(cls) -> typing.List[str]:
+            return different_labels(cls.all, cls.all_dps)
+
         all_healer = []  # type: typing.List[str]
-        non_healer = []  # type: typing.List[str]
+
+        @classmethod
+        def non_healer(cls) -> typing.List[str]:
+            return different_labels(cls.all, cls.all_healer)
 
         # 1. war
         all_protect_war = []  # type: typing.List[str]
@@ -204,9 +216,16 @@ class Config:
         all_holy_priest = []  # type: typing.List[str]
 
         leader_1 = []  # type: typing.List[str]
-        non_leader_1 = []  # type: typing.List[str]
+
+        @classmethod
+        def non_leader_1(cls) -> typing.List[str]:
+            return different_labels(cls.all, cls.leader_1)
+
         leader_2 = []  # type: typing.List[str]
-        non_leader_2 = []  # type: typing.List[str]
+
+        @classmethod
+        def non_leader_2(cls) -> typing.List[str]:
+            return different_labels(cls.all, cls.leader_2)
 
     @classmethod
     def use_1920_1080_resolution(cls):
@@ -240,10 +259,12 @@ class Config:
         cls.Windows.toggle_specific_windows = list(range(1, 10 + 1))
 
         cls.SendLabelTo.all = indice_to_labels(range(1, 10 + 1))
+        cls.SendLabelTo.all_tank = indice_to_labels([1, 10])
+        cls.SendLabelTo.all_dps = indice_to_labels([2, 3, 4, 5, 6, 7])
+        cls.SendLabelTo.all_healer = indice_to_labels([8, 9])
+
         cls.SendLabelTo.leader_1 = indice_to_labels([1, ])
-        cls.SendLabelTo.non_leader_2 = different_labels(range(1, 10 + 1), [1, ])
         cls.SendLabelTo.leader_1 = indice_to_labels([10, ])
-        cls.SendLabelTo.non_leader_2 = different_labels(range(1, 10 + 1), [10, ])
 
         cls.SendLabelTo.all_protect_pala = indice_to_labels([1, ])
         cls.SendLabelTo.all_holy_pala = indice_to_labels([9, ])
