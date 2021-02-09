@@ -3,6 +3,11 @@
 """
 本模块定义了各个人物, 职业的详细动作条设置. 哪个技能以及哪个宏应该绑定什么快捷键.
 
+本模块还实现了 Key 和 Mouse 行为的抽象化, 用人类可读, 有具体含义的代码, 形如:
+``Paladin.PROTECT_SPEC_JUDGEMENT`` 这样的代码来代替意义不明确的 <Key 1>. 使得
+Hotkey 代码本身就能反映出想要实现的功能, 避免了写注释. 因为保持注释和代码一致非常麻烦.
+这种抽象化能使得你能专注于实现各个 Hotkey 的具体功能. 而当某个功能, 例如防护圣骑士
+
 要使得此脚本按照预期工作, 必须按照本模块中的定义绑定技能和快捷键.
 """
 
@@ -10,6 +15,7 @@ from ...keyname import *
 from ...script import (
     Key, Mouse, ModifiedMouseClick
 )
+from .config import Config
 
 
 def convert_to_key_action(cls):
@@ -19,79 +25,189 @@ def convert_to_key_action(cls):
                 setattr(cls, key, Key(name=value))
 
 
-class General:
+class Movement:
     """
-    通用类功能的按键绑定. 所有职业都需要按照这个设置.
+    移动类的按键绑定. 所有职业都需要按照这个设置. 以下设置如果没有特殊说明, 都是
+    在游戏内的按键绑定实现的.
     """
-    #--- TARGETING
-    TARGET_ENEMY = TAB
+    MOVE_LEFT = Q  # 往左平移
+    MOVE_RIGHT = E  # 往右平移
+    MOVE_FORWARD = UP  # 往前
+    MOVE_BACKWARD = DOWN  # 往后
+    MOVE_LEFT_TOP = f"{MOVE_LEFT} {MOVE_FORWARD}"  # 左上
+    MOVE_RIGHT_TOP = f"{MOVE_RIGHT} {MOVE_FORWARD}"  # 右上
+    MOVE_LEFT_BOTTOM = f"{MOVE_LEFT} {MOVE_BACKWARD}"  # 左下
+    MOVE_RIGHT_BOTTOM = f"{MOVE_RIGHT} {MOVE_BACKWARD}"  # 右下
+    TURN_LEFT = LEFT  # 向左转
+    TURN_RIGHT = RIGHT  # 向右转
+    JUMP = SPACE  # 跳跃
+    TOGGLE_AUTO_RUN = OEM3_WAVE_OR_BACK_QUOTE # 切换自动奔跑
+    FOLLOW_TARGET = OEM5_PIPE_OR_BACK_SLASH # 跟随目标
+    FOLLOW_FOCUS = NUMPAD_12_MULTIPLY # 跟随焦点目标
+    PITCH_UP = INSERT # 在水中/空中上浮
+    PITCH_DOWN = DELETE # 在水中/空中下沉
+
+
+convert_to_key_action(Movement)
+
+
+class PetAction:
+    """
+    操作宠物的按键绑定. 所有职业都需要按照这个设置. 以下设置如果没有特殊说明, 都是
+    在游戏内的按键绑定实现的.
+    """
+    ATTACK = CTRL_(KEY_1)  # 宠物攻击主人的目标
+    FOLLOW = CTRL_(KEY_2)  # 宠物跟随主人
+    STAY = CTRL_(KEY_3)  # 宠物停留
+    AGGRESSIVE = CTRL_(KEY_1)  # 进攻模式
+    DEFENSIVE = CTRL_(KEY_2)  # 防御模式
+    PASSIVE = CTRL_(KEY_3)  # 被动模式
+
+
+convert_to_key_action(PetAction)
+
+
+class Target:
+    """
+    选择目标相关的按键绑定. 所有职业都需要按照这个设置. 以下设置如果没有特殊说明, 都是
+    在游戏内的按键绑定实现的.
+    """
+    TARGET_NEAREST_ENEMY = TAB
+    TARGET_NEAREST_FRIEND = CTRL_(TAB)
     TARGET_SELF = F1
+    TARGET_PARTY_MEMBER_1 = F2
+    TARGET_PARTY_MEMBER_2 = F2
+    TARGET_PARTY_MEMBER_3 = F2
+    TARGET_PARTY_MEMBER_4 = F2
 
-    TARGET_FOCUS = NUMPAD_1
-    """
-    The ``MB-TgtFcs`` Macro::
+    INTERACT_WITH_TARGET = J
+    INTERACT_WITH_MOUSE_OVER = UNKNOWN
+    ASSIST_TARGET = F
 
-        /target focus
+    SET_TARGET_AS_FOCUS = CTRL_ALT_(F)
+    TARGET_FOCUS = COMMA
+    TARGET_LAST_TARGET = PERIOD
+
+    TARGET_PARTY = NUMPAD_1
+    """
+    The ``MB-TgtParty`` Macro, randomly select a party member, if in camera::
+
+        /targetparty
     """
 
-    TARGET_FOCUS_TARGET = NUMPAD_2
+    TARGET_RAID = NUMPAD_2
     """
-    The ``MB-TgtFcsTgt`` Macro::
+    The ``MB-TgtRaid`` Macro, randomly select a raid member, if in camera::
+
+        /targetraid
+    """
+
+    TARGET_FOCUS_TARGET = NUMPAD_3
+    """
+    The ``MB-TgtFcsTgt`` Macro, when focus is tank, usually it assist the leader::
 
         /assist focus
     """
 
-    TARGET_FOCUS_TARGET_TARGET = NUMPAD_3
+    TARGET_FOCUS_TARGET_TARGET = NUMPAD_4
     """
-    The ``MB-TgtFcsTgtTgt`` Macro::
+    The ``MB-TgtFcsTgtTgt`` Macro, when focus is tank, usually it select the 
+    boss current target player::
 
         /assist focus
         /assist
     """
 
-    TARGET_LAST_TARGET = NUMPAD_4
-    """
-    The ``MB-TgtLastTgt`` Macro::
+    #--- Target specific person
+    # w1
+    TARGET_W1_BATLEFURY = SHIFT_(INSERT)
+    TARGET_W1_LITGOATSSA = SHIFT_(INSERT)
+    TARGET_W1_LITGOATDKA = SHIFT_(INSERT)
 
-        /targetlasttarget
-    """
+    # w2
+    TARGET_W2_OPIITOU = SHIFT_(HOME)
 
-    TARGET_PARTY = NUMPAD_5
-    """
-    The ``MB-TgtParty`` Macro::
+    # w6
+    TARGET_W6_KINDHEARTED = SHIFT_(PAGE_UP)
+    TARGET_W6_SWEETMONK = SHIFT_(PAGE_UP)
 
-        /targetparty
-    """
+    # w9
+    TARGET_w9_GLOWYY = SHIFT_(DELETE)
 
-    TARGET_RAID = NUMPAD_6
-    """
-    The ``MB-TgtRaid`` Macro::
+    # w10
+    TARGET_W10_LUXIAOFENG = SHIFT_(END)
 
-        /targetraid
-    """
+    # w11
+    TARGET_W11_LITGUGUA = SHIFT_(PAGE_DOWN)
 
-    STOP_CASTING = NUMPAD_7
-    """
-    The ``MB-StopCasting`` Macro::
+    #
+    TARGET_LEADER_1 = UNKNOWN
 
-        /stopcasting
-    """
+    #
+    TARGET_LEADER_2 = UNKNOWN
 
-    CONFIRM = NUMPAD_8
+
+convert_to_key_action(Target)
+
+leader_key_mapper = {
+    "w1": Target.TARGET_W1_BATLEFURY,
+    "w2": Target.TARGET_W2_OPIITOU,
+    "w6": Target.TARGET_W6_KINDHEARTED,
+    "w9": Target.TARGET_w9_GLOWYY,
+    "w10": Target.TARGET_W10_LUXIAOFENG,
+    "w11": Target.TARGET_W11_LITGUGUA,
+}
+
+
+Target.TARGET_LEADER_1 = leader_key_mapper[Config.SendLabelTo.leader_1[0]]
+Target.TARGET_LEADER_2 = leader_key_mapper[Config.SendLabelTo.leader_2[0]]
+
+
+class Camera:
+    """
+    视角, 摄像头相关的按键绑定, 所有职业都需要按照这个设置. 以下设置如果没有特殊说明, 都是
+    在游戏内的按键绑定实现的.
+    """
+    SET_FIRST_CAMERA_VIEW_1 = CTRL_SHIFT_ALT(INSERT) # 第一个视角永远是视角拉到最近, 第一人称视角, 也就是按下 Home 键的效果
+    SET_FIRST_CAMERA_VIEW_2 = CTRL_SHIFT_ALT(HOME) # 第二个视角永远是视角拉到最远, 并且开启摄像头永远跟随的模式时系统自动的高度.
+    SET_FIRST_CAMERA_VIEW_3 = CTRL_SHIFT_ALT(PAGE_UP)
+
+    SAVE_FIRST_CAMERA_VIEW_1 = CTRL_SHIFT_ALT(DELETE)
+    SAVE_FIRST_CAMERA_VIEW_2 = CTRL_SHIFT_ALT(END)
+    SAVE_FIRST_CAMERA_VIEW_3 = CTRL_SHIFT_ALT(PAGE_DOWN)
+
+convert_to_key_action(Camera)
+
+
+class System:
+    """
+    客户端系统相关的按键绑定, 所有职业都需要按照这个设置. 以下设置如果没有特殊说明, 都是
+    在游戏内的按键绑定实现的.
+    """
+    MASTER_VOLUME_DOWN = CTRL_(KEY_11_MINUS)
+    MASTER_VOLUME_UP = CTRL_(KEY_12_PLUS)
+    TOGGLE_USER_INTERFACE = CTRL_(F12)
+
+convert_to_key_action(Camera)
+
+
+class General:
+    """
+    通用类功能的按键绑定. 所有职业都需要按照这个设置.  以下设置如果没有特殊说明, 都是
+    在游戏内的按键绑定实现的.
+    """
+    STOP_CASTING = OEM1_SEMICOLUMN
+    STOP_ATTACKING = OEM7_QUOTE
+    LEAVE_PARTY = ALT_(END)
+
+    CONFIRM = NUMPAD_5
     """
     The ``MB-Confirm`` Macro::
 
         /click StaticPopup1Button1
     """
 
-    FOCUS_SET = NUMPAD_9
-    """
-    The ``MB-FocusSet`` Macro::
-
-        /focus
-    """
-
-    FOCUS_CLEAR = NUMPAD_0
+    CLEAR_FOCUS = NUMPAD_6
     """
     The ``MB-FocusClear`` Macro::
 
@@ -100,7 +216,8 @@ class General:
 
     MOUNT_UP = NUMPAD_11_DIVIDE
     """
-    The ``MountUp`` Macro::
+    The ``MountUp`` Macro. 简单来说逻辑是如果已经在 坐骑上, 或是进入了飞行模式, 则 
+    stopmacro; 其他情况根据当地是否可以飞行, 使用不同的坐骑和进入德鲁伊飞行形态::
 
         #showtooltip
         /stopmacro [mounted]
@@ -109,12 +226,16 @@ class General:
         /cast [noflyable] ${YourLandMountSpellName}
     """
 
-    FOLLOW_FOCUS = NUMPAD_12_MULTIPLY
+    MOUNT_DOWN = CTRL_(OEM3_WAVE_OR_BACK_QUOTE)
     """
-    The ``MB-FollowFocus`` Macro::
+    The ``MountDown`` Macro. 简单来说就是尝试清除掉坐骑和飞行形态的光环::
+    
+        #showtooltip
+        /cancelaura ${YourLandMountSpellName}
+        /cancelaura ${YourFlyMountSpellName}
+        /cancelaura Swift Flight Form
+    """
 
-        /follow focus
-    """
     BUFF_SELF_MACRO = KEY_8
     """
     用于给自己刷 Buff 的宏或技能
@@ -123,45 +244,6 @@ class General:
     BUFF_RAID_MACRO = KEY_9
     """
     用于给团队刷 Buff 的宏或技能
-    """
-
-    SHORT_DURATION_BUFF = KEY_0
-    """
-    持续时间较短的, 需要经常补的技能. 例如
-    
-    - 战士的怒吼
-    - 防骑, 惩戒骑的圣洁护盾, 奶骑的圣光道标
-    - 死亡骑士的凛冬号角
-    - 萨满的电盾水盾
-    - 牧师的心灵之火
-    """
-
-    # w1
-    TARGET_BATLEFURY = KEY_1
-    TARGET_LITGOATSSA = KEY_1
-    TARGET_LITGOATDKA = KEY_1
-
-    # w2
-    TARGET_OPIITOU = KEY_1
-
-    # w6
-    TARGET_KINDHEARTED = KEY_1
-    TARGET_SWEETMONK = KEY_1
-
-    # w10
-    TARGET_LUXIAOFENG = KEY_1
-
-    # w11
-    TARGET_LITGUGUA = KEY_1
-
-    INTERACT_WITH_TARGET = J
-    """
-    The "Interact with Target" key binding, this is not set by default, you need to specify it
-    """
-
-    MASTER_VOLUMN_DOWN = CTRL_(KEY_11_MINUS)
-    """
-    The "Master Volume Down" key binding, this is not set by default, you need to specify it
     """
 
     RACIAL_SKILL = ALT_(A)
@@ -185,43 +267,7 @@ class General:
     Mage / Warlock / Priest shoot wand, Warrior / Rogue shoot range weapon
     """
 
-
 convert_to_key_action(General)
-
-
-class Movement:
-    """
-    移动类的按键绑定. 所有职业都需要按照这个设置.
-    """
-    MOVE_LEFT = Q  # 往左平移
-    MOVE_RIGHT = E  # 往右平移
-    MOVE_FORWARD = UP  # 往前
-    MOVE_BACKWARD = DOWN  # 往后
-    MOVE_LEFT_TOP = f"{MOVE_LEFT} {MOVE_FORWARD}"  # 左上
-    MOVE_RIGHT_TOP = f"{MOVE_RIGHT} {MOVE_FORWARD}"  # 右上
-    MOVE_LEFT_BOTTOM = f"{MOVE_LEFT} {MOVE_BACKWARD}"  # 左下
-    MOVE_RIGHT_BOTTOM = f"{MOVE_RIGHT} {MOVE_BACKWARD}"  # 右下
-    TURN_LEFT = LEFT  # 向左转
-    TURN_RIGHT = RIGHT  # 向右转
-    JUMP = SPACE  # 跳跃
-
-
-convert_to_key_action(Movement)
-
-
-class PetAction:
-    """
-    操作宠物的按键绑定. 所有职业都需要按照这个设置.
-    """
-    ATTACK = CTRL_(KEY_1)  # 宠物攻击主人的目标
-    FOLLOW = CTRL_(KEY_2)  # 宠物跟随主人
-    STAY = CTRL_(KEY_3)  # 宠物停留
-    AGGRESSIVE = CTRL_(KEY_1)  # 进攻模式
-    DEFENSIVE = CTRL_(KEY_2)  # 防御模式
-    PASSIVE = CTRL_(KEY_3)  # 被动模式
-
-
-convert_to_key_action(PetAction)
 
 
 class Warrior:
@@ -252,7 +298,7 @@ class Paladin:
 
     # --- CC 控制类技能 ---
     ALL_SPEC_HAMMER_OF_JUSTICE = CTRL_(E)  # 制裁之锤
-    ALL_SPEC_HOLY_WRATH = SHIFT_(OEM3_WAVE)  # 神圣愤怒 (对亡灵群体昏迷) Shift + ~
+    ALL_SPEC_HOLY_WRATH = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 神圣愤怒 (对亡灵群体昏迷) Shift + ~
     ALL_SPEC_TURN_EVIL = CTRL_(F)  # 恐惧亡灵
 
     # --- 治疗类技能 ---
@@ -362,7 +408,7 @@ class DK:
     ALL_SPEC_HEART_STRIKE = KEY_1  # 心脏打击 (血天赋)
 
     ALL_SPEC_PESTILENCE_ALT_1 = ALT_(KEY_1)  # 传染
-    ALL_SPEC_PESTILENCE_SHIFT_OEM3 = SHIFT_(OEM3_WAVE)  # 传染
+    ALL_SPEC_PESTILENCE_SHIFT_OEM3 = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 传染
 
     ALL_SPEC_ICE_TOUCH = KEY_2  # 冰冷触摸
 
@@ -374,6 +420,11 @@ class DK:
     ALL_SPEC_FROST_STRIKE = ALT_(KEY_3)  # 冰霜打击 (冰天赋技能, 可以取代 死亡缠绕)
 
     ALL_SPEC_DEATH_STRIKE = KEY_4  # 死亡打击 (回血技能)
+    """
+    #showtooltip
+    #spec1=unholy dps,spec2=frost dps
+    /cast [mod:alt,spec:1] Scourge Strike; [mod:alt,spec:2] Obliterate; Death Strike
+    """
     ALL_SPEC_OBLITERATE = ALT_(KEY_4)  # 湮没
     ALL_SPEC_SCOURGE_STRIKE = ALT_(KEY_4)  # 天灾打击 (邪天赋技能, 可以取代 湮没)
 
@@ -401,6 +452,16 @@ class DK:
     UNHOLY_SPEC_SUMMON_GARGOYLE = SHIFT_(C)  # 召唤石像鬼
     UNHOLY_SPEC_ANTI_MAGIC_ZONE = SHIFT_(G)  # 反魔法领域
     UNHOLY_SPEC_CORPSE_EXPLOSION = ALT_(F)  # 尸体爆炸
+    UNHOLY_SPEC_DPS_ROTATE_MACRO = KEY_2
+    """
+    #showtooltip
+    /castsequence reset=9 Icy Touch,Plague Strike,Pestilence,Scourge Strike,Blood Strike,Death Coil,Scourge Strike,Blood Strike,Scourge Strike,Blood Strike,Death Coil
+    """
+    UNHOLY_SPEC_BUFF_SELF_MACRO = KEY_8
+    """
+    #showtooltip
+    /castsequence !Unholy Presence,Raise Dead
+    """
 
     FROST_SPEC_UNBREAKABLE_ARMOR = SHIFT_(F2)  # 铜墙铁壁 (提高护甲和力量)
     FROST_SPEC_DEATH_CHILL = SHIFT_(C)  # 死亡之寒 (下一击必爆)
@@ -419,6 +480,14 @@ class Hunter:
 
     ALL_SPEC_SERPENT_STING = KEY_1  # 毒蛇钉刺 (Dot 伤害)
     ALL_SPEC_MISDIRECTION = ALT_(KEY_1)  # 误导
+    ALL_SPEC_MISDIRECTION_FOCUS_MACRO = ALT_(Z)  # 误导焦点宏
+    """
+    ::
+    
+        #showtooltip
+        /cast [target=focus,noharm] Misdirection; [target=focustarget,noharm] Misdirection
+        #/target [target=focus,noharm] focus; [] focustarget
+    """
     ALL_SPEC_STEADY_SHOT = KEY_2  # 稳固射击
     ALL_SPEC_AIMED_SHOT = KEY_4  # 瞄准射击
     ALL_SPEC_MULTI_SHOT = ALT_(KEY_4)  # 多重射击
@@ -441,7 +510,7 @@ class Hunter:
     ALL_SPEC_FEIGN_DEATH = ALT_(E)  # 假死
     ALL_SPEC_DISENGAGE = SHIFT_(R)  # 逃脱 (向后跳)
 
-    ALL_SPEC_DISTRACTING_SHOT = SHIFT_(OEM3_WAVE)  # 扰乱射击
+    ALL_SPEC_DISTRACTING_SHOT = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 扰乱射击
     ALL_SPEC_TRANQUILIZING_SHOT = SHIFT_(TAB)  # 凝神射击
     ALL_SPEC_VIPER_STING = CTRL_(X)  # 蝮蛇钉刺 (吸蓝)
 
@@ -449,6 +518,7 @@ class Hunter:
     ALL_SPEC_ASPECT_OF_VIPER_OR_DRAGON_HAWK = SHIFT_(G)  # 蝮蛇 和 龙鹰 守护相互切换
     ALL_SPEC_TRUE_SHOT_AURA = KEY_9  # 强击光环
 
+    # 射击天赋
     MARKSMAN_SPEC_DPS_ROTATE_MACRO = KEY_2 # 射击猎人 用于 dps 循环的宏
     """
     """
@@ -456,6 +526,7 @@ class Hunter:
     MARKSMAN_SPEC_SILENCING_SHOT = R  # 沉默射击
     MARKSMAN_SPEC_HUNTERS_MARK = KEY_6 # 猎人印记
 
+    # 生存天赋
     SURVIVAL_SPEC_DPS_ROTATE_MACRO = KEY_2 # 生存猎人 用于 dps 循环的宏
     """
     """
@@ -464,6 +535,7 @@ class Hunter:
     SURVIVAL_SPEC_EXPLOSIVE_ARROW = KEY_1  # // 爆裂箭 (debuff 使你对该目标的每次攻击都会造成爆炸额外伤害)
     SURVIVAL_SPEC_HUNTERS_MARK = KEY_6  # 猎人印记
 
+    # 兽王天赋
     BEAST_SPEC_DPS_ROTATE_MACRO = KEY_1  # 生存猎人 用于 dps 循环的宏
     """
     """
@@ -481,7 +553,8 @@ class Shaman:
     """
     萨满职业的按键绑定.
     """
-    ALL_SPEC_CALL_OF_THE_ELEMENTS = SHIFT_(OEM3_WAVE)  # 远古呼唤, 同时召唤 4 个图腾
+    ALL_SPEC_CALL_OF_THE_ELEMENTS = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 远古呼唤, 同时召唤 4 个图腾
+    ALL_SPEC_TOTEMIC_RECALL = SHIFT_(TAB) # 召回图腾
 
     # earth totem
     ALL_SPEC_TREMOR_TOTEM = ALT_(F1)  # 战栗图腾 (解除恐惧)
@@ -506,16 +579,25 @@ class Shaman:
 
     ALL_SPEC_FROST_SHOCK = Z  # 冰霜震击
     ALL_SPEC_BLOOD_THIRST_HEROISM = CTRL_(F)  # 嗜血, 英勇
-    ALL_SPEC_FIRE_NOVA = SHIFT_(OEM3_WAVE)  # 火焰新星
+    ALL_SPEC_FIRE_NOVA = CTRL_(X)  # 火焰新星
 
     # utility spell
     ALL_SPEC_HEX = CTRL_(E)  # 妖术
     ALL_SPEC_PURGE = CTRL_(R)  # 进攻魔法驱散
     ALL_SPEC_CURE_TOXINS = ALT_(R)  # 驱毒术
     ALL_SPEC_GHOST_WOLF = SHIFT_(R)  # 幽灵狼形态
-    ALL_SPEC_WIND_SHEAR = R  # 打断施法
+    ALL_SPEC_WIND_SHEAR_MACRO = R  # 打断施法
     """
-    风剪术 宏, 没有焦点时对目标打断, 有焦点时焦点打断 (如果焦点是敌人则打断敌人, 如果是友方则打断焦点的目标)::
+    This should be a macro
+    
+    #showtooltip
+    /stopcasting
+    /cast [target=focus,harm] Wind Shear; [target=focustarget,harm] Wind Shear; [] Wind Shear
+    """
+    ALL_SPEC_DISPEL = T # 驱散
+
+    """
+    风剪术 宏, 没有焦点时对目标打断, 有焦点时焦点打  断 (如果焦点是敌人则打断敌人, 如果是友方则打断焦点的目标)::
 
         #showtooltip
         /stopcasting
@@ -523,6 +605,8 @@ class Shaman:
     """
 
     ALL_SPEC_CHAIN_HEAL = CTRL_(G)  # 治疗链
+    ALL_SPEC_LESS_HEALING_WAVE = ALT_(X)  # 治疗链
+    ALL_SPEC_HEAL_WAVE = X  # 治疗链
 
     RESTO_SPEC_EARTH_SHIELD = ALT_(G)  # 大地之盾
     RESTO_SPEC_LESS_HEALING_WAVE_KEY_6 = KEY_6  # 次级治疗波
@@ -541,21 +625,25 @@ class Shaman:
     """
     ELEMENTAL_SPEC_ELEMENTAL_MASTERY = SHIFT_(C)  # 元素精通
     ELEMENTAL_SPEC_THUNDER_STORM = ALT_(F)  # 雷霆风暴
+    ELEMENTAL_SPEC_CURE_TOXIC = T  # 净化疾病中毒
 
     ENHANCEMENT_SPEC_DPS_ROTATE_MACRO = KEY_2  # 增强萨满 输出循环
     ENHANCEMENT_SPEC_FERAL_SPIRIT = SHIFT_(C)  # 野性之魂
     ENHANCEMENT_SPEC_SHAMANISTIC_RAGE = ALT_(F)  # 萨满之怒
+    ENHANCEMENT_SPEC_CURE_TOXIC = T  # 净化疾病中毒
 
-    HEAL_BOT_TARGET_RAID_FRAME = Mouse(button=MOUSE_LButton)  # 选择目标
+    # Left | Right | Middle
+    HEAL_BOT_HEALING_WAVE = Mouse(button=MOUSE_LButton)  # 治疗波
     HEAL_BOT_RIPTIDE = Mouse(button=MOUSE_RButton)  # 激流
     HEAL_BOT_HEAL_CHAIN = Mouse(button=MOUSE_MButton)  # 治疗链
 
-    HEAL_BOT_LESS_HEALING_WAVE = ModifiedMouseClick.shift_left_click()  # 次级治疗波
-    HEAL_BOT_HEALING_WAVE = ModifiedMouseClick.alt_left_click()  # 治疗波
+    # Shift, Alt, Ctrl Left Click
+    HEAL_BOT_CHAIN_HEAL = ModifiedMouseClick.shift_left_click()  # 治疗链
+    HEAL_BOT_LESS_HEALING_WAVE = ModifiedMouseClick.alt_left_click()  # 次级治疗波
     HEAL_BOT_CLEANSE = ModifiedMouseClick.ctrl_left_click()  # 先祖驱散
 
-    HEAL_BOT_EARTH_SHIELD = ModifiedMouseClick.shift_right_click()  # 大地之盾
-    HEAL_BOT_CHAIN_HEAL = ModifiedMouseClick.alt_right_click()  # 治疗链
+    # Shift, Alt, Ctrl Right Click
+    HEAL_BOT_EARTH_SHIELD = ModifiedMouseClick.alt_right_click()  # 大地之盾
     HEAL_BOT_CURE_TOXINS = ModifiedMouseClick.ctrl_right_click()  # 驱毒术
 
 
@@ -585,6 +673,8 @@ class Druid:
     ALL_SPEC_BARK_SKIN = SHIFT_(F1)  # 树皮术
     ALL_SPEC_ABOLISH_POISON = ALT_(R)  # 清毒术
     ALL_SPEC_REMOVE_CURSE = T  # 驱除诅咒
+    ALL_SPEC_SOOTHE_ANIMAL = ALT_(Z) # 安抚野兽龙类
+    ALL_SPEC_HIBERNATE = ALT_(T) # 睡眠野兽龙类
 
     SHAPE_SHIFT_BEAR_FORM = SHIFT_(Q)  # 熊形态
     SHAPE_SHIFT_CAT_FORM = SHIFT_(W)  # 猫形态
@@ -593,7 +683,6 @@ class Druid:
     SHAPE_SHIFT_MOONKIN_FORM = SHIFT_(E)  # 枭兽形态
     SHAPE_SHIFT_TREE_OF_LIFE_FORM = SHIFT_(E)  # 生命之树形态
     SHAPE_SHIFT_FLIGHT_FORM = NUMPAD_11_DIVIDE  # 飞行形态
-
 
     BALANCE_SPEC_MOON_FIRE_KEY_1 = KEY_1  # 月火术 (Dot)
     BALANCE_SPEC_WRATH_KEY_2 = KEY_2  # 愤怒 (施法较快的直接攻击法术)
@@ -643,9 +732,9 @@ class Druid:
     FERAL_SPEC_SURVIVAL_INSTINCT = SHIFT_(F2)  # 生存本能 (类似于战士的破釜沉舟)
 
     # Left | Right | Middle
-    HEAL_BOT_REJUVENATION = Mouse(button=MOUSE_LButton)  # 回春术
-    HEAL_BOT_NOURISH = Mouse(button=MOUSE_RButton)  # 滋养
-    HEAL_BOT_INNERVATE = Mouse(button=MOUSE_MButton)  # 激活
+    HEAL_BOT_LEFT_CLICK_REJUVENATION = Mouse(button=MOUSE_LButton)  # 回春术
+    HEAL_BOT_RIGHT_CLICK_NOURISH = Mouse(button=MOUSE_RButton)  # 滋养
+    HEAL_BOT_MIDDLE_CLICK_INNERVATE = Mouse(button=MOUSE_MButton)  # 激活
 
     # Shift | Alt | Ctrl + Left
     HEAL_BOT_WILD_GROWTH = ModifiedMouseClick.shift_left_click()
@@ -683,11 +772,18 @@ class Mage:
     ALL_SPEC_CONE_OF_COLD = KEY_5  # 冰锥术
     ALL_SPEC_MANA_SHIELD = ALT_(KEY_5)  # 法力护盾
     ALL_SPEC_ARCANE_EXPLOSION = Z  # 奥爆术
-    ALL_SPEC_COUNTER_SPELL = R  # 法术反制
+    ALL_SPEC_COUNTER_SPELL_MACRO = R  # 法术反制
+    """
+    This should be a macro
+    
+    #showtooltip
+    /stopcasting
+    /cast [target=focus,harm] Counter Spell; [target=focustarget,harm] Counter Spell; [] Counter Spell
+    """
     ALL_SPEC_REMOVE_CURSE = T  # 解除诅咒
     ALL_SPEC_FLAME_STRIKE = X  # 烈焰风暴
     ALL_SPEC_BLIZZARD = ALT_(X)  # 暴风雪
-    ALL_SPEC_ICE_LANCE = SHIFT_(OEM3_WAVE)  # 冰枪术
+    ALL_SPEC_ICE_LANCE = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 冰枪术
     ALL_SPEC_FROST_FIRE_BOLT = CTRL_(X)  # 霜火箭
     ALL_SPEC_FOCUS_MAGIC = ALT_(Z)  # 专注魔法
     ALL_SPEC_SLOW_FALL = ALT_(F1)  # 缓落术
@@ -775,7 +871,7 @@ class Warlock:
     ALL_SPEC_DEMONIC_CIRCLE_TELEPORT = SHIFT_(R)  # 恶魔法阵: 传送
     ALL_SPEC_SOUL_SHATTLE = ALT_(Z)  # 灵魂碎裂 (减仇恨)
 
-    ALL_SPEC_CORRUPTION = SHIFT_(OEM3_WAVE)  # 腐蚀术
+    ALL_SPEC_CORRUPTION = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 腐蚀术
     ALL_SPEC_SEED_OF_CORRUPTION = R  # 腐蚀之种
 
     DEMON_SPEC_DPS_ROTATE = KEY_2  # 恶魔术 用于 dps 循环的宏
@@ -825,11 +921,11 @@ class Priest:
     ALL_SPEC_SHACKLE_UNDEAD = CTRL_(E)  # 束缚亡灵
     ALL_SPEC_MIND_CONTROL = CTRL_(F)  # 精神控制
 
-    ALL_SPEC_POWER_WORLD_SHIELD = SHIFT_(OEM3_WAVE)  # 真言术盾
+    ALL_SPEC_POWER_WORLD_SHIELD = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 真言术盾
 
     ALL_SPEC_MASS_DISPEL = CTRL_(R)  # 群体驱散
-    ALL_SPEC_DISPEL_MAGIC = ALT_(R)  # 驱散魔法
-    ALL_SPEC_ABOLISH_DISEASE = T  # 驱除疾病
+    ALL_SPEC_ABOLISH_DISEASE = ALT_(R)  # 驱除疾病
+    ALL_SPEC_DISPEL_MAGIC = T  # 驱散魔法
 
     ALL_SPEC_PRAYER_OF_HEALING = ALT_(G)  # 治疗祷言
     ALL_SPEC_HOLY_NOVA = G  # 神圣新星

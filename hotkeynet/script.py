@@ -16,9 +16,14 @@ _ScriptTemplate = Path(TPL_DIR, "Script.tpl").read_text(encoding="utf-8")
 
 @attr.s
 class Script:
+    """
+
+    :param labels: OrderedDict([(label_name, window_name), ...])
+    """
     commands: OrderedDict = attr.ib(factory=OrderedDict)
     templates: OrderedDict = attr.ib(factory=OrderedDict)
     hotkeys: OrderedDict = attr.ib(factory=OrderedDict)
+    labels: OrderedDict = attr.ib(factory=OrderedDict)
 
     def add_command(self, command: 'Command', ignore_duplicate=False):
         if command.name in self.commands:
@@ -35,7 +40,12 @@ class Script:
     def add_hotkey(self, hotkey: 'Hotkey', ignore_duplicate=False):
         if hotkey.key in self.hotkeys:
             if not ignore_duplicate:
-                raise ValueError(f"Duplicate hotkey name found {hotkey.name}")
+                existing_hotkey = self.hotkeys[hotkey.key]
+                msg = (
+                    f"Hotkey(name={hotkey.name},key={hotkey.key}) cannot defined. "
+                    f"Another hotkey Hotkey(name={existing_hotkey.name},key={existing_hotkey.key}) already exists. "
+                )
+                raise ValueError(msg)
         self.hotkeys[hotkey.key] = hotkey
 
     def dump(self):
@@ -146,6 +156,11 @@ class Hotkey:
 
 @attr.s
 class MovementHotkey(Hotkey):
+    name: str = attr.ib()
+    key: str = attr.ib()
+    actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
+    script: 'Script' = attr.ib(default=None, validator=attr.validators.optional(attr.validators.instance_of(Script)))
+
     @property
     def title(self) -> str:
         return f"<MovementHotkey {self.key}>"
