@@ -502,6 +502,10 @@ class Config:
         cls.SendLabelTo.g3_dr_holy_pala = ensure_labels([9, ])
 
     @classmethod
+    def set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid_onyxia(cls):
+        cls.set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid()
+
+    @classmethod
     def set_mode_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(cls):
         cls.is_pvp_mode = True
         cls.use_1600_900_resolution()
