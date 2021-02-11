@@ -72,6 +72,27 @@ def build_hk_1():
                     Key.trigger(),
                 ]
             ),
+            SendLabel(
+                name="all_unholy_dps_dk",
+                to=Config.SendLabelTo.all_unholy_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_blood_dps_dk",
+                to=Config.SendLabelTo.all_blood_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_frost_dps_dk",
+                to=Config.SendLabelTo.all_frost_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
             # hunter
             SendLabel(
                 name="all_marksman_hunter",
@@ -119,6 +140,7 @@ def build_hk_1():
                 to=Config.SendLabelTo.all_resto_shaman,
                 actions=[
                     act.Target.TARGET_FOCUS,
+                    Key.trigger(),
                 ]
             ),
 
@@ -263,6 +285,27 @@ def build_hk_2():
                     Key.trigger(),
                 ]
             ),
+            SendLabel(
+                name="all_unholy_dps_dk",
+                to=Config.SendLabelTo.all_unholy_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_blood_dps_dk",
+                to=Config.SendLabelTo.all_blood_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_frost_dps_dk",
+                to=Config.SendLabelTo.all_frost_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
             # hunter
             SendLabel(
                 name="all_marksman_hunter",
@@ -295,6 +338,13 @@ def build_hk_2():
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
                     act.Shaman.ELEMENTAL_SPEC_DPS_ROTATE_MACRO,
+                ]
+            ),
+            SendLabel(
+                name="all_resto_shaman",
+                to=Config.SendLabelTo.all_resto_shaman,
+                actions=[
+                    Key.trigger(),
                 ]
             ),
             # druid
@@ -434,6 +484,27 @@ def build_hk_3():
                     Key.trigger(),
                 ]
             ),
+            SendLabel(
+                name="all_unholy_dps_dk",
+                to=Config.SendLabelTo.all_unholy_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_blood_dps_dk",
+                to=Config.SendLabelTo.all_blood_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_frost_dps_dk",
+                to=Config.SendLabelTo.all_frost_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
             # hunter
             SendLabel(
                 name="all_marksman_hunter",
@@ -481,7 +552,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_resto_shaman,
                 actions=[
                     act.Target.TARGET_FOCUS,
-                    act.Shaman.RESTO_SPEC_LESS_HEALING_WAVE_KEY_6,
+                    act.Shaman.RESTO_SPEC_HEALING_WAVE_KEY_7,
                 ]
             ),
             # druid
@@ -618,6 +689,27 @@ def build_hk_4():
                     Key.trigger(),
                 ]
             ),
+            SendLabel(
+                name="all_unholy_dps_dk",
+                to=Config.SendLabelTo.all_unholy_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_blood_dps_dk",
+                to=Config.SendLabelTo.all_blood_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_frost_dps_dk",
+                to=Config.SendLabelTo.all_frost_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
             # hunter
             SendLabel(
                 name="all_marksman_hunter",
@@ -664,6 +756,8 @@ def build_hk_4():
                 name="all_resto_shaman",
                 to=Config.SendLabelTo.all_resto_shaman,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
+                    Key.trigger(),
                 ]
             ),
             # druid
@@ -794,6 +888,27 @@ def build_hk_5():
             SendLabel(
                 name="all_blood_tank_dk",
                 to=Config.SendLabelTo.all_blood_tank_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_unholy_dps_dk",
+                to=Config.SendLabelTo.all_unholy_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_blood_dps_dk",
+                to=Config.SendLabelTo.all_blood_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_frost_dps_dk",
+                to=Config.SendLabelTo.all_frost_dps_dk,
                 actions=[
                     Key.trigger(),
                 ]
@@ -981,6 +1096,27 @@ def build_hk_6_one_time_debuff():
                 to=Config.SendLabelTo.all_blood_tank_dk,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_unholy_dps_dk",
+                to=Config.SendLabelTo.all_unholy_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_blood_dps_dk",
+                to=Config.SendLabelTo.all_blood_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_frost_dps_dk",
+                to=Config.SendLabelTo.all_frost_dps_dk,
+                actions=[
                     Key.trigger(),
                 ]
             ),
@@ -1180,6 +1316,27 @@ def build_hk_7():
                 to=Config.SendLabelTo.all_blood_tank_dk,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_unholy_dps_dk",
+                to=Config.SendLabelTo.all_unholy_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_blood_dps_dk",
+                to=Config.SendLabelTo.all_blood_dps_dk,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_frost_dps_dk",
+                to=Config.SendLabelTo.all_frost_dps_dk,
+                actions=[
                     Key.trigger(),
                 ]
             ),

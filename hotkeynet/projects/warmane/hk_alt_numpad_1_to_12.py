@@ -129,6 +129,13 @@ def build_hk_alt_numpad_6_all_dps_burst_and_hero():
                     act.General.DPS_BURST_MACRO,
                 ]
             ),
+            SendLabel(
+                name="all_resto_shaman",
+                to=Config.SendLabelTo.all_resto_shaman,
+                actions=[
+                    act.Shaman.ALL_SPEC_BLOOD_THIRST_HEROISM,
+                ]
+            ),
         ],
         script=script,
     )

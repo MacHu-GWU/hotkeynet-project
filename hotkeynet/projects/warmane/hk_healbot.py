@@ -62,15 +62,7 @@ def build_hk_healbot_small_heal():
             ),
             SendLabel(
                 name="",
-                to=difference_list(
-                    Config.SendLabelTo.all(),
-                    Config.SendLabelTo.all_holy_pala,
-                    Config.SendLabelTo.all_resto_shaman,
-                    Config.SendLabelTo.all_resto_druid,
-                    Config.SendLabelTo.all_disco_priest,
-                    Config.SendLabelTo.all_holy_priest,
-                    Config.SendLabelTo.all_tank(),
-                ),
+                to=Config.SendLabelTo.all_dps(),
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
                     Key(name=keyname.KEY_2),
@@ -132,15 +124,7 @@ def build_hk_healbot_big_heal():
             ),
             SendLabel(
                 name="",
-                to=difference_list(
-                    Config.SendLabelTo.all(),
-                    Config.SendLabelTo.all_holy_pala,
-                    Config.SendLabelTo.all_resto_shaman,
-                    Config.SendLabelTo.all_resto_druid,
-                    Config.SendLabelTo.all_disco_priest,
-                    Config.SendLabelTo.all_holy_priest,
-                    Config.SendLabelTo.all_tank(),
-                ),
+                to=Config.SendLabelTo.all_dps(),
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
                     Key(name=keyname.KEY_2),
@@ -151,3 +135,58 @@ def build_hk_healbot_big_heal():
     )
 
 hk_healbot_big_heal = build_hk_healbot_big_heal()
+
+
+def build_hk_healbot_aoe_heal():
+    return Hotkey(
+        name="Healbot Aoe Heal",
+        key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.MOUSE_LButton)),
+        actions=[
+            SendLabel(
+                name="",
+                to=Config.SendLabelTo.all_resto_shaman,
+                actions=[
+                    act.Shaman.HEAL_BOT_CHAIN_HEAL,
+                ]
+            ),
+            SendLabel(
+                name="",
+                to=Config.SendLabelTo.all_holy_pala,
+                actions=[
+                    act.Paladin.HEAL_BOT_LEFT_CLICK_HOLY_LIGHT,
+                ]
+            ),
+            SendLabel(
+                name="",
+                to=Config.SendLabelTo.all_disco_priest,
+                actions=[
+                    # act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+                ]
+            ),
+            SendLabel(
+                name="",
+                to=Config.SendLabelTo.all_holy_priest,
+                actions=[
+                    # act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+                ]
+            ),
+            SendLabel(
+                name="",
+                to=Config.SendLabelTo.all_tank(),
+                actions=[
+                    Key(name=keyname.KEY_2)
+                ]
+            ),
+            SendLabel(
+                name="",
+                to=Config.SendLabelTo.all_dps(),
+                actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
+                    Key(name=keyname.KEY_2),
+                ]
+            )
+        ],
+        script=script,
+    )
+
+hk_healbot_aoe_heal = build_hk_healbot_aoe_heal()

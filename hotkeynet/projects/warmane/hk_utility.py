@@ -15,6 +15,7 @@ from ...script import (
     Key, Mouse, SendLabel,
 )
 
+
 hk_confirm = Hotkey(
     name="Confirm",
     key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.Y)),
@@ -97,3 +98,19 @@ def build_hk_all_pass_item():
     )
 
 hk_all_pass_item = build_hk_all_pass_item()
+
+
+hk_volume_down= Hotkey(
+    name="Volume Down",
+    key=keyname.SCROLOCK_ON(keyname.CTRL_SHIFT_ALT(keyname.M)),
+    actions=[
+        SendLabel(
+            name="all",
+            to=Config.SendLabelTo.all(),
+            actions=[
+                act.System.MASTER_VOLUME_DOWN,
+            ]
+        )
+    ],
+    script=script,
+)

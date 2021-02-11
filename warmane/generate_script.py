@@ -13,9 +13,20 @@ from hotkeynet.projects.warmane.config import Config
 
 # Config.set_mode_temp()
 # Config.set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid()
-Config.set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid_onyxia()
+# Config.set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid_onyxia()
+
+#--- 5人随机副本单刷 ---
+Config.set_mode_18w_5p_elite_team_batlefury_quentin_opiitou_swagsonic_kangliu()
+# Config.set_mode_18w_5p_glowyy_litgugu_abcd()
+# Config.set_mode_18w_5p_glowyy_litgoatss_abc_bunnysisters()
+# Config.set_mode_18w_5p_glowyy_litgoatss_de_laoshou_bunnysisters()
+# Config.set_mode_18w_5p_glowyy_litgoatdk_abc_bunnysisters()
+# Config.set_mode_18w_5p_glowyy_litgoatdk_de_ganjj_bunnysisters()
 
 # Config.set_mode_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps()
+
+# Config.set_mode_18w_5p_batlefury_bunnysister_kangliu_kindhearted_kapacuk()
+
 # Config.set_mode_18p_batlefury_luxiaofeng_litgugu_team_solo_raid()
 # Config.set_mode_18p_batlefury_kangliu_litgugu_team_solo_voa()
 

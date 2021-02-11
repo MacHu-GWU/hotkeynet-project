@@ -138,20 +138,22 @@ hk_shift_g = Hotkey(
     script=script,
 )
 
-hk_shift_tab = Hotkey(
-    name="Shift Tab",
-    key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.TAB)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
+# hk_shift_tab = Hotkey(
+#     name="Shift Tab",
+#     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.TAB)),
+#     actions=[
+#         SendLabel(
+#             name="",
+#             to=Config.SendLabelTo.all_shaman(),
+#             actions=[
+#                 Key.trigger()
+#             ]
+#         ),
+#         "<SendFocusWin>",
+#         Key.trigger(),
+#     ],
+#     script=script,
+# )
 
 hk_ctrl_e = Hotkey(
     name="Ctrl E",
@@ -446,13 +448,13 @@ hk_ctrl_t = Hotkey(
     name="Ctrl T",
     key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.T)),
     actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
+        SendLabel(
+            name="",
+            to=Config.SendLabelTo.all(),
+            actions=[
+                Key.trigger()
+            ]
+        )
     ],
     script=script,
 )

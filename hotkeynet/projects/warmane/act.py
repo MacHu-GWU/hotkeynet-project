@@ -188,7 +188,7 @@ class System:
     MASTER_VOLUME_UP = CTRL_(KEY_12_PLUS)
     TOGGLE_USER_INTERFACE = CTRL_(F12)
 
-convert_to_key_action(Camera)
+convert_to_key_action(System)
 
 
 class General:

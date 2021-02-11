@@ -10,20 +10,41 @@ from ...script import (
 
 def build_hk_shift_numpad_1():
     return Hotkey(
-        name="Shift  Numpad1",
+        name="Shift Numpad1",
         key=keyname.SCROLOCK_ON(keyname.NUMPAD_SHIFT_1_END),
         actions=[
             SendLabel(
-                name="all_hunter",
-                to=Config.SendLabelTo.all_hunter(),
+                name="all_shaman",
+                to=Config.SendLabelTo.all_shaman(),
                 actions=[
-                    act.Hunter.MARKSMAN_SPEC_SILENCING_SHOT,
+                    act.General.STOP_CASTING,
+                    act.Shaman.ALL_SPEC_CALL_OF_THE_ELEMENTS,
                 ]
             )
         ],
         script=script,
     )
 
+hk_shift_numpad_1 = build_hk_shift_numpad_1()
+
+def build_hk_shift_numpad_2():
+    return Hotkey(
+        name="Shift Numpad2",
+        key=keyname.SCROLOCK_ON(keyname.NUMPAD_SHIFT_2_DOWN),
+        actions=[
+            SendLabel(
+                name="all_shaman",
+                to=Config.SendLabelTo.all_shaman(),
+                actions=[
+                    act.General.STOP_CASTING,
+                    act.Shaman.ALL_SPEC_TOTEMIC_RECALL,
+                ]
+            )
+        ],
+        script=script,
+    )
+
+hk_shift_numpad_2 = build_hk_shift_numpad_2()
 #
 # hk_shift_numpad_1 = build_hk_shift_numpad_1()
 #

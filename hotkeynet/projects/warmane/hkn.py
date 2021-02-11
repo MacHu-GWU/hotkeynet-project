@@ -18,6 +18,8 @@ from . import hk_healbot
 
 from . import post_hook
 from . import hk_alt_numpad_1_to_12
+from . import hk_ctrl_numpad_1_to_12
+from . import hk_shift_numpad_1_to_12
 from . import hk_control_panel
 
 

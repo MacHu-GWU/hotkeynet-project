@@ -159,20 +159,22 @@ class Config:
             dict(username=fatmulti8_username, password=fatmulti8_password),
             dict(username=fatmulti9_username, password=fatmulti9_password),
             # dict(username=fatmulti10_username, password=fatmulti10_password),
-            dict(username=monkey130_username, password=monkey130_password),
+            # dict(username=monkey130_username, password=monkey130_password),
+            dict(username=makun7551_username, password=makun7551_password),
             dict(username=fatmulti11_username, password=fatmulti11_password),
             dict(username=fatmulti12_username, password=fatmulti12_password),
             dict(username=fatmulti13_username, password=fatmulti13_password),
             dict(username=fatmulti14_username, password=fatmulti14_password),
-            # dict(username=fatmulti15_username, password=fatmulti15_password),
-            # dict(username=fatmulti16_username, password=fatmulti16_password),
-            # dict(username=fatmulti17_username, password=fatmulti17_password),
-            # dict(username=fatmulti18_username, password=fatmulti18_password),
+            dict(username=fatmulti15_username, password=fatmulti15_password),
+            dict(username=fatmulti16_username, password=fatmulti16_password),
+            dict(username=fatmulti17_username, password=fatmulti17_password),
+            dict(username=fatmulti18_username, password=fatmulti18_password),
         ]  # type: typing.List[typing.Dict[str, str]]
 
     class Windows:
         from_1_to_5 = list(range(1, 5 + 1))
         from_1_to_10 = list(range(1, 10 + 1))
+        from_1_to_14 = list(range(1, 14 + 1))
         from_1_to_18 = list(range(1, 18 + 1))
 
         # 快捷键 Ctrl Shift Alt + F1 ~ F18 对应的 窗口名字
@@ -460,6 +462,14 @@ class Config:
         cls.Windows.toggle_specific_windows = list(range(1, 10 + 1))
 
     @classmethod
+    def use_14_window(cls):
+        cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_14
+        cls.Windows.batch_login_windows = list(range(1, 14 + 1))
+        cls.Windows.batch_login_accounts = list(range(1, 14 + 1))
+        cls.Windows.toggle_round_robin_windows = list(range(1, 14 + 1))
+        cls.Windows.toggle_specific_windows = list(range(1, 14 + 1))
+
+    @classmethod
     def use_18_window(cls):
         cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_18
         cls.Windows.batch_login_windows = list(range(1, 18 + 1))
@@ -505,6 +515,120 @@ class Config:
     def set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid_onyxia(cls):
         cls.set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid()
 
+    #--- 18 window 5 p solo RDF ---
+    @classmethod
+    def set_mode_18w_5p_elite_team_batlefury_quentin_opiitou_swagsonic_kangliu(cls):
+        cls.use_1600_900_resolution()
+        cls.use_14_window()
+
+        cls.char_fatmulti1_batlefury_paladin_protect()
+        cls.char_fatmulti2_quentin_shaman_resto()
+        cls.char_fatmulti3_opiitou_druid_balance()
+        cls.char_fatmulti4_swagsonic_mage_arcane()
+        cls.char_fatmulti5_kangliu_priest_shadow()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([1, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([1, ])
+
+    @classmethod
+    def set_mode_18w_5p_glowyy_litgugu_abcd(cls):
+        cls.use_1600_900_resolution()
+        cls.use_14_window()
+
+        cls.char_fatmulti9_glowyy_protect_pala()
+        cls.char_fatmulti11_litgugua_balance_druid()
+        cls.char_fatmulti12_litgugub_balance_druid()
+        cls.char_fatmulti13_litguguc_balance_druid()
+        cls.char_fatmulti14_litgugud_resto_druid()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([9, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([9, ])
+
+    @classmethod
+    def set_mode_18w_5p_glowyy_litgoatss_abc_bunnysisters(cls):
+        cls.use_1600_900_resolution()
+        cls.use_14_window()
+
+        cls.char_fatmulti9_glowyy_protect_pala()
+        cls.char_fatmulti1_litgoatssa_warlock_demon()
+        cls.char_fatmulti3_litgoatssb_warlock_demon()
+        cls.char_fatmulti2_litgoatssc_warlock_demon()
+        cls.char_fatmulti8_bunnysisters_resto_druid()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([9, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([9, ])
+
+    @classmethod
+    def set_mode_18w_5p_glowyy_litgoatss_de_laoshou_bunnysisters(cls):
+        cls.use_1600_900_resolution()
+        cls.use_14_window()
+
+        cls.char_fatmulti9_glowyy_protect_pala()
+        cls.char_makun7551_laoshou_protect_pala()
+        cls.char_fatmulti4_litgoatssd_warlock_demon()
+        cls.char_fatmulti5_litgoatsse_warlock_demon()
+        cls.char_fatmulti8_bunnysisters_resto_druid()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([9, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([9, ])
+
+    @classmethod
+    def set_mode_18w_5p_glowyy_litgoatdk_abc_bunnysisters(cls):
+        cls.use_1600_900_resolution()
+        cls.use_14_window()
+
+        cls.char_fatmulti9_glowyy_protect_pala()
+        cls.char_fatmulti1_litgoatdka_dk_dps()
+        cls.char_fatmulti3_litgoatdkb_dk_dps()
+        cls.char_fatmulti2_litgoatdkc_dk_dps()
+        cls.char_fatmulti8_bunnysisters_resto_druid()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([9, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([9, ])
+
+    @classmethod
+    def set_mode_18w_5p_glowyy_litgoatdk_de_ganjj_bunnysisters(cls):
+        cls.use_1600_900_resolution()
+        cls.use_14_window()
+
+        cls.char_fatmulti9_glowyy_protect_pala()
+        cls.char_makun7551_ganjj_tank_dk()
+        cls.char_fatmulti4_litgoatdkd_dk_dps()
+        cls.char_fatmulti5_litgoatdke_dk_dps()
+        cls.char_fatmulti8_bunnysisters_resto_druid()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([9, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([9, ])
+
+    @classmethod
+    def set_mode_18w_5p_batlefury_bunnysister_kangliu_kindhearted_kapacuk(cls):
+        cls.use_1600_900_resolution()
+        cls.use_14_window()
+
+        cls.char_fatmulti1_batlefury_paladin_protect()
+        cls.char_fatmulti8_bunnysisters_resto_druid()
+        cls.char_fatmulti5_kangliu_priest_shadow()
+        cls.char_fitsheep_kindhearted_demon_warlock()
+        cls.char_fatmulti6_kapacuk_marksman_hunter()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([1, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([1, ])
+
+    @classmethod
+    def set_mode_18w_5p_batlefury_glowyy_opiitou_quentin_swagsonic(cls):
+        cls.use_1600_900_resolution()
+        cls.use_14_window()
+
+        cls.char_fatmulti1_batlefury_paladin_protect()
+        cls.char_fatmulti8_bunnysisters_resto_druid()
+        cls.char_fatmulti5_kangliu_priest_shadow()
+        cls.char_fitsheep_kindhearted_demon_warlock()
+        cls.char_fatmulti6_kapacuk_marksman_hunter()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([1, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([1, ])
+
+
     @classmethod
     def set_mode_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(cls):
         cls.is_pvp_mode = True
@@ -528,11 +652,14 @@ class Config:
         cls.char_fatmulti14_litgugud_resto_druid()
 
         cls.SendLabelTo.leader_1 = ensure_labels([10, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([1, ])
         cls.SendLabelTo.g1_dr_holy_pala = ensure_labels([9, ])
 
     @classmethod
     def set_mode_18p_batlefury_luxiaofeng_litgugu_team_solo_raid(cls):
-        cls.set_mode_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps()
+        cls.is_pvp_mode = True
+        cls.use_1600_900_resolution()
+        cls.use_18_window()
 
         cls.char_fatmulti1_batlefury_paladin_protect()
         cls.char_fatmulti3_opiitou_druid_balance()
@@ -738,6 +865,16 @@ class Config:
 
     @classmethod
     def char_feixue_flydps_tank_dk(cls):
+        label = "w10"
+        cls.SendLabelTo.all_unholy_tank_dk.append(label)
+
+    @classmethod
+    def char_makun7551_laoshou_protect_pala(cls):
+        label = "w10"
+        cls.SendLabelTo.all_protect_pala.append(label)
+
+    @classmethod
+    def char_makun7551_ganjj_tank_dk(cls):
         label = "w10"
         cls.SendLabelTo.all_unholy_tank_dk.append(label)
 
