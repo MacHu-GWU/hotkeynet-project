@@ -488,8 +488,9 @@ class Config:
         cls.SendLabelTo.leader_1 = ensure_labels([1, ])
         cls.SendLabelTo.leader_2 = ensure_labels([10, ])
 
+    #--- 10 wiindow 10 p solo Raid ---
     @classmethod
-    def set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid(cls):
+    def set_mode_10w_10p_batlefury_luxiaofeng_high_gs_team_solo_raid(cls):
         cls.use_1920_1080_resolution()
         cls.use_10_window()
 
@@ -512,8 +513,9 @@ class Config:
         cls.SendLabelTo.g3_dr_holy_pala = ensure_labels([9, ])
 
     @classmethod
-    def set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid_onyxia(cls):
-        cls.set_mode_10p_batlefury_luxiaofeng_high_gs_team_solo_raid()
+    def set_mode_10w_10p_batlefury_luxiaofeng_high_gs_team_solo_raid_onyxia(cls):
+        cls.combat_mode = "batlefury_luxiaofeng_high_gs_team_solo_raid_onyxia"
+        cls.set_mode_10w_10p_batlefury_luxiaofeng_high_gs_team_solo_raid()
 
     #--- 18 window 5 p solo RDF ---
     @classmethod
@@ -856,7 +858,7 @@ class Config:
     @classmethod
     def char_fatmulti9_glowyy_holy_pala(cls):
         label = "w9"
-        cls.SendLabelTo.all_resto_druid.append(label)
+        cls.SendLabelTo.all_holy_pala.append(label)
 
     @classmethod
     def char_fatmulti9_glowyy_protect_pala(cls):

@@ -143,28 +143,35 @@ def build_hk_healbot_aoe_heal():
         key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.MOUSE_LButton)),
         actions=[
             SendLabel(
-                name="",
+                name="all_resto_shaman",
                 to=Config.SendLabelTo.all_resto_shaman,
                 actions=[
                     act.Shaman.HEAL_BOT_CHAIN_HEAL,
                 ]
             ),
             SendLabel(
-                name="",
+                name="all_holy_pala",
                 to=Config.SendLabelTo.all_holy_pala,
                 actions=[
                     act.Paladin.HEAL_BOT_LEFT_CLICK_HOLY_LIGHT,
                 ]
             ),
             SendLabel(
-                name="",
+                name="all_resto_druid",
+                to=Config.SendLabelTo.all_resto_druid,
+                actions=[
+                    act.Druid.HEAL_BOT_WILD_GROWTH,
+                ]
+            ),
+            SendLabel(
+                name="all_disco_priest",
                 to=Config.SendLabelTo.all_disco_priest,
                 actions=[
                     # act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
                 ]
             ),
             SendLabel(
-                name="",
+                name="all_holy_priest",
                 to=Config.SendLabelTo.all_holy_priest,
                 actions=[
                     # act.Priest.HEAL_BOT_POWER_WORD_SHIELD,

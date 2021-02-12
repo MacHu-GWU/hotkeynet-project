@@ -28,6 +28,7 @@ from ...script import (
     Hotkey,
     Key, SendLabel,
 )
+from varname import nameof
 
 
 def build_hk_1():
@@ -1690,7 +1691,7 @@ def build_hk_11():
         key=keyname.SCROLOCK_ON(keyname.KEY_11_MINUS),
         actions=[
             SendLabel(
-                name="",
+                name="non_leader_1",
                 to=Config.SendLabelTo.non_leader_1(),
                 actions=[
                     act.Target.TARGET_LEADER_1,
@@ -1698,7 +1699,7 @@ def build_hk_11():
                 ]
             ),
             SendLabel(
-                name="",
+                name="leader_1",
                 to=Config.SendLabelTo.leader_1,
                 actions=[
                     act.General.CLEAR_FOCUS,
@@ -1717,7 +1718,7 @@ def build_hk_12():
         key=keyname.SCROLOCK_ON(keyname.KEY_12_PLUS),
         actions=[
             SendLabel(
-                name="",
+                name="non_leader_2",
                 to=Config.SendLabelTo.non_leader_2(),
                 actions=[
                     act.Target.TARGET_LEADER_2,
@@ -1725,7 +1726,7 @@ def build_hk_12():
                 ]
             ),
             SendLabel(
-                name="",
+                name="leader_2",
                 to=Config.SendLabelTo.leader_2,
                 actions=[
                     act.General.CLEAR_FOCUS,

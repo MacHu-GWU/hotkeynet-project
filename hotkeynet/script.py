@@ -125,6 +125,16 @@ class Hotkey:
     def title(self) -> str:
         return f"<Hotkey {self.key}>"
 
+    _send_labels = None # type: typing.Dict[str, SendLabel]
+
+    def get_send_label_by_name(self, name) -> 'SendLabel':
+        if self._send_labels is None:
+            self._send_labels = dict()
+            for action in self.actions:
+                if isinstance(action, SendLabel):
+                    self._send_labels[action.name] = action
+        return self._send_labels[name]
+
     def validate(self):
         # don't allow duplicate label in SendLabel actions.
         for action in self.actions :
