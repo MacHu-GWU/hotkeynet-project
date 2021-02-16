@@ -517,6 +517,11 @@ class Config:
         cls.combat_mode = "batlefury_luxiaofeng_high_gs_team_solo_raid_onyxia"
         cls.set_mode_10w_10p_batlefury_luxiaofeng_high_gs_team_solo_raid()
 
+    @classmethod
+    def set_mode_10w_10p_batlefury_luxiaofeng_high_gs_team_solo_raid_icc_1_marrowgar(cls):
+        cls.combat_mode = "batlefury_luxiaofeng_high_gs_team_solo_raid_icc_1_marrowgar"
+        cls.set_mode_10w_10p_batlefury_luxiaofeng_high_gs_team_solo_raid()
+
     #--- 18 window 5 p solo RDF ---
     @classmethod
     def set_mode_18w_5p_elite_team_batlefury_quentin_opiitou_swagsonic_kangliu(cls):
