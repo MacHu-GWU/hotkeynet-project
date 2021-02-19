@@ -28,7 +28,6 @@ from ...script import (
     Hotkey,
     Key, SendLabel,
 )
-from varname import nameof
 
 
 def build_hk_1():
@@ -227,13 +226,15 @@ def build_hk_1():
                 to=Config.SendLabelTo.all_disco_priest,
                 actions=[
                     act.Target.TARGET_FOCUS,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
                 name="all_holy_priest",
                 to=Config.SendLabelTo.all_holy_priest,
                 actions=[
-                    act.Target.TARGET_FOCUS
+                    act.Target.TARGET_FOCUS,
+                    Key.trigger(),
                 ]
             ),
         ],
@@ -313,7 +314,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_marksman_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -321,7 +322,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_survival_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.SURVIVAL_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -329,7 +330,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_beast_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.BEAST_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             # shaman
@@ -338,7 +339,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_elemental_shaman,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Shaman.ELEMENTAL_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -354,14 +355,14 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_boomkin_druid,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Druid.BALANCE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
                 name="all_resto_druid",
                 to=Config.SendLabelTo.all_resto_druid,
                 actions=[
-                    act.Druid.RESTO_SPEC_RAID_HEAL_MACRO,
+                    act.Druid.RESTO_SPEC_HEAL_RAID_MACRO_KEY_2,
                 ]
             ),
 
@@ -371,7 +372,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_arcane_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.ARCANE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -379,7 +380,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_fire_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.FIRE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -387,7 +388,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_frost_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.FROST_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             # warlock
@@ -396,7 +397,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_demonic_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.DEMON_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -404,7 +405,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_affiliate_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.AFFLICTION_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -412,7 +413,7 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_destruction_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.DESTRUCTION_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             # priest
@@ -421,21 +422,21 @@ def build_hk_2():
                 to=Config.SendLabelTo.all_shadow_priest,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Priest.SHADOW_SPEC_DPS_ROTATE_SPEC,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
                 name="all_disco_priest",
                 to=Config.SendLabelTo.all_disco_priest,
                 actions=[
-                    act.Priest.DISC_SPEC_HEAL_RAID_MACRO,
+                    act.Priest.DISC_SPEC_HEAL_RAID_MACRO_KEY_2,
                 ]
             ),
             SendLabel(
                 name="all_holy_priest",
                 to=Config.SendLabelTo.all_holy_priest,
                 actions=[
-                    act.Priest.HOLY_SPEC_HEAL_RAID_MACRO,
+                    act.Priest.HOLY_SPEC_HEAL_RAID_MACRO_KEY_2,
                 ]
             ),
         ],
@@ -512,7 +513,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_marksman_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -520,7 +521,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_survival_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.SURVIVAL_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -528,7 +529,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_beast_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.BEAST_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             # shaman
@@ -537,7 +538,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_elemental_shaman,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Shaman.ELEMENTAL_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -545,7 +546,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_enhancement_shaman,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Shaman.ENHANCEMENT_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -562,7 +563,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_boomkin_druid,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Druid.BALANCE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -580,7 +581,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_arcane_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.ARCANE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -588,7 +589,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_fire_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.FIRE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -596,7 +597,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_frost_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.FROST_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             # warlock
@@ -605,7 +606,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_demonic_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.DEMON_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -613,7 +614,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_affiliate_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.AFFLICTION_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -621,7 +622,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_destruction_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.DESTRUCTION_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             # priest
@@ -630,7 +631,7 @@ def build_hk_3():
                 to=Config.SendLabelTo.all_shadow_priest,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Priest.SHADOW_SPEC_DPS_ROTATE_SPEC,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -920,7 +921,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_marksman_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -928,7 +929,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_survival_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.SURVIVAL_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -936,7 +937,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_beast_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.BEAST_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             # shaman
@@ -945,7 +946,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_elemental_shaman,
                 actions=[
                     act.Target.TARGET_SELF,
-                    act.Shaman.ALL_SPEC_CHAIN_HEAL,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -953,7 +954,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_enhancement_shaman,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Shaman.ALL_SPEC_CHAIN_HEAL,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -970,7 +971,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_boomkin_druid,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Druid.BALANCE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -987,7 +988,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_arcane_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.ARCANE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -995,7 +996,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_fire_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.FIRE_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -1003,7 +1004,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_frost_mage,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Mage.FROST_SPEC_DPS_ROTATE_MACRO,
+                    Key.trigger(),
                 ]
             ),
             # warlock
@@ -1012,7 +1013,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_demonic_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.DEMON_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -1020,7 +1021,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_affiliate_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.AFFLICTION_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -1028,7 +1029,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_destruction_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.DESTRUCTION_SPEC_DPS_ROTATE,
+                    Key.trigger(),
                 ]
             ),
             # priest
@@ -1037,7 +1038,7 @@ def build_hk_5():
                 to=Config.SendLabelTo.all_shadow_priest,
                 actions=[
                     act.Target.TARGET_SELF,
-                    act.Priest.ALL_SPEC_POWER_WORLD_SHIELD,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(

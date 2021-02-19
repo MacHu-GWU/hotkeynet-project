@@ -175,8 +175,8 @@ cmd_BatchLogin = Command(
             data=[
                 (
                     "WoW{}".format(window),
-                    Config.Credential.all[account - 1]["username"],
-                    Config.Credential.all[account - 1]["password"],
+                    Config.Credential.account_sequence()[account - 1]["username"],
+                    Config.Credential.account_sequence()[account - 1]["password"],
                 )
                 for window, account in zip(
                     Config.Windows.batch_login_windows,

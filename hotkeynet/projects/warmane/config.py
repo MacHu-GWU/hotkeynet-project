@@ -54,7 +54,7 @@ def different_labels(labels, *other_labels):
 
 class Config:
     wow_exe_path = r"D:\HSH\Games\WOW Private\Client\World of Warcraft 3.3.5 enUS (Warman wod models)\Wow.exe"
-    combat_mode = None
+    combat_mode = ""
     is_pvp_mode = False
 
     class Coordinate:
@@ -88,6 +88,7 @@ class Config:
         pass_item_button_4_y = None
 
     class Credential:
+        # 枚举拥有的所有账号的账号密码, 以供之后引用
         fatmulti1_username = "fatmulti1"
         fatmulti1_password = credentials["fatmulti1"]
 
@@ -148,10 +149,13 @@ class Config:
         fatmulti18_username = "fatmulti18"
         fatmulti18_password = credentials["fatmulti18"]
 
-        all = [
+        # 定义了一个从 1, 2, 3, ... 到最后的账号列表. 这些账号是从上面所枚举的账号中
+        # 整理出来的. 也是登录时所用的账号的默认列表. 快捷键1 对应的登录第一个账号,
+        # 以此类推.
+        _account_sequence = [
             dict(username=fatmulti1_username, password=fatmulti1_password),
-            dict(username=fatmulti3_username, password=fatmulti3_password),
             dict(username=fatmulti2_username, password=fatmulti2_password),
+            dict(username=fatmulti3_username, password=fatmulti3_password),
             dict(username=fatmulti4_username, password=fatmulti4_password),
             dict(username=fatmulti5_username, password=fatmulti5_password),
             dict(username=fitsheep_username, password=fitsheep_password),
@@ -170,6 +174,20 @@ class Config:
             dict(username=fatmulti17_username, password=fatmulti17_password),
             dict(username=fatmulti18_username, password=fatmulti18_password),
         ]  # type: typing.List[typing.Dict[str, str]]
+
+        # 该变量用来自定义 快捷键 1, 2, 3, ... 所对应的账号. 如果未定义, 则用 _account_sequence
+        # 中的定义. 如果有自定义, 则根据 _account_sequence 的序号进行重新排列组合.
+        custom_account_sequence = [] # type: typing.List[int]
+
+        @classmethod
+        def account_sequence(cls):
+            if len(cls.custom_account_sequence):
+                return [
+                    cls._account_sequence[ind-1]
+                    for ind in cls.custom_account_sequence
+                ]
+            else:
+                return cls._account_sequence
 
     class Windows:
         from_1_to_5 = list(range(1, 5 + 1))
@@ -480,10 +498,12 @@ class Config:
     @classmethod
     def set_mode_temp(cls):
         cls.use_1920_1080_resolution()
-        cls.use_10_window()
+        cls.use_14_window()
 
-        cls.char_fatmulti8_bunnysisters_resto_druid()
-        cls.char_feixue_flydps_tank_dk()
+        cls.char_fatmulti1_batlefury_paladin_protect()
+        cls.char_fatmulti14_litgugud_resto_druid()
+        # cls.char_fatmulti8_bunnysisters_resto_druid()
+        # cls.char_feixue_flydps_tank_dk()
 
         cls.SendLabelTo.leader_1 = ensure_labels([1, ])
         cls.SendLabelTo.leader_2 = ensure_labels([10, ])
@@ -558,8 +578,8 @@ class Config:
 
         cls.char_fatmulti9_glowyy_protect_pala()
         cls.char_fatmulti1_litgoatssa_warlock_demon()
-        cls.char_fatmulti3_litgoatssb_warlock_demon()
-        cls.char_fatmulti2_litgoatssc_warlock_demon()
+        cls.char_fatmulti2_litgoatssb_warlock_demon()
+        cls.char_fatmulti3_litgoatssc_warlock_demon()
         cls.char_fatmulti8_bunnysisters_resto_druid()
 
         cls.SendLabelTo.leader_1 = ensure_labels([9, ])
@@ -586,8 +606,8 @@ class Config:
 
         cls.char_fatmulti9_glowyy_protect_pala()
         cls.char_fatmulti1_litgoatdka_dk_dps()
-        cls.char_fatmulti3_litgoatdkb_dk_dps()
-        cls.char_fatmulti2_litgoatdkc_dk_dps()
+        cls.char_fatmulti2_litgoatdkb_dk_dps()
+        cls.char_fatmulti3_litgoatdkc_dk_dps()
         cls.char_fatmulti8_bunnysisters_resto_druid()
 
         cls.SendLabelTo.leader_1 = ensure_labels([9, ])
@@ -637,30 +657,36 @@ class Config:
 
 
     @classmethod
-    def set_mode_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(cls):
+    def set_mode_18w_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(cls):
         cls.is_pvp_mode = True
         cls.use_1600_900_resolution()
         cls.use_18_window()
 
-        cls.char_fatmulti1_litgoatssa_warlock_demon()
-        cls.char_fatmulti3_litgoatssb_warlock_demon()
-        cls.char_fatmulti2_litgoatssc_warlock_demon()
-        cls.char_fatmulti4_litgoatssd_warlock_demon()
-        cls.char_fatmulti5_litgoatsse_warlock_demon()
+        # cls.char_fatmulti1_litgoatssa_warlock_demon()
+        # cls.char_fatmulti3_litgoatssb_warlock_demon()
+        # cls.char_fatmulti2_litgoatssc_warlock_demon()
+        # cls.char_fatmulti4_litgoatssd_warlock_demon()
+        # cls.char_fatmulti5_litgoatsse_warlock_demon()
+
+        cls.char_fatmulti1_litgoatdka_dk_dps()
+        cls.char_fatmulti2_litgoatdkb_dk_dps()
+        cls.char_fatmulti3_litgoatdkc_dk_dps()
+        cls.char_fatmulti4_litgoatdkd_dk_dps()
+        cls.char_fatmulti5_litgoatdke_dk_dps()
+
         cls.char_fitsheep_kindhearted_demon_warlock()
         cls.char_fatmulti6_kapacuk_marksman_hunter()
         cls.char_fatmulti8_bunnysisters_resto_druid()
-        cls.char_fatmulti9_glowyy_holy_pala()
-        cls.char_feixue_flydps_tank_dk()
+        cls.char_fatmulti9_glowyy_protect_pala()
+        cls.char_makun7551_ganjj_tank_dk()
 
         cls.char_fatmulti11_litgugua_balance_druid()
         cls.char_fatmulti12_litgugub_balance_druid()
         cls.char_fatmulti13_litguguc_balance_druid()
         cls.char_fatmulti14_litgugud_resto_druid()
 
-        cls.SendLabelTo.leader_1 = ensure_labels([10, ])
-        cls.SendLabelTo.leader_2 = ensure_labels([1, ])
-        cls.SendLabelTo.g1_dr_holy_pala = ensure_labels([9, ])
+        cls.SendLabelTo.leader_1 = ensure_labels([9, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([6, ])
 
     @classmethod
     def set_mode_18p_batlefury_luxiaofeng_litgugu_team_solo_raid(cls):
@@ -704,7 +730,96 @@ class Config:
 
         cls.SendLabelTo.all_shadow_priest = ensure_labels([5, ])
 
+    #
+    @classmethod
+    def set_mode_18w_10p_batlefury_litgoatssb_opiitou_swagsonic_litgoatsse_ganjj_litgugu_a_to_d_solo_weekly(cls):
+        """
+        10开做Naxx蜘蛛周长任务
+        """
+        cls.use_1600_900_resolution()
+        cls.use_18_window()
+
+        cls.char_fatmulti1_batlefury_paladin_protect()
+        cls.char_fatmulti2_litgoatssb_warlock_demon()
+        cls.char_fatmulti3_opiitou_druid_balance()
+        cls.char_fatmulti4_swagsonic_mage_arcane()
+        cls.char_fatmulti5_litgoatsse_warlock_demon()
+
+        cls.char_makun7551_ganjj_dps_dk()
+        cls.char_fatmulti11_litgugua_balance_druid()
+        cls.char_fatmulti12_litgugub_balance_druid()
+        cls.char_fatmulti13_litguguc_balance_druid()
+        cls.char_fatmulti14_litgugud_resto_druid()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([1, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([10, ])
+        cls.SendLabelTo.g1_dr_protect_pala = ensure_labels([1, ])
+
+    @classmethod
+    def set_mode_18w_10p_luxiaofeng_glowyy_bunny_kindhearted_kapacuk_litgoatss_a_to_e_quentin_kangliu_solo_weekly(cls):
+        """
+        10开做Naxx蜘蛛周长任务
+        """
+        cls.use_1600_900_resolution()
+        cls.use_18_window()
+
+        cls.char_fatmulti1_litgoatssa_warlock_demon()
+        cls.char_fatmulti2_quentin_shaman_elemental()
+        cls.char_fatmulti3_litgoatssc_warlock_demon()
+        cls.char_fatmulti4_litgoatssd_warlock_demon()
+        cls.char_fatmulti5_kangliu_priest_shadow()
+
+        cls.char_makun7551_laoshou_protect_pala()
+        cls.char_fitsheep_kindhearted_demon_warlock()
+        cls.char_fatmulti6_kapacuk_marksman_hunter()
+        cls.char_fatmulti8_bunnysisters_resto_druid()
+        cls.char_fatmulti9_glowyy_protect_pala()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([9, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([10, ])
+        cls.SendLabelTo.g1_dr_protect_pala = ensure_labels([9, ])
+        cls.SendLabelTo.g1_dr_protect_pala = ensure_labels([9, ])
+
+    @classmethod
+    def set_mode_10w_10p_batle_to_kangliu_and_bunny_litgugu_a_to_d_daily_quest_gold_farm(cls):
+        cls.use_1600_900_resolution()
+        cls.use_18_window()
+
+        cls.char_fatmulti1_batlefury_paladin_protect()
+        cls.char_fatmulti3_opiitou_druid_balance()
+        cls.char_fatmulti2_quentin_shaman_elemental()
+        cls.char_fatmulti4_swagsonic_mage_arcane()
+        cls.char_fatmulti5_kangliu_priest_shadow()
+
+        cls.char_fatmulti8_bunnysisters_balance_druid()
+        cls.char_fatmulti11_litgugua_balance_druid()
+        cls.char_fatmulti12_litgugub_balance_druid()
+        cls.char_fatmulti13_litguguc_balance_druid()
+        cls.char_fatmulti14_litgugud_resto_druid()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([1, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([11, ])
+
+    # --- Leveling
+    @classmethod
+    def set_mode_18w_18p_opiitou_lgms_and_batlefury_lgsm_leveling(cls):
+        cls.use_1600_900_resolution()
+        cls.use_18_window()
+
+        cls.char_fatmulti3_opiitou_druid_bear()
+        cls.char_fatmulti19_lgmsi_shadow_priest()
+        cls.char_fatmulti20_lgmsj_shadow_priest()
+        cls.char_fatmulti21_lgmsk_shadow_priest()
+        cls.char_fatmulti22_lgmsl_shadow_priest()
+
+        cls.char_fatmulti23_lgsmm_elemental_shaman()
+        cls.char_fatmulti24_lgsmn_elemental_shaman()
+        cls.char_fatmulti25_lgsmo_elemental_shaman()
+        cls.char_fatmulti26_lgsmp_elemental_shaman()
+
+
     # --- Account, Character, Talent Definition
+    # --- fatmulti 1
     @classmethod
     def char_fatmulti1_batlefury_paladin_protect(cls):
         label = "w1"
@@ -730,56 +845,59 @@ class Config:
         label = "w1"
         cls.SendLabelTo.all_unholy_dps_dk.append(label)
 
-    @classmethod
-    def char_fatmulti3_opiitou_druid_balance(cls):
-        label = "w2"
-        cls.SendLabelTo.all_boomkin_druid.append(label)
-
-    @classmethod
-    def char_fatmulti3_opiitou_druid_bear(cls):
-        label = "w2"
-        cls.SendLabelTo.all_bear_druid.append(label)
-
-    @classmethod
-    def char_fatmulti3_litgoatssb_warlock_demon(cls):
-        label = "w2"
-        cls.SendLabelTo.all_demonic_warlock.append(label)
-
-    @classmethod
-    def char_fatmulti3_litgoatdkb_dk_tank(cls):
-        label = "w2"
-        cls.SendLabelTo.all_unholy_tank_dk.append(label)
-
-    @classmethod
-    def char_fatmulti3_litgoatdkb_dk_dps(cls):
-        label = "w2"
-        cls.SendLabelTo.all_unholy_dps_dk.append(label)
-
+    # --- fatmulti 2
     @classmethod
     def char_fatmulti2_quentin_shaman_elemental(cls):
-        label = "w3"
+        label = "w2"
         cls.SendLabelTo.all_elemental_shaman.append(label)
 
     @classmethod
     def char_fatmulti2_quentin_shaman_resto(cls):
-        label = "w3"
+        label = "w2"
         cls.SendLabelTo.all_resto_shaman.append(label)
 
     @classmethod
-    def char_fatmulti2_litgoatssc_warlock_demon(cls):
+    def char_fatmulti2_litgoatssb_warlock_demon(cls):
+        label = "w2"
+        cls.SendLabelTo.all_demonic_warlock.append(label)
+
+    @classmethod
+    def char_fatmulti2_litgoatdkb_dk_tank(cls):
+        label = "w2"
+        cls.SendLabelTo.all_unholy_tank_dk.append(label)
+
+    @classmethod
+    def char_fatmulti2_litgoatdkb_dk_dps(cls):
+        label = "w2"
+        cls.SendLabelTo.all_unholy_dps_dk.append(label)
+
+    # --- fatmulti 3
+    @classmethod
+    def char_fatmulti3_opiitou_druid_balance(cls):
+        label = "w3"
+        cls.SendLabelTo.all_boomkin_druid.append(label)
+
+    @classmethod
+    def char_fatmulti3_opiitou_druid_bear(cls):
+        label = "w3"
+        cls.SendLabelTo.all_bear_druid.append(label)
+
+    @classmethod
+    def char_fatmulti3_litgoatssc_warlock_demon(cls):
         label = "w3"
         cls.SendLabelTo.all_demonic_warlock.append(label)
 
     @classmethod
-    def char_fatmulti2_litgoatdkc_dk_tank(cls):
+    def char_fatmulti3_litgoatdkc_dk_tank(cls):
         label = "w3"
         cls.SendLabelTo.all_unholy_tank_dk.append(label)
 
     @classmethod
-    def char_fatmulti2_litgoatdkc_dk_dps(cls):
+    def char_fatmulti3_litgoatdkc_dk_dps(cls):
         label = "w3"
         cls.SendLabelTo.all_unholy_dps_dk.append(label)
 
+    # --- fatmulti 4
     @classmethod
     def char_fatmulti4_swagsonic_mage_arcane(cls):
         label = "w4"
@@ -805,6 +923,7 @@ class Config:
         label = "w4"
         cls.SendLabelTo.all_unholy_dps_dk.append(label)
 
+    # --- fatmulti 5
     @classmethod
     def char_fatmulti5_kangliu_priest_shadow(cls):
         label = "w5"
@@ -886,6 +1005,11 @@ class Config:
         cls.SendLabelTo.all_unholy_tank_dk.append(label)
 
     @classmethod
+    def char_makun7551_ganjj_dps_dk(cls):
+        label = "w10"
+        cls.SendLabelTo.all_unholy_dps_dk.append(label)
+
+    @classmethod
     def char_fatmulti11_litgugua_balance_druid(cls):
         label = "w11"
         cls.SendLabelTo.all_boomkin_druid.append(label)
@@ -924,3 +1048,47 @@ class Config:
     def char_fatmulti14_litgugud_resto_druid(cls):
         label = "w14"
         cls.SendLabelTo.all_resto_druid.append(label)
+
+    @classmethod
+    def char_fatmulti19_lgmsi_shadow_priest(cls):
+        label = "w2"
+        cls.SendLabelTo.all_holy_priest.append(label)
+
+    @classmethod
+    def char_fatmulti20_lgmsj_shadow_priest(cls):
+        label = "w3"
+        cls.SendLabelTo.all_holy_priest.append(label)
+
+    @classmethod
+    def char_fatmulti21_lgmsk_shadow_priest(cls):
+        label = "w4"
+        cls.SendLabelTo.all_holy_priest.append(label)
+
+    @classmethod
+    def char_fatmulti22_lgmsl_shadow_priest(cls):
+        label = "w5"
+        cls.SendLabelTo.all_holy_priest.append(label)
+
+    @classmethod
+    def char_fatmulti23_lgsmm_elemental_shaman(cls):
+        label = "w7"
+        cls.SendLabelTo.all_resto_shaman.append(label)
+
+    @classmethod
+    def char_fatmulti24_lgsmn_elemental_shaman(cls):
+        label = "w8"
+        cls.SendLabelTo.all_resto_shaman.append(label)
+
+    @classmethod
+    def char_fatmulti25_lgsmo_elemental_shaman(cls):
+        label = "w9"
+        cls.SendLabelTo.all_resto_shaman.append(label)
+
+    @classmethod
+    def char_fatmulti26_lgsmp_elemental_shaman(cls):
+        label = "w10"
+        cls.SendLabelTo.all_resto_shaman.append(label)
+
+
+
+

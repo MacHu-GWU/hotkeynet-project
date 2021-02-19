@@ -710,7 +710,7 @@ class Druid:
         /castsequence reset=target 回春, 愈合, 生命之花, 生命之花, 生命之花,,,,,,
     """
 
-    RESTO_SPEC_RAID_HEAL_MACRO = KEY_2
+    RESTO_SPEC_HEAL_RAID_MACRO_KEY_2 = KEY_2
     """
     团队随机治疗宏::
         
@@ -955,7 +955,7 @@ class Priest:
     DISC_SPEC_INNER_FOCUS = SHIFT_(C)  # 心灵专注
     DISC_SPEC_PAIN_SUPPRESSION = ALT_(F)  # 痛苦压制
     DISC_SPEC_PENANCE = KEY_1  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
-    DISC_SPEC_HEAL_RAID_MACRO = KEY_2
+    DISC_SPEC_HEAL_RAID_MACRO_KEY_2 = KEY_2
     """
     全团套盾宏::
         
@@ -974,7 +974,7 @@ class Priest:
     HOLY_SPEC_BINDING_HEAL = KEY_1  # 联结治疗 (治疗目标和你自己)
     HOLY_SPEC_LIGHT_WELL = KEY_1  # 治疗之泉
     HOLY_SPEC_CIRCLE_OF_HEALING = KEY_1  # 治疗之环
-    HOLY_SPEC_HEAL_RAID_MACRO = KEY_2
+    HOLY_SPEC_HEAL_RAID_MACRO_KEY_2 = KEY_2
     """
     全团治疗宏::
     

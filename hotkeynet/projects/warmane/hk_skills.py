@@ -670,7 +670,7 @@ hk_r = Hotkey(
             name="all_resto_druid",
             to=Config.SendLabelTo.all_resto_druid,
             actions=[
-                act.Druid.RESTO_SPEC_RAID_HEAL_MACRO,
+                act.Druid.RESTO_SPEC_HEAL_RAID_MACRO_KEY_2,
             ]
         ),
 
@@ -737,14 +737,14 @@ hk_r = Hotkey(
             name="all_disco_priest",
             to=Config.SendLabelTo.all_disco_priest,
             actions=[
-                act.Priest.DISC_SPEC_HEAL_RAID_MACRO,
+                act.Priest.DISC_SPEC_HEAL_RAID_MACRO_KEY_2,
             ]
         ),
         SendLabel(
             name="all_holy_priest",
             to=Config.SendLabelTo.all_holy_priest,
             actions=[
-                act.Priest.HOLY_SPEC_HEAL_RAID_MACRO,
+                act.Priest.HOLY_SPEC_HEAL_RAID_MACRO_KEY_2,
             ]
         ),
     ],

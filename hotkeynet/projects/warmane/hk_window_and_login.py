@@ -35,7 +35,7 @@ hk_RoundRobinToggleWindow = Hotkey(
 
 
 #---
-for key, window in zip(keyname.F1_to_F18, Config.Windows.toggle_specific_windows):
+for key, window in zip(keyname.F1_to_F22, Config.Windows.toggle_specific_windows):
     hk = Hotkey(
         name=f"ToggleToSpecificWindowWoW{window}",
         key=keyname.SCROLOCK_ON(keyname.CTRL_(key)),
@@ -72,13 +72,13 @@ hk_BatchLogin = Hotkey(
 
 #---
 for key, window, account in zip(
-        keyname.F1_to_F18,
+        keyname.F1_to_F22,
         Config.Windows.batch_login_windows,
         Config.Windows.batch_login_accounts
 ):
     window_name = f"WoW{window}"
-    username = Config.Credential.all[account - 1]["username"]
-    password = Config.Credential.all[account - 1]["password"]
+    username = Config.Credential.account_sequence()[account - 1]["username"]
+    password = Config.Credential.account_sequence()[account - 1]["password"]
     hk = Hotkey(
         name=f"SingleLogin{username.title()}",
         key=keyname.SCROLOCK_ON(keyname.CTRL_SHIFT_ALT(key)),
