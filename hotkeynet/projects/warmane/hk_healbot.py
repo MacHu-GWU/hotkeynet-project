@@ -177,6 +177,68 @@ def build_hk_healbot_aoe_heal():
                     # act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
                 ]
             ),
+            # SendLabel(
+            #     name="",
+            #     to=Config.SendLabelTo.all_tank(),
+            #     actions=[
+            #         Key(name=keyname.KEY_2)
+            #     ]
+            # ),
+            SendLabel(
+                name="",
+                to=Config.SendLabelTo.all_dps(),
+                actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
+                    Key(name=keyname.KEY_2),
+                ]
+            )
+        ],
+        script=script,
+    )
+
+hk_healbot_aoe_heal = build_hk_healbot_aoe_heal()
+
+
+def build_hk_healbot_dispel():
+    return Hotkey(
+        name="Healbot Dispel",
+        key=keyname.SCROLOCK_ON(keyname.MOUSE_MButton),
+        actions=[
+            SendLabel(
+                name="all_resto_shaman",
+                to=Config.SendLabelTo.all_resto_shaman,
+                actions=[
+                    act.Shaman.HEAL_BOT_CLEANSE,
+                ]
+            ),
+            SendLabel(
+                name="all_holy_pala",
+                to=Config.SendLabelTo.all_holy_pala,
+                actions=[
+                    act.Paladin.HEAL_BOT_CLEANSE,
+                ]
+            ),
+            SendLabel(
+                name="all_resto_druid",
+                to=Config.SendLabelTo.all_resto_druid,
+                actions=[
+                    act.Druid.HEAL_BOT_REMOVE_CURSE,
+                ]
+            ),
+            SendLabel(
+                name="all_disco_priest",
+                to=Config.SendLabelTo.all_disco_priest,
+                actions=[
+                    act.Priest.HEAL_BOT_DISPEL_MAGIC,
+                ]
+            ),
+            SendLabel(
+                name="all_holy_priest",
+                to=Config.SendLabelTo.all_holy_priest,
+                actions=[
+                    act.Priest.HEAL_BOT_DISPEL_MAGIC,
+                ]
+            ),
             SendLabel(
                 name="",
                 to=Config.SendLabelTo.all_tank(),
@@ -196,4 +258,4 @@ def build_hk_healbot_aoe_heal():
         script=script,
     )
 
-hk_healbot_aoe_heal = build_hk_healbot_aoe_heal()
+hk_healbot_dispel = build_hk_healbot_dispel()

@@ -125,20 +125,32 @@ class Target:
     TARGET_W1_LITGOATDKA = SHIFT_(INSERT)
 
     # w2
-    TARGET_W2_OPIITOU = SHIFT_(HOME)
+    TARGET_W3_OPIITOU = SHIFT_(HOME)
 
     # w6
     TARGET_W6_KINDHEARTED = SHIFT_(PAGE_UP)
     TARGET_W6_SWEETMONK = SHIFT_(PAGE_UP)
 
+    # w7
+    TARGET_w7_KAPACUK = SHIFT_(DELETE)
+
     # w9
-    TARGET_w9_GLOWYY = SHIFT_(DELETE)
+    TARGET_w9_GLOWYY = SHIFT_(END)
 
     # w10
-    TARGET_W10_LUXIAOFENG = SHIFT_(END)
+    TARGET_W10_LUXIAOFENG = SHIFT_(PAGE_DOWN)
+    TARGET_W10_GANJJ = SHIFT_(PAGE_DOWN)
+    TARGET_W10_LAOSHOU = SHIFT_(PAGE_DOWN)
+    TARGET_W10_FLYDPS = SHIFT_(PAGE_DOWN)
 
     # w11
-    TARGET_W11_LITGUGUA = SHIFT_(PAGE_DOWN)
+    TARGET_W11_LITGUGUA = ALT_(INSERT)
+
+    # w15
+    TARGET_W15_LGMSI = ALT_(HOME)
+
+    # w19
+    TARGET_W19_LGSMM = ALT_(PAGE_UP)
 
     #
     TARGET_LEADER_1 = UNKNOWN
@@ -151,11 +163,14 @@ convert_to_key_action(Target)
 
 leader_key_mapper = {
     "w1": Target.TARGET_W1_BATLEFURY,
-    "w2": Target.TARGET_W2_OPIITOU,
+    "w3": Target.TARGET_W3_OPIITOU,
     "w6": Target.TARGET_W6_KINDHEARTED,
+    "w7": Target.TARGET_w7_KAPACUK,
     "w9": Target.TARGET_w9_GLOWYY,
     "w10": Target.TARGET_W10_LUXIAOFENG,
     "w11": Target.TARGET_W11_LITGUGUA,
+    "w15": Target.TARGET_W15_LGMSI,
+    "w19": Target.TARGET_W19_LGSMM,
 }
 
 
@@ -207,7 +222,14 @@ class General:
         /click StaticPopup1Button1
     """
 
-    CLEAR_FOCUS = NUMPAD_6
+    SET_FOCUS = NUMPAD_6
+    """
+    The ``MB-FocusSet`` Macro::
+
+        /focus
+    """
+
+    CLEAR_FOCUS = NUMPAD_7
     """
     The ``MB-FocusClear`` Macro::
 
@@ -293,7 +315,7 @@ class Paladin:
     # --- Hand Of xxx 给他人释放的功能性的祝福 ---
     ALL_SPEC_HAND_OF_PROTECTION = SHIFT_(G)  # 保护祝福
     ALL_SPEC_HAND_OF_SALVATION = CTRL_(R)  # 拯救祝福
-    ALL_SPEC_HAND_OF_SACRIFICE = ALT_(E)  # 牺牲祝福
+    ALL_SPEC_HAND_OF_SACRIFICE = ALT_(R)  # 牺牲祝福
     ALL_SPEC_HAND_OF_FREEDOM = SHIFT_(R)  # 自由祝福
 
     # --- CC 控制类技能 ---
@@ -436,7 +458,7 @@ class DK:
     ALL_SPEC_DARK_COMMAND = Z  # 黑暗命令 (嘲讽)
     ALL_SPEC_RUNE_TAP = T  # 符文分流 (血天赋, 回血技能)
     ALL_SPEC_DEATH_GRIP = G  # 死亡之握 (远程嘲讽 加 拉人)
-    ALL_SPEC_DEATH_AND_DECAY = X  # 死亡凋零
+    ALL_SPEC_DEATH_AND_DECAY_ALT_X = ALT_(X)  # 死亡凋零
     ALL_SPEC_MIND_FREEZE = R  # 心灵冻结 (打断施法)
     ALL_SPEC_RUNE_STRIKE = ALT_(E)  # 符文打击 (类似于战士的打击, 高仇恨技能)
     ALL_SPEC_ICE_BOUND_FORTITUDE = SHIFT_(F1)  # 冰固坚韧
@@ -495,8 +517,8 @@ class Hunter:
     ALL_SPEC_ARCANE_SHOT = KEY_6  # 奥术射击
 
     ALL_SPEC_CONCUSSIVE_SHOT = Z  # 震荡射击
-    ALL_SPEC_VOLLEY = X  # 乱射 (AOE)
     ALL_SPEC_WIND_CLIP = T  # 摔绊 (减速)
+    ALL_SPEC_KILL_COMMAND_X = X  # 杀戮命令 (宠物加攻速)
 
     ALL_SPEC_SCORPID_STING = KEY_1  # 毒蝎钉刺 (降低命中)
 
@@ -505,6 +527,8 @@ class Hunter:
     ALL_SPEC_FREEZING_ARROW = ALT_(R)  # 冰冻箭
     ALL_SPEC_SNAKE_TRAP = SHIFT_(MOUSE_MButton)  # 毒蛇陷阱
     ALL_SPEC_EXPLOSIVE_TRAP = CTRL_(MOUSE_MButton)  # 爆裂陷阱
+
+    ALL_SPEC_VOLLEY_ALT_X = ALT_(X)  # 乱射 (AOE)
 
     ALL_SPEC_DETERRENCE = SHIFT_(F1)  # 胁迫 (招架所有攻击和法术)
     ALL_SPEC_FEIGN_DEATH = ALT_(E)  # 假死
@@ -675,6 +699,8 @@ class Druid:
     ALL_SPEC_REMOVE_CURSE = T  # 驱除诅咒
     ALL_SPEC_SOOTHE_ANIMAL = ALT_(Z) # 安抚野兽龙类
     ALL_SPEC_HIBERNATE = ALT_(T) # 睡眠野兽龙类
+
+    ALL_SPEC_CAT_STEALTH_MACRO = ALT_(F1) # 强制进入潜行状态
 
     SHAPE_SHIFT_BEAR_FORM = SHIFT_(Q)  # 熊形态
     SHAPE_SHIFT_CAT_FORM = SHIFT_(W)  # 猫形态

@@ -202,10 +202,10 @@ hk_ctrl_f = Hotkey(
 
 _ACTION_BAR_4_________________________________ = ""
 
-hk_middle_click = Hotkey(
-    name="MButton",
-    key=keyname.SCROLOCK_ON(keyname.MOUSE_MButton),
-    actions=[
+# hk_middle_click = Hotkey(
+#     name="MButton",
+#     key=keyname.SCROLOCK_ON(keyname.MOUSE_MButton),
+#     actions=[
         # SendLabel(
         #     name="",
         #     to=Config.SendLabelTo.all(),
@@ -213,9 +213,9 @@ hk_middle_click = Hotkey(
         #         Key.trigger()
         #     ]
         # )
-    ],
-    script=script,
-)
+#     ],
+#     script=script,
+# )
 
 hk_shift_middle_click = Hotkey(
     name="Shift MButton",
@@ -539,10 +539,17 @@ hk_alt_x_aoe = Hotkey(
     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.X)),
     actions=[
         SendLabel(
+            name="all_dk",
+            to=Config.SendLabelTo.all_dps_dk(),
+            actions=[
+                act.DK.ALL_SPEC_DEATH_AND_DECAY_ALT_X,
+            ]
+        ),
+        SendLabel(
             name="all_hunter",
             to=Config.SendLabelTo.all_hunter(),
             actions=[
-                act.Hunter.ALL_SPEC_VOLLEY,
+                act.Hunter.ALL_SPEC_VOLLEY_ALT_X,
             ]
         ),
         SendLabel(

@@ -146,13 +146,37 @@ class Config:
         fatmulti17_username = "fatmulti17"
         fatmulti17_password = credentials["fatmulti17"]
 
-        fatmulti18_username = "fatmulti18"
+        fatmulti18_username = "fatmulti19"
         fatmulti18_password = credentials["fatmulti18"]
+
+        fatmulti19_username = "fatmulti19"
+        fatmulti19_password = credentials["fatmulti19"]
+
+        fatmulti20_username = "fatmulti20"
+        fatmulti20_password = credentials["fatmulti20"]
+
+        fatmulti21_username = "fatmulti21"
+        fatmulti21_password = credentials["fatmulti21"]
+
+        fatmulti22_username = "fatmulti22"
+        fatmulti22_password = credentials["fatmulti22"]
+
+        fatmulti23_username = "fatmulti23"
+        fatmulti23_password = credentials["fatmulti23"]
+
+        fatmulti24_username = "fatmulti24"
+        fatmulti24_password = credentials["fatmulti24"]
+
+        fatmulti25_username = "fatmulti25"
+        fatmulti25_password = credentials["fatmulti25"]
+
+        fatmulti26_username = "fatmulti26"
+        fatmulti26_password = credentials["fatmulti26"]
 
         # 定义了一个从 1, 2, 3, ... 到最后的账号列表. 这些账号是从上面所枚举的账号中
         # 整理出来的. 也是登录时所用的账号的默认列表. 快捷键1 对应的登录第一个账号,
         # 以此类推.
-        _account_sequence = [
+        _account_inventory = [
             dict(username=fatmulti1_username, password=fatmulti1_password),
             dict(username=fatmulti2_username, password=fatmulti2_password),
             dict(username=fatmulti3_username, password=fatmulti3_password),
@@ -169,40 +193,59 @@ class Config:
             dict(username=fatmulti12_username, password=fatmulti12_password),
             dict(username=fatmulti13_username, password=fatmulti13_password),
             dict(username=fatmulti14_username, password=fatmulti14_password),
-            dict(username=fatmulti15_username, password=fatmulti15_password),
-            dict(username=fatmulti16_username, password=fatmulti16_password),
-            dict(username=fatmulti17_username, password=fatmulti17_password),
-            dict(username=fatmulti18_username, password=fatmulti18_password),
+            dict(username=fatmulti19_username, password=fatmulti19_password),
+            dict(username=fatmulti20_username, password=fatmulti20_password),
+            dict(username=fatmulti21_username, password=fatmulti21_password),
+            dict(username=fatmulti22_username, password=fatmulti22_password),
+            dict(username=fatmulti23_username, password=fatmulti23_password),
+            dict(username=fatmulti24_username, password=fatmulti24_password),
+            dict(username=fatmulti25_username, password=fatmulti25_password),
+            dict(username=fatmulti26_username, password=fatmulti26_password),
         ]  # type: typing.List[typing.Dict[str, str]]
+
+        default_account_sequence = list(range(1, len(_account_inventory) + 1))
 
         # 该变量用来自定义 快捷键 1, 2, 3, ... 所对应的账号. 如果未定义, 则用 _account_sequence
         # 中的定义. 如果有自定义, 则根据 _account_sequence 的序号进行重新排列组合.
-        custom_account_sequence = [] # type: typing.List[int]
+        custom_account_sequence = []  # type: typing.List[int]
 
         @classmethod
         def account_sequence(cls):
             if len(cls.custom_account_sequence):
                 return [
-                    cls._account_sequence[ind-1]
+                    cls._account_inventory[ind - 1]
                     for ind in cls.custom_account_sequence
                 ]
             else:
-                return cls._account_sequence
+                return [
+                    cls._account_inventory[ind - 1]
+                    for ind in cls.default_account_sequence
+                ]
 
     class Windows:
         from_1_to_5 = list(range(1, 5 + 1))
         from_1_to_10 = list(range(1, 10 + 1))
+        from_1_to_12 = list(range(1, 12 + 1))
         from_1_to_14 = list(range(1, 14 + 1))
         from_1_to_18 = list(range(1, 18 + 1))
 
         # 快捷键 Ctrl Shift Alt + F1 ~ F18 对应的 窗口名字
-        launch_and_rename_windows = None # type: typing.List[int]
-        # 快捷键 Ctrl Alt S 批量登录时登录的窗口名字
-        batch_login_windows = None # type: typing.List[int]
-        # 快捷键 Ctrl Alt S 批量登录时登录的窗口
-        batch_login_accounts = None # type: typing.List[int]
-        toggle_round_robin_windows = None # type: typing.List[int]
-        toggle_specific_windows = None # type: typing.List[int]
+        launch_and_rename_windows = None  # type: typing.List[int]
+
+        # 快捷键 Ctrl Alt S 批量登录时 按照顺序 第1到最后 登录的窗口的编号
+        # 通常是 1, 2, ... , N (N为一共有多少个窗口)
+        # 如果是 3, 2, 1 则表示先操作 WoW3, 再操作 WoW2 最后操作 WoW1
+        batch_login_windows = None  # type: typing.List[int]
+
+        # 快捷键 Ctrl Alt S 批量登录时 按照顺序 第1到最后 登录的账号的编号
+        # 通常是 1, 2, ... , N (N为一共有多少个窗口)
+        # 如果是 3, 2, 1 则表示先登录 Config.Credentials.account_sequence 中的
+        # 第3个, 然后是第2个, 最后是第1个
+        batch_login_accounts = None  # type: typing.List[int]
+
+        toggle_round_robin_windows = None  # type: typing.List[int]
+
+        toggle_specific_windows = None  # type: typing.List[int]
 
     class SendLabelTo:
         # 1. war
@@ -248,6 +291,14 @@ class Config:
                 cls.all_frost_tank_dk,
                 cls.all_blood_dps_dk,
                 cls.all_unholy_dps_dk,
+                cls.all_frost_dps_dk,
+            )
+
+        @classmethod
+        def all_dps_dk(cls) -> typing.List[str]:
+            return union_list(
+                cls.all_unholy_dps_dk,
+                cls.all_blood_dps_dk,
                 cls.all_frost_dps_dk,
             )
 
@@ -508,7 +559,7 @@ class Config:
         cls.SendLabelTo.leader_1 = ensure_labels([1, ])
         cls.SendLabelTo.leader_2 = ensure_labels([10, ])
 
-    #--- 10 wiindow 10 p solo Raid ---
+    # --- 10 wiindow 10 p solo Raid ---
     @classmethod
     def set_mode_10w_10p_batlefury_luxiaofeng_high_gs_team_solo_raid(cls):
         cls.use_1920_1080_resolution()
@@ -542,7 +593,7 @@ class Config:
         cls.combat_mode = "batlefury_luxiaofeng_high_gs_team_solo_raid_icc_1_marrowgar"
         cls.set_mode_10w_10p_batlefury_luxiaofeng_high_gs_team_solo_raid()
 
-    #--- 18 window 5 p solo RDF ---
+    # --- 18 window 5 p solo RDF ---
     @classmethod
     def set_mode_18w_5p_elite_team_batlefury_quentin_opiitou_swagsonic_kangliu(cls):
         cls.use_1600_900_resolution()
@@ -559,6 +610,7 @@ class Config:
 
     @classmethod
     def set_mode_18w_5p_glowyy_litgugu_abcd(cls):
+        cls.combat_mode = "set_mode_18w_5p_glowyy_litgugu_abcd"
         cls.use_1600_900_resolution()
         cls.use_14_window()
 
@@ -655,10 +707,11 @@ class Config:
         cls.SendLabelTo.leader_1 = ensure_labels([1, ])
         cls.SendLabelTo.leader_2 = ensure_labels([1, ])
 
-
     @classmethod
     def set_mode_18w_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(cls):
         cls.is_pvp_mode = True
+        cls.combat_mode = "set_mode_18w_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps"
+
         cls.use_1600_900_resolution()
         cls.use_18_window()
 
@@ -674,10 +727,10 @@ class Config:
         cls.char_fatmulti4_litgoatdkd_dk_dps()
         cls.char_fatmulti5_litgoatdke_dk_dps()
 
-        cls.char_fitsheep_kindhearted_demon_warlock()
+        cls.char_fitsheep_kindhearted_destruction_warlock()
         cls.char_fatmulti6_kapacuk_marksman_hunter()
         cls.char_fatmulti8_bunnysisters_resto_druid()
-        cls.char_fatmulti9_glowyy_protect_pala()
+        cls.char_fatmulti9_glowyy_holy_pala()
         cls.char_makun7551_ganjj_tank_dk()
 
         cls.char_fatmulti11_litgugua_balance_druid()
@@ -685,8 +738,23 @@ class Config:
         cls.char_fatmulti13_litguguc_balance_druid()
         cls.char_fatmulti14_litgugud_resto_druid()
 
-        cls.SendLabelTo.leader_1 = ensure_labels([9, ])
-        cls.SendLabelTo.leader_2 = ensure_labels([6, ])
+        cls.SendLabelTo.leader_1 = ensure_labels([6, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([9, ])
+
+    @classmethod
+    def set_mode_18w_18p_boomy_wild(cls):
+        cls.combat_mode = "set_mode_18w_18p_boomy_wild"
+
+        cls.use_1600_900_resolution()
+        cls.use_18_window()
+        cls.char_fatmulti3_opiitou_druid_balance()
+        cls.char_fatmulti8_bunnysisters_balance_druid()
+        cls.char_fatmulti11_litgugua_balance_druid()
+        cls.char_fatmulti12_litgugub_balance_druid()
+        cls.char_fatmulti13_litguguc_balance_druid()
+        cls.char_fatmulti14_litgugud_resto_druid()
+        cls.SendLabelTo.leader_1 = ensure_labels([11, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([11, ])
 
     @classmethod
     def set_mode_18p_batlefury_luxiaofeng_litgugu_team_solo_raid(cls):
@@ -703,7 +771,7 @@ class Config:
         cls.char_fatmulti6_kapacuk_marksman_hunter()
         cls.char_fatmulti8_bunnysisters_resto_druid()
         cls.char_fatmulti9_glowyy_holy_pala()
-        cls.char_feixue_flydps_tank_dk()
+        cls.char_makun7551_ganjj_dps_dk()
 
         cls.char_fatmulti11_litgugua_balance_druid()
         cls.char_fatmulti12_litgugub_balance_druid()
@@ -769,7 +837,7 @@ class Config:
         cls.char_fatmulti4_litgoatssd_warlock_demon()
         cls.char_fatmulti5_kangliu_priest_shadow()
 
-        cls.char_makun7551_laoshou_protect_pala()
+        cls.char_makun7551_laoshou_holy_pala()
         cls.char_fitsheep_kindhearted_demon_warlock()
         cls.char_fatmulti6_kapacuk_marksman_hunter()
         cls.char_fatmulti8_bunnysisters_resto_druid()
@@ -779,6 +847,20 @@ class Config:
         cls.SendLabelTo.leader_2 = ensure_labels([10, ])
         cls.SendLabelTo.g1_dr_protect_pala = ensure_labels([9, ])
         cls.SendLabelTo.g1_dr_protect_pala = ensure_labels([9, ])
+
+    @classmethod
+    def set_mode_18w_5p_litgoatdk_abcde_solo_weekly(cls):
+        cls.use_1600_900_resolution()
+        cls.use_18_window()
+
+        cls.char_fatmulti1_litgoatdka_dk_dps()
+        cls.char_fatmulti2_litgoatdkb_dk_dps()
+        cls.char_fatmulti3_litgoatdkc_dk_dps()
+        cls.char_fatmulti4_litgoatdkd_dk_dps()
+        cls.char_fatmulti5_litgoatdke_dk_dps()
+
+        cls.SendLabelTo.leader_1 = ensure_labels([1, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([1, ])
 
     @classmethod
     def set_mode_10w_10p_batle_to_kangliu_and_bunny_litgugu_a_to_d_daily_quest_gold_farm(cls):
@@ -802,21 +884,33 @@ class Config:
 
     # --- Leveling
     @classmethod
-    def set_mode_18w_18p_opiitou_lgms_and_batlefury_lgsm_leveling(cls):
+    def set_mode_18w_14p_opiitou_and_batlefury_carry_leveling(cls):
         cls.use_1600_900_resolution()
-        cls.use_18_window()
 
-        cls.char_fatmulti3_opiitou_druid_bear()
-        cls.char_fatmulti19_lgmsi_shadow_priest()
-        cls.char_fatmulti20_lgmsj_shadow_priest()
-        cls.char_fatmulti21_lgmsk_shadow_priest()
-        cls.char_fatmulti22_lgmsl_shadow_priest()
+        cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_12
 
-        cls.char_fatmulti23_lgsmm_elemental_shaman()
-        cls.char_fatmulti24_lgsmn_elemental_shaman()
-        cls.char_fatmulti25_lgsmo_elemental_shaman()
-        cls.char_fatmulti26_lgsmp_elemental_shaman()
+        cls.Windows.batch_login_windows = [
+            1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12,
+        ]
+        cls.Windows.batch_login_accounts = [
+            3, 15, 16, 17, 18, # 野德司机队
+            1, 19, 20, 21, 22, # 防骑司机队
+            4, 6, # 法师, 术士
+        ]
+        cls.Windows.toggle_round_robin_windows = list(range(1, 18 + 1))
+        cls.Windows.toggle_specific_windows = list(range(1, 18 + 1))
 
+        cls.SendLabelTo.all_bear_druid.append("w1")
+        cls.SendLabelTo.all_holy_priest = ["w2", "w3", "w4", "w5"]
+
+        cls.SendLabelTo.all_protect_pala.append("w6")
+        cls.SendLabelTo.all_resto_shaman = ["w7", "w8", "w9", "w10"]
+
+        cls.SendLabelTo.all_arcane_mage.append("w11")
+        cls.SendLabelTo.all_demonic_warlock.append("w12")
+
+        cls.SendLabelTo.leader_1 = ensure_labels([1, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([6, ])
 
     # --- Account, Character, Talent Definition
     # --- fatmulti 1
@@ -1000,6 +1094,11 @@ class Config:
         cls.SendLabelTo.all_protect_pala.append(label)
 
     @classmethod
+    def char_makun7551_laoshou_holy_pala(cls):
+        label = "w10"
+        cls.SendLabelTo.all_holy_pala.append(label)
+
+    @classmethod
     def char_makun7551_ganjj_tank_dk(cls):
         label = "w10"
         cls.SendLabelTo.all_unholy_tank_dk.append(label)
@@ -1088,7 +1187,3 @@ class Config:
     def char_fatmulti26_lgsmp_elemental_shaman(cls):
         label = "w10"
         cls.SendLabelTo.all_resto_shaman.append(label)
-
-
-
-

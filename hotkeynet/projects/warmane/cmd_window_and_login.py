@@ -180,7 +180,7 @@ cmd_BatchLogin = Command(
                 )
                 for window, account in zip(
                     Config.Windows.batch_login_windows,
-                    Config.Windows.batch_login_accounts
+                    Config.Windows.batch_login_accounts,
                 )
             ],
             cmd=cmd_EnterUsernamePasssword

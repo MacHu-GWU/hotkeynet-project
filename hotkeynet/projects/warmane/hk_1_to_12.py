@@ -76,6 +76,7 @@ def build_hk_1():
                 name="all_unholy_dps_dk",
                 to=Config.SendLabelTo.all_unholy_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -83,6 +84,7 @@ def build_hk_1():
                 name="all_blood_dps_dk",
                 to=Config.SendLabelTo.all_blood_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -90,6 +92,7 @@ def build_hk_1():
                 name="all_frost_dps_dk",
                 to=Config.SendLabelTo.all_frost_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -490,6 +493,7 @@ def build_hk_3():
                 name="all_unholy_dps_dk",
                 to=Config.SendLabelTo.all_unholy_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -497,6 +501,7 @@ def build_hk_3():
                 name="all_blood_dps_dk",
                 to=Config.SendLabelTo.all_blood_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -504,6 +509,7 @@ def build_hk_3():
                 name="all_frost_dps_dk",
                 to=Config.SendLabelTo.all_frost_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -695,6 +701,7 @@ def build_hk_4():
                 name="all_unholy_dps_dk",
                 to=Config.SendLabelTo.all_unholy_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -702,6 +709,7 @@ def build_hk_4():
                 name="all_blood_dps_dk",
                 to=Config.SendLabelTo.all_blood_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -709,6 +717,7 @@ def build_hk_4():
                 name="all_frost_dps_dk",
                 to=Config.SendLabelTo.all_frost_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -898,6 +907,7 @@ def build_hk_5():
                 name="all_unholy_dps_dk",
                 to=Config.SendLabelTo.all_unholy_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -905,6 +915,7 @@ def build_hk_5():
                 name="all_blood_dps_dk",
                 to=Config.SendLabelTo.all_blood_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -912,6 +923,7 @@ def build_hk_5():
                 name="all_frost_dps_dk",
                 to=Config.SendLabelTo.all_frost_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -1105,6 +1117,7 @@ def build_hk_6_one_time_debuff():
                 name="all_unholy_dps_dk",
                 to=Config.SendLabelTo.all_unholy_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -1112,6 +1125,7 @@ def build_hk_6_one_time_debuff():
                 name="all_blood_dps_dk",
                 to=Config.SendLabelTo.all_blood_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -1119,6 +1133,7 @@ def build_hk_6_one_time_debuff():
                 name="all_frost_dps_dk",
                 to=Config.SendLabelTo.all_frost_dps_dk,
                 actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
                     Key.trigger(),
                 ]
             ),
@@ -1128,7 +1143,7 @@ def build_hk_6_one_time_debuff():
                 to=Config.SendLabelTo.all_marksman_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.ALL_SPEC_HUNTERS_MARK,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -1136,7 +1151,7 @@ def build_hk_6_one_time_debuff():
                 to=Config.SendLabelTo.all_survival_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.ALL_SPEC_HUNTERS_MARK,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -1144,7 +1159,7 @@ def build_hk_6_one_time_debuff():
                 to=Config.SendLabelTo.all_beast_hunter,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Hunter.ALL_SPEC_HUNTERS_MARK,
+                    Key.trigger(),
                 ]
             ),
             # shaman
@@ -1178,7 +1193,7 @@ def build_hk_6_one_time_debuff():
                 to=Config.SendLabelTo.all_boomkin_druid,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Druid.ALL_SPEC_FAERI_FIRE,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(
@@ -1220,7 +1235,7 @@ def build_hk_6_one_time_debuff():
                 to=Config.SendLabelTo.all_demonic_warlock,
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.Warlock.ALL_SPEC_CURSE_OF_ELEMENT,
+                    Key.trigger(),
                 ]
             ),
             SendLabel(

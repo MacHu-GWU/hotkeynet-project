@@ -144,28 +144,28 @@ def build_hk_spread_matrix():
         actions=[
             SendLabel(
                 name="all",
-                to=["w6", "w11", "w14"],
+                to=["w6", "w15", "w14"],
                 actions=[
                     act.Movement.MOVE_LEFT,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w3", "w15", "w18"],
+                to=["w3", "w11", "w18"],
                 actions=[
                     act.Movement.MOVE_RIGHT,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w4", "w8", "w12", "w13"],
+                to=["w4", "w8", "w16", "w13"],
                 actions=[
                     act.Movement.MOVE_LEFT_BOTTOM,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w5", "w9", "w16", "17"],
+                to=["w5", "w9", "w12", "17"],
                 actions=[
                     act.Movement.MOVE_RIGHT_BOTTOM,
                 ]
@@ -233,7 +233,7 @@ def build_hk_spread_circle():
         actions=[
             SendLabel(
                 name="all",
-                to=["w2", "w14"],
+                to=["w2", "w15"],
                 actions=[
                     act.Movement.MOVE_FORWARD,
                 ]
@@ -247,7 +247,7 @@ def build_hk_spread_circle():
             ),
             SendLabel(
                 name="all",
-                to=["w9", "w12"],
+                to=["w9", "w17"],
                 actions=[
                     act.Movement.MOVE_RIGHT,
                 ]
@@ -268,7 +268,7 @@ def build_hk_spread_circle():
             ),
             SendLabel(
                 name="all",
-                to=["w4", "w15"],
+                to=["w4", "w14"],
                 actions=[
                     act.Movement.MOVE_LEFT_BOTTOM,
                 ]
@@ -282,7 +282,7 @@ def build_hk_spread_circle():
             ),
             SendLabel(
                 name="all",
-                to=["w7", "w17"],
+                to=["w7", "w12"],
                 actions=[
                     act.Movement.MOVE_LEFT_TOP,
                 ]

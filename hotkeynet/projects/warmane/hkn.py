@@ -103,6 +103,41 @@ class Mode:
     def batlefury_luxiaofeng_high_gs_team_solo_raid_icc_1_marrowgar(self):
         pass
 
+    def set_mode_18w_5p_glowyy_litgugu_abcd(self):
+        actions_star_fall = [
+            act.General.STOP_CASTING,
+            act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F,
+        ]
+        hk_alt_numpad_1_to_12.hk_alt_numpad_1.actions = [
+            SendLabel(name="", to=["w11", ], actions=actions_star_fall)
+        ]
+        hk_alt_numpad_1_to_12.hk_alt_numpad_2.actions = [
+            SendLabel(name="", to=["w12", ], actions=actions_star_fall)
+        ]
+        hk_alt_numpad_1_to_12.hk_alt_numpad_3.actions = [
+            SendLabel(name="", to=["w13", ], actions=actions_star_fall)
+        ]
+
+    def set_mode_18w_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(self):
+        actions_death_grib = [
+            act.Target.TARGET_FOCUS_TARGET,
+            act.DK.ALL_SPEC_DEATH_GRIP,
+        ]
+        hk_alt_numpad_1_to_12.hk_alt_numpad_1.actions = [
+            SendLabel(name="", to=["w1", "w2", "w3", "w4", "w5"], actions=actions_death_grib)
+        ]
+
+    def set_mode_18w_18p_boomy_wild(self):
+        hk_skills.hk_alt_f1.actions = [
+            SendLabel(
+                name="all_druid",
+                to=Config.SendLabelTo.all_druid(),
+                actions=[
+                    act.Druid.ALL_SPEC_CAT_STEALTH_MACRO,
+                ]
+            )
+        ]
+
 
 
 mode = Mode()

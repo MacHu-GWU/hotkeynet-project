@@ -8,3 +8,15 @@ Welcome to ``hotkeynet`` Documentation
 
 
 运行 ``warmane/generate_script.py`` 可生成一个 ``warmane/warmane.js`` 脚本文件给 HotkeyNet 使用.
+
+
+我的 Warmane 多开设置
+------------------------------------------------------------------------------
+
+核心 10人团队副本 PvE 队伍
+
+1. 防骑 / 惩戒
+2. 元素萨 / 奶萨
+3. 鸟德 / 熊坦
+4. 奥法 / 火法
+5. 暗牧 / 戒律
