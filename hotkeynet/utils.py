@@ -70,3 +70,24 @@ def remove_indent(content: str) -> str:
             values.append(unindent)
     unindent = min(values)
     return "\n".join([line[unindent:] for line in lines])
+
+
+def union_list(*lists) -> list:
+    """
+    Union elements in all given lists.
+    """
+    l = list(set([i for lst in lists for i in lst]))
+    l.sort()
+    return l
+
+
+def difference_list(lst, *other_lsts) -> list:
+    """
+    Remove all item in ``lst`` that exists in all ``other_lsts``
+    """
+    st = set(lst)
+    for l in other_lsts:
+        st.difference_update(l)
+    l = list(st)
+    l.sort()
+    return l
