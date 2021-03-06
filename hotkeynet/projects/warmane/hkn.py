@@ -23,7 +23,7 @@ from . import hk_control_panel
 
 from . import act
 from ... import keyname
-from ...script import Hotkey, SendLabel
+from ...script import Hotkey, SendLabel, Key
 
 class Mode:
     """
@@ -138,6 +138,38 @@ class Mode:
             )
         ]
 
+    def set_mode_18p_batlefury_luxiaofeng_litgugu_team_solo_raid(self):
+        hk_nuke_frozen_orb = Hotkey(
+            name="Nuke Frozen Orb",
+            key=keyname.SCROLOCK_ON(keyname.V),
+            actions=[
+                SendLabel(
+                    name="",
+                    to=Config.SendLabelTo.all_dps(),
+                    actions=[
+                        Key(name=keyname.SHIFT_(keyname.Z)),
+                    ]
+                ),
+                SendLabel(
+                    name="all_resto_druid",
+                    to=Config.SendLabelTo.all_resto_druid,
+                    actions=[
+                        act.Druid.RESTO_SPEC_HEAL_RAID_MACRO_KEY_2,
+                    ]
+                ),
+                SendLabel(
+                    name="all_holy_pala",
+                    to=Config.SendLabelTo.all_holy_pala,
+                    actions=[
+                        act.Target.TARGET_RAID,
+                        act.Paladin.HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_2,
+                    ]
+                ),
+            ],
+            script=script,
+        )
+
+    # def set_mode_18w_14p_opiitou_and_batlefury_carry_leveling(self):
 
 
 mode = Mode()

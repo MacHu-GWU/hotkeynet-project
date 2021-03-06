@@ -164,6 +164,13 @@ def build_hk_1():
                     act.Druid.RESTO_SPEC_HOT_HEAL_MACRO,
                 ]
             ),
+            SendLabel(
+                name="all_bear_druid",
+                to=Config.SendLabelTo.all_bear_druid,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
 
             # mage
             SendLabel(
@@ -368,7 +375,13 @@ def build_hk_2():
                     act.Druid.RESTO_SPEC_HEAL_RAID_MACRO_KEY_2,
                 ]
             ),
-
+            SendLabel(
+                name="all_bear_druid",
+                to=Config.SendLabelTo.all_bear_druid,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
             # mage
             SendLabel(
                 name="all_arcane_mage",
@@ -580,6 +593,13 @@ def build_hk_3():
                     act.Druid.RESTO_SPEC_NOURISH_KEY_3,
                 ]
             ),
+            SendLabel(
+                name="all_bear_druid",
+                to=Config.SendLabelTo.all_bear_druid,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
 
             # mage
             SendLabel(
@@ -783,6 +803,13 @@ def build_hk_4():
             SendLabel(
                 name="all_resto_druid",
                 to=Config.SendLabelTo.all_resto_druid,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
+            SendLabel(
+                name="all_bear_druid",
+                to=Config.SendLabelTo.all_bear_druid,
                 actions=[
                     Key.trigger(),
                 ]
@@ -994,6 +1021,13 @@ def build_hk_5():
                     act.Druid.RESTO_SPEC_WILD_GROWTH_KEY_5,
                 ]
             ),
+            SendLabel(
+                name="all_bear_druid",
+                to=Config.SendLabelTo.all_bear_druid,
+                actions=[
+                    Key.trigger(),
+                ]
+            ),
             # mage
             SendLabel(
                 name="all_arcane_mage",
@@ -1202,6 +1236,13 @@ def build_hk_6_one_time_debuff():
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
                     act.Druid.RESTO_SPEC_REJUVENATION_KEY_6,
+                ]
+            ),
+            SendLabel(
+                name="all_bear_druid",
+                to=Config.SendLabelTo.all_bear_druid,
+                actions=[
+                    Key.trigger(),
                 ]
             ),
             # mage
@@ -1417,6 +1458,13 @@ def build_hk_7():
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
                     act.Druid.RESTO_SPEC_NOURISH_KEY_7,
+                ]
+            ),
+            SendLabel(
+                name="all_bear_druid",
+                to=Config.SendLabelTo.all_bear_druid,
+                actions=[
+                    Key.trigger(),
                 ]
             ),
             # mage

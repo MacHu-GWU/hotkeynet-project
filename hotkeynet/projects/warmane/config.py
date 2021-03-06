@@ -548,16 +548,34 @@ class Config:
 
     @classmethod
     def set_mode_temp(cls):
-        cls.use_1920_1080_resolution()
+        cls.use_1600_900_resolution()
         cls.use_14_window()
 
         cls.char_fatmulti1_batlefury_paladin_protect()
-        cls.char_fatmulti14_litgugud_resto_druid()
+        cls.char_fatmulti12_litgugub_balance_druid()
+        # cls.char_fatmulti12_litgugub_resto_druid()
         # cls.char_fatmulti8_bunnysisters_resto_druid()
         # cls.char_feixue_flydps_tank_dk()
+        # cls.char_fatmulti5_kangliu_priest_shadow()
+
+        # cls.char_fatmulti1_litgoatdka_dk_dps()
+        # cls.char_fatmulti2_litgoatdkb_dk_dps()
+        # cls.char_fatmulti3_litgoatdkc_dk_dps()
+        # cls.char_fatmulti4_litgoatdkd_dk_dps()
+        # cls.char_fatmulti5_litgoatdke_dk_dps()
+        # cls.char_fatmulti9_glowyy_protect_pala()
+
+        # cls.char_fatmulti9_glowyy_protect_pala()
+        # cls.char_fatmulti1_litgoatssa_warlock_demon()
+        # cls.char_fatmulti2_litgoatssb_warlock_demon()
+        # cls.char_fatmulti3_litgoatssc_warlock_demon()
+        # cls.char_fatmulti4_litgoatssd_warlock_demon()
+        # cls.char_fatmulti5_litgoatsse_warlock_demon()
+        # cls.char_makun7551_laoshou_protect_pala()
+        # cls.char_fatmulti8_bunnysisters_resto_druid()
 
         cls.SendLabelTo.leader_1 = ensure_labels([1, ])
-        cls.SendLabelTo.leader_2 = ensure_labels([10, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([1, ])
 
     # --- 10 wiindow 10 p solo Raid ---
     @classmethod
@@ -761,6 +779,7 @@ class Config:
         cls.is_pvp_mode = True
         cls.use_1600_900_resolution()
         cls.use_18_window()
+        cls.combat_mode = "set_mode_18p_batlefury_luxiaofeng_litgugu_team_solo_raid"
 
         cls.char_fatmulti1_batlefury_paladin_protect()
         cls.char_fatmulti3_opiitou_druid_balance()
@@ -771,7 +790,7 @@ class Config:
         cls.char_fatmulti6_kapacuk_marksman_hunter()
         cls.char_fatmulti8_bunnysisters_resto_druid()
         cls.char_fatmulti9_glowyy_holy_pala()
-        cls.char_makun7551_ganjj_dps_dk()
+        cls.char_makun7551_ganjj_tank_dk()
 
         cls.char_fatmulti11_litgugua_balance_druid()
         cls.char_fatmulti12_litgugub_balance_druid()
@@ -885,8 +904,8 @@ class Config:
     # --- Leveling
     @classmethod
     def set_mode_18w_14p_opiitou_and_batlefury_carry_leveling(cls):
+        cls.combat_mode = "set_mode_18w_14p_opiitou_and_batlefury_carry_leveling"
         cls.use_1600_900_resolution()
-
         cls.Windows.launch_and_rename_windows = cls.Windows.from_1_to_12
 
         cls.Windows.batch_login_windows = [
@@ -900,7 +919,8 @@ class Config:
         cls.Windows.toggle_round_robin_windows = list(range(1, 18 + 1))
         cls.Windows.toggle_specific_windows = list(range(1, 18 + 1))
 
-        cls.SendLabelTo.all_bear_druid.append("w1")
+        # cls.SendLabelTo.all_bear_druid.append("w1")
+        cls.SendLabelTo.all_boomkin_druid.append("w1")
         cls.SendLabelTo.all_holy_priest = ["w2", "w3", "w4", "w5"]
 
         cls.SendLabelTo.all_protect_pala.append("w6")
@@ -909,8 +929,8 @@ class Config:
         cls.SendLabelTo.all_arcane_mage.append("w11")
         cls.SendLabelTo.all_demonic_warlock.append("w12")
 
-        cls.SendLabelTo.leader_1 = ensure_labels([1, ])
-        cls.SendLabelTo.leader_2 = ensure_labels([6, ])
+        cls.SendLabelTo.leader_1 = ensure_labels([3, ])
+        cls.SendLabelTo.leader_2 = ensure_labels([1, ])
 
     # --- Account, Character, Talent Definition
     # --- fatmulti 1

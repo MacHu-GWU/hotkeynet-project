@@ -464,6 +464,7 @@ class DK:
     ALL_SPEC_ICE_BOUND_FORTITUDE = SHIFT_(F1)  # 冰固坚韧
     ALL_SPEC_HORN_OF_WINTER = SHIFT_(TAB)  # 凛冬号角 (力量敏捷 Buff)
     ALL_SPEC_ANTI_MAGIC_SHIELD = SHIFT_(F)  # 反魔法护盾
+    ALL_SPEC_EMPOWERED_RUNED_WEAPON = CTRL_(R)  # 强化符文武器
 
     BLOOD_SPEC_VAMPIRIC_BLOOD = SHIFT_(F2)  # 吸血鬼之血 (DK版 战士的 破釜沉舟 技能)
     BLOOD_SPEC_HYSTERIA = SHIFT_(C)  # 狂血术

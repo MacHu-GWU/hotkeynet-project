@@ -287,6 +287,19 @@ def build_hk_spread_circle():
                     act.Movement.MOVE_LEFT_TOP,
                 ]
             ),
+
+
+            #
+
+            # SendLabel(name="", to=["w15"], actions=[act.Movement.MOVE_FORWARD, ]), # 前
+            # SendLabel(name="", to=["w17"], actions=[act.Movement.MOVE_RIGHT, ]), # 右
+            # SendLabel(name="", to=["w18"], actions=[act.Movement.MOVE_BACKWARD, ]), # 后
+            # SendLabel(name="", to=["w16"], actions=[act.Movement.MOVE_LEFT, ]),  # 左
+            #
+            # SendLabel(name="", to=["w11"], actions=[act.Movement.MOVE_RIGHT_TOP, ]),  # 右上
+            # SendLabel(name="", to=["w13"], actions=[act.Movement.MOVE_RIGHT_BOTTOM, ]),  # 右下
+            # SendLabel(name="", to=["w14"], actions=[act.Movement.MOVE_LEFT_BOTTOM, ]),  # 左下
+            # SendLabel(name="", to=["w12"], actions=[act.Movement.MOVE_LEFT_TOP,]), # 左上
         ],
         script=script,
     )
