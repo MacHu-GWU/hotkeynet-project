@@ -3,7 +3,7 @@ hotkeynet_venv/
 hotkeynet.egg-info/
 hotkeynet-*/
 credentials.json
-warmane/*.js
+*.js
 
 
 # Byte-compiled / optimized / DLL files

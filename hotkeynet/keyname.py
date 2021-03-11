@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 
+"""
+- 虚拟按键表: https://www.cnblogs.com/del/archive/2007/12/07/987364.html
+- Key Names表: http://www.hotkeynet.com/ref/keynames.html
+"""
+
 ESC = "Esc"
 
 F1 = "F1"
@@ -44,6 +49,9 @@ LALT = "LAlt"
 RALT = "RAlt"
 
 SPACE = "Space"
+
+LWIN = "LWin"
+RWIN = "RWin"
 
 A = "A"
 B = "B"
@@ -130,6 +138,14 @@ MOUSE_MButton = "MButton"
 MOUSE_Button4 = "Button4"
 MOUSE_Button5 = "Button5"
 
+F1_to_F12 = [
+    F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
+]
+
+INSERT_TO_PGDN = [
+    INSERT, HOME, PAGE_UP, DELETE, END, PAGE_DOWN,
+]
+
 F1_to_F22 = [
     F1, F2, F3, F4, F5, F6, F7, F8, F9, F10, F11, F12,
     INSERT, HOME, PAGE_UP, DELETE, END, PAGE_DOWN,
@@ -190,3 +206,11 @@ def SCROLOCK_ON(key):
 
 def CAPSLOCK_ON(key):
     return "CapsLockOn {}".format(key)
+
+
+def LWIN_(*keys):
+    return "{} {}".format(LWIN, ", ".join(keys))
+
+
+def RWIN_(*keys):
+    return "{} {}".format(RWIN, ", ".join(keys))
