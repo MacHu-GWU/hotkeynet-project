@@ -6,7 +6,7 @@ Ctrl 1 ~ 6 主要是宠物的动作条设置
 
 from . import act
 from .script import script
-from .config import Config
+from .config_ import Config
 from ... import keyname
 from ...script import (
     Hotkey,

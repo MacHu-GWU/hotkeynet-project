@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from . config import Config
+from . config_ import Config
 
 from .script import script
 from . import cmd_window_and_login

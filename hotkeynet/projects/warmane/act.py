@@ -15,7 +15,7 @@ from ...keyname import *
 from ...script import (
     Key, Mouse, ModifiedMouseClick
 )
-from .config import Config
+from .config_ import Config
 
 
 def convert_to_key_action(cls):

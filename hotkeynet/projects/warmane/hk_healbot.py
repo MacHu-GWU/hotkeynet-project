@@ -6,7 +6,7 @@ Healbot 主要是鼠标动作, 用于使用团队框架进行治疗.
 
 from . import act
 from .script import script
-from .config import Config, union_list, difference_list
+from .config_ import Config, union_list, difference_list
 from ... import keyname
 from ...script import (
     Hotkey,

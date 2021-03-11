@@ -8,7 +8,7 @@
 
 from . import act
 from .script import script
-from .config import Config
+from .config_ import Config
 from ... import keyname
 from ...script import (
     Hotkey,

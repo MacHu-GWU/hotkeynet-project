@@ -8,7 +8,7 @@
 """
 
 from . import act
-from .config import Config, different_labels
+from .config_ import Config, different_labels
 from .script import script
 from ... import keyname
 from ...script import (

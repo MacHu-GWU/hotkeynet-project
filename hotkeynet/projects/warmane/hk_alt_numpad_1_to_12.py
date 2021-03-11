@@ -2,7 +2,7 @@
 
 from . import act
 from .script import script
-from .config import Config, different_labels
+from .config_ import Config, different_labels
 from ... import keyname
 from ...script import (
     Hotkey, SendLabel,

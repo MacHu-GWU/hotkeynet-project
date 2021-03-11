@@ -9,7 +9,7 @@
 3. 最后 对 script 对象中的 command hotkey 等进行一些动态的修改.
 4. 于是就可以将 script dump 到文件了.
 """
-from hotkeynet.projects.warmane.config import Config
+from hotkeynet.projects.warmane.config_ import Config
 
 # Config.set_mode_temp()
 

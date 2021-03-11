@@ -21,7 +21,7 @@ Hotkeynet 可以发送非常特殊的 Numpad Up, Down, Left, Right, 以及 End, 
 """
 
 from . import act
-from .config import Config, different_labels
+from .config_ import Config, different_labels
 from .script import script
 from ... import keyname
 from ...script import (

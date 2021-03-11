@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from .script import script
-from .config import Config
+from .config_ import Config
 from collections import OrderedDict
 
 script.labels = OrderedDict([

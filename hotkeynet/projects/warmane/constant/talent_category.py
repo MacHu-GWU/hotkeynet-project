@@ -20,3 +20,14 @@ class TalentCategory(Enum):
 
     physics = auto()
     caster = auto()
+
+    warrior = auto()
+    paladin = auto()
+    dk = auto()
+    hunter = auto()
+    shaman = auto()
+    rogue = auto()
+    druid = auto()
+    mage = auto()
+    warlock = auto()
+    priest = auto()

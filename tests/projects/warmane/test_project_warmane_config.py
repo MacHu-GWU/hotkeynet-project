@@ -2,7 +2,7 @@
 
 import pytest
 from pytest import raises, approx
-from hotkeynet.projects.warmane.config import (
+from hotkeynet.projects.warmane.config_ import (
     ensure_labels,
     different_labels,
     union_list,

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from .config import Config
+from .config_ import Config
 from .script import script
 from ...script import Command
 from ...utils import render_template, remove_indent
