@@ -298,6 +298,9 @@ class General:
     Mage / Warlock / Priest shoot wand, Warrior / Rogue shoot range weapon
     """
 
+    TOGGLE_MAIN_GAME_MENU = CTRL_SHIFT_ALT(E)
+
+
 convert_to_key_action(General)
 
 

@@ -279,7 +279,8 @@ def build_hk_11_focus_mode_1():
                 name=char.name,
                 to=[char.window_label,],
                 actions=[
-                    act.target_leader_key_mapper[char.leader1_window_label]
+                    act.target_leader_key_mapper[char.leader1_window_label],
+                    act.General.SET_FOCUS_KEY_NUMPAD_6,
                 ]
             )
             actions.append(sl)
@@ -305,7 +306,8 @@ def build_hk_12_focus_mode_2():
                 name=char.name,
                 to=[char.window_label,],
                 actions=[
-                    act.target_leader_key_mapper[char.leader2_window_label]
+                    act.target_leader_key_mapper[char.leader2_window_label],
+                    act.General.SET_FOCUS_KEY_NUMPAD_6,
                 ]
             )
             actions.append(sl)

@@ -9,8 +9,9 @@ import typing
 from . import cmd_g01_window_and_login
 from ._config_and_script import config, script
 from ..constant.windows import window_index
+from .. import act
 from .... import keyname
-from ....script import Hotkey, CallCommand
+from ....script import Hotkey, CallCommand, SendLabel, Key, Mouse, SendFocusWindow
 
 
 # ---
@@ -49,20 +50,20 @@ hk_round_robin_toggle_window = build_hk_round_robin_toggle_window()
 
 
 def build_hk_toggle_specific_window() -> typing.List[Hotkey]:
-    # 12 + 8 + 6 = 26
-    ctrl_f1_to_12 = [
+    # 10 + 8 + 6 = 24
+    ctrl_f1_to_10 = [
         keyname.CTRL_(key)
-        for key in keyname.F1_to_F12
+        for key in keyname.F1_to_F12[:10]
     ]
     shift_f5_to_f12 = [
         keyname.SHIFT_(key)
-        for key in keyname.F1_to_F12[5:]
+        for key in keyname.F1_to_F12[4:]
     ]
     ctrl_insert_to_pgdn = [
         keyname.CTRL_(key)
         for key in keyname.INSERT_TO_PGDN
     ]
-    TOGGLE_SPECIFIC_WINDOW_1_TO_25 = ctrl_f1_to_12 + shift_f5_to_f12 + ctrl_insert_to_pgdn
+    TOGGLE_SPECIFIC_WINDOW_1_TO_25 = ctrl_f1_to_10 + shift_f5_to_f12 + ctrl_insert_to_pgdn
 
     hk_list = list()
     for key, index in zip(TOGGLE_SPECIFIC_WINDOW_1_TO_25, config.toggle_window_config.key1_to_25_window_index):
@@ -116,20 +117,20 @@ hk_batch_login = build_hk_batch_login()
 
 
 def build_hk_login_specific_account() -> typing.List[Hotkey]:
-    # 12 + 8 + 6 = 26
-    ctrl_alt_f1_to_12 = [
+    # 10 + 8 + 6 = 24
+    ctrl_alt_f1_to_10 = [
         keyname.CTRL_ALT_(key)
-        for key in keyname.F1_to_F12
+        for key in keyname.F1_to_F12[:10]
     ]
     shift_alt_f5_to_f12 = [
         keyname.ALT_SHIFT_(key)
-        for key in keyname.F1_to_F12[5:]
+        for key in keyname.F1_to_F12[4:]
     ]
     ctrl_alt_insert_to_pgdn = [
         keyname.CTRL_ALT_(key)
         for key in keyname.INSERT_TO_PGDN
     ]
-    LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_12 + shift_alt_f5_to_f12 + ctrl_alt_insert_to_pgdn
+    LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + ctrl_alt_insert_to_pgdn
 
     hk_list = list()
     for char in config.active_character_config.active_characters:
@@ -149,3 +150,64 @@ def build_hk_login_specific_account() -> typing.List[Hotkey]:
     return hk_list
 
 hk_list_login_specific_account = build_hk_login_specific_account()
+
+
+def build_hk_batch_logout():
+    return Hotkey(
+        name="BatchLogout",
+        key=keyname.SCROLOCK_ON(keyname.CTRL_ALT_(keyname.O)),
+        actions=[
+            SendLabel(
+                name="",
+                to=config.lbs_all(),
+                actions=[
+                    "<Wait 100>",
+                    act.General.TOGGLE_MAIN_GAME_MENU,
+                    "<Wait 50>",
+                    act.General.TOGGLE_MAIN_GAME_MENU,
+                    "<Wait 50>",
+                    f"<MoveMouse {config.game_client_config.return_to_game_button_x} {config.game_client_config.return_to_game_button_y}>",
+                    "<ClickMouse LButton Both Window NoMove>"
+                    "<Wait 50>",
+                    act.General.TOGGLE_MAIN_GAME_MENU,
+                    "<Wait 50>",
+                    f"<MoveMouse {config.game_client_config.log_out_button_x} {config.game_client_config.log_out_button_y}>",
+                    "<Wait 50>",
+                    "<ClickMouse LButton Both Window NoMove>"
+                ]
+            )
+        ],
+        script=script,
+    )
+
+hk_batch_logout = build_hk_batch_logout()
+
+
+def build_hk_logout_on_current_window():
+    return Hotkey(
+        name="LogoutOnCurrentWindow",
+        key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.O)),
+        actions=[
+            SendFocusWindow(
+                name="",
+                actions=[
+                    "<Wait 500>",
+                    act.General.TOGGLE_MAIN_GAME_MENU,
+                    "<Wait 50>",
+                    act.General.TOGGLE_MAIN_GAME_MENU,
+                    "<Wait 50>",
+                    f"<MoveMouse {config.game_client_config.return_to_game_button_x} {config.game_client_config.return_to_game_button_y}>",
+                    "<ClickMouse LButton Both Window NoMove>"
+                    "<Wait 50>",
+                    act.General.TOGGLE_MAIN_GAME_MENU,
+                    "<Wait 50>",
+                    f"<MoveMouse {config.game_client_config.log_out_button_x} {config.game_client_config.log_out_button_y}>",
+                    "<Wait 50>",
+                    "<ClickMouse LButton Both Window NoMove>"
+                ]
+            )
+        ],
+        script=script,
+    )
+
+hk_logout_on_current_window = build_hk_logout_on_current_window()

@@ -330,6 +330,29 @@ class SendLabel(Action):
 
 
 @attr.s
+class SendFocusWindow(Action):
+    name = attr.ib(validator=attr.validators.instance_of(str))
+    actions = attr.ib(factory=list)  # type: typing.List[typing.Union[Action, str]]
+    _template = Path(TPL_DIR, "SendLabel.tpl").read_text(encoding="utf-8")
+
+    @property
+    def title(self) -> str:
+        return f"<SendFocusWin>"
+
+    def dump(self) -> str:
+        if len(self.actions):
+            return remove_empty_line(
+                render_template(
+                    self._template,
+                    send_label=self,
+                    render_action=render_action,
+                )
+            )
+        else:
+            return ""
+
+
+@attr.s
 class CallCommand(Action):
     cmd = attr.ib()  # type: typing.Union[Command, str]
     args = attr.ib(factory=tuple)  # type: tuple
