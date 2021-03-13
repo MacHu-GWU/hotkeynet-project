@@ -11,7 +11,7 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 
 ### General
 # Mode.set_mode_solo_raid_10p_batlefury_flydps_core_team(config)
-Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team(config)
+# Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team(config)
 
 ### Naxx
 
@@ -27,9 +27,15 @@ Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team
 #--- Leveling
 
 
+#--- Questing
+Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team1(config)
+
+
 #=== Build Script
 from hotkeynet.projects.warmane.hkn_script import hkn
 _ = hkn
+
+config.post_hook(config, script)
 
 
 #=== Dump Script

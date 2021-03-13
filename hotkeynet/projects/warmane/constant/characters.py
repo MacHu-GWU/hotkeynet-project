@@ -251,6 +251,15 @@ class CharacterFactory:
             window_index=10,
         )
 
+    @classmethod
+    def make_char_makun7551_laoshou_retri_paladin(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_makun7551.value,
+            name="laoshou",
+            talent=Talent.paladin_pve_retri,
+            window_index=10,
+        )
+
     #--- litgoat ss
     @classmethod
     def make_char_fatmulti1_litgoatssa_pve_demo_warlock(cls) -> Character:

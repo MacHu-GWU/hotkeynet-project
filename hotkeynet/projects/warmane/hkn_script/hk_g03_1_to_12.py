@@ -60,16 +60,6 @@ def build_actions_default(config: Config,
     return actions
 
 
-# def build_send_label_paladin_pve_holy(config: Config) -> SendLabel:
-#     return SendLabel(
-#         name=Talent.paladin_pve_holy.name,
-#         to=config.active_character_config.window_label_list_by_talent(t=Talent.paladin_pve_holy),
-#         actions=[
-#             act.Target.TARGET_RAID,
-#             act.General.TRIGGER,
-#         ]
-#     )
-
 def build_hk_1():
     actions = build_actions_default(
         config=config, is_healer_target_focus=True, key=Key(name=keyname.KEY_1))
@@ -268,24 +258,35 @@ def build_hk_0_short_term_buff():
         script=script,
     )
 
+
 hk_0_short_term_buff = build_hk_0_short_term_buff()
 
 
 def build_hk_11_focus_mode_1():
     actions = list()
     for char in config.active_character_config.iter_by_window_index():
-        try:
+        if char.leader1_window_index:
+            try:
+                sl = SendLabel(
+                    name=char.name,
+                    to=[char.window_label, ],
+                    actions=[
+                        act.target_leader_key_mapper[char.leader1_window_label],
+                        act.General.SET_FOCUS_KEY_NUMPAD_6,
+                    ]
+                )
+                actions.append(sl)
+            except KeyError:
+                pass
+        else:
             sl = SendLabel(
                 name=char.name,
-                to=[char.window_label,],
+                to=[char.window_label, ],
                 actions=[
-                    act.target_leader_key_mapper[char.leader1_window_label],
-                    act.General.SET_FOCUS_KEY_NUMPAD_6,
+                    act.General.CLEAR_FOCUS_NUMPAD_7,
                 ]
             )
             actions.append(sl)
-        except KeyError:
-            pass
 
     return Hotkey(
         name="SetFocusMode1",
@@ -304,7 +305,7 @@ def build_hk_12_focus_mode_2():
         try:
             sl = SendLabel(
                 name=char.name,
-                to=[char.window_label,],
+                to=[char.window_label, ],
                 actions=[
                     act.target_leader_key_mapper[char.leader2_window_label],
                     act.General.SET_FOCUS_KEY_NUMPAD_6,
