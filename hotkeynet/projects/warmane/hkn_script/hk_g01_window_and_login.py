@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+实现与游戏客户端以及登录有关的快捷键.
+"""
+
 import typing
 
 from . import cmd_g01_window_and_login
@@ -45,23 +49,22 @@ hk_round_robin_toggle_window = build_hk_round_robin_toggle_window()
 
 
 def build_hk_toggle_specific_window() -> typing.List[Hotkey]:
-    hk_list = list()
-    # 12 + 6 + 7 = 25
-    print()
-    f1_to_12 = [
+    # 12 + 8 + 6 = 26
+    ctrl_f1_to_12 = [
         keyname.CTRL_(key)
         for key in keyname.F1_to_F12
     ]
-    f13_to_18 = [
+    shift_f5_to_f12 = [
+        keyname.SHIFT_(key)
+        for key in keyname.F1_to_F12[5:]
+    ]
+    ctrl_insert_to_pgdn = [
         keyname.CTRL_(key)
         for key in keyname.INSERT_TO_PGDN
     ]
-    f19_to_25 = [
-        keyname.LWIN_(key)
-        for key in keyname.F1_to_F12[:7]
-    ]
-    TOGGLE_SPECIFIC_WINDOW_1_TO_25 = f1_to_12 + f13_to_18 + f19_to_25
+    TOGGLE_SPECIFIC_WINDOW_1_TO_25 = ctrl_f1_to_12 + shift_f5_to_f12 + ctrl_insert_to_pgdn
 
+    hk_list = list()
     for key, index in zip(TOGGLE_SPECIFIC_WINDOW_1_TO_25, config.toggle_window_config.key1_to_25_window_index):
         window_title = window_index[index].title
         hk = Hotkey(
@@ -79,44 +82,70 @@ def build_hk_toggle_specific_window() -> typing.List[Hotkey]:
 
 hk_list_toggle_specific_window = build_hk_toggle_specific_window()
 
+
 # ---
-# hk_CenterOverlapLayout = Hotkey(
-#     name="CenterOverlapLayout",
-#     key=keyname.SCROLOCK_ON(keyname.CTRL_SHIFT_ALT(keyname.NUMPAD_11_DIVIDE)),
-#     actions=[
-#         CallCommand(cmd=cmd_window_and_login.cmd_CenterOverlapLayout)
-#     ],
-#     script=script,
-# )
-#
-#
-# #---
-# hk_BatchLogin = Hotkey(
-#     name="BatchLogin",
-#     key=keyname.SCROLOCK_ON(keyname.CTRL_ALT_(keyname.S)),
-#     actions=[
-#         CallCommand(
-#             cmd=cmd_window_and_login.cmd_BatchLogin,
-#         )
-#     ],
-#     script=script,
-# )
-#
-#
-# #---
-# for key, window, account in zip(
-#         keyname.F1_to_F22,
-#         Config.Windows.batch_login_windows,
-#         Config.Windows.batch_login_accounts
-# ):
-#     window_name = f"WoW{window}"
-#     username = Config.Credential.account_sequence()[account - 1]["username"]
-#     password = Config.Credential.account_sequence()[account - 1]["password"]
-#     hk = Hotkey(
-#         name=f"SingleLogin{username.title()}",
-#         key=keyname.SCROLOCK_ON(keyname.CTRL_SHIFT_ALT(key)),
-#         actions=[
-#             cmd_window_and_login.cmd_EnterUsernamePasssword.call(window_name, username, password)
-#         ],
-#         script=script,
-#     )
+
+def build_hk_center_overlap_layout():
+    return Hotkey(
+        name="CenterOverlapLayout",
+        key=keyname.SCROLOCK_ON(keyname.CTRL_SHIFT_ALT(keyname.NUMPAD_11_DIVIDE)),
+        actions=[
+            CallCommand(cmd=cmd_g01_window_and_login.cmd_center_overlap_layout)
+        ],
+        script=script,
+    )
+
+
+hk_center_overlap_layout = build_hk_center_overlap_layout()
+
+
+def build_hk_batch_login():
+    return Hotkey(
+        name="BatchLogin",
+        key=keyname.SCROLOCK_ON(keyname.CTRL_ALT_(keyname.S)),
+        actions=[
+            CallCommand(
+                cmd=cmd_g01_window_and_login.cmd_batch_login,
+            )
+        ],
+        script=script,
+    )
+
+
+hk_batch_login = build_hk_batch_login()
+
+
+def build_hk_login_specific_account() -> typing.List[Hotkey]:
+    # 12 + 8 + 6 = 26
+    ctrl_alt_f1_to_12 = [
+        keyname.CTRL_ALT_(key)
+        for key in keyname.F1_to_F12
+    ]
+    shift_alt_f5_to_f12 = [
+        keyname.ALT_SHIFT_(key)
+        for key in keyname.F1_to_F12[5:]
+    ]
+    ctrl_alt_insert_to_pgdn = [
+        keyname.CTRL_ALT_(key)
+        for key in keyname.INSERT_TO_PGDN
+    ]
+    LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_12 + shift_alt_f5_to_f12 + ctrl_alt_insert_to_pgdn
+
+    hk_list = list()
+    for char in config.active_character_config.active_characters:
+        key = LOGIN_SPECIFIC_ACCOUNT_1_TO_25[char.window_index-1]
+        hk = Hotkey(
+            name=f"SingleLogin{char.credential.username.title()}",
+            key=keyname.SCROLOCK_ON(key),
+            actions=[
+                cmd_g01_window_and_login.cmd_enter_username_and_password.call(
+                    char.window_title,
+                    char.credential.username, char.credential.password
+                )
+            ],
+            script=script,
+        )
+        hk_list.append(hk)
+    return hk_list
+
+hk_list_login_specific_account = build_hk_login_specific_account()

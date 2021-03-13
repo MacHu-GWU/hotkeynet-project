@@ -1,12 +1,17 @@
 # -*- coding: utf-8 -*-
 
-from . import act
-from .script import script
-from .config_ import Config, different_labels
-from ... import keyname
-from ...script import (
+"""
+实现 Ctrl + 小键盘 1-12 的快捷键功能. 通常是一些不常用, 但是关键时刻必备的技能.
+"""
+
+from .. import act
+from ._config_and_script import config, script
+from .... import keyname
+from ....script import (
     Hotkey, SendLabel,
 )
+from ..constant.talent_category_association import T, TC
+
 
 def build_hk_ctrl_numpad_1_silence_shot_focus_target():
     return Hotkey(
@@ -14,8 +19,8 @@ def build_hk_ctrl_numpad_1_silence_shot_focus_target():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_1)),
         actions=[
             SendLabel(
-                name="all_hunter",
-                to=Config.SendLabelTo.all_hunter(),
+                name=TC.hunter.name,
+                to=config.lbs_by_tc(TC.hunter),
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
                     act.Hunter.MARKSMAN_SPEC_SILENCING_SHOT,
@@ -35,8 +40,8 @@ def build_hk_ctrl_numpad_2_counter_spell_focus_target():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_2)),
         actions=[
             SendLabel(
-                name="all_mage",
-                to=Config.SendLabelTo.all_mage(),
+                name=TC.mage.name,
+                to=config.lbs_by_tc(TC.mage),
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
                     act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
@@ -56,20 +61,20 @@ def build_hk_ctrl_numpad_3_aggressive_dispel():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_3)),
         actions=[
             SendLabel(
-                name="all_shaman",
-                to=Config.SendLabelTo.all_shaman(),
+                name=TC.shaman.name,
+                to=config.lbs_by_tc(TC.shaman),
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Shaman.ALL_SPEC_PURGE,
                 ]
             ),
             SendLabel(
-                name="all_priest",
-                to=Config.SendLabelTo.all_priest(),
+                name=TC.priest.name,
+                to=config.lbs_by_tc(TC.priest),
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Priest.ALL_SPEC_DISPEL_MAGIC,
                 ]
             )
@@ -87,10 +92,10 @@ def build_hk_ctrl_numpad_4_aoe_fear():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_4)),
         actions=[
             SendLabel(
-                name="all_shadow_priest",
-                to=Config.SendLabelTo.all_shadow_priest,
+                name=TC.priest_shadow.name,
+                to=config.lbs_by_tc(TC.priest_shadow),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Priest.SHADOW_SPEC_PSYCHIC_HORROR,
                 ]
             )
@@ -108,10 +113,10 @@ def build_hk_ctrl_numpad_5_typhoon():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_5)),
         actions=[
             SendLabel(
-                name="all_boomkin_druid",
-                to=Config.SendLabelTo.all_boomkin_druid,
+                name=TC.druid_balance.name,
+                to=config.lbs_by_tc(TC.druid_balance),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Druid.BALANCE_SPEC_TYPHOON_KEY_G,
                 ]
             )
@@ -130,9 +135,9 @@ def build_hk_ctrl_numpad_6_thunder_storm():
         actions=[
             SendLabel(
                 name="all_elemental_shaman",
-                to=Config.SendLabelTo.all_elemental_shaman,
+                to=config.lbs_by_tc(TC.shaman_elemental),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Shaman.ELEMENTAL_SPEC_THUNDER_STORM,
                 ]
             )
@@ -150,10 +155,10 @@ def build_hk_ctrl_numpad_7_hymn_of_life():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_7)),
         actions=[
             SendLabel(
-                name="all_priest",
-                to=Config.SendLabelTo.all_priest(),
+                name=TC.priest.name,
+                to=config.lbs_by_tc(TC.priest),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Priest.ALL_SPEC_DIVINE_HYMN,
                 ]
             )
@@ -172,10 +177,10 @@ def build_hk_ctrl_numpad_10_hymn_of_mana():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_0)),
         actions=[
             SendLabel(
-                name="all_priest",
-                to=Config.SendLabelTo.all_priest(),
+                name=TC.priest.name,
+                to=config.lbs_by_tc(TC.priest),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Priest.ALL_SPEC_HYMN_OF_HOPE,
                 ]
             )
@@ -193,11 +198,11 @@ def build_hk_ctrl_numpad_11_tank_1_taunt():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_11_DIVIDE)),
         actions=[
             SendLabel(
-                name="leader_1",
-                to=Config.SendLabelTo.leader_1,
+                name="tank1",
+                to=config.lbs_tank1(),
                 actions=[
-                    act.General.STOP_CASTING,
-                    act.Paladin.PROTECT_SPEC_HAND_OF_RECKONING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
+                    act.Paladin.PROTECT_SPEC_KEY_Z_HAND_OF_RECKONING,
                 ]
             )
         ],
@@ -214,11 +219,11 @@ def build_hk_ctrl_numpad_12_tank_2_taunt():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.NUMPAD_12_MULTIPLY)),
         actions=[
             SendLabel(
-                name="leader_2",
-                to=Config.SendLabelTo.leader_2,
+                name="tank2",
+                to=config.lbs_tank2(),
                 actions=[
-                    act.General.STOP_CASTING,
-                    act.DK.ALL_SPEC_DARK_COMMAND,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
+                    act.DK.ALL_SPEC_DARK_COMMAND_KEY_Z,
                 ]
             )
         ],

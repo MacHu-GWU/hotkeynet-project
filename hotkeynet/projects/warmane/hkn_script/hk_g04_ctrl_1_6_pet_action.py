@@ -1,17 +1,16 @@
 # -*- coding: utf-8 -*-
 
 """
-Ctrl 1 ~ 6 主要是宠物的动作条设置
+实现 Ctrl 1 ~ 6 的功能. 主要是宠物的动作条按键. 1 进攻主人目标, 2 撤回, 3 原地待命.
 """
 
-from . import act
-from .script import script
-from .config_ import Config
-from ... import keyname
-from ...script import (
-    Hotkey,
-    Key, Mouse, SendLabel,
+from ._config_and_script import config, script
+from .. import act
+from .... import keyname
+from ....script import (
+    Hotkey, SendLabel,
 )
+
 
 def build_hk_ctrl_1_6():
     return [
@@ -21,16 +20,17 @@ def build_hk_ctrl_1_6():
             actions=[
                 SendLabel(
                     name="all",
-                    to=Config.SendLabelTo.all(),
+                    to=config.lbs_all(),
                     actions=[
                         act.Target.TARGET_FOCUS_TARGET,
-                        Key.trigger(),
+                        act.General.TRIGGER,
                     ]
                 )
             ],
             script=script,
-        ) for i in range(1, 6+1)
+        ) for i in range(1, 6 + 1)
     ]
+
 
 (
     hk_ctrl_1,

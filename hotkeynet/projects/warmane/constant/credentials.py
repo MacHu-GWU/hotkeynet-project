@@ -10,6 +10,7 @@ import typing
 
 import attr
 from pathlib_mate import PathCls as Path
+from enum import Enum
 
 # put credentials.json file in the git repo root folder
 credentials_file = Path(__file__).parent.parent.parent.parent.change(new_basename="credentials.json")
@@ -25,7 +26,7 @@ class Credential:
 
 # Enumerate all username password data object
 # 枚举出所有的用户名密码的数据对象, 以供之后引用
-class Credentials:
+class Credentials(Enum):
     cred_fatmulti1 = Credential(username="fatmulti1", password=credentials_data["fatmulti1"])
     cred_fatmulti2 = Credential(username="fatmulti2", password=credentials_data["fatmulti2"])
     cred_fatmulti3 = Credential(username="fatmulti3", password=credentials_data["fatmulti3"])
@@ -65,49 +66,49 @@ class Credentials:
 # 而无需使用 cred_fatmulti1.username 这样的 API.
 _credential_index = [
     # 1-5
-    Credentials.cred_fatmulti1,
-    Credentials.cred_fatmulti2,
-    Credentials.cred_fatmulti3,
-    Credentials.cred_fatmulti4,
-    Credentials.cred_fatmulti5,
+    Credentials.cred_fatmulti1.value,
+    Credentials.cred_fatmulti2.value,
+    Credentials.cred_fatmulti3.value,
+    Credentials.cred_fatmulti4.value,
+    Credentials.cred_fatmulti5.value,
 
     # 6-10
-    Credentials.cred_fitsheep,
-    Credentials.cred_fatmulti6,
-    Credentials.cred_fatmulti8,
-    Credentials.cred_fatmulti9,
-    # Credentials.cred_fatmulti10,
-    Credentials.cred_makun7551,
-    # Credentials.cred_monkey130,
-    # Credentials.cred_freiliheng,
+    Credentials.cred_fitsheep.value,
+    Credentials.cred_fatmulti6.value,
+    Credentials.cred_fatmulti8.value,
+    Credentials.cred_fatmulti9.value,
+    # Credentials.cred_fatmulti10.value,
+    Credentials.cred_makun7551.value,
+    # Credentials.cred_monkey130.value,
+    # Credentials.cred_freiliheng.value,
 
     # 11-14
-    Credentials.cred_fatmulti11,
-    Credentials.cred_fatmulti12,
-    Credentials.cred_fatmulti13,
-    Credentials.cred_fatmulti14,
+    Credentials.cred_fatmulti11.value,
+    Credentials.cred_fatmulti12.value,
+    Credentials.cred_fatmulti13.value,
+    Credentials.cred_fatmulti14.value,
 
-    # Credentials.cred_fatmulti15,
-    # Credentials.cred_fatmulti16,
-    # Credentials.cred_fatmulti17,
-    # Credentials.cred_fatmulti18,
+    # Credentials.cred_fatmulti15.value,
+    # Credentials.cred_fatmulti16.value,
+    # Credentials.cred_fatmulti17.value,
+    # Credentials.cred_fatmulti18.value,
 
     # 15-18
-    Credentials.cred_fatmulti19,
-    Credentials.cred_fatmulti20,
-    Credentials.cred_fatmulti21,
-    Credentials.cred_fatmulti22,
+    Credentials.cred_fatmulti19.value,
+    Credentials.cred_fatmulti20.value,
+    Credentials.cred_fatmulti21.value,
+    Credentials.cred_fatmulti22.value,
 
     # 19-22
-    Credentials.cred_fatmulti23,
-    Credentials.cred_fatmulti24,
-    Credentials.cred_fatmulti25,
-    Credentials.cred_fatmulti26,
+    Credentials.cred_fatmulti23.value,
+    Credentials.cred_fatmulti24.value,
+    Credentials.cred_fatmulti25.value,
+    Credentials.cred_fatmulti26.value,
 
     # 23,24,25
-    Credentials.cred_fatmulti27,
-    Credentials.cred_fatmulti28,
-    Credentials.cred_fatmulti29,
+    Credentials.cred_fatmulti27.value,
+    Credentials.cred_fatmulti28.value,
+    Credentials.cred_fatmulti29.value,
 ]  # type: typing.List[Credential]
 
 credential_index = {

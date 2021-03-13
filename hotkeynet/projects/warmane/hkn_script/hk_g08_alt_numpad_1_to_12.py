@@ -1,12 +1,18 @@
 # -*- coding: utf-8 -*-
 
-from . import act
-from .script import script
-from .config_ import Config, different_labels
-from ... import keyname
-from ...script import (
+"""
+实现 Alt + 小键盘 1-12 的快捷键功能. 通常是一些不常用, 但是关键时刻必备的技能.
+"""
+
+from ._config_and_script import config, script
+from .. import act
+from ..constant.talent_category_association import TC
+from .... import keyname
+from ....script import (
     Hotkey, SendLabel,
 )
+from ....utils import difference_list
+
 
 def build_hk_alt_numpad_1_misdirect_and_tot_focus():
     return Hotkey(
@@ -14,8 +20,8 @@ def build_hk_alt_numpad_1_misdirect_and_tot_focus():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_1)),
         actions=[
             SendLabel(
-                name="all_hunter",
-                to=Config.SendLabelTo.all_hunter(),
+                name=TC.hunter.name,
+                to=config.lbs_by_tc(TC.hunter),
                 actions=[
                     act.Hunter.ALL_SPEC_MISDIRECTION_FOCUS_MACRO,
                 ]
@@ -34,8 +40,8 @@ def build_hk_alt_numpad_2_aspect_of_pact_or_hawk():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_2)),
         actions=[
             SendLabel(
-                name="all_hunter",
-                to=Config.SendLabelTo.all_hunter(),
+                name=TC.hunter.name,
+                to=config.lbs_by_tc(TC.hunter),
                 actions=[
                     act.Hunter.ALL_SPEC_ASPECT_OF_PACT_OR_DRAGON_HAWK,
                 ]
@@ -54,8 +60,8 @@ def build_hk_alt_numpad_3_aspect_of_viper_or_hawk():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_3)),
         actions=[
             SendLabel(
-                name="all_hunter",
-                to=Config.SendLabelTo.all_hunter(),
+                name=TC.hunter.name,
+                to=config.lbs_by_tc(TC.hunter),
                 actions=[
                     act.Hunter.ALL_SPEC_ASPECT_OF_VIPER_OR_DRAGON_HAWK,
                 ]
@@ -74,10 +80,10 @@ def build_hk_alt_numpad_4_all_boomy_star_fall():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_4)),
         actions=[
             SendLabel(
-                name="all_boomkin_druid",
-                to=Config.SendLabelTo.all_boomkin_druid,
+                name=TC.druid_balance.name,
+                to=config.lbs_by_tc(TC.druid_balance),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F,
                 ]
             )
@@ -95,10 +101,10 @@ def build_hk_alt_numpad_5_all_dps_burst():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_5)),
         actions=[
             SendLabel(
-                name="all_dps",
-                to=Config.SendLabelTo.all_dps(),
+                name=TC.dps.name,
+                to=config.lbs_by_tc(TC.dps),
                 actions=[
-                    act.General.DPS_BURST_MACRO,
+                    act.General.DPS_BURST_MACRO_KEY_ALT_D,
                 ]
             )
         ],
@@ -116,22 +122,25 @@ def build_hk_alt_numpad_6_all_dps_burst_and_hero():
         actions=[
             SendLabel(
                 name="all_non_shaman_dps",
-                to=different_labels(Config.SendLabelTo.all_dps(), Config.SendLabelTo.all_shaman()),
+                to=difference_list(
+                    config.lbs_by_tc(TC.dps),
+                    config.lbs_by_tc(TC.shaman),
+                ),
                 actions=[
-                    act.General.DPS_BURST_MACRO,
+                    act.General.DPS_BURST_MACRO_KEY_ALT_D,
                 ]
             ),
             SendLabel(
-                name="all_elemental_shaman",
-                to=Config.SendLabelTo.all_elemental_shaman,
+                name=TC.shaman_elemental.name,
+                to=config.lbs_by_tc(TC.shaman_elemental),
                 actions=[
                     act.Shaman.ALL_SPEC_BLOOD_THIRST_HEROISM,
-                    act.General.DPS_BURST_MACRO,
+                    act.General.DPS_BURST_MACRO_KEY_ALT_D,
                 ]
             ),
             SendLabel(
-                name="all_resto_shaman",
-                to=Config.SendLabelTo.all_resto_shaman,
+                name=TC.shaman_resto.name,
+                to=config.lbs_by_tc(TC.shaman_resto),
                 actions=[
                     act.Shaman.ALL_SPEC_BLOOD_THIRST_HEROISM,
                 ]
@@ -150,8 +159,8 @@ def build_hk_alt_numpad_7_8_9_first_raid_damage_reduction():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_7)),
         actions=[
             SendLabel(
-                name="protect_pala",
-                to=Config.SendLabelTo.g1_dr_protect_pala,
+                name=TC.paladin_protect.name,
+                to=config.lbs_by_tc(TC.paladin_protect),
                 actions=[
                     # 要点两下
                     act.Paladin.ALL_SPEC_DIVINE_SACRIFICE,
@@ -166,14 +175,14 @@ def build_hk_alt_numpad_7_8_9_first_raid_damage_reduction():
         name="Alt Numpad8",
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_8)),
         actions=[
-            SendLabel(
-                name="holy_pala",
-                to=Config.SendLabelTo.g2_dr_holy_pala,
-                actions=[
-                    act.Paladin.ALL_SPEC_DIVINE_SACRIFICE,
-                    act.Paladin.ALL_SPEC_DIVINE_SACRIFICE,
-                ]
-            ),
+            # SendLabel(
+            #     name="holy_pala",
+            #     to=Config.SendLabelTo.g2_dr_holy_pala,
+            #     actions=[
+            #         act.Paladin.ALL_SPEC_DIVINE_SACRIFICE,
+            #         act.Paladin.ALL_SPEC_DIVINE_SACRIFICE,
+            #     ]
+            # ),
         ],
         script=script,
     )
@@ -182,14 +191,14 @@ def build_hk_alt_numpad_7_8_9_first_raid_damage_reduction():
         name="Alt Numpad9",
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_9)),
         actions=[
-            SendLabel(
-                name="holy_pala",
-                to=Config.SendLabelTo.g3_dr_holy_pala,
-                actions=[
-                    act.Paladin.ALL_SPEC_AURA_MASTERY,
-                    act.Paladin.ALL_SPEC_AURA_MASTERY,
-                ]
-            ),
+            # SendLabel(
+            #     name="holy_pala",
+            #     to=Config.SendLabelTo.g3_dr_holy_pala,
+            #     actions=[
+            #         act.Paladin.ALL_SPEC_AURA_MASTERY,
+            #         act.Paladin.ALL_SPEC_AURA_MASTERY,
+            #     ]
+            # ),
         ],
         script=script,
     )
@@ -210,16 +219,17 @@ def build_hk_alt_numpad_10_cleasing_totem():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_0)),
         actions=[
             SendLabel(
-                name="all_shaman",
-                to=Config.SendLabelTo.all_shaman(),
+                name=TC.shaman.name,
+                to=config.lbs_by_tc(TC.shaman),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Shaman.ALL_SPEC_CLEANSING_TOTEM,
                 ]
             ),
         ],
         script=script,
     )
+
 
 hk_alt_numpad_10 = build_hk_alt_numpad_10_cleasing_totem()
 
@@ -230,16 +240,17 @@ def build_hk_alt_numpad_11_tremor_totem():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_11_DIVIDE)),
         actions=[
             SendLabel(
-                name="all_shaman",
-                to=Config.SendLabelTo.all_shaman(),
+                name=TC.shaman.name,
+                to=config.lbs_by_tc(TC.shaman),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Shaman.ALL_SPEC_TREMOR_TOTEM,
                 ]
             ),
         ],
         script=script,
     )
+
 
 hk_alt_numpad_11 = build_hk_alt_numpad_11_tremor_totem()
 
@@ -250,10 +261,10 @@ def build_hk_alt_numpad_12_earth_binding_totem():
         key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.NUMPAD_12_MULTIPLY)),
         actions=[
             SendLabel(
-                name="all_shaman",
-                to=Config.SendLabelTo.all_shaman(),
+                name=TC.shaman.name,
+                to=config.lbs_by_tc(TC.shaman),
                 actions=[
-                    act.General.STOP_CASTING,
+                    act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                     act.Shaman.ALL_SPEC_EARTHBIND_TOTEM,
                 ]
             ),
@@ -261,6 +272,5 @@ def build_hk_alt_numpad_12_earth_binding_totem():
         script=script,
     )
 
+
 hk_alt_numpad_12 = build_hk_alt_numpad_12_earth_binding_totem()
-
-

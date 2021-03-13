@@ -1,20 +1,18 @@
 # -*- coding: utf-8 -*-
 
 """
-
-如果你不知道该设置什么键, 则注释掉所有的actions即可. 或是用 ``<SendFocusWin>`` 发送到当前
-焦点窗口
-
+实现每个游戏内所绑定的动作条快捷键, 会触发哪些职业的哪些功能.
 """
 
-from . import act
-from .config_ import Config, different_labels
-from .script import script
-from ... import keyname
-from ...script import (
+from ._config_and_script import config, script
+from .. import act
+from ..constant.talent_category_association import T, TC
+from .... import keyname
+from ....script import (
     Hotkey,
     Key, SendLabel,
 )
+from ....utils import union_list, intersection_list, difference_list
 
 _ACTION_BAR_5_________________________________ = ""
 
@@ -206,13 +204,13 @@ _ACTION_BAR_4_________________________________ = ""
 #     name="MButton",
 #     key=keyname.SCROLOCK_ON(keyname.MOUSE_MButton),
 #     actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
+# SendLabel(
+#     name="",
+#     to=Config.SendLabelTo.all(),
+#     actions=[
+#         Key.trigger()
+#     ]
+# )
 #     ],
 #     script=script,
 # )
@@ -253,9 +251,9 @@ hk_ctrl_oem3_wave = Hotkey(
     actions=[
         SendLabel(
             name="all",
-            to=Config.SendLabelTo.all(),
+            to=config.lbs_all(),
             actions=[
-                act.General.MOUNT_DOWN
+                act.General.MOUNT_DOWN_MACRO_CTRL_OEM3_WAVE
             ]
         )
     ],
@@ -371,13 +369,13 @@ hk_alt_f = Hotkey(
     name="Alt F",
     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.F)),
     actions=[
-        SendLabel(
-            name="",
-            to=Config.SendLabelTo.all(),
-            actions=[
-                Key.trigger()
-            ]
-        )
+        # SendLabel(
+        #     name="",
+        #     to=Config.SendLabelTo.all(),
+        #     actions=[
+        #         Key.trigger()
+        #     ]
+        # )
     ],
     script=script,
 )
@@ -435,9 +433,9 @@ hk_ctrl_z_land = Hotkey(
     actions=[
         SendLabel(
             name="",
-            to=Config.SendLabelTo.all(),
+            to=config.lbs_all(),
             actions=[
-                Key.trigger()
+                act.General.LAND_MOUNT_SPELL_KEY_CTRL_Z
             ]
         )
     ],
@@ -449,10 +447,10 @@ hk_ctrl_t = Hotkey(
     key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.T)),
     actions=[
         SendLabel(
-            name="",
-            to=Config.SendLabelTo.all(),
+            name="all",
+            to=config.lbs_all(),
             actions=[
-                Key.trigger()
+                act.General.EAT_FOOD_KEY_CTRL_T
             ]
         )
     ],
@@ -475,7 +473,7 @@ hk_ctrl_g = Hotkey(
 )
 
 hk_ctrl_x = Hotkey(
-    name="Ctrl T",
+    name="Ctrl X",
     key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.X)),
     actions=[
         # SendLabel(
@@ -525,7 +523,7 @@ hk_alt_g = Hotkey(
     actions=[
         SendLabel(
             name="",
-            to=Config.SendLabelTo.all_boomkin_druid,
+            to=config.lbs_by_tc(TC.druid_balance),
             actions=[
                 act.Druid.BALANCE_SPEC_TYPHOON_KEY_G,
             ]
@@ -539,37 +537,42 @@ hk_alt_x_aoe = Hotkey(
     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.X)),
     actions=[
         SendLabel(
-            name="all_dk",
-            to=Config.SendLabelTo.all_dps_dk(),
+            name=TC.dk.name,
+            to=config.lbs_by_tc(TC.dk),
             actions=[
-                act.DK.ALL_SPEC_DEATH_AND_DECAY_ALT_X,
+                act.General.ESC,
+                act.DK.ALL_SPEC_DEATH_AND_DECAY_KEY_ALT_X,
             ]
         ),
         SendLabel(
-            name="all_hunter",
-            to=Config.SendLabelTo.all_hunter(),
+            name=TC.hunter.name,
+            to=config.lbs_by_tc(TC.hunter),
             actions=[
+                act.General.ESC,
                 act.Hunter.ALL_SPEC_VOLLEY_ALT_X,
             ]
         ),
         SendLabel(
-            name="all_druid",
-            to=Config.SendLabelTo.all_boomkin_druid,
+            name=TC.druid_balance.name,
+            to=config.lbs_by_tc(TC.druid_balance),
             actions=[
+                act.General.ESC,
                 act.Druid.ALL_SPEC_HURRICANE,
             ]
         ),
         SendLabel(
-            name="all_warlock",
-            to=Config.SendLabelTo.all_warlock(),
+            name=TC.warlock.name,
+            to=config.lbs_by_tc(TC.warlock),
             actions=[
+                act.General.ESC,
                 act.Warlock.ALL_SPEC_RAIN_OF_FIRE,
             ]
         ),
         SendLabel(
-            name="all_mage",
-            to=Config.SendLabelTo.all_mage(),
+            name=TC.mage.name,
+            to=config.lbs_by_tc(TC.mage),
             actions=[
+                act.General.ESC,
                 act.Mage.ALL_SPEC_BLIZZARD,
             ]
         ),
@@ -579,184 +582,122 @@ hk_alt_x_aoe = Hotkey(
 
 _ACTION_BAR_2_________________________________ = ""
 
+_hk_r_actions = [
+    # paladin
+    SendLabel(
+        name=TC.paladin_protect.name,
+        to=config.lbs_by_tc(TC.paladin_protect),
+        actions=[
+            Key(name=keyname.R),
+        ]
+    ),
+    SendLabel(
+        name=TC.paladin_holy.name,
+        to=config.lbs_by_tc(TC.paladin_holy),
+        actions=[
+            act.Paladin.HOLY_SPEC_KEY_R_FOCUS_JUDGEMENT,
+        ]
+    ),
+    # death knight
+    SendLabel(
+        name=TC.dk_tank.name,
+        to=config.lbs_by_tc(TC.dk_tank),
+        actions=[
+            act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
+        ]
+    ),
+    SendLabel(
+        name=TC.dk_dps.name,
+        to=config.lbs_by_tc(TC.dk_dps),
+        actions=[
+            act.Target.TARGET_FOCUS_TARGET,
+            act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
+        ]
+    ),
+    # hunter
+    SendLabel(
+        name=TC.hunter_marksman.name,
+        to=config.lbs_by_tc(TC.hunter_marksman),
+        actions=[
+            act.Target.TARGET_FOCUS_TARGET,
+            act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
+        ]
+    ),
+    # shaman
+    SendLabel(
+        name=TC.shaman.name,
+        to=config.lbs_by_tc(TC.shaman),
+        actions=[
+            act.Target.TARGET_FOCUS_TARGET,
+            act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
+        ]
+    ),
+
+    # mage
+    SendLabel(
+        name=TC.mage.name,
+        to=config.lbs_by_tc(TC.mage),
+        actions=[
+            act.Target.TARGET_FOCUS_TARGET,
+            act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
+        ]
+    ),
+]
+
+special_labels = union_list(*[
+    sl.to
+    for sl in _hk_r_actions
+])
+
+regular_tank_labels = difference_list(
+    config.lbs_by_tc(TC.tank),
+    special_labels,
+)
+
+regular_dps_labels = difference_list(
+    config.lbs_by_tc(TC.dps),
+    special_labels,
+)
+
+regular_healer_labels = difference_list(
+    config.lbs_by_tc(TC.healer),
+    special_labels,
+)
+
+_hk_r_actions.extend([
+    SendLabel(
+        name="other_tank",
+        to=regular_tank_labels,
+        actions=[
+            Key(name=keyname.KEY_2),
+        ]
+    ),
+    SendLabel(
+        name="other_dps",
+        to=regular_dps_labels,
+        actions=[
+            act.Target.TARGET_FOCUS_TARGET,
+            Key(name=keyname.KEY_3),
+        ]
+    ),
+    SendLabel(
+        name="other_healer",
+        to=regular_healer_labels,
+        actions=[
+            act.Target.TARGET_FOCUS,
+            Key(name=keyname.KEY_3),
+        ]
+    ),
+])
+
+
 hk_r = Hotkey(
     name="R Interrupt Spell",
     key=keyname.SCROLOCK_ON(keyname.R),
-    actions=[
-        # paladin
-        SendLabel(
-            name="all_protect_pala",
-            to=Config.SendLabelTo.all_protect_pala,
-            actions=[
-                Key.trigger(),
-            ]
-        ),
-        SendLabel(
-            name="all_holy_pala",
-            to=Config.SendLabelTo.all_holy_pala,
-            actions=[
-                act.Target.TARGET_RAID,
-                act.Paladin.HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_2,
-            ]
-        ),
-        # death knight
-        SendLabel(
-            name="all_unholy_tank_dk",
-            to=Config.SendLabelTo.all_unholy_tank_dk,
-            actions=[
-                act.DK.ALL_SPEC_MIND_FREEZE,
-            ]
-        ),
-        SendLabel(
-            name="all_blood_tank_dk",
-            to=Config.SendLabelTo.all_blood_tank_dk,
-            actions=[
-                act.DK.ALL_SPEC_MIND_FREEZE,
-            ]
-        ),
-        # hunter
-        SendLabel(
-            name="all_marksman_hunter",
-            to=Config.SendLabelTo.all_marksman_hunter,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
-            ]
-        ),
-        SendLabel(
-            name="all_survival_hunter",
-            to=Config.SendLabelTo.all_survival_hunter,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Hunter.SURVIVAL_SPEC_DPS_ROTATE_MACRO,
-            ]
-        ),
-        SendLabel(
-            name="all_beast_hunter",
-            to=Config.SendLabelTo.all_beast_hunter,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Hunter.BEAST_SPEC_DPS_ROTATE_MACRO,
-            ]
-        ),
-        # shaman
-        SendLabel(
-            name="all_elemental_shaman",
-            to=Config.SendLabelTo.all_elemental_shaman,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
-            ]
-        ),
-        SendLabel(
-            name="all_enhancement_shaman",
-            to=Config.SendLabelTo.all_enhancement_shaman,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
-            ]
-        ),
-        SendLabel(
-            name="all_resto_shaman",
-            to=Config.SendLabelTo.all_resto_shaman,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
-            ]
-        ),
-        # druid
-        SendLabel(
-            name="all_boomkin_druid",
-            to=Config.SendLabelTo.all_boomkin_druid,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Druid.BALANCE_SPEC_DPS_ROTATE_MACRO,
-            ]
-        ),
-        SendLabel(
-            name="all_resto_druid",
-            to=Config.SendLabelTo.all_resto_druid,
-            actions=[
-                act.Druid.RESTO_SPEC_HEAL_RAID_MACRO_KEY_2,
-            ]
-        ),
-
-        # mage
-        SendLabel(
-            name="all_arcane_mage",
-            to=Config.SendLabelTo.all_arcane_mage,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
-            ]
-        ),
-        SendLabel(
-            name="all_fire_mage",
-            to=Config.SendLabelTo.all_fire_mage,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
-            ]
-        ),
-        SendLabel(
-            name="all_frost_mage",
-            to=Config.SendLabelTo.all_frost_mage,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
-            ]
-        ),
-        # warlock
-        SendLabel(
-            name="all_demonic_warlock",
-            to=Config.SendLabelTo.all_demonic_warlock,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Warlock.DEMON_SPEC_DPS_ROTATE,
-            ]
-        ),
-        SendLabel(
-            name="all_affiliate_warlock",
-            to=Config.SendLabelTo.all_affiliate_warlock,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Warlock.AFFLICTION_SPEC_DPS_ROTATE,
-            ]
-        ),
-        SendLabel(
-            name="all_destruction_warlock",
-            to=Config.SendLabelTo.all_destruction_warlock,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Warlock.DESTRUCTION_SPEC_DPS_ROTATE,
-            ]
-        ),
-        # priest
-        SendLabel(
-            name="all_shadow_priest",
-            to=Config.SendLabelTo.all_shadow_priest,
-            actions=[
-                act.Target.TARGET_FOCUS_TARGET,
-                act.Priest.SHADOW_SPEC_DPS_ROTATE_SPEC,
-            ]
-        ),
-        SendLabel(
-            name="all_disco_priest",
-            to=Config.SendLabelTo.all_disco_priest,
-            actions=[
-                act.Priest.DISC_SPEC_HEAL_RAID_MACRO_KEY_2,
-            ]
-        ),
-        SendLabel(
-            name="all_holy_priest",
-            to=Config.SendLabelTo.all_holy_priest,
-            actions=[
-                act.Priest.HOLY_SPEC_HEAL_RAID_MACRO_KEY_2,
-            ]
-        ),
-    ],
+    actions=_hk_r_actions,
     script=script,
 )
+
 
 hk_z = Hotkey(
     name="Z",
@@ -783,8 +724,8 @@ hk_t = Hotkey(
     key=keyname.SCROLOCK_ON(keyname.T),
     actions=[
         SendLabel(
-            name="",
-            to=Config.SendLabelTo.all_dispeler(),
+            name=TC.dispeler.name,
+            to=config.lbs_by_tc(TC.dispeler),
             actions=[
                 act.Target.TARGET_RAID,
                 Key.trigger()
@@ -841,7 +782,6 @@ hk_shift_insert = Hotkey(
     script=script,
 )
 
-
 hk_shift_home = Hotkey(
     name="Shift Home",
     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.HOME)),
@@ -856,7 +796,6 @@ hk_shift_home = Hotkey(
     ],
     script=script,
 )
-
 
 hk_shift_page_up = Hotkey(
     name="Shift PageUp",
@@ -873,7 +812,6 @@ hk_shift_page_up = Hotkey(
     script=script,
 )
 
-
 hk_shift_delete = Hotkey(
     name="Shift Delete",
     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.DELETE)),
@@ -888,7 +826,6 @@ hk_shift_delete = Hotkey(
     ],
     script=script,
 )
-
 
 hk_shift_end = Hotkey(
     name="Shift End",
@@ -905,7 +842,6 @@ hk_shift_end = Hotkey(
     script=script,
 )
 
-
 hk_shift_page_down = Hotkey(
     name="Shift PageDown",
     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.PAGE_DOWN)),
@@ -920,7 +856,6 @@ hk_shift_page_down = Hotkey(
     ],
     script=script,
 )
-
 
 hk_alt_insert = Hotkey(
     name="Alt Insert",
@@ -937,7 +872,6 @@ hk_alt_insert = Hotkey(
     script=script,
 )
 
-
 hk_alt_home = Hotkey(
     name="Alt Home",
     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.HOME)),
@@ -952,7 +886,6 @@ hk_alt_home = Hotkey(
     ],
     script=script,
 )
-
 
 hk_alt_page_up = Hotkey(
     name="Alt PageUp",
@@ -969,7 +902,6 @@ hk_alt_page_up = Hotkey(
     script=script,
 )
 
-
 hk_alt_delete = Hotkey(
     name="Alt Delete",
     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.DELETE)),
@@ -985,7 +917,6 @@ hk_alt_delete = Hotkey(
     script=script,
 )
 
-
 hk_alt_end = Hotkey(
     name="Alt End",
     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.END)),
@@ -1000,7 +931,6 @@ hk_alt_end = Hotkey(
     ],
     script=script,
 )
-
 
 hk_alt_page_down = Hotkey(
     name="Alt PageDown",
@@ -1025,8 +955,8 @@ hk_alt_shift_f_all_boomkin_star_fall = Hotkey(
     key=keyname.SCROLOCK_ON(keyname.ALT_SHIFT_(keyname.F)),
     actions=[
         SendLabel(
-            name="",
-            to=Config.SendLabelTo.all_boomkin_druid,
+            name=TC.druid_balance.name,
+            to=config.lbs_by_tc(TC.druid_balance),
             actions=[
                 act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F
             ]

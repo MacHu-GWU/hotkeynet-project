@@ -3,27 +3,34 @@
 import pytest
 
 from hotkeynet.projects.warmane.constant.talent_category_association import (
-    Talent, TalentCategory, get_talent_by_category, get_category_by_talent,
+    get_talent_by_category, Talent as T,
+    TalentCategory as TC,
 )
 
 
 def test_get_talent_by_category():
-    assert get_talent_by_category(category=TalentCategory.healer) == [
-        Talent.paladin_pve_holy,
-        Talent.shaman_pve_resto,
-        Talent.druid_pve_resto,
-        Talent.priest_pve_disco,
-        Talent.priest_pve_holy,
-    ]
+    assert T.druid_pve_bear in get_talent_by_category(TC.tank)
+    assert len(get_talent_by_category(TC.tank)) == 6
+
+    assert T.paladin_pve_protect not in get_talent_by_category(TC.non_tank)
+
+    assert T.druid_pve_balance in get_talent_by_category(TC.druid_balance)
+    assert T.druid_pvp_balance in get_talent_by_category(TC.druid_balance)
+
+    assert T.paladin_pvp_protect in get_talent_by_category(TC.paladin_dps)
+
+    assert T.paladin_pve_protect in get_talent_by_category(TC.paladin_non_dps)
+    assert T.paladin_pve_holy in get_talent_by_category(TC.paladin_non_dps)
+    assert T.paladin_pvp_holy in get_talent_by_category(TC.paladin_non_dps)
+
+    assert T.paladin_pvp_retri in get_talent_by_category(TC.dispeler)
+    assert T.shaman_pve_enhancement in get_talent_by_category(TC.dispeler)
+    assert T.druid_pve_bear not in get_talent_by_category(TC.dispeler)
+    assert T.druid_pvp_cat not in get_talent_by_category(TC.dispeler)
 
 
 def test_get_category_by_talent():
-    assert get_category_by_talent(talent=Talent.priest_pve_shadow) == [
-        TalentCategory.pve,
-        TalentCategory.dps,
-        TalentCategory.ranger,
-        TalentCategory.caster,
-    ]
+    pass
 
 
 if __name__ == "__main__":

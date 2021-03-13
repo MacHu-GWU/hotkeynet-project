@@ -491,7 +491,7 @@ class Config:
         g3_dr_holy_pala = []  # type: typing.List[str]
 
     @classmethod
-    def }(cls):
+    def use_1920_1080_resolution(cls):
         cls.Coordinate.wrong_password_pop_up_x = cls.Coordinate.wrong_password_pop_up_x_at_1920_1080
         cls.Coordinate.wrong_password_pop_up_y = cls.Coordinate.wrong_password_pop_up_y_at_1920_1080
         cls.Coordinate.wrong_password_pop_up_x = cls.Coordinate.wrong_password_pop_up_x_at_1920_1080

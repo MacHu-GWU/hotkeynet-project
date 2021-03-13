@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from .script import script
-from ...script import Command
 from pathlib_mate import PathCls as Path
 
-dir_project_root = Path(__file__).parent.parent.parent.parent
+from ._config_and_script import script
+from ....script import Command
+
+dir_project_root = Path(__file__).parent.parent.parent.parent.parent
+assert Path(dir_project_root, "hotkeynet").exists()
 dir_icon = Path(dir_project_root, "icons")
+
 content = f"""
 <CreatePanel MBControlPanel 0 0 120 1000>
     <CreateButton ButtonBar11 0 0 36 36 "Alt">
@@ -143,18 +146,6 @@ command = Command(
     name="AutoExec",
     actions=[
         content,
-        # '<CreatePanel MBControlPanel 0 0 120 1000>',
-        #
-        # '<CreatePictureButton Button1 0 0 "{}">'.format(Path(dir_icon, "ability_hunter_misdirection.jpg").abspath),
-        # '<AddButtonToPanel Button1 MBControlPanel 0 0>',
-        # '<SetButtonHotkey Button1 Hotkey ScrollLockOn Alt Numpad1>',
-        #
-        # # syntax: <SetPanelLayout Panel RowLength Margin [ButtonWidth ButtonHeight]>
-        # # RowLength is the maximum number of buttons in a row
-        # '<SetPanelLayout MBControlPanel 3 1 36 36>',
-        # '<TargetWin MBControlPanel>',
-        # '<AlwaysOnTop on>',
-
     ],
     script=script,
 )

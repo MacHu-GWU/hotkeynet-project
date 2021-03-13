@@ -15,7 +15,7 @@ from ...keyname import *
 from ...script import (
     Key, Mouse, ModifiedMouseClick
 )
-from .config_ import Config
+from .constant.windows import window_index
 
 
 def convert_to_key_action(cls):
@@ -161,21 +161,20 @@ class Target:
 
 convert_to_key_action(Target)
 
-leader_key_mapper = {
-    "w1": Target.TARGET_W1_BATLEFURY,
-    "w3": Target.TARGET_W3_OPIITOU,
-    "w6": Target.TARGET_W6_KINDHEARTED,
-    "w7": Target.TARGET_w7_KAPACUK,
-    "w9": Target.TARGET_w9_GLOWYY,
-    "w10": Target.TARGET_W10_LUXIAOFENG,
-    "w11": Target.TARGET_W11_LITGUGUA,
-    "w15": Target.TARGET_W15_LGMSI,
-    "w19": Target.TARGET_W19_LGSMM,
+target_leader_key_mapper = {
+    window_index[1].label: Target.TARGET_W1_BATLEFURY,
+    window_index[3].label: Target.TARGET_W3_OPIITOU,
+    window_index[6].label: Target.TARGET_W6_KINDHEARTED,
+    window_index[7].label: Target.TARGET_w7_KAPACUK,
+    window_index[9].label: Target.TARGET_w9_GLOWYY,
+    window_index[10].label: Target.TARGET_W10_LUXIAOFENG,
+    window_index[11].label: Target.TARGET_W11_LITGUGUA,
+    window_index[15].label: Target.TARGET_W15_LGMSI,
+    window_index[19].label: Target.TARGET_W19_LGSMM,
 }
 
-
-Target.TARGET_LEADER_1 = leader_key_mapper[Config.SendLabelTo.leader_1[0]]
-Target.TARGET_LEADER_2 = leader_key_mapper[Config.SendLabelTo.leader_2[0]]
+# Target.TARGET_LEADER_1 = leader_key_mapper[Config.SendLabelTo.leader_1[0]]
+# Target.TARGET_LEADER_2 = leader_key_mapper[Config.SendLabelTo.leader_2[0]]
 
 
 class Camera:
@@ -211,32 +210,35 @@ class General:
     通用类功能的按键绑定. 所有职业都需要按照这个设置.  以下设置如果没有特殊说明, 都是
     在游戏内的按键绑定实现的.
     """
-    STOP_CASTING = OEM1_SEMICOLUMN
-    STOP_ATTACKING = OEM7_QUOTE
-    LEAVE_PARTY = ALT_(END)
+    ESC = ESC
+    TRIGGER = Key.trigger()
 
-    CONFIRM = NUMPAD_5
+    STOP_CASTING_KEY_OEM1_SEMICOLUMN = OEM1_SEMICOLUMN
+    STOP_ATTACKING_KEY_OEM7_QUOTE = OEM7_QUOTE
+    LEAVE_PARTY_MACRO_KEY_ALT_END = ALT_(END)
+
+    CONFIRM_MACRO_KEY_NUMPAD_5 = NUMPAD_5
     """
     The ``MB-Confirm`` Macro::
 
         /click StaticPopup1Button1
     """
 
-    SET_FOCUS = NUMPAD_6
+    SET_FOCUS_KEY_NUMPAD_6 = NUMPAD_6
     """
     The ``MB-FocusSet`` Macro::
 
         /focus
     """
 
-    CLEAR_FOCUS = NUMPAD_7
+    CLEAR_FOCUS_NUMPAD_7 = NUMPAD_7
     """
     The ``MB-FocusClear`` Macro::
 
         /clearfocus
     """
 
-    MOUNT_UP = NUMPAD_11_DIVIDE
+    MOUNT_UP_MACRO_KEY_NUMPAD_11_DIVIDE = NUMPAD_11_DIVIDE
     """
     The ``MountUp`` Macro. 简单来说逻辑是如果已经在 坐骑上, 或是进入了飞行模式, 则 
     stopmacro; 其他情况根据当地是否可以飞行, 使用不同的坐骑和进入德鲁伊飞行形态::
@@ -248,7 +250,7 @@ class General:
         /cast [noflyable] ${YourLandMountSpellName}
     """
 
-    MOUNT_DOWN = CTRL_(OEM3_WAVE_OR_BACK_QUOTE)
+    MOUNT_DOWN_MACRO_CTRL_OEM3_WAVE = CTRL_(OEM3_WAVE_OR_BACK_QUOTE)
     """
     The ``MountDown`` Macro. 简单来说就是尝试清除掉坐骑和飞行形态的光环::
     
@@ -258,21 +260,28 @@ class General:
         /cancelaura Swift Flight Form
     """
 
-    BUFF_SELF_MACRO = KEY_8
+    LAND_MOUNT_SPELL_KEY_CTRL_Z = CTRL_(Z)
+    """
+    陆地专用坐骑.
+    """
+
+    EAT_FOOD_KEY_CTRL_T = CTRL_(T)
+
+    BUFF_SELF_MACRO_KEY_8 = KEY_8
     """
     用于给自己刷 Buff 的宏或技能
     """
 
-    BUFF_RAID_MACRO = KEY_9
+    BUFF_RAID_MACRO_KEY_9 = KEY_9
     """
     用于给团队刷 Buff 的宏或技能
     """
 
-    RACIAL_SKILL = ALT_(A)
-    USE_TRINKET_1 = ALT_(S)
-    USE_TRINKET_2 = ALT_(D)
+    RACIAL_SKILL_KEY_ALT_A = ALT_(A)
+    USE_TRINKET_1_KEY_ALT_S = ALT_(S)
+    USE_TRINKET_2_KEY_ALT_D = ALT_(D)
 
-    DPS_BURST_MACRO = ALT_(D)
+    DPS_BURST_MACRO_KEY_ALT_D = ALT_(D)
     """
     The DPS Burst Skill macro, different class use different macro.
 
@@ -284,7 +293,7 @@ class General:
         /use ${TrinketOrEngineeringEnchantingItemName}
     """
 
-    SHOOT_WAND_OR_RANGE_WEAPON = SHIFT_(TAB)
+    SHOOT_WAND_OR_RANGE_WEAPON_KEY_SHIFT_TAB = SHIFT_(TAB)
     """
     Mage / Warlock / Priest shoot wand, Warrior / Rogue shoot range weapon
     """
@@ -333,28 +342,30 @@ class Paladin:
     ALL_SPEC_EXORCISM = G  # 驱邪术 (读条施法攻击技能, 对亡灵必爆)
 
     # --- 防护天赋下专属键位 ---
-    PROTECT_SPEC_JUDGEMENT = KEY_1  # 智慧 | 光明 | 公正 审判
-    PROTECT_SPEC_HAMMER_OF_THE_RIGHTEOUS = KEY_2  # 公正之锤 (防护 51 点天赋技能, 近战群拉高仇恨)
-    PROTECT_SPEC_SHIELD_OF_RIGHTEOUSNESS = ALT_(KEY_2)  # 复仇之盾, 近战单体仇恨技能
-    PROTECT_SPEC_HOLY_SHIELD = KEY_3  # 神圣之盾 (防护 31 点天赋技能, 短CD加大量格挡)
-    PROTECT_SPEC_AVENGER_SHIELD = ALT_(KEY_3)  # 防御者之盾 (防护 41点天赋技能, 远程群体攻击, 打断施法并减速)
-    PROTECT_SPEC_CONSECRATION = KEY_4  # 奉献 (AOE)
-    PROTECT_SPEC_SACRED_SHIELD = KEY_5  # 圣洁护盾
-    PROTECT_SPEC_HAND_OF_RECKONING = Z  # 嘲讽 (单体嘲讽)
-    PROTECT_SPEC_RIGHTEOUS_DEFENCE = ALT_(F)  # 正义防护 (群体嘲讽)
+    PROTECT_SPEC_KEY_1_JUDGEMENT = KEY_1  # 智慧 | 光明 | 公正 审判
+    PROTECT_SPEC_KEY_ALT_1_HAND_OF_RECKONING = Z  # 嘲讽 (单体嘲讽)
+    PROTECT_SPEC_KEY_2_HAMMER_OF_THE_RIGHTEOUS = KEY_2  # 公正之锤 (防护 51 点天赋技能, 近战群拉高仇恨)
+    PROTECT_SPEC_KEY_ALT_2_SHIELD_OF_RIGHTEOUSNESS = ALT_(KEY_2)  # 复仇之盾, 近战单体仇恨技能
+    PROTECT_SPEC_KEY_3_HOLY_SHIELD = KEY_3  # 神圣之盾 (防护 31 点天赋技能, 短CD加大量格挡)
+    PROTECT_SPEC_KEY_ALT_3_AVENGER_SHIELD = ALT_(KEY_3)  # 防御者之盾 (防护 41点天赋技能, 远程群体攻击, 打断施法并减速)
+    PROTECT_SPEC_KEY_4_CONSECRATION = KEY_4  # 奉献 (AOE)
+    PROTECT_SPEC_KEY_2_SACRED_SHIELD = KEY_5  # 圣洁护盾
+    PROTECT_SPEC_KEY_Z_HAND_OF_RECKONING = Z  # 嘲讽 (单体嘲讽)
+    PROTECT_SPEC_KEY_ALT_F_RIGHTEOUS_DEFENCE = ALT_(F)  # 正义防护 (群体嘲讽)
 
     # --- 惩戒天赋下专属键位 ---
-    RETRIBUTION_SPEC_JUDGEMENT = KEY_1  # 智慧 | 光明 | 公正 审判
-    RETRIBUTION_SPEC_CRUSADER_STRIKE = KEY_2  # 十字军打击 (惩戒 41 点天赋技能)
-    RETRIBUTION_SPEC_DIVINE_STORM = KEY_3  # 神圣风暴 (惩戒 51 点天赋技能)
-    RETRIBUTION_SPEC_CONSECRATION = KEY_4  # 奉献 （AOE)
-    RETRIBUTION_SPEC_SACRED_SHIELD = KEY_5  # 圣洁护盾
-    RETRIBUTION_SPEC_REPENTANCE = ALT_(E)  # 忏悔 (惩戒 31 点天赋技能)
-    RETRIBUTION_SPEC_HAND_OF_RECKONING = Z  # 嘲讽 (单体嘲讽)
-    RETRIBUTION_SPEC_RIGHTEOUS_DEFENCE = ALT_(F)  # 正义防护 (群体嘲讽)
+    RETRIBUTION_SPEC_KEY_1_JUDGEMENT = KEY_1  # 智慧 | 光明 | 公正 审判
+    RETRIBUTION_SPEC_KEY_ALT_1_HAND_OF_RECKONING = Z  # 嘲讽 (单体嘲讽)
+    RETRIBUTION_SPEC_KEY_2_CRUSADER_STRIKE = KEY_2  # 十字军打击 (惩戒 41 点天赋技能)
+    RETRIBUTION_SPEC_KEY_3_DIVINE_STORM = KEY_3  # 神圣风暴 (惩戒 51 点天赋技能)
+    RETRIBUTION_SPEC_KEY_4_CONSECRATION = KEY_4  # 奉献 （AOE)
+    RETRIBUTION_SPEC_KEY_5_SACRED_SHIELD = KEY_5  # 圣洁护盾
+    RETRIBUTION_SPEC_KEY_ALT_E_REPENTANCE = ALT_(E)  # 忏悔 (惩戒 31 点天赋技能)
+    RETRIBUTION_SPEC_KEY_Z_HAND_OF_RECKONING = Z  # 嘲讽 (单体嘲讽)
+    RETRIBUTION_SPEC_KEY_ALT_F_RIGHTEOUS_DEFENCE = ALT_(F)  # 正义防护 (群体嘲讽)
 
     # --- 神圣天赋下专属键位 ---
-    HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_1 = KEY_1
+    HOLY_SPEC_KEY_1_ONE_MINUTE_HEAL_ROTATION_MACRO = KEY_1
     """
     以1分钟为一个循环 (根据你的急速) 的治疗宏
     以 /castsequence reset=30 为起始, 以 4 圣闪 1 圣光 或者 3闪 1 光, 或是 2 闪 2 光
@@ -363,18 +374,20 @@ class Paladin:
 
     /castsequence reset=30 Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Divine Plea,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,Flash of Light,Flash of Light,Flash of Light,Holy Light,
     """
-    HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_2 = KEY_2
+    HOLY_SPEC_KEY_2_ONE_MINUTE_HEAL_ROTATION_MACRO = KEY_2
 
-    HOLY_SPEC_PERIODICAL_BEACON_OF_LIGHT_ON_FOCUS_MACRO = KEY_3
+    HOLY_SPEC_KEY_3_PERIODICAL_BEACON_OF_LIGHT_ON_FOCUS_MACRO = KEY_3
     """
-    每 1.5 分钟一次的给焦点刷新圣光道标宏
+    每 1.5 分钟一次的给焦点刷新圣光道标宏. 里面的,的数量决定了刷新道标的概率.
+    例如有 9 个逗号, 意味着按 10 下该技能会生效一次. 在坦克模式平均你每 30 秒会按 10 下
+    键盘 3. 那么也就是 30 秒会刷新一次道标.
 
     #showtooltip
     /target focus
     /castsequence Beacon of Light,,,,,,,,,,,,,,,,,,
     """
 
-    HOLY_SPEC_PERIODICAL_JUDGEMENT_OF_LIGHT_ON_FOCUS_TARGET = KEY_4
+    HOLY_SPEC_KEY_4_PERIODICAL_JUDGEMENT_OF_LIGHT_ON_FOCUS_TARGET_MACRO = KEY_4
     """
     每 15 秒一次的对焦点的目标打审判宏. 偶尔给自己补圣洁护盾
 
@@ -383,11 +396,11 @@ class Paladin:
     /startattack
     /castsequence Judgement of Light,Judgement of Light,Sacred Shield
     """
-    HOLY_SPEC_HOLY_LIGHT_KEY_5 = KEY_5  # 圣光术, 只有在神圣天赋下该键位有效
-    HOLY_SPEC_FLASH_OF_LIGHT_KEY_6 = KEY_6  # 圣光闪现, 只有在神圣天赋下该键位有效
-    HOLY_SPEC_HOLY_LIGHT_KEY_7 = KEY_7  # 圣光术, 只有在神圣天赋下该键位有效
-    HOLY_SPEC_HOLY_SHOCK = Z  # 神圣震击 (神圣 31 点天赋技能)
-    HOLY_SPEC_FOCUS_JUDGEMENT = R
+    HOLY_SPEC_KEY_5_HOLY_LIGHT = KEY_5  # 圣光术, 只有在神圣天赋下该键位有效
+    HOLY_SPEC_KEY_6_FLASH_OF_LIGHT = KEY_6  # 圣光闪现, 只有在神圣天赋下该键位有效
+    HOLY_SPEC_KEY_7_HOLY_LIGHT = KEY_7  # 圣光术, 只有在神圣天赋下该键位有效
+    HOLY_SPEC_KEY_Z_HOLY_SHOCK = Z  # 神圣震击 (神圣 31 点天赋技能)
+    HOLY_SPEC_KEY_R_FOCUS_JUDGEMENT = R
     """
     如果焦点是敌人, 则对焦点, 如果焦点是友方, 则对焦点目标打审判.
     通常用于设置坦克或者Boss为焦点的情况下使用, 避免选择目标的麻烦.
@@ -395,7 +408,7 @@ class Paladin:
     #showtooltip
     /cast [target=focustarget,harm][target=focus,harm][] Judgement of Light;
     """
-    HOLY_SPEC_BEACON_OF_LIGHT = KEY_0  # 圣光道标 (神圣 51 点天赋)
+    HOLY_SPEC_KEY_0_BEACON_OF_LIGHT = KEY_0  # 圣光道标 (神圣 51 点天赋)
 
     # --- Healbot 团队框架快捷键 ---
     # Left | Right | Middle Click
@@ -455,16 +468,16 @@ class DK:
     ALL_SPEC_FROST_PRESENCE = SHIFT_(W)  # 冰霜领域
     ALL_SPEC_UNHOLY_PRESENCE = SHIFT_(E)  # 邪恶领域
 
-    ALL_SPEC_DARK_COMMAND = Z  # 黑暗命令 (嘲讽)
-    ALL_SPEC_RUNE_TAP = T  # 符文分流 (血天赋, 回血技能)
-    ALL_SPEC_DEATH_GRIP = G  # 死亡之握 (远程嘲讽 加 拉人)
-    ALL_SPEC_DEATH_AND_DECAY_ALT_X = ALT_(X)  # 死亡凋零
-    ALL_SPEC_MIND_FREEZE = R  # 心灵冻结 (打断施法)
-    ALL_SPEC_RUNE_STRIKE = ALT_(E)  # 符文打击 (类似于战士的打击, 高仇恨技能)
-    ALL_SPEC_ICE_BOUND_FORTITUDE = SHIFT_(F1)  # 冰固坚韧
-    ALL_SPEC_HORN_OF_WINTER = SHIFT_(TAB)  # 凛冬号角 (力量敏捷 Buff)
-    ALL_SPEC_ANTI_MAGIC_SHIELD = SHIFT_(F)  # 反魔法护盾
-    ALL_SPEC_EMPOWERED_RUNED_WEAPON = CTRL_(R)  # 强化符文武器
+    ALL_SPEC_DARK_COMMAND_KEY_Z = Z  # 黑暗命令 (嘲讽)
+    ALL_SPEC_RUNE_TAP_KEY_T = T  # 符文分流 (血天赋, 回血技能)
+    ALL_SPEC_DEATH_GRIP_KEY_G = G  # 死亡之握 (远程嘲讽 加 拉人)
+    ALL_SPEC_DEATH_AND_DECAY_KEY_ALT_X = ALT_(X)  # 死亡凋零
+    ALL_SPEC_MIND_FREEZE_KEY_R = R  # 心灵冻结 (打断施法)
+    ALL_SPEC_RUNE_STRIKE_KEY_ALT_E = ALT_(E)  # 符文打击 (类似于战士的打击, 高仇恨技能)
+    ALL_SPEC_ICE_BOUND_FORTITUDE_KEY_SHIFT_F1 = SHIFT_(F1)  # 冰固坚韧
+    ALL_SPEC_HORN_OF_WINTER_KEY_SHIFT_TAB = SHIFT_(TAB)  # 凛冬号角 (力量敏捷 Buff)
+    ALL_SPEC_ANTI_MAGIC_SHIELD_KEY_SHIFT_F = SHIFT_(F)  # 反魔法护盾
+    ALL_SPEC_EMPOWERED_RUNED_WEAPON_KEY_CTRL_R = CTRL_(R)  # 强化符文武器
 
     BLOOD_SPEC_VAMPIRIC_BLOOD = SHIFT_(F2)  # 吸血鬼之血 (DK版 战士的 破釜沉舟 技能)
     BLOOD_SPEC_HYSTERIA = SHIFT_(C)  # 狂血术
@@ -599,8 +612,9 @@ class Shaman:
     ALL_SPEC_GROUNDINIG_TOTEM = SHIFT_(G)  # 根基图腾 (吸收指向性法术)
 
     # elemental shield
-    ALL_SPEC_WATER_SHELD = G  # 水之盾
-    ALL_SPEC_LIGHTNING_SHIELD = G  # 闪电盾
+    ALL_SPEC_KEY_G_WATER_SHELD = G  # 水之盾
+    ALL_SPEC_KEY_G_LIGHTNING_SHIELD = G  # 闪电盾
+    ALL_SPEC_KEY_0_WATER_OR_LIGHTNING_SHIELD = KEY_0 # 水盾或电盾
 
     ALL_SPEC_FROST_SHOCK = Z  # 冰霜震击
     ALL_SPEC_BLOOD_THIRST_HEROISM = CTRL_(F)  # 嗜血, 英勇
@@ -658,18 +672,18 @@ class Shaman:
     ENHANCEMENT_SPEC_CURE_TOXIC = T  # 净化疾病中毒
 
     # Left | Right | Middle
-    HEAL_BOT_HEALING_WAVE = Mouse(button=MOUSE_LButton)  # 治疗波
-    HEAL_BOT_RIPTIDE = Mouse(button=MOUSE_RButton)  # 激流
-    HEAL_BOT_HEAL_CHAIN = Mouse(button=MOUSE_MButton)  # 治疗链
+    HEAL_BOT_HEALING_WAVE_LEFT_CLICK = Mouse(button=MOUSE_LButton)  # 治疗波
+    HEAL_BOT_RIPTIDE_RIGHT_CLICK = Mouse(button=MOUSE_RButton)  # 激流
+    HEAL_BOT_HEAL_CHAIN_MIDDLE_CLICK = Mouse(button=MOUSE_MButton)  # 治疗链
 
     # Shift, Alt, Ctrl Left Click
-    HEAL_BOT_CHAIN_HEAL = ModifiedMouseClick.shift_left_click()  # 治疗链
-    HEAL_BOT_LESS_HEALING_WAVE = ModifiedMouseClick.alt_left_click()  # 次级治疗波
-    HEAL_BOT_CLEANSE = ModifiedMouseClick.ctrl_left_click()  # 先祖驱散
+    HEAL_BOT_CHAIN_HEAL_SHIFT_LEFT_CLIICK = ModifiedMouseClick.shift_left_click()  # 治疗链
+    HEAL_BOT_LESS_HEALING_WAVE_ALT_LEFT_CLICK = ModifiedMouseClick.alt_left_click()  # 次级治疗波
+    HEAL_BOT_CLEANSE_CTRL_LEFT_CLICK = ModifiedMouseClick.ctrl_left_click()  # 先祖驱散
 
     # Shift, Alt, Ctrl Right Click
-    HEAL_BOT_EARTH_SHIELD = ModifiedMouseClick.alt_right_click()  # 大地之盾
-    HEAL_BOT_CURE_TOXINS = ModifiedMouseClick.ctrl_right_click()  # 驱毒术
+    HEAL_BOT_EARTH_SHIELD_ALT_RIGHT_CLICK = ModifiedMouseClick.alt_right_click()  # 大地之盾
+    HEAL_BOT_CURE_TOXINS_CTRL_RIGHT_CLICK = ModifiedMouseClick.ctrl_right_click()  # 驱毒术
 
 
 convert_to_key_action(Shaman)

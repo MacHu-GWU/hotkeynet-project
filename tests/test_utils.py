@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import pytest
+
 from hotkeynet import utils
 
 
@@ -18,11 +19,15 @@ def test_remove_indent():
 
 
 def test_union_list():
-    assert utils.union_list([3,4,1], [2,3], [5,3,4]) == [1,2,3,4,5]
+    assert utils.union_list([3, 4, 1], [2, 3], [5, 3, 4]) == [1, 2, 3, 4, 5]
+
+
+def test_intersection_list():
+    assert utils.intersection_list([3, 2, 1], [4, 2, 3], [4, 5, 3]) == [3]
 
 
 def test_difference_list():
-    assert utils.difference_list([1,2,3,4,5], [1,3], [5,3]) == [2,4]
+    assert utils.difference_list([1, 2, 3, 4, 5], [1, 3], [5, 3]) == [2, 4]
 
 
 if __name__ == "__main__":

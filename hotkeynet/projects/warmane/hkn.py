@@ -35,13 +35,13 @@ class Mode:
         send_label = hk_1_to_12.hk_1.get_send_label_by_name("all_holy_pala")
         send_label.actions = [
             act.Target.TARGET_W1_BATLEFURY,
-            act.Paladin.HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_1,
+            act.Paladin.HOLY_SPEC_KEY_1_ONE_MINUTE_HEAL_ROTATION_MACRO,
         ]
 
         send_label = hk_1_to_12.hk_2.get_send_label_by_name("all_holy_pala")
         send_label.actions = [
             act.Target.TARGET_W1_BATLEFURY,
-            act.Paladin.HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_2,
+            act.Paladin.HOLY_SPEC_KEY_2_ONE_MINUTE_HEAL_ROTATION_MACRO,
         ]
 
         hk_c = Hotkey(
@@ -53,7 +53,7 @@ class Mode:
                     to=Config.SendLabelTo.all_shadow_priest,
                     actions=[
                         act.Target.TARGET_W10_LUXIAOFENG,
-                        act.General.STOP_CASTING,
+                        act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                         act.Priest.ALL_SPEC_FEAR_WARD,
                     ]
                 )
@@ -76,7 +76,7 @@ class Mode:
                     name="all_holy_pala",
                     to=Config.SendLabelTo.all_holy_pala,
                     actions=[
-                        act.General.STOP_CASTING,
+                        act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
                         act.Paladin.ALL_SPEC_AURA_MASTERY,
                     ]
                 ),
@@ -105,7 +105,7 @@ class Mode:
 
     def set_mode_18w_5p_glowyy_litgugu_abcd(self):
         actions_star_fall = [
-            act.General.STOP_CASTING,
+            act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN,
             act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F,
         ]
         hk_alt_numpad_1_to_12.hk_alt_numpad_1.actions = [
@@ -121,7 +121,7 @@ class Mode:
     def set_mode_18w_18p_luxiaofeng_litgoatss_litgugu_team_winter_graps(self):
         actions_death_grib = [
             act.Target.TARGET_FOCUS_TARGET,
-            act.DK.ALL_SPEC_DEATH_GRIP,
+            act.DK.ALL_SPEC_DEATH_GRIP_KEY_G,
         ]
         hk_alt_numpad_1_to_12.hk_alt_numpad_1.actions = [
             SendLabel(name="", to=["w1", "w2", "w3", "w4", "w5"], actions=actions_death_grib)
@@ -162,7 +162,7 @@ class Mode:
                     to=Config.SendLabelTo.all_holy_pala,
                     actions=[
                         act.Target.TARGET_RAID,
-                        act.Paladin.HOLY_SPEC_ONE_MINUTE_HEAL_ROTATION_MACRO_KEY_2,
+                        act.Paladin.HOLY_SPEC_KEY_2_ONE_MINUTE_HEAL_ROTATION_MACRO,
                     ]
                 ),
             ],

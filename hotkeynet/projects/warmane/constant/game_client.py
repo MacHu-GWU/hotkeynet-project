@@ -13,8 +13,8 @@ window_left_top_y = 0
 window_width_at_1920_1080 = 1800
 window_height_at_1920_1080 = 1012
 
-window_width_at_1600_900 = 1600
-window_height_at_1600_900 = 900
+window_width_at_1600_900 = 1610
+window_height_at_1600_900 = 935
 
 # 在游戏登录界面当输入了错误的账号密码时弹出的错误窗口上的确认按钮的坐标
 wrong_password_pop_up_x_at_1920_1080 = 890

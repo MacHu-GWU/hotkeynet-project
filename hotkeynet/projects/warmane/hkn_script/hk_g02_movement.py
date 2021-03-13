@@ -1,17 +1,15 @@
 # -*- coding: utf-8 -*-
 
 """
-实现与移动有关的快捷键.
+实现与人物移动有关的快捷键.
 """
 
-from . import act
-from .config_ import Config, different_labels
-from .script import script
-from ... import keyname
-from ...script import (
-    MovementHotkey,
-    Key, SendLabel,
-)
+from ._config_and_script import config, script
+from .. import act
+from ..constant.talent_category_association import (
+    TalentCategory, )
+from .... import keyname
+from ....script import MovementHotkey, SendLabel, Key
 
 
 def build_hk_all_move_up_down_turn_left_right():
@@ -24,14 +22,15 @@ def build_hk_all_move_up_down_turn_left_right():
         actions=[
             SendLabel(
                 name="all",
-                to=Config.SendLabelTo.all(),
+                to=config.lbs_all(),
                 actions=[
-                    Key.trigger()
+                    act.General.TRIGGER,
                 ]
             )
         ],
         script=script,
     )
+
 
 hk_all_move_up_down_turn_left_right = build_hk_all_move_up_down_turn_left_right()
 
@@ -46,7 +45,7 @@ def build_hk_non_tank_move_up_down_turn_left_right():
         actions=[
             SendLabel(
                 name="non_tank",
-                to=Config.SendLabelTo.non_tank(),
+                to=config.lbs_all(),
                 actions=[
                     Key.trigger()
                 ]
@@ -54,6 +53,7 @@ def build_hk_non_tank_move_up_down_turn_left_right():
         ],
         script=script,
     )
+
 
 hk_non_tank_move_up_down_turn_left_right = build_hk_non_tank_move_up_down_turn_left_right()
 
@@ -67,8 +67,8 @@ def build_hk_non_tank_move_left_right():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.A)),
         actions=[
             SendLabel(
-                name="non_tank",
-                to=Config.SendLabelTo.non_tank(),
+                name=TalentCategory.non_tank.name,
+                to=config.lbs_by_tc(TalentCategory.non_tank),
                 actions=[
                     act.Movement.MOVE_LEFT,
                 ]
@@ -82,8 +82,8 @@ def build_hk_non_tank_move_left_right():
         key=keyname.SCROLOCK_ON(keyname.CTRL_(keyname.D)),
         actions=[
             SendLabel(
-                name="non_tank",
-                to=Config.SendLabelTo.non_tank(),
+                name=TalentCategory.non_tank.name,
+                to=config.lbs_by_tc(TalentCategory.non_tank),
                 actions=[
                     act.Movement.MOVE_RIGHT,
                 ]
@@ -93,6 +93,7 @@ def build_hk_non_tank_move_left_right():
     )
 
     return hk_non_tank_move_left, hk_non_tank_move_right
+
 
 hk_non_tank_move_left, hk_non_tank_move_right = build_hk_non_tank_move_left_right()
 
@@ -104,7 +105,7 @@ def build_hk_all_jump():
         actions=[
             SendLabel(
                 name="all",
-                to=Config.SendLabelTo.all(),
+                to=config.lbs_all(),
                 actions=[
                     act.Movement.JUMP,
                 ]
@@ -113,10 +114,11 @@ def build_hk_all_jump():
         script=script,
     )
 
+
 hk_all_jump = build_hk_all_jump()
 
-def build_hk_spread_matrix():
 
+def build_hk_spread_matrix():
     """
          **矩阵分散站位***
 
@@ -172,7 +174,7 @@ def build_hk_spread_matrix():
             ),
             SendLabel(
                 name="all",
-                to=["w2",],
+                to=["w2", ],
                 actions=[
                     act.Movement.MOVE_BACKWARD,
                 ]
@@ -204,6 +206,7 @@ def build_hk_spread_matrix():
     )
 
     return hk_spread_matrix_1, hk_spread_matrix_2
+
 
 hk_spread_matrix_1, hk_spread_matrix_2 = build_hk_spread_matrix()
 
@@ -288,7 +291,6 @@ def build_hk_spread_circle():
                 ]
             ),
 
-
             #
 
             # SendLabel(name="", to=["w15"], actions=[act.Movement.MOVE_FORWARD, ]), # 前
@@ -303,5 +305,6 @@ def build_hk_spread_circle():
         ],
         script=script,
     )
+
 
 hk_spread_circle = build_hk_spread_circle()

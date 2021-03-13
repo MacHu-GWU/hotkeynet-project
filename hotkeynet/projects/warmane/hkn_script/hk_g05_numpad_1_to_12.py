@@ -1,16 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-实现在多开模式下 小键盘 Numpad1-12 的功能.
-
-之所以为每一个快捷键创建一个工厂函数是为了能将注释放在函数的 docstr 里, 以便自动生成文档.
+实现在多开模式下 小键盘 Numpad 1-12 的功能.
 """
 
-from . import act
-from .script import script
-from .config_ import Config
-from ... import keyname
-from ...script import (
+from .. import act
+from ._config_and_script import config, script
+from ..constant.talent_category_association import TalentCategory
+from .... import keyname
+from ....script import (
     Hotkey,
     Mouse, SendLabel,
 )
@@ -26,8 +24,8 @@ def build_hk_numpad_4():
         key=keyname.SCROLOCK_ON(keyname.NUMPAD_4),
         actions=[
             SendLabel(
-                name="shaman",
-                to=Config.SendLabelTo.all(),
+                name="all",
+                to=config.lbs_all(),
                 actions=[
                     act.Camera.SET_FIRST_CAMERA_VIEW_2,
                 ]
@@ -36,7 +34,7 @@ def build_hk_numpad_4():
         script=script,
     )
 
-hk_numpad4_reset_camera = build_hk_numpad_4()
+hk_numpad_4_reset_camera = build_hk_numpad_4()
 
 
 def build_hk_numpad_5():
@@ -50,8 +48,8 @@ def build_hk_numpad_5():
         key=keyname.SCROLOCK_ON(keyname.NUMPAD_5),
         actions=[
             SendLabel(
-                name="shaman",
-                to=Config.SendLabelTo.all_shaman(),
+                name=TalentCategory.shaman.name,
+                to=config.lbs_by_tc(TalentCategory.shaman),
                 actions=[
                     act.Shaman.ALL_SPEC_CALL_OF_THE_ELEMENTS,
                 ]
@@ -60,7 +58,7 @@ def build_hk_numpad_5():
         script=script,
     )
 
-hk_numpad5_shaman_put_totem = build_hk_numpad_5()
+hk_numpad_5_shaman_put_totem = build_hk_numpad_5()
 
 
 def build_hk_numpad_6():
@@ -74,8 +72,8 @@ def build_hk_numpad_6():
         key=keyname.SCROLOCK_ON(keyname.NUMPAD_6),
         actions=[
             SendLabel(
-                name="shaman",
-                to=Config.SendLabelTo.all_shaman(),
+                name=TalentCategory.shaman.name,
+                to=config.lbs_by_tc(TalentCategory.shaman),
                 actions=[
                     act.Shaman.ALL_SPEC_TOTEMIC_RECALL,
                 ]
@@ -84,7 +82,7 @@ def build_hk_numpad_6():
         script=script,
     )
 
-hk_numpad6_shaman_recall_totem = build_hk_numpad_6()
+hk_numpad_6_shaman_recall_totem = build_hk_numpad_6()
 
 
 def build_hk_numpad_7():
@@ -99,7 +97,7 @@ def build_hk_numpad_7():
         actions=[
             SendLabel(
                 name="all",
-                to=Config.SendLabelTo.all(),
+                to=config.lbs_all(),
                 actions=[
                     act.Movement.MOVE_BACKWARD,
                 ]
@@ -108,7 +106,7 @@ def build_hk_numpad_7():
         script=script,
     )
 
-hk_numpad7_all_move_backward = build_hk_numpad_7()
+hk_numpad_7_all_move_backward = build_hk_numpad_7()
 
 
 def build_hk_numpad_8():
@@ -126,7 +124,7 @@ def build_hk_numpad_8():
         actions=[
             SendLabel(
                 name="all",
-                to=Config.SendLabelTo.all(),
+                to=config.lbs_all(),
                 actions=[
                     Mouse(button=keyname.MOUSE_LButton),
                 ]
@@ -136,7 +134,7 @@ def build_hk_numpad_8():
     )
 
 
-hk_numpad8_sync_left_click = build_hk_numpad_8()
+hk_numpad_8_sync_left_click = build_hk_numpad_8()
 
 
 def build_hk_numpad_9():
@@ -154,7 +152,7 @@ def build_hk_numpad_9():
         actions=[
             SendLabel(
                 name="all",
-                to=Config.SendLabelTo.all(),
+                to=config.lbs_all(),
                 actions=[
                     Mouse(button=keyname.MOUSE_RButton),
                 ]
@@ -164,7 +162,7 @@ def build_hk_numpad_9():
     )
 
 
-hk_numpad9_sync_right_click = build_hk_numpad_9()
+hk_numpad_9_sync_right_click = build_hk_numpad_9()
 
 
 def build_hk_numpad_0():
@@ -179,7 +177,7 @@ def build_hk_numpad_0():
         actions=[
             SendLabel(
                 name="all",
-                to=Config.SendLabelTo.all(),
+                to=config.lbs_all(),
                 actions=[
                     act.Movement.FOLLOW_FOCUS,
                 ]
@@ -189,7 +187,7 @@ def build_hk_numpad_0():
     )
 
 
-hk_numpad0_all_follow_focus = build_hk_numpad_0()
+hk_numpad_0_all_follow_focus = build_hk_numpad_0()
 
 
 def build_hk_numpad_11():
@@ -206,9 +204,9 @@ def build_hk_numpad_11():
         actions=[
             SendLabel(
                 name="all",
-                to=Config.SendLabelTo.all(),
+                to=config.lbs_all(),
                 actions=[
-                    act.General.MOUNT_UP,
+                    act.General.MOUNT_UP_MACRO_KEY_NUMPAD_11_DIVIDE,
                 ]
             )
         ],
@@ -216,7 +214,7 @@ def build_hk_numpad_11():
     )
 
 
-hk_numpad11_mount_up = build_hk_numpad_11()
+hk_numpad_11_mount_up = build_hk_numpad_11()
 
 
 def build_hk_numpad_12():
@@ -233,7 +231,7 @@ def build_hk_numpad_12():
         actions=[
             SendLabel(
                 name="all",
-                to=Config.SendLabelTo.all(),
+                to=config.lbs_all(),
                 actions=[
                     act.Target.TARGET_FOCUS_TARGET,
                     act.Target.INTERACT_WITH_TARGET,
@@ -244,4 +242,4 @@ def build_hk_numpad_12():
     )
 
 
-hk_numpad12_interact_with_focus_target = build_hk_numpad_12()
+hk_numpad_12_interact_with_focus_target = build_hk_numpad_12()

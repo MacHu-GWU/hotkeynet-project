@@ -60,7 +60,7 @@ def build_cmd_launch_and_rename_all_game_client():
 cmd_launch_and_rename_all_game_client = build_cmd_launch_and_rename_all_game_client()
 
 
-def build_cmd_bring_window_to_foreground(script: Script, config: Config):
+def build_cmd_bring_window_to_foreground():
     """
     将某个窗口作为当前焦点窗口, 带到最前端.
 
@@ -88,7 +88,7 @@ def build_cmd_bring_window_to_foreground(script: Script, config: Config):
     )
 
 
-cmd_bring_window_to_foreground = build_cmd_bring_window_to_foreground(script, config)
+cmd_bring_window_to_foreground = build_cmd_bring_window_to_foreground()
 
 
 def build_cmd_resize_and_relocate_window():
@@ -210,14 +210,17 @@ def build_cmd_batch_login():
                 {%- endfor %}
                 <Restore>
                 """),
-                data=[
-                    (
-                        window_index[ac.window_index].title,
-                        ac.credential.username,
-                        ac.credential.password,
-                    )
-                    for ac in config.active_character_config.iter_by_window_index()
-                ],
+                data=list(sorted(
+                    [
+                        (
+                            window_index[ac.window_index].title,
+                            ac.credential.username,
+                            ac.credential.password,
+                        )
+                        for ac in config.active_character_config.active_characters
+                    ],
+                    key=lambda x: x[0]
+                )),
                 cmd=cmd_enter_username_and_password
             ),
         ],

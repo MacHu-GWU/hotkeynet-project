@@ -76,7 +76,17 @@ def union_list(*lists) -> list:
     """
     Union elements in all given lists.
     """
-    l = list(set([i for lst in lists for i in lst]))
+
+    l = list(set.union(*[set(lst) for lst in lists]))
+    l.sort()
+    return l
+
+
+def intersection_list(*lists) -> list:
+    """
+    Common elements in all given lists.
+    """
+    l = list(set.intersection(*[set(lst) for lst in lists]))
     l.sort()
     return l
 
@@ -88,6 +98,12 @@ def difference_list(lst, *other_lsts) -> list:
     st = set(lst)
     for l in other_lsts:
         st.difference_update(l)
+    l = list(st)
+    l.sort()
+    return l
+
+
+def set_to_list(st) -> list:
     l = list(st)
     l.sort()
     return l

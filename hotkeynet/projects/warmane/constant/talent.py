@@ -4,10 +4,10 @@
 枚举所有职业天赋.
 """
 
-from enum import Enum, auto
+from enum import IntEnum, auto
 
 
-class Talent(Enum):
+class Talent(IntEnum):
     warrior_pve_fury = auto()
     warrior_pve_arm = auto()
     warrior_pve_protect = auto()
