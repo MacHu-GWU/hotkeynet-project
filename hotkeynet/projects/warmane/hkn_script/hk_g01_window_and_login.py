@@ -9,6 +9,7 @@ import typing
 from . import cmd_g01_window_and_login
 from ._config_and_script import config, script
 from ..constant.windows import window_index
+from ..constant.credentials import credential_index
 from .. import act
 from .... import keyname
 from ....script import Hotkey, CallCommand, SendLabel, Key, Mouse, SendFocusWindow
@@ -59,11 +60,11 @@ def build_hk_toggle_specific_window() -> typing.List[Hotkey]:
         keyname.SHIFT_(key)
         for key in keyname.F1_to_F12[4:]
     ]
-    ctrl_insert_to_pgdn = [
-        keyname.CTRL_(key)
+    shift_insert_to_pgdn = [
+        keyname.SHIFT_(key)
         for key in keyname.INSERT_TO_PGDN
     ]
-    TOGGLE_SPECIFIC_WINDOW_1_TO_25 = ctrl_f1_to_10 + shift_f5_to_f12 + ctrl_insert_to_pgdn
+    TOGGLE_SPECIFIC_WINDOW_1_TO_25 = ctrl_f1_to_10 + shift_f5_to_f12 + shift_insert_to_pgdn
 
     hk_list = list()
     for key, index in zip(TOGGLE_SPECIFIC_WINDOW_1_TO_25, config.toggle_window_config.key1_to_25_window_index):
@@ -126,13 +127,14 @@ def build_hk_login_specific_account() -> typing.List[Hotkey]:
         keyname.ALT_SHIFT_(key)
         for key in keyname.F1_to_F12[4:]
     ]
-    ctrl_alt_insert_to_pgdn = [
-        keyname.CTRL_ALT_(key)
+    shift_alt_insert_to_pgdn = [
+        keyname.ALT_SHIFT_(key)
         for key in keyname.INSERT_TO_PGDN
     ]
-    LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + ctrl_alt_insert_to_pgdn
+    LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + shift_alt_insert_to_pgdn
 
-    hk_list = list()
+    hk_dict_view = dict()
+    used_window_index = list()
     for char in config.active_character_config.active_characters:
         key = LOGIN_SPECIFIC_ACCOUNT_1_TO_25[char.window_index-1]
         hk = Hotkey(
@@ -146,8 +148,31 @@ def build_hk_login_specific_account() -> typing.List[Hotkey]:
             ],
             script=script,
         )
-        hk_list.append(hk)
-    return hk_list
+        hk_dict_view[char.window_index] = hk
+
+    for ind in range(1, config.game_client_config.n_windows+1):
+        if ind not in hk_dict_view:
+            key = LOGIN_SPECIFIC_ACCOUNT_1_TO_25[ind-1]
+
+            hk = Hotkey(
+                name=f"SingleLogin{char.credential.username.title()}",
+                key=keyname.SCROLOCK_ON(key),
+                actions=[
+                    cmd_g01_window_and_login.cmd_enter_username_and_password.call(
+                        window_index[ind].title,
+                        credential_index[ind].username,
+                        credential_index[ind].password,
+                    )
+                ],
+                script=script,
+            )
+            hk_dict_view[ind] = hk
+
+    hk_list_view = list()
+    for ind in range(1, config.game_client_config.n_windows+1):
+        hk_list_view.append(hk_dict_view[ind])
+
+    return hk_list_view
 
 hk_list_login_specific_account = build_hk_login_specific_account()
 

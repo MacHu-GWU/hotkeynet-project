@@ -41,8 +41,9 @@ class Mode:
 
     @classmethod
     def set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team(cls, config: Config):
-        # config.game_client_config.use_1600_900_resolution()
-        config.game_client_config.use_1176_664_resolution()
+        config.game_client_config.use_1600_900_resolution()
+        # config.game_client_config.use_1176_664_resolution()
+
         config.game_client_config.use_n_windows(22)
         config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
         config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))

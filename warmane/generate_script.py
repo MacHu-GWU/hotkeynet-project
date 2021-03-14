@@ -28,7 +28,10 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 
 
 #--- Questing
-Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team1(config)
+Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team0_fatmulti_1_to_5(config)
+# Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team1_litgugu_druid(config)
+# Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_priest(config)
+# Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team3_litgoat_shaman(config)
 
 
 #=== Build Script

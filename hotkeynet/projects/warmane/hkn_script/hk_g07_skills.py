@@ -540,7 +540,7 @@ hk_alt_x_aoe = Hotkey(
             name=TC.dk.name,
             to=config.lbs_by_tc(TC.dk),
             actions=[
-                act.General.ESC,
+                # act.General.ESC,
                 act.DK.ALL_SPEC_DEATH_AND_DECAY_KEY_ALT_X,
             ]
         ),
@@ -548,7 +548,7 @@ hk_alt_x_aoe = Hotkey(
             name=TC.hunter.name,
             to=config.lbs_by_tc(TC.hunter),
             actions=[
-                act.General.ESC,
+                # act.General.ESC,
                 act.Hunter.ALL_SPEC_VOLLEY_ALT_X,
             ]
         ),
@@ -556,7 +556,7 @@ hk_alt_x_aoe = Hotkey(
             name=TC.druid_balance.name,
             to=config.lbs_by_tc(TC.druid_balance),
             actions=[
-                act.General.ESC,
+                # act.General.ESC,
                 act.Druid.ALL_SPEC_HURRICANE,
             ]
         ),
@@ -564,7 +564,7 @@ hk_alt_x_aoe = Hotkey(
             name=TC.warlock.name,
             to=config.lbs_by_tc(TC.warlock),
             actions=[
-                act.General.ESC,
+                # act.General.ESC,
                 act.Warlock.ALL_SPEC_RAIN_OF_FIRE,
             ]
         ),
@@ -572,7 +572,7 @@ hk_alt_x_aoe = Hotkey(
             name=TC.mage.name,
             to=config.lbs_by_tc(TC.mage),
             actions=[
-                act.General.ESC,
+                # act.General.ESC,
                 act.Mage.ALL_SPEC_BLIZZARD,
             ]
         ),
@@ -767,185 +767,185 @@ hk_x = Hotkey(
 
 _ACTION_BAR_7_8_9_10_____________________________ = ""
 
-hk_shift_insert = Hotkey(
-    name="Shift Insert",
-    key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.INSERT)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_shift_home = Hotkey(
-    name="Shift Home",
-    key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.HOME)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_shift_page_up = Hotkey(
-    name="Shift PageUp",
-    key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.PAGE_UP)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_shift_delete = Hotkey(
-    name="Shift Delete",
-    key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.DELETE)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_shift_end = Hotkey(
-    name="Shift End",
-    key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.END)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_shift_page_down = Hotkey(
-    name="Shift PageDown",
-    key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.PAGE_DOWN)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_alt_insert = Hotkey(
-    name="Alt Insert",
-    key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.INSERT)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_alt_home = Hotkey(
-    name="Alt Home",
-    key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.HOME)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_alt_page_up = Hotkey(
-    name="Alt PageUp",
-    key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.PAGE_UP)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_alt_delete = Hotkey(
-    name="Alt Delete",
-    key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.DELETE)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_alt_end = Hotkey(
-    name="Alt End",
-    key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.END)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
-
-hk_alt_page_down = Hotkey(
-    name="Alt PageDown",
-    key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.PAGE_DOWN)),
-    actions=[
-        # SendLabel(
-        #     name="",
-        #     to=Config.SendLabelTo.all(),
-        #     actions=[
-        #         Key.trigger()
-        #     ]
-        # )
-    ],
-    script=script,
-)
+# hk_shift_insert = Hotkey(
+#     name="Shift Insert",
+#     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.INSERT)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_shift_home = Hotkey(
+#     name="Shift Home",
+#     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.HOME)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_shift_page_up = Hotkey(
+#     name="Shift PageUp",
+#     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.PAGE_UP)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_shift_delete = Hotkey(
+#     name="Shift Delete",
+#     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.DELETE)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_shift_end = Hotkey(
+#     name="Shift End",
+#     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.END)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_shift_page_down = Hotkey(
+#     name="Shift PageDown",
+#     key=keyname.SCROLOCK_ON(keyname.SHIFT_(keyname.PAGE_DOWN)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_alt_insert = Hotkey(
+#     name="Alt Insert",
+#     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.INSERT)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_alt_home = Hotkey(
+#     name="Alt Home",
+#     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.HOME)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_alt_page_up = Hotkey(
+#     name="Alt PageUp",
+#     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.PAGE_UP)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_alt_delete = Hotkey(
+#     name="Alt Delete",
+#     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.DELETE)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_alt_end = Hotkey(
+#     name="Alt End",
+#     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.END)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
+#
+# hk_alt_page_down = Hotkey(
+#     name="Alt PageDown",
+#     key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.PAGE_DOWN)),
+#     actions=[
+#         # SendLabel(
+#         #     name="",
+#         #     to=Config.SendLabelTo.all(),
+#         #     actions=[
+#         #         Key.trigger()
+#         #     ]
+#         # )
+#     ],
+#     script=script,
+# )
 
 _ACTION_BAR_UNDEFINED = ""
 

@@ -3,6 +3,7 @@
 from ._config_and_script import config, script
 from ..config import Config
 from ..constant.windows import window_list, window_index
+from ..constant.credentials import Credentials, credential_index
 from ....script import Script, Command
 from ....utils import render_template, remove_indent
 
@@ -205,7 +206,7 @@ def build_cmd_batch_login():
             render_template(
                 remove_indent("""
                 <Wait 3000> // 等待一段时间, 让你有时间将错误的输入法切换对
-                {%- for window, username, password in data %}
+                {%- for window, label, username, password in data %}
                 {{ cmd.call(window, username, password) }}
                 {%- endfor %}
                 <Restore>
@@ -214,12 +215,13 @@ def build_cmd_batch_login():
                     [
                         (
                             window_index[ac.window_index].title,
+                            window_index[ac.window_index].label,
                             ac.credential.username,
                             ac.credential.password,
                         )
                         for ac in config.active_character_config.active_characters
                     ],
-                    key=lambda x: x[0]
+                    key=lambda x: x[1]
                 )),
                 cmd=cmd_enter_username_and_password
             ),
