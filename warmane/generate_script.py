@@ -35,6 +35,14 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_priest(config)
 Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team3_litgoat_shaman(config)
 
+#--- 小队一起做杂七杂八的任务, 冲声望等
+Mode.set_mode_questing_5_ppl_litgoat_warlock_team(config)
+Mode.set_mode_questing_5_ppl_litgoat_dk_team(config)
+Mode.set_mode_questing_4_ppl_litgugu_druid_team(config)
+Mode.set_mode_questing_5_ppl_lgms_priest_glowyy_team(config)
+Mode.set_mode_questing_5_ppl_lgsm_shaman_laoshou_team(config)
+
+
 #--- 冬拥湖周常
 # Mode.set_mode_questing_wintergraps_team1(config)
 

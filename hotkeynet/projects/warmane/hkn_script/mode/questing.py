@@ -89,6 +89,59 @@ class Mode:
         )
 
     @classmethod
+    def set_mode_questing_5_ppl_litgoat_warlock_team(cls, config: Config):
+        """
+        5 个 术士 一起做小队任务.
+        """
+        config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_n_windows(22)
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                CharacterFactory.make_char_fatmulti1_litgoatssa_pve_demo_warlock().evolve(),
+                CharacterFactory.make_char_fatmulti2_litgoatssb_pve_demo_warlock().evolve(leader1_window_index=1),
+                CharacterFactory.make_char_fatmulti3_litgoatssc_pve_demo_warlock().evolve(leader1_window_index=1),
+                CharacterFactory.make_char_fatmulti4_litgoatssd_pve_demo_warlock().evolve(leader1_window_index=1),
+                CharacterFactory.make_char_fatmulti5_litgoatsse_pve_demo_warlock().evolve(leader1_window_index=1),
+            ]
+        )
+
+    @classmethod
+    def set_mode_questing_5_ppl_litgoat_dk_team(cls, config: Config):
+        """
+        5 个 DK 一起做小队任务.
+        """
+        config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_n_windows(22)
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                CharacterFactory.make_char_fatmulti1_litgoatdka_pvp_frost_dk().evolve(),
+                CharacterFactory.make_char_fatmulti2_litgoatdkb_pvp_frost_dk().evolve(leader1_window_index=1),
+                CharacterFactory.make_char_fatmulti3_litgoatdkc_pvp_frost_dk().evolve(leader1_window_index=1),
+                CharacterFactory.make_char_fatmulti4_litgoatdkd_pvp_frost_dk().evolve(leader1_window_index=1),
+                CharacterFactory.make_char_fatmulti5_litgoatdke_pvp_frost_dk().evolve(leader1_window_index=1),
+            ]
+        )
+
+    @classmethod
+    def set_mode_questing_4_ppl_litgugu_druid_team(cls, config: Config):
+        config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_n_windows(22)
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid().evolve(),
+                CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid().evolve(leader1_window_index=11),
+                CharacterFactory.make_char_fatmulti13_litguguc_pve_balance_druid().evolve(leader1_window_index=11),
+                CharacterFactory.make_char_fatmulti14_litgugud_pve_resto_druid().evolve(leader1_window_index=11),
+            ]
+        )
+
+    @classmethod
     def set_mode_questing_5_ppl_lgms_priest_glowyy_team(cls, config: Config):
         config.game_client_config.use_1600_900_resolution()
         config.game_client_config.use_n_windows(22)
