@@ -236,56 +236,56 @@ def build_hk_spread_circle():
         actions=[
             SendLabel(
                 name="all",
-                to=["w2", "w15"],
+                to=["w02", "w15"],
                 actions=[
                     act.Movement.MOVE_FORWARD,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w5", "w11"],
+                to=["w05", "w11"],
                 actions=[
                     act.Movement.MOVE_RIGHT_TOP,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w9", "w17"],
+                to=["w09", "w17"],
                 actions=[
                     act.Movement.MOVE_RIGHT,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w3", "w13"],
+                to=["w03", "w13"],
                 actions=[
                     act.Movement.MOVE_RIGHT_BOTTOM,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w6", "w18"],
+                to=["w06", "w18"],
                 actions=[
                     act.Movement.MOVE_BACKWARD,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w4", "w14"],
+                to=["w04", "w14"],
                 actions=[
                     act.Movement.MOVE_LEFT_BOTTOM,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w8", "w16"],
+                to=["w08", "w16"],
                 actions=[
                     act.Movement.MOVE_LEFT,
                 ]
             ),
             SendLabel(
                 name="all",
-                to=["w7", "w12"],
+                to=["w07", "w12"],
                 actions=[
                     act.Movement.MOVE_LEFT_TOP,
                 ]

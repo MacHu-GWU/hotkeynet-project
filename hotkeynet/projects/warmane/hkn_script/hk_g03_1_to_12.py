@@ -240,6 +240,13 @@ def build_hk_0_short_term_buff():
         key=keyname.SCROLOCK_ON(keyname.KEY_0),
         actions=[
             SendLabel(
+                name=TalentCategory.dk.name,
+                to=config.lbs_by_tc(TalentCategory.dk),
+                actions=[
+                    act.DK.ALL_SPEC_HORN_OF_WINTER_KEY_SHIFT_TAB,
+                ]
+            ),
+            SendLabel(
                 name=TalentCategory.paladin_healer.name,
                 to=config.lbs_by_tc(TalentCategory.paladin_healer),
                 actions=[
