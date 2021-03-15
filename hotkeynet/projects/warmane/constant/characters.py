@@ -117,7 +117,7 @@ class CharacterFactory:
         )
 
     @classmethod
-    def make_char_fatmulti3_opiitou_pve_resto_druid(cls) -> Character:
+    def make_char_fatmulti3_opiitou_pve_bear_druid(cls) -> Character:
         return Character(
             credential=Credentials.cred_fatmulti3.value,
             name="opiitou",
@@ -176,6 +176,24 @@ class CharacterFactory:
             credential=Credentials.cred_fitsheep.value,
             name="kindhearted",
             talent=Talent.warlock_pvp_destruction,
+            window_index=6,
+        )
+
+    @classmethod
+    def make_char_fitsheep_bordercollie_pve_shadow_priest(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fitsheep.value,
+            name="bordercollie",
+            talent=Talent.priest_pve_shadow,
+            window_index=6,
+        )
+
+    @classmethod
+    def make_char_fitsheep_bordercollie_pve_disco_priest(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fitsheep.value,
+            name="bordercollie",
+            talent=Talent.priest_pve_disco,
             window_index=6,
         )
 
@@ -408,27 +426,9 @@ class CharacterFactory:
         )
 
     @classmethod
-    def make_char_fatmulti12_litgugub_pvp_balance_druid(cls) -> Character:
+    def make_char_fatmulti11_litgugua_pvp_resto_druid(cls) -> Character:
         return Character(
-            credential=Credentials.cred_fatmulti12.value,
-            name="litgugub",
-            talent=Talent.druid_pvp_balance,
-            window_index=12,
-        )
-
-    @classmethod
-    def make_char_fatmulti13_litguguc_pvp_balance_druid(cls) -> Character:
-        return Character(
-            credential=Credentials.cred_fatmulti13.value,
-            name="litguguc",
-            talent=Talent.druid_pvp_balance,
-            window_index=13,
-        )
-
-    @classmethod
-    def make_char_fatmulti14_litgugud_pvp_resto_druid(cls) -> Character:
-        return Character(
-            credential=Credentials.cred_fatmulti14.value,
+            credential=Credentials.cred_fatmulti11.value,
             name="litgugud",
             talent=Talent.druid_pvp_resto,
             window_index=14,
@@ -444,12 +444,48 @@ class CharacterFactory:
         )
 
     @classmethod
+    def make_char_fatmulti12_litgugub_pvp_balance_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti12.value,
+            name="litgugub",
+            talent=Talent.druid_pvp_balance,
+            window_index=12,
+        )
+
+    @classmethod
+    def make_char_fatmulti12_litgugub_pvp_resto_drudi(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti12.value,
+            name="litgugub",
+            talent=Talent.druid_pvp_resto,
+            window_index=12,
+        )
+
+    @classmethod
     def make_char_fatmulti12_litgugub_pve_balance_druid(cls) -> Character:
         return Character(
             credential=Credentials.cred_fatmulti12.value,
             name="litgugub",
             talent=Talent.druid_pve_balance,
             window_index=12,
+        )
+
+    @classmethod
+    def make_char_fatmulti13_litguguc_pvp_balance_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti13.value,
+            name="litguguc",
+            talent=Talent.druid_pvp_balance,
+            window_index=13,
+        )
+
+    @classmethod
+    def make_char_fatmulti13_litguguc_pvp_resto_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti13.value,
+            name="litguguc",
+            talent=Talent.druid_pvp_resto,
+            window_index=13,
         )
 
     @classmethod
@@ -462,11 +498,29 @@ class CharacterFactory:
         )
 
     @classmethod
-    def make_char_fatmulti14_litgugud_pve_resto_druid(cls) -> Character:
+    def make_char_fatmulti14_litgugud_pvp_balancce_druid(cls) -> Character:
         return Character(
             credential=Credentials.cred_fatmulti14.value,
             name="litgugud",
-            talent=Talent.druid_pve_resto,
+            talent=Talent.druid_pvp_balance,
+            window_index=14,
+        )
+
+    @classmethod
+    def make_char_fatmulti14_litgugud_pvp_resto_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti14.value,
+            name="litgugud",
+            talent=Talent.druid_pvp_resto,
+            window_index=14,
+        )
+
+    @classmethod
+    def make_char_fatmulti14_litgugud_pve_balance_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti14.value,
+            name="litgugud",
+            talent=Talent.druid_pve_balance,
             window_index=14,
         )
 

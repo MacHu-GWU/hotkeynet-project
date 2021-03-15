@@ -76,22 +76,3 @@ class Mode:
         )
         config.active_character_config.set_leader1_window_index(1)
         config.active_character_config.set_leader2_window_index(10)
-
-
-    @classmethod
-    def temp(cls, config: Config):
-        config.game_client_config.use_1600_900_resolution()
-        config.game_client_config.use_n_windows(22)
-        config.toggle_window_config.key1_to_25_window_index = [2,5,13]
-        config.toggle_window_config.round_robin_window_index = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        config.active_character_config = ActiveCharacterConfig(
-            active_characters=[
-                # CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().evolve(is_tank1=True,
-                #                                                                          is_dr_pala1=True),
-                CharacterFactory.make_char_fatmulti2_quentin_pve_resto_shaman().evolve(),
-                CharacterFactory.make_char_fatmulti5_kangliu_pve_shadow_priest().evolve(leader1_window_index=2),
-                CharacterFactory.make_char_fatmulti13_litguguc_pve_balance_druid().evolve(leader1_window_index=2),
-            ]
-        )
-        # config.active_character_config.set_leader1_window_index(1)
-        # config.active_character_config.set_leader2_window_index(10)

@@ -6,7 +6,8 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 
 #=== Set Combat Mode
 #--- Temp
-Mode.temp(config)
+Mode.set_mode_temp(config)
+
 #--- Solo Raid
 
 ### General
@@ -25,7 +26,7 @@ Mode.temp(config)
 # Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
 
 #--- Leveling
-
+# Mode.set_mode_leveling_two_team_carry_in_dungeon(config)
 
 #--- Questing
 

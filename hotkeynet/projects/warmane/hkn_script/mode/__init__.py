@@ -4,10 +4,14 @@ from . import (
     raid,
     dungeon,
     questing,
+    leveling,
+    temp,
 )
 
 
 class Mode(raid.Mode,
            dungeon.Mode,
-           questing.Mode):
+           questing.Mode,
+           leveling.Mode,
+           temp.Mode):
     pass

@@ -134,7 +134,7 @@ def build_hk_login_specific_account() -> typing.List[Hotkey]:
     LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + shift_alt_insert_to_pgdn
 
     hk_dict_view = dict()
-    used_window_index = list()
+
     for char in config.active_character_config.active_characters:
         key = LOGIN_SPECIFIC_ACCOUNT_1_TO_25[char.window_index-1]
         hk = Hotkey(
@@ -155,7 +155,7 @@ def build_hk_login_specific_account() -> typing.List[Hotkey]:
             key = LOGIN_SPECIFIC_ACCOUNT_1_TO_25[ind-1]
 
             hk = Hotkey(
-                name=f"SingleLogin{char.credential.username.title()}",
+                name=f"SingleLogin{credential_index[ind].username.title()}",
                 key=keyname.SCROLOCK_ON(key),
                 actions=[
                     cmd_g01_window_and_login.cmd_enter_username_and_password.call(
