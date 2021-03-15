@@ -453,7 +453,7 @@ class CharacterFactory:
         )
 
     @classmethod
-    def make_char_fatmulti12_litgugub_pvp_resto_drudi(cls) -> Character:
+    def make_char_fatmulti12_litgugub_pvp_resto_druid(cls) -> Character:
         return Character(
             credential=Credentials.cred_fatmulti12.value,
             name="litgugub",

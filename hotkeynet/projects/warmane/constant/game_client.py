@@ -67,8 +67,8 @@ pass_item_button_2_y_at_1920_1080 = 857
 pass_item_button_3_y_at_1920_1080 = 790
 pass_item_button_4_y_at_1920_1080 = 724
 
-pass_item_button_x_at_1600_900 = 1361
-pass_item_button_1_y_at_1600_900 = 824
-pass_item_button_2_y_at_1600_900 = 766
-pass_item_button_3_y_at_1600_900 = 705
-pass_item_button_4_y_at_1600_900 = 647
+pass_item_button_x_at_1600_900 = 1365
+pass_item_button_1_y_at_1600_900 = 852
+pass_item_button_2_y_at_1600_900 = 795
+pass_item_button_3_y_at_1600_900 = 725
+pass_item_button_4_y_at_1600_900 = 668

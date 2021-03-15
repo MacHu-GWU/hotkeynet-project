@@ -960,7 +960,14 @@ hk_alt_shift_f_all_boomkin_star_fall = Hotkey(
             actions=[
                 act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F
             ]
-        )
+        ),
+        SendLabel(
+            name=TC.dk.name,
+            to=config.lbs_by_tc(TC.dk),
+            actions=[
+                act.DK.UNHOLY_SPEC_CORPSE_EXPLOSION_ALF_F,
+            ]
+        ),
     ],
     script=script,
 )

@@ -43,7 +43,7 @@ def build_actions_default(config: Config,
 
     if is_healer_target_focus:
         _actions = [
-            act.Target.TARGET_FOCUS_TARGET,
+            act.Target.TARGET_FOCUS,
             key,
         ]
     else:

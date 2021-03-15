@@ -19,7 +19,7 @@ class Mode:
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
                 # 1 - 5
-                # CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().evolve(),
+                CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().evolve(),
                 # CharacterFactory.make_char_fatmulti1_batlefury_pve_retri_pala().evolve(),
                 # CharacterFactory.make_char_fatmulti1_litgoatssa_pve_demo_warlock().evolve(),
                 # CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().evolve(),
@@ -74,7 +74,7 @@ class Mode:
                 # CharacterFactory.make_char_fatmulti11_litgugua_pvp_resto_druid().evolve(),
                 #
                 # CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid().evolve(),
-                # CharacterFactory.make_char_fatmulti12_litgugub_pvp_resto_drudi().evolve(),
+                CharacterFactory.make_char_fatmulti12_litgugub_pvp_resto_druid().evolve(),
                 #
                 # CharacterFactory.make_char_fatmulti13_litguguc_pve_balance_druid().evolve(),
                 # CharacterFactory.make_char_fatmulti13_litguguc_pvp_resto_druid().evolve(),

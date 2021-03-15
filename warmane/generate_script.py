@@ -12,7 +12,7 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 
 ### General
 # Mode.set_mode_solo_raid_10p_batlefury_flydps_core_team(config)
-Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team(config)
+# Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team(config)
 
 ### Naxx
 
@@ -24,6 +24,8 @@ Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team
 
 #--- Solo RDF
 # Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
+# Mode.set_mode_solo_dungeon_litgoatdk_abcd_bunnysisters(config)
+# Mode.set_mode_solo_dungeon_litgugu_abcd_glowyy(config)
 
 #--- Leveling
 # Mode.set_mode_leveling_two_team_carry_in_dungeon(config)
@@ -45,7 +47,7 @@ Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team
 
 
 #--- 冬拥湖周常
-# Mode.set_mode_questing_wintergraps_team1(config)
+Mode.set_mode_questing_wintergraps_team1(config)
 
 #=== Build Script
 from hotkeynet.projects.warmane.hkn_script import hkn
