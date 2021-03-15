@@ -63,7 +63,7 @@ class Mode:
                 CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid(),
                 CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid(),
                 CharacterFactory.make_char_fatmulti13_litguguc_pve_balance_druid(),
-                CharacterFactory.make_char_fatmulti14_litgugud_pve_resto_druid(),
+                CharacterFactory.make_char_fatmulti14_litgugud_pvp_resto_druid(),
                 CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest(),
                 CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest(),
                 CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest(),

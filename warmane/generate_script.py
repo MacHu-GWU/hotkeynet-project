@@ -6,13 +6,13 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 
 #=== Set Combat Mode
 #--- Temp
-Mode.set_mode_temp(config)
+# Mode.set_mode_temp(config)
 
 #--- Solo Raid
 
 ### General
 # Mode.set_mode_solo_raid_10p_batlefury_flydps_core_team(config)
-# Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team(config)
+Mode.set_mode_solo_raid_22p_batlefury_flydps_4_druid_4_priest_4_shaman_core_team(config)
 
 ### Naxx
 
