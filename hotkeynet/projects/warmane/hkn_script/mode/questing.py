@@ -138,11 +138,13 @@ class Mode:
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
                 CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid().evolve(),
-                CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid().evolve(leader1_window_index=11),
-                CharacterFactory.make_char_fatmulti13_litguguc_pve_balance_druid().evolve(leader1_window_index=11),
-                CharacterFactory.make_char_fatmulti14_litgugud_pve_resto_druid().evolve(leader1_window_index=11),
+                CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid().evolve(),
+                CharacterFactory.make_char_fatmulti13_litguguc_pve_balance_druid().evolve(),
+                CharacterFactory.make_char_fatmulti14_litgugud_pvp_resto_druid().evolve(),
             ]
         )
+        config.active_character_config.set_leader1_window_index(ind=11)
+        config.active_character_config.set_leader2_window_index(ind=11)
 
     @classmethod
     def set_mode_questing_5_ppl_lgms_priest_glowyy_team(cls, config: Config):
@@ -153,12 +155,14 @@ class Mode:
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
                 CharacterFactory.make_char_fatmulti9_glowyy_pve_protect_pala().evolve(),
-                CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(leader1_window_index=9),
-                CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(leader1_window_index=9),
-                CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(leader1_window_index=9),
-                CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().evolve(leader1_window_index=9),
+                CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().evolve(),
             ]
         )
+        config.active_character_config.set_leader1_window_index(ind=9)
+        config.active_character_config.set_leader2_window_index(ind=15)
 
     @classmethod
     def set_mode_questing_5_ppl_lgsm_shaman_laoshou_team(cls, config: Config):
@@ -168,13 +172,15 @@ class Mode:
         config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
-                CharacterFactory.make_char_makun7551_laoshou_retri_paladin().evolve(leader1_window_index=10),
-                CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman().evolve(leader1_window_index=10),
-                CharacterFactory.make_char_fatmulti24_lgsmn_pve_elemental_shaman().evolve(leader1_window_index=10),
-                CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().evolve(leader1_window_index=10),
-                CharacterFactory.make_char_fatmulti26_lgsmp_pve_elemental_shaman().evolve(leader1_window_index=10),
+                CharacterFactory.make_char_makun7551_laoshou_retri_paladin().evolve(),
+                CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti24_lgsmn_pve_elemental_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti26_lgsmp_pve_elemental_shaman().evolve(),
             ]
         )
+        config.active_character_config.set_leader1_window_index(ind=10)
+        config.active_character_config.set_leader2_window_index(ind=19)
 
     @classmethod
     def set_mode_questing_wintergraps_team1(cls, config: Config):

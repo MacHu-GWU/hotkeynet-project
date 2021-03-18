@@ -61,3 +61,31 @@ class Mode:
         )
         config.active_character_config.set_leader1_window_index(9)
         config.active_character_config.set_leader2_window_index(9)
+
+    @classmethod
+    def set_mode_solo_dungeon_batlefury_carry_4_healer(cls, config: Config):
+        config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_n_windows(22)
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22+1))
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22+1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().evolve(),
+                # CharacterFactory.make_char_fatmulti2_quentin_pve_elemental_shaman().evolve(),
+                # CharacterFactory.make_char_fatmulti3_opiitou_pve_balance_druid().evolve(),
+                # CharacterFactory.make_char_fatmulti4_swagsonic_pve_arcane_mage().evolve(),
+                # CharacterFactory.make_char_fatmulti5_kangliu_pve_shadow_priest().evolve(),
+                #
+                # CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
+                # CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
+                # CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(),
+                # CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().evolve(),
+
+                CharacterFactory.make_char_fatmulti23_lgsmm_pve_resto_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti24_lgsmn_pve_resto_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti25_lgsmo_pve_resto_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti26_lgsmp_pve_resto_shaman().evolve(),
+            ]
+        )
+        config.active_character_config.set_leader1_window_index(1)
+        config.active_character_config.set_leader2_window_index(19)

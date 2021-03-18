@@ -572,11 +572,29 @@ class CharacterFactory:
         )
 
     @classmethod
+    def make_char_fatmulti23_lgsmm_pve_resto_shaman(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti23.value,
+            name="lgsmm",
+            talent=Talent.shaman_pve_resto,
+            window_index=19,
+        )
+
+    @classmethod
     def make_char_fatmulti24_lgsmn_pve_elemental_shaman(cls) -> Character:
         return Character(
             credential=Credentials.cred_fatmulti24.value,
             name="lgsmn",
             talent=Talent.shaman_pve_elemental,
+            window_index=20,
+        )
+
+    @classmethod
+    def make_char_fatmulti24_lgsmn_pve_resto_shaman(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti24.value,
+            name="lgsmn",
+            talent=Talent.shaman_pve_resto,
             window_index=20,
         )
 
@@ -590,10 +608,28 @@ class CharacterFactory:
         )
 
     @classmethod
+    def make_char_fatmulti25_lgsmo_pve_resto_shaman(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti25.value,
+            name="lgsmo",
+            talent=Talent.shaman_pve_resto,
+            window_index=21,
+        )
+
+    @classmethod
     def make_char_fatmulti26_lgsmp_pve_elemental_shaman(cls) -> Character:
         return Character(
             credential=Credentials.cred_fatmulti26.value,
             name="lgsmp",
             talent=Talent.shaman_pve_elemental,
+            window_index=22,
+        )
+
+    @classmethod
+    def make_char_fatmulti26_lgsmp_pve_resto_shaman(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti26.value,
+            name="lgsmp",
+            talent=Talent.shaman_pve_resto,
             window_index=22,
         )
