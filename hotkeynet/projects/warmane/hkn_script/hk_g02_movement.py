@@ -4,6 +4,7 @@
 实现与人物移动有关的快捷键.
 """
 
+import typing
 from ._config_and_script import config, script
 from .. import act
 from ..constant.talent_category_association import (
@@ -15,35 +16,42 @@ from ....script import MovementHotkey, SendLabel, Key
 
 def go_up(lbs: list):
     lbs = [window_index[ind].label for ind in lbs]
-    return SendLabel(name="up", to=lbs, actions=[act.Movement.MOVE_FORWARD,])
+    return SendLabel(name="up", to=lbs, actions=[act.Movement.MOVE_FORWARD, ])
+
 
 def go_down(lbs: list):
     lbs = [window_index[ind].label for ind in lbs]
-    return SendLabel(name="down", to=lbs, actions=[act.Movement.MOVE_BACKWARD,])
+    return SendLabel(name="down", to=lbs, actions=[act.Movement.MOVE_BACKWARD, ])
+
 
 def go_left(lbs: list):
     lbs = [window_index[ind].label for ind in lbs]
-    return SendLabel(name="left", to=lbs, actions=[act.Movement.MOVE_LEFT,])
+    return SendLabel(name="left", to=lbs, actions=[act.Movement.MOVE_LEFT, ])
+
 
 def go_right(lbs: list):
     lbs = [window_index[ind].label for ind in lbs]
-    return SendLabel(name="right", to=lbs, actions=[act.Movement.MOVE_RIGHT,])
+    return SendLabel(name="right", to=lbs, actions=[act.Movement.MOVE_RIGHT, ])
+
 
 def go_left_up(lbs: list):
     lbs = [window_index[ind].label for ind in lbs]
-    return SendLabel(name="left_up", to=lbs, actions=[act.Movement.MOVE_LEFT_TOP,])
+    return SendLabel(name="left_up", to=lbs, actions=[act.Movement.MOVE_LEFT_TOP, ])
+
 
 def go_left_down(lbs: list):
     lbs = [window_index[ind].label for ind in lbs]
-    return SendLabel(name="left_down", to=lbs, actions=[act.Movement.MOVE_LEFT_BOTTOM,])
+    return SendLabel(name="left_down", to=lbs, actions=[act.Movement.MOVE_LEFT_BOTTOM, ])
+
 
 def go_right_up(lbs: list):
     lbs = [window_index[ind].label for ind in lbs]
-    return SendLabel(name="right_up", to=lbs, actions=[act.Movement.MOVE_RIGHT_TOP,])
+    return SendLabel(name="right_up", to=lbs, actions=[act.Movement.MOVE_RIGHT_TOP, ])
+
 
 def go_right_down(lbs: list):
     lbs = [window_index[ind].label for ind in lbs]
-    return SendLabel(name="right_down", to=lbs, actions=[act.Movement.MOVE_RIGHT_BOTTOM,])
+    return SendLabel(name="right_down", to=lbs, actions=[act.Movement.MOVE_RIGHT_BOTTOM, ])
 
 
 def build_hk_all_move_up_down_turn_left_right():
@@ -264,19 +272,28 @@ def build_hk_spread_circle_1():
         法师                元素萨
                 术士/奶德3
     """
+    actions = [
+        go_up([3, 14, 15]),
+        go_down([6, 11, 18, ]),
+        go_left([8, 12, 16, ]),
+        go_right([9, 13, 17, ]),
+        go_left_up([7, 19]),
+        go_left_down([4, 20, ]),
+        go_right_up([5, 21, ]),
+        go_right_down([2, 22]),
+    ] # type: typing.List[SendLabel]
+
+    tank_char_window_label_list = config.lbs_by_tc(tc=TalentCategory.tank)
+
+    for send_label in actions:
+        for label in tank_char_window_label_list:
+            if label in send_label.to:
+                send_label.to.remove(label)
+
     return MovementHotkey(
         name="Spread Circle",
         key=keyname.SCROLOCK_ON(keyname.OEM5_PIPE_OR_BACK_SLASH),
-        actions=[
-            go_up([3,14,15]),
-            go_down([6,11,18,]),
-            go_left([8,12,16,]),
-            go_right([9,13,17,]),
-            go_left_up([7,19]),
-            go_left_down([4,20,]),
-            go_right_up([5,21,]),
-            go_right_down([2,22]),
-        ],
+        actions=actions,
         script=script,
     )
 

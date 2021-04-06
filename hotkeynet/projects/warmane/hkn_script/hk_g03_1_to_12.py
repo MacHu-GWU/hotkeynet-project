@@ -261,6 +261,13 @@ def build_hk_0_short_term_buff():
                     act.Shaman.ALL_SPEC_KEY_0_WATER_OR_LIGHTNING_SHIELD,
                 ]
             ),
+            SendLabel(
+                name=TalentCategory.warlock.name,
+                to=config.lbs_by_tc(TalentCategory.warlock),
+                actions=[
+                    act.Warlock.ALL_SPEC_FEL_ARMOR,
+                ]
+            ),
         ],
         script=script,
     )
@@ -309,18 +316,29 @@ hk_11_focus_mode_1 = build_hk_11_focus_mode_1()
 def build_hk_12_focus_mode_2():
     actions = list()
     for char in config.active_character_config.iter_by_window_index():
-        try:
+        print(char.name, char.leader2_window_index)
+        if char.leader2_window_index:
+            try:
+                sl = SendLabel(
+                    name=char.name,
+                    to=[char.window_label, ],
+                    actions=[
+                        act.target_leader_key_mapper[char.leader2_window_label],
+                        act.General.SET_FOCUS_KEY_NUMPAD_6,
+                    ]
+                )
+                actions.append(sl)
+            except KeyError:
+                pass
+        else:
             sl = SendLabel(
                 name=char.name,
                 to=[char.window_label, ],
                 actions=[
-                    act.target_leader_key_mapper[char.leader2_window_label],
-                    act.General.SET_FOCUS_KEY_NUMPAD_6,
+                    act.General.CLEAR_FOCUS_NUMPAD_7,
                 ]
             )
             actions.append(sl)
-        except KeyError:
-            pass
 
     return Hotkey(
         name="SetFocusMode2",

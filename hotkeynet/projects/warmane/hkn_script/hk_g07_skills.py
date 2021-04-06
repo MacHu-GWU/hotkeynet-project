@@ -6,13 +6,13 @@
 
 from ._config_and_script import config, script
 from .. import act
-from ..constant.talent_category_association import T, TC
+from ..constant.talent_category_association import TC
 from .... import keyname
 from ....script import (
     Hotkey,
     Key, SendLabel,
 )
-from ....utils import union_list, intersection_list, difference_list
+from ....utils import union_list, difference_list
 
 _ACTION_BAR_5_________________________________ = ""
 

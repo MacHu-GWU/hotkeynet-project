@@ -60,7 +60,7 @@ class Command:
 
     _template = Path(TPL_DIR, "Command.tpl").read_text(encoding="utf-8")
 
-    def __attrs_post_init__(self):
+    def __attrs_post_init__(    self):
         if self.script is not None:
             self.script.add_command(self)
 
@@ -350,7 +350,6 @@ class SendFocusWindow(Action):
             )
         else:
             return ""
-
 
 @attr.s
 class CallCommand(Action):

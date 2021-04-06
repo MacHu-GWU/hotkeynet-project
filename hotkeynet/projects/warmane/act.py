@@ -998,7 +998,8 @@ class Priest:
     DISC_SPEC_POWER_INFUSION = ALT_(F2)  # 灌注魔法
     DISC_SPEC_INNER_FOCUS = SHIFT_(C)  # 心灵专注
     DISC_SPEC_PAIN_SUPPRESSION = ALT_(F)  # 痛苦压制
-    DISC_SPEC_PENANCE = KEY_1  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
+
+    DISC_SPEC_PENANCE_KEY_1 = KEY_1  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
     DISC_SPEC_HEAL_RAID_MACRO_KEY_2 = KEY_2
     """
     全团套盾宏::
@@ -1014,7 +1015,7 @@ class Priest:
     HOLY_SPEC_RENEW = KEY_1  # 恢复
     HOLY_SPEC_FLASH_HEAL = KEY_1  # 快速治疗
     HOLY_SPEC_GREATER_HEAL = KEY_1  # 强效治疗术
-    HOLY_SPEC_PRAYER_OF_MENDING = KEY_1  # 愈合祷言 (受攻击后回血, 在团队中跳跃)
+    HOLY_SPEC_PRAYER_OF_MENDING_KEY_1 = KEY_1  # 愈合祷言 (受攻击后回血, 在团队中跳跃)
     HOLY_SPEC_BINDING_HEAL = KEY_1  # 联结治疗 (治疗目标和你自己)
     HOLY_SPEC_LIGHT_WELL = KEY_1  # 治疗之泉
     HOLY_SPEC_CIRCLE_OF_HEALING = KEY_1  # 治疗之环

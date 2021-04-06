@@ -36,11 +36,15 @@ class ActiveCharacterConfig(BaseConfig):
         for ac in self.active_characters:
             if ac.window_index != ind:
                 ac.leader1_window_index = ind
+            else:
+                ac.leader1_window_index = None
 
     def set_leader2_window_index(self, ind: int):
         for ac in self.active_characters:
             if ac.window_index != ind:
                 ac.leader2_window_index = ind
+            else:
+                ac.leader2_window_index = None
 
     def validate_active_characters(self):
         """
