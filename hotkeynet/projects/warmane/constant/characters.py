@@ -252,6 +252,24 @@ class CharacterFactory:
         )
 
     @classmethod
+    def make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti10.value,
+            name="luxiaofeng",
+            talent=Talent.dk_pve_blood_tank,
+            window_index=10,
+        )
+
+    @classmethod
+    def make_char_fatmulti10_luxiaofeng_pve_unholy_tank_dk(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti10.value,
+            name="luxiaofeng",
+            talent=Talent.dk_pve_unholy_tank,
+            window_index=10,
+        )
+
+    @classmethod
     def make_char_monkey130_flydps_pve_blood_tank_dk(cls) -> Character:
         return Character(
             credential=Credentials.cred_monkey130.value,
@@ -270,6 +288,24 @@ class CharacterFactory:
         )
 
     @classmethod
+    def make_char_makun7551_ganjj_pve_unholy_dps_dk(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_makun7551.value,
+            name="ganjj",
+            talent=Talent.dk_pve_unholy_dps,
+            window_index=10,
+        )
+
+    @classmethod
+    def make_char_makun7551_ganjj_pve_unholy_dps_dk_at_window_22(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_makun7551.value,
+            name="ganjj",
+            talent=Talent.dk_pve_unholy_dps,
+            window_index=22,
+        )
+
+    @classmethod
     def make_char_makun7551_laoshou_retri_paladin(cls) -> Character:
         return Character(
             credential=Credentials.cred_makun7551.value,
@@ -278,7 +314,25 @@ class CharacterFactory:
             window_index=10,
         )
 
-    #--- litgoat ss
+    @classmethod
+    def make_char_makun7551_laoshou_retri_paladin_at_window_19(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_makun7551.value,
+            name="laoshou",
+            talent=Talent.paladin_pve_retri,
+            window_index=19,
+        )
+
+    @classmethod
+    def make_char_freiliheng_stophealing_pve_blood_tank_dk(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_freiliheng.value,
+            name="stophealing",
+            talent=Talent.dk_pve_blood_tank,
+            window_index=10,
+        )
+
+    # --- litgoat ss
     @classmethod
     def make_char_fatmulti1_litgoatssa_pve_demo_warlock(cls) -> Character:
         return Character(
@@ -324,7 +378,7 @@ class CharacterFactory:
             window_index=5,
         )
 
-    #--- litgoat dk
+    # --- litgoat dk
     @classmethod
     def make_char_fatmulti1_litgoatdka_pvp_frost_dk(cls) -> Character:
         return Character(
@@ -415,7 +469,7 @@ class CharacterFactory:
             window_index=5,
         )
 
-    #--- litgugu abcd
+    # --- litgugu abcd
     @classmethod
     def make_char_fatmulti11_litgugua_pvp_balance_druid(cls) -> Character:
         return Character(
@@ -431,7 +485,7 @@ class CharacterFactory:
             credential=Credentials.cred_fatmulti11.value,
             name="litgugud",
             talent=Talent.druid_pvp_resto,
-            window_index=14,
+            window_index=11,
         )
 
     @classmethod
@@ -524,7 +578,44 @@ class CharacterFactory:
             window_index=14,
         )
 
-    #--- lg ms i, j, k, l
+    # --- litgugu e, f, g, h
+    @classmethod
+    def make_char_fatmulti15_litgugue_pvp_balance_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti15.value,
+            name="litgugue",
+            talent=Talent.druid_pvp_balance,
+            window_index=11,
+        )
+
+    @classmethod
+    def make_char_fatmulti16_litguguf_pvp_balance_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti16.value,
+            name="litguguf",
+            talent=Talent.druid_pvp_balance,
+            window_index=12,
+        )
+
+    @classmethod
+    def make_char_fatmulti17_litgugug_pvp_balance_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti17.value,
+            name="litgugug",
+            talent=Talent.druid_pvp_balance,
+            window_index=13,
+        )
+
+    @classmethod
+    def make_char_fatmulti18_litguguh_pvp_resto_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti18.value,
+            name="litguguh",
+            talent=Talent.druid_pvp_resto,
+            window_index=14,
+        )
+
+    # --- lg ms i, j, k, l
     @classmethod
     def make_char_fatmulti19_lgmsi_pve_shadow_priest(cls) -> Character:
         return Character(
@@ -535,11 +626,30 @@ class CharacterFactory:
         )
 
     @classmethod
+    def make_char_fatmulti19_lgmsi_pve_disco_priest(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti19.value,
+            name="lgmsi",
+            talent=Talent.priest_pve_disco,
+            window_index=15,
+        )
+
+
+    @classmethod
     def make_char_fatmulti20_lgmsj_pve_shadow_priest(cls) -> Character:
         return Character(
             credential=Credentials.cred_fatmulti20.value,
             name="lgmsj",
             talent=Talent.priest_pve_shadow,
+            window_index=16,
+        )
+
+    @classmethod
+    def make_char_fatmulti20_lgmsj_pve_disco_priest(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti20.value,
+            name="lgmsj",
+            talent=Talent.priest_pve_disco,
             window_index=16,
         )
 
@@ -553,6 +663,15 @@ class CharacterFactory:
         )
 
     @classmethod
+    def make_char_fatmulti21_lgmsk_pve_holy_priest(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti21.value,
+            name="lgmsk",
+            talent=Talent.priest_pve_holy,
+            window_index=17,
+        )
+
+    @classmethod
     def make_char_fatmulti22_lgmsl_pve_shadow_priest(cls) -> Character:
         return Character(
             credential=Credentials.cred_fatmulti22.value,
@@ -561,7 +680,16 @@ class CharacterFactory:
             window_index=18,
         )
 
-    #--- lg sm m, n, o, p
+    @classmethod
+    def make_char_fatmulti22_lgmsl_pve_holy_priest(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti22.value,
+            name="lgmsl",
+            talent=Talent.priest_pve_holy,
+            window_index=18,
+        )
+
+    # --- lg sm m, n, o, p
     @classmethod
     def make_char_fatmulti23_lgsmm_pve_elemental_shaman(cls) -> Character:
         return Character(

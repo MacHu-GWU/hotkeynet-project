@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from ._config_and_script import config, script
-from ..config import Config
 from ..constant.windows import window_list, window_index
-from ..constant.credentials import Credentials, credential_index
 from ....script import Script, Command
 from ....utils import render_template, remove_indent
 
@@ -198,7 +196,7 @@ cmd_enter_username_and_password = build_cmd_enter_username_and_password()
 
 def build_cmd_batch_login():
     """
-    根据 Active Character 批量登录游戏账号.
+    根据 Active Character 中定义的角色, 批量登录游戏账号.
     """
     return Command(
         name="BatchLogin",

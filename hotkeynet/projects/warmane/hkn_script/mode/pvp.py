@@ -5,6 +5,7 @@ from ...constant.characters import CharacterFactory
 from .....script import Script, SendLabel
 from ...constant.talent_category_association import TC
 from ... import act
+from . import post_hooks
 
 
 def post_hook_druid(config: 'Config', script: Script):
@@ -27,6 +28,7 @@ class Mode:
     def set_mode_pvp_grizzly_hill(cls, config: Config):
         config.game_client_config.use_1600_900_resolution()
         config.game_client_config.use_n_windows(22)
+        config.game_client_config.use_credential_list_default()
         config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
@@ -52,6 +54,7 @@ class Mode:
     def set_mode_pvp_wintergraps_team1(cls, config: Config):
         config.game_client_config.use_1176_664_resolution()
         config.game_client_config.use_n_windows(22)
+        config.game_client_config.use_credential_list_default()
         config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
         config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
         config.active_character_config = ActiveCharacterConfig(
@@ -104,3 +107,46 @@ class Mode:
             print(hk_g07_skills.hk_g.actions)
 
         config.post_hook = post_hook
+
+    @classmethod
+    def set_mode_pvp_wintergrasp_wg_5_ppl_lgms_priest_ganjj_team(cls, config: Config):
+        config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_n_windows(22)
+        config.game_client_config.use_credential_list_default()
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                CharacterFactory.make_char_makun7551_ganjj_pve_unholy_dps_dk().evolve(),
+                CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().evolve(),
+            ]
+        )
+        config.active_character_config.set_leader1_window_index(ind=10)
+        config.active_character_config.set_leader2_window_index(ind=15)
+
+        config.post_hook = [
+            post_hooks.litgoatdk_abcde_team_death_grip,
+            post_hooks.lgms_ijkl_shadow_priest_group,
+        ]
+
+    @classmethod
+    def set_mode_pvp_wintergrasp_wg_5_ppl_lgsm_shaman_laoshou_team(cls, config: Config):
+        config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_n_windows(22)
+        config.game_client_config.use_credential_list_default()
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                CharacterFactory.make_char_makun7551_laoshou_retri_paladin().evolve(),
+                CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti24_lgsmn_pve_elemental_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti26_lgsmp_pve_elemental_shaman().evolve(),
+            ]
+        )
+        config.active_character_config.set_leader1_window_index(ind=10)
+        config.active_character_config.set_leader2_window_index(ind=19)

@@ -10,7 +10,7 @@ assert Path(dir_project_root, "hotkeynet").exists()
 dir_icon = Path(dir_project_root, "icons")
 
 content = f"""
-<CreatePanel MBControlPanel 0 0 120 1000>
+<CreatePanel MBControlPanel 0 120 120 1000>
     <CreateButton ButtonBar11 0 0 36 36 "Alt">
     <AddButtonToPanel ButtonBar11 MBControlPanel 0 0>
 

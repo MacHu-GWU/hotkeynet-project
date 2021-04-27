@@ -677,7 +677,7 @@ class Shaman:
     # Left | Right | Middle
     HEAL_BOT_HEALING_WAVE_LEFT_CLICK = Mouse(button=MOUSE_LButton)  # 治疗波
     HEAL_BOT_RIPTIDE_RIGHT_CLICK = Mouse(button=MOUSE_RButton)  # 激流
-    HEAL_BOT_HEAL_CHAIN_MIDDLE_CLICK = Mouse(button=MOUSE_MButton)  # 治疗链
+    HEAL_BOT_CHAIN_HEAL_MIDDLE_CLICK = Mouse(button=MOUSE_MButton)  # 治疗链
 
     # Shift, Alt, Ctrl Left Click
     HEAL_BOT_CHAIN_HEAL_SHIFT_LEFT_CLIICK = ModifiedMouseClick.shift_left_click()  # 治疗链
@@ -1011,15 +1011,16 @@ class Priest:
         /castsequence [spec:2] reset=6, 治疗之环,真言术盾,真言术盾,真言术盾,真言术盾 
     """
 
-    HOLY_SPEC_GUARDIAN_SPIRIT = KEY_1  # 守护天使
+    HOLY_SPEC_GUARDIAN_SPIRIT_ALT_F = ALT_(F) # 守护天使
     HOLY_SPEC_RENEW = KEY_1  # 恢复
     HOLY_SPEC_FLASH_HEAL = KEY_1  # 快速治疗
     HOLY_SPEC_GREATER_HEAL = KEY_1  # 强效治疗术
     HOLY_SPEC_PRAYER_OF_MENDING_KEY_1 = KEY_1  # 愈合祷言 (受攻击后回血, 在团队中跳跃)
     HOLY_SPEC_BINDING_HEAL = KEY_1  # 联结治疗 (治疗目标和你自己)
     HOLY_SPEC_LIGHT_WELL = KEY_1  # 治疗之泉
-    HOLY_SPEC_CIRCLE_OF_HEALING = KEY_1  # 治疗之环
+    HOLY_SPEC_CIRCLE_OF_HEALING = R  # 治疗之环
     HOLY_SPEC_HEAL_RAID_MACRO_KEY_2 = KEY_2
+    HOLY_SPEC_DESPERATE_PRAYER_ALT_F1 = ALT_(F1) # 绝望祷言
     """
     全团治疗宏::
     
@@ -1032,6 +1033,7 @@ class Priest:
 
     # Left | Right | Middle
     HEAL_BOT_TARGET_RAID_FRAME = Mouse(button=MOUSE_LButton)  # 选择团队框架成员
+    HEAL_BOT_HOLY_SPEC_FLASH_HEAL = Mouse(button=MOUSE_LButton)  # 选择团队框架成员
     HEAL_BOT_POWER_WORD_SHIELD = Mouse(button=MOUSE_RButton)  # 真言术盾
     HEAL_BOT_RENEW = Mouse(button=MOUSE_MButton)  # 恢复
 
@@ -1042,6 +1044,7 @@ class Priest:
 
     # Shift | Alt | Ctrl + Right
     HEAL_BOT_PENANCE = ModifiedMouseClick.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
+    HEAL_BOT_CIRCLE_OF_HEALING = ModifiedMouseClick.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
     HEAL_BOT_DISPEL_MAGIC = ModifiedMouseClick.ctrl_right_click()  # 驱散魔法
 
 

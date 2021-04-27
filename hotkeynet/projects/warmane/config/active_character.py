@@ -18,15 +18,22 @@ class ActiveCharacterConfig(BaseConfig):
     """
     active_characters = attr.ib(default=lambda: [])  # type: typing.List[Character]
 
-    _characters_name_mapper = None
+    _characters_name_mapper = None # type: typing.Dict[str, Character]
 
-    def get_character_by_name(self, name: str) -> Character:
+    @property
+    def characters_name_mapper(self) -> typing.Dict[str, Character]:
         if self._characters_name_mapper is None:
             self._characters_name_mapper = {
                 char.name: char
                 for char in self.active_characters
             }
-        return self._characters_name_mapper[name]
+        return self._characters_name_mapper
+
+    def get_character_by_name(self, name: str) -> Character:
+        return self.characters_name_mapper[name]
+
+    def is_char_exists(self, char: Character) -> bool:
+        return char.name in self.characters_name_mapper
 
     def set_leader1_window_index(self, ind: int):
         """

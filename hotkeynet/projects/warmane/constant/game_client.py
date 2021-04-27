@@ -72,3 +72,23 @@ pass_item_button_1_y_at_1600_900 = 852
 pass_item_button_2_y_at_1600_900 = 795
 pass_item_button_3_y_at_1600_900 = 725
 pass_item_button_4_y_at_1600_900 = 668
+
+pass_item_button_x_at_1176_664 = 1005
+pass_item_button_1_y_at_1176_664 = 632
+pass_item_button_2_y_at_1176_664 = 589
+pass_item_button_3_y_at_1176_664 = 542
+pass_item_button_4_y_at_1176_664 = 497
+
+
+log_in_log_out_button_x = 1225
+log_in_log_out_button_y = 168
+
+username_input_box_x = 685
+username_input_box_y = 605
+
+password_input_box_x = 685
+password_input_box_y= 660
+
+# 625
+#
+# 710

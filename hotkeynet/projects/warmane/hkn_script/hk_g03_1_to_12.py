@@ -48,6 +48,7 @@ def build_actions_default(config: Config,
         ]
     else:
         _actions = [
+            act.Target.TARGET_FOCUS_TARGET,
             key,
         ]
     for talent in get_talent_by_category(category=TalentCategory.healer):

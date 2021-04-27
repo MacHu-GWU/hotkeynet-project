@@ -24,7 +24,7 @@ class Script:
     templates: OrderedDict = attr.ib(factory=OrderedDict)
     hotkeys: OrderedDict = attr.ib(factory=OrderedDict)
     labels: OrderedDict = attr.ib(factory=OrderedDict)
-
+        
     def add_command(self, command: 'Command', ignore_duplicate=False):
         if command.name in self.commands:
             if not ignore_duplicate:
@@ -145,6 +145,8 @@ class Hotkey:
                             and (action.name != _action.name) \
                             and (label in _action.to):
                             raise ValueError(f"label {label} in {action} conflicts with {_action}")
+
+
 
     def dump(self) -> str:
         print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")

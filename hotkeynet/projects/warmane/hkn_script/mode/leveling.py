@@ -13,6 +13,7 @@ class Mode:
         """
         config.game_client_config.use_1600_900_resolution()
         config.game_client_config.use_n_windows(22)
+        config.game_client_config.use_credential_list_default()
         config.toggle_window_config.key1_to_25_window_index = [
             1, 15, 16, 17, 18,
             3, 19, 20, 21, 22,

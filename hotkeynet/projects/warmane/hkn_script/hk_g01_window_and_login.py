@@ -9,7 +9,6 @@ import typing
 from . import cmd_g01_window_and_login
 from ._config_and_script import config, script
 from ..constant.windows import window_index
-from ..constant.credentials import credential_index
 from .. import act
 from .... import keyname
 from ....script import Hotkey, CallCommand, SendLabel, Key, Mouse, SendFocusWindow
@@ -131,12 +130,13 @@ def build_hk_login_specific_account() -> typing.List[Hotkey]:
         keyname.ALT_SHIFT_(key)
         for key in keyname.INSERT_TO_PGDN
     ]
-    LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + shift_alt_insert_to_pgdn
+    HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + shift_alt_insert_to_pgdn
 
     hk_dict_view = dict()
 
+    # 对于 active_characters 中定义了的角色, 登录定义了的角色
     for char in config.active_character_config.active_characters:
-        key = LOGIN_SPECIFIC_ACCOUNT_1_TO_25[char.window_index-1]
+        key = HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[char.window_index - 1]
         hk = Hotkey(
             name=f"SingleLogin{char.credential.username.title()}",
             key=keyname.SCROLOCK_ON(key),
@@ -150,18 +150,19 @@ def build_hk_login_specific_account() -> typing.List[Hotkey]:
         )
         hk_dict_view[char.window_index] = hk
 
+    # 对于没有被 active_characters 定义的那些 window, 使用 LOGIN_SPECIFIC_ACCOUNT_1_TO_25 中的定义
     for ind in range(1, config.game_client_config.n_windows+1):
         if ind not in hk_dict_view:
-            key = LOGIN_SPECIFIC_ACCOUNT_1_TO_25[ind-1]
+            key = HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[ind - 1]
 
             hk = Hotkey(
-                name=f"SingleLogin{credential_index[ind].username.title()}",
+                name=f"SingleLogin{config.game_client_config.credential_index[ind].username.title()}",
                 key=keyname.SCROLOCK_ON(key),
                 actions=[
                     cmd_g01_window_and_login.cmd_enter_username_and_password.call(
                         window_index[ind].title,
-                        credential_index[ind].username,
-                        credential_index[ind].password,
+                        config.game_client_config.credential_index[ind].username,
+                        config.game_client_config.credential_index[ind].password,
                     )
                 ],
                 script=script,

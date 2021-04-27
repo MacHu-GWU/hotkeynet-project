@@ -87,7 +87,7 @@ def build_hk_healbot_small_heal():
                 act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
             ]),
             _build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+                act.Priest.HEAL_BOT_HOLY_SPEC_FLASH_HEAL,
             ]),
             _build_send_label_tank(),
             _build_send_label_dps(),
@@ -117,7 +117,7 @@ def build_hk_healbot_big_heal():
                 act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
             ]),
             _build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+                act.Priest.HEAL_BOT_HOLY_SPEC_FLASH_HEAL,
             ]),
             _build_send_label_tank(),
             _build_send_label_dps(),
@@ -138,7 +138,7 @@ def build_hk_healbot_aoe_heal():
                 act.Paladin.HEAL_BOT_LEFT_CLICK_HOLY_LIGHT,
             ]),
             _build_send_label_resto_shaman([
-                act.Shaman.HEAL_BOT_CHAIN_HEAL_SHIFT_LEFT_CLIICK,
+                act.Shaman.HEAL_BOT_CHAIN_HEAL_MIDDLE_CLICK,
             ]),
             _build_send_label_resto_druid([
                 act.Druid.HEAL_BOT_WILD_GROWTH,
@@ -147,7 +147,7 @@ def build_hk_healbot_aoe_heal():
                 act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
             ]),
             _build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+                act.Priest.HEAL_BOT_CIRCLE_OF_HEALING,
             ]),
             _build_send_label_tank(),
             _build_send_label_dps(),
