@@ -121,7 +121,7 @@ class Mode:
         config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
-                CharacterFactory.make_char_fatmulti1_batlefury_pve_retri_pala().evolve(),
+                CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().evolve(),
                 CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
                 CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
                 # CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(),
@@ -154,8 +154,8 @@ class Mode:
                 CharacterFactory.make_char_fatmulti24_lgsmn_pve_elemental_shaman().evolve(),
                 # CharacterFactory.make_char_fatmulti24_lgsmn_pve_resto_shaman().evolve(),
 
-                # CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().evolve(),
-                CharacterFactory.make_char_fatmulti25_lgsmo_pve_resto_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().evolve(),
+                # CharacterFactory.make_char_fatmulti25_lgsmo_pve_resto_shaman().evolve(),
 
                 # CharacterFactory.make_char_fatmulti26_lgsmp_pve_elemental_shaman().evolve(),
                 CharacterFactory.make_char_fatmulti26_lgsmp_pve_resto_shaman().evolve(),

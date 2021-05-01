@@ -104,7 +104,6 @@ class Mode:
                     ]
                 )
             ]
-            print(hk_g07_skills.hk_g.actions)
 
         config.post_hook = post_hook
 
@@ -141,7 +140,8 @@ class Mode:
         config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
-                CharacterFactory.make_char_makun7551_laoshou_retri_paladin().evolve(),
+                CharacterFactory.make_char_makun7551_laoshou_protect_paladin().evolve(),
+                # CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().evolve(),
                 CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman().evolve(),
                 CharacterFactory.make_char_fatmulti24_lgsmn_pve_elemental_shaman().evolve(),
                 CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().evolve(),

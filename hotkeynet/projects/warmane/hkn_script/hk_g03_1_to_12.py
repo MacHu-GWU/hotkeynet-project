@@ -9,7 +9,7 @@ import typing
 from ._config_and_script import config, script, Config
 from .. import act
 from ..constant.talent_category_association import (
-    Talent, TalentCategory, get_talent_by_category,
+    Talent, TalentCategory, T, TC, get_talent_by_category,
 )
 from .... import keyname
 from ....script import Hotkey, SendLabel, Key
@@ -350,3 +350,25 @@ def build_hk_12_focus_mode_2():
 
 
 hk_12_focus_mode_2 = build_hk_12_focus_mode_2()
+
+
+def build_hk_alt_5():
+    hk = Hotkey(
+        name="Alt 5",
+        key=keyname.SCROLOCK_ON(keyname.ALT_(keyname.KEY_5)),
+        actions=[
+            SendLabel(
+                name=TC.priest_holy.name,
+                to=config.lbs_by_tc(tc=TC.priest_holy),
+                actions=[
+                    act.Target.TARGET_SELF,
+                    act.Priest.HOLY_SPEC_CIRCLE_OF_HEALING,
+                ]
+            )
+        ],
+        script=script,
+    )
+    return hk
+
+
+hk_alt_5 = build_hk_alt_5()

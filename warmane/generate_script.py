@@ -6,7 +6,7 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 
 #=== Set Combat Mode
 #--- Temp
-Mode.set_mode_temp(config)
+# Mode.set_mode_temp(config)
 
 #------------------------------------------------------------------------------
 #                                   Solo RAID
@@ -54,7 +54,7 @@ Mode.set_mode_temp(config)
 
 # Mode.set_mode_solo_dungeon_glowyy_and_litgugu_abcd(config)
 # Mode.set_mode_solo_dungeon_batlefury_carry_4_priest(config)
-# Mode.set_mode_solo_dungeon_batlefury_carry_4_shaman(config)
+Mode.set_mode_solo_dungeon_batlefury_carry_4_shaman(config)
 
 # Naxx
 
@@ -73,11 +73,11 @@ Mode.set_mode_temp(config)
 
 #--- 灰熊丘陵日常 Grizzily Hill Daily Quest
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team0_fatmulti_1_to_5(config)
-
+#
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team1_litgugu_druid(config)
-Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_priest(config)
-# Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team3_litgoat_shaman(config)
-
+# Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_ss_and_ganjj_priest(config)
+# Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team3_litgoat_dk_and_laoshou_shaman(config)
+#
 # Mode.set_mode_questing_4_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
 
 
@@ -85,24 +85,25 @@ Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_priest(config)
 # Mode.set_mode_questing_5_ppl_batlefury_team(config)              # Paladin Main Team
 # Mode.set_mode_questing_5_ppl_litgoat_warlock_team(config)         # Warlock
 # Mode.set_mode_questing_5_ppl_litgoat_dk_team(config)              # DK
-
-# Mode.set_mode_questing_4_ppl_litgugu_abcd_luxiaofeng_druid_team(config)
-# Mode.set_mode_questing_4_ppl_litgugu_efgh_glowyy_druid_team(config)
-
-# Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgms_priest_ganjj_team(config) # Priest
+#
+# Mode.set_mode_questing_4_ppl_litgugu_abcd_bunnysisters_druid_team(config) # 5 Druid PK
+# # Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgms_priest_ganjj_team(config) # Priest
 # Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgsm_shaman_laoshou_team(config) # Shaman
-
+#
+# Mode.set_mode_questing_4_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
 
 #------------------------------------------------------------------------------
 #                                   PvP
 #------------------------------------------------------------------------------
-# Mode.set_mode_questing_4_ppl_litgugu_abcd_opiitou_druid_team(config) # 5 Druid PK
+# Mode.set_mode_questing_4_ppl_litgugu_abcd_bunnysisters_druid_team(config) # 5 Druid PK
+
 # Mode.set_mode_questing_4_ppl_litgugu_efgh_bunnysisters_druid_team(config) # 5 Druid PK
 
 # Mode.set_mode_pvp_wintergraps_team1(config)
 
 # Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgms_priest_ganjj_team(config) # Priest
 # Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgsm_shaman_laoshou_team(config) # Shaman
+
 
 #=== Build Script
 from hotkeynet.projects.warmane.hkn_script import hkn

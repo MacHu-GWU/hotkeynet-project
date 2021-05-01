@@ -242,6 +242,7 @@ for class_ in _all_class:
     _c2t_map[TC[class_]] = [t for t in Talent if t.name.startswith(class_)]
     _c2t_map[TC[f"non_{class_}"]] = difference_list(_all_talent, _c2t_map[TC[class_]])
 
+
 for tc in TC:
     tc_name_chunks = tc.name.split("_")
     class_ = tc_name_chunks[0]
@@ -250,7 +251,7 @@ for tc in TC:
         _c2t_map[TC[f"{class_}_{spec}"]] = [
             t
             for t in Talent
-            if class_ in t.name and spec in t.name
+            if (class_ in t.name) and (spec in t.name)
         ]
 
 for tc in TC:
@@ -259,7 +260,7 @@ for tc in TC:
     if class_ in _all_class and len(tc_name_chunks) == 3:
         spec = tc.name.split("_")[-1]
         _c2t_map[TC[f"{class_}_non_{spec}"]] = difference_list(
-            _all_talent,
+            _c2t_map[TC[f"{class_}"]],
             _c2t_map[TC[f"{class_}_{spec}"]],
         )
 

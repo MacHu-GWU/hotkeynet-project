@@ -28,6 +28,13 @@ def test_get_talent_by_category():
     assert T.druid_pve_bear not in get_talent_by_category(TC.dispeler)
     assert T.druid_pvp_cat not in get_talent_by_category(TC.dispeler)
 
+    # 测试 TC.${class}_non_${spec}
+    assert T.warrior_pve_fury not in get_talent_by_category(TC.shaman_non_resto)
+    assert T.shaman_pve_resto not in get_talent_by_category(TC.shaman_non_resto)
+    assert T.shaman_pve_elemental in get_talent_by_category(TC.shaman_non_resto)
+    assert T.shaman_pvp_elemental in get_talent_by_category(TC.shaman_non_resto)
+
+
 
 def test_get_category_by_talent():
     pass

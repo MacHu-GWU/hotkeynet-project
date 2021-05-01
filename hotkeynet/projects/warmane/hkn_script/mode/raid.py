@@ -515,8 +515,8 @@ class Mode:
 
                 CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().evolve(is_tank1=True),
 
-                CharacterFactory.make_char_fatmulti15_litgugue_pvp_balance_druid().evolve(),
-                CharacterFactory.make_char_fatmulti16_litguguf_pvp_balance_druid().evolve(),
+                # CharacterFactory.make_char_fatmulti15_litgugue_pvp_balance_druid().evolve(),
+                # CharacterFactory.make_char_fatmulti16_litguguf_pvp_balance_druid().evolve(),
 
                 CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
                 CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),

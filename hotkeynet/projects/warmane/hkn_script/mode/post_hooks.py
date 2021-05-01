@@ -125,6 +125,18 @@ def boomkin_round_robin_starfall(config: 'Config', script: Script):
         )
     )
 
+    from .. import hk_g07_skills
+
+    hk_g07_skills.hk_alt_f1.actions = [
+        SendLabel(
+            name=TC.druid.name,
+            to=config.lbs_by_tc(tc=TC.druid),
+            actions=[
+                act.Druid.ALL_SPEC_CAT_STEALTH_MACRO,
+            ]
+        )
+    ]
+
 
 def lgms_ijkl_shadow_priest_group(config: 'Config', script: Script):
     from .. import hk_g07_skills

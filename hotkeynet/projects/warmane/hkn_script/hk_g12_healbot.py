@@ -7,6 +7,7 @@
 
 from ._config_and_script import config, script
 from .. import act
+from ....utils import difference_list
 from ..constant.talent_category_association import TC
 from .... import keyname
 from ....script import (
@@ -25,6 +26,12 @@ def _build_send_label_holy_paladin(actions):
 def _build_send_label_resto_shaman(actions):
     return SendLabel(
         name=TC.shaman_resto.name, to=config.lbs_by_tc(TC.shaman_resto),
+        actions=actions,
+    )
+
+def _build_send_label_dps_shaman(actions):
+    return SendLabel(
+        name=TC.shaman_non_resto.name, to=config.lbs_by_tc(TC.shaman_non_resto),
         actions=actions,
     )
 
@@ -61,7 +68,8 @@ def _build_send_label_tank():
 
 def _build_send_label_dps():
     return SendLabel(
-        name=TC.dps.name, to=config.lbs_by_tc(TC.dps),
+        name=TC.dps.name,
+        to=difference_list(config.lbs_by_tc(TC.dps), config.lbs_by_tc(TC.shaman_non_resto)),
         actions=[
             act.Target.TARGET_FOCUS_TARGET,
             Key(name=keyname.KEY_2)
@@ -138,6 +146,9 @@ def build_hk_healbot_aoe_heal():
                 act.Paladin.HEAL_BOT_LEFT_CLICK_HOLY_LIGHT,
             ]),
             _build_send_label_resto_shaman([
+                act.Shaman.HEAL_BOT_CHAIN_HEAL_MIDDLE_CLICK,
+            ]),
+            _build_send_label_dps_shaman([
                 act.Shaman.HEAL_BOT_CHAIN_HEAL_MIDDLE_CLICK,
             ]),
             _build_send_label_resto_druid([
