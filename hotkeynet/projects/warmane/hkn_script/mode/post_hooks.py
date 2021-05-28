@@ -1,11 +1,39 @@
 # -*- coding: utf-8 -*-
 
+import typing
 from ...config import Config
 from ...constant.characters import CharacterFactory
-from .....script import Script, SendLabel
+from .....script import Script, Action, SendLabel, SendFocusWindow
 from ...constant.talent_category_association import TC
 from ...constant.windows import window_index
 from ... import act
+
+
+send_focus_window_trigger = SendFocusWindow(
+    name="",
+    actions=[
+        act.General.TRIGGER,
+    ]
+)
+
+def _has_send_focus_window(actions: typing.List[Action]) -> bool:
+    """
+    Identify whether there is a ``SendFocusWindow`` in actions.
+    :param actions:
+    :return:
+    """
+    for act in actions:
+        if isinstance(act, SendFocusWindow):
+            return True
+    return False
+
+
+def _add_send_focus_window_if_not_available(actions: typing.List[Action]) -> bool:
+    if _has_send_focus_window(actions):
+        return False
+    else:
+        actions.append(send_focus_window_trigger)
+        return True
 
 
 def litgoatdk_abcde_team_death_grip(config: 'Config', script: Script):
@@ -150,3 +178,20 @@ def lgms_ijkl_shadow_priest_group(config: 'Config', script: Script):
             ]
         )
     )
+
+
+def resto_shaman_earth_shield(config: 'Config', script: Script):
+    from ..hk_g07_skills import hk_z
+
+    hk_z.actions.append(
+        SendLabel(
+            name=TC.shaman_resto.name,
+            to=config.lbs_by_tc(tc=TC.shaman_resto)[:1],
+            actions=[
+                act.Target.TARGET_FOCUS,
+                act.Shaman.RESTO_SPEC_EARTH_SHIELD,
+            ]
+        )
+    )
+
+    _add_send_focus_window_if_not_available(hk_z.actions)

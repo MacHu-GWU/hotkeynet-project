@@ -203,3 +203,62 @@ class Mode:
                 )
 
         config.post_hook = post_hook
+
+    @classmethod
+    def set_mode_solo_dungeon_ganjj_2_priest_2_shaman_team1(cls, config: Config):
+        config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_n_windows(22)
+        config.game_client_config.use_credential_list_default()
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().evolve(is_tank1=True),
+
+                CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
+                # CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(),
+                # CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().evolve(),
+
+                CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti24_lgsmn_pve_resto_shaman().evolve(),
+                # CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().evolve(),
+                # CharacterFactory.make_char_fatmulti26_lgsmp_pve_resto_shaman().evolve(),
+            ]
+        )
+        config.active_character_config.set_leader1_window_index(10)
+        config.active_character_config.set_leader2_window_index(10)
+
+        config.post_hook = [
+            # post_hooks.lgms_ijkl_shadow_priest_group
+            post_hooks.resto_shaman_earth_shield,
+        ]
+
+    @classmethod
+    def set_mode_solo_dungeon_laoshou_2_priest_2_shaman_team2(cls, config: Config):
+        config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_n_windows(22)
+        config.game_client_config.use_credential_list_default()
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                CharacterFactory.make_char_makun7551_laoshou_protect_paladin().evolve(is_tank1=True),
+                # CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
+                # CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().evolve(),
+
+                # CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman().evolve(),
+                # CharacterFactory.make_char_fatmulti24_lgsmn_pve_resto_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().evolve(),
+                CharacterFactory.make_char_fatmulti26_lgsmp_pve_resto_shaman().evolve(),
+            ]
+        )
+        config.active_character_config.set_leader1_window_index(10)
+        config.active_character_config.set_leader2_window_index(10)
+
+        config.post_hook = [
+            post_hooks.lgms_ijkl_shadow_priest_group,
+            post_hooks.resto_shaman_earth_shield,
+        ]

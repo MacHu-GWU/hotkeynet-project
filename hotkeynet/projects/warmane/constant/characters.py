@@ -324,6 +324,15 @@ class CharacterFactory:
         )
 
     @classmethod
+    def make_char_makun7551_laoshou_protect_paladin_at_window_9(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_makun7551.value,
+            name="laoshou",
+            talent=Talent.paladin_pve_protect,
+            window_index=9,
+        )
+
+    @classmethod
     def make_char_makun7551_laoshou_retri_paladin_at_window_19(cls) -> Character:
         return Character(
             credential=Credentials.cred_makun7551.value,
@@ -613,6 +622,15 @@ class CharacterFactory:
             name="litgugug",
             talent=Talent.druid_pvp_balance,
             window_index=13,
+        )
+
+    @classmethod
+    def make_char_fatmulti18_litguguh_pvp_balance_druid(cls) -> Character:
+        return Character(
+            credential=Credentials.cred_fatmulti18.value,
+            name="litguguh",
+            talent=Talent.druid_pvp_balance,
+            window_index=14,
         )
 
     @classmethod

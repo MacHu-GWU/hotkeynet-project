@@ -160,8 +160,8 @@ def build_hk_healbot_aoe_heal():
             _build_send_label_holy_priest([
                 act.Priest.HEAL_BOT_CIRCLE_OF_HEALING,
             ]),
-            _build_send_label_tank(),
-            _build_send_label_dps(),
+            # _build_send_label_tank(),
+            # _build_send_label_dps(),
         ],
         script=script,
     )

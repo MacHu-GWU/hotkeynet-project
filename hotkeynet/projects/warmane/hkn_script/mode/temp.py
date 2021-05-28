@@ -20,13 +20,13 @@ class Mode:
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
                 # 1 - 5
-                CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().evolve(is_tank1=True),
+                # CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().evolve(is_tank1=True),
                 # CharacterFactory.make_char_fatmulti1_batlefury_pve_retri_pala().evolve(),
                 # CharacterFactory.make_char_fatmulti1_litgoatssa_pve_demo_warlock().evolve(),
                 # CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().evolve(),
                 # CharacterFactory.make_char_fatmulti1_litgoatdka_pvp_frost_dk().evolve(),
                 #
-                CharacterFactory.make_char_fatmulti2_quentin_pve_elemental_shaman().evolve(),
+                # CharacterFactory.make_char_fatmulti2_quentin_pve_elemental_shaman().evolve(),
                 # CharacterFactory.make_char_fatmulti2_quentin_pve_resto_shaman().evolve(),
                 # CharacterFactory.make_char_fatmulti2_litgoatssb_pve_demo_warlock().evolve(),
                 # CharacterFactory.make_char_fatmulti2_litgoatdkb_pve_unholy_dk().evolve(),
@@ -63,14 +63,17 @@ class Mode:
                 # CharacterFactory.make_char_fatmulti8_bunnysisters_pve_balance_druid().evolve(),
                 #
                 # CharacterFactory.make_char_fatmulti9_glowyy_pve_holy_pala().evolve(),
-                # CharacterFactory.make_char_fatmulti9_glowyy_pve_protect_pala().evolve(),
+                CharacterFactory.make_char_fatmulti9_glowyy_pve_protect_pala().evolve(),
                 #
                 # CharacterFactory.make_char_monkey130_flydps_pve_blood_tank_dk().evolve(),
+                CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().evolve(),
                 #
                 # CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().evolve(),
-                CharacterFactory.make_char_makun7551_ganjj_pve_unholy_dps_dk().evolve(),
+                # CharacterFactory.make_char_makun7551_ganjj_pve_unholy_dps_dk().evolve(),
                 # CharacterFactory.make_char_makun7551_laoshou_retri_paladin().evolve(),
 
+
+                # CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().evolve(),
                 # 11 - 14
                 # CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid().evolve(),
                 # CharacterFactory.make_char_fatmulti11_litgugua_pvp_resto_druid().evolve(),
@@ -86,7 +89,7 @@ class Mode:
 
                 # 15 - 18
                 # CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
-                # CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
+                CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
                 # CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(),
                 # CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().evolve(),
 
@@ -102,6 +105,6 @@ class Mode:
                 # CharacterFactory.make_char_fatmulti26_lgsmp_pve_resto_shaman().evolve(),
             ]
         )
-        config.active_character_config.set_leader1_window_index(1)
-        config.active_character_config.set_leader2_window_index(19)
+        config.active_character_config.set_leader1_window_index(9)
+        config.active_character_config.set_leader2_window_index(10)
 

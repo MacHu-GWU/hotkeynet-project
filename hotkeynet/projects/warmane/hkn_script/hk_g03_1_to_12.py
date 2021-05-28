@@ -48,7 +48,7 @@ def build_actions_default(config: Config,
         ]
     else:
         _actions = [
-            act.Target.TARGET_FOCUS_TARGET,
+            # act.Target.TARGET_FOCUS_TARGET,
             key,
         ]
     for talent in get_talent_by_category(category=TalentCategory.healer):
@@ -352,6 +352,7 @@ def build_hk_12_focus_mode_2():
 hk_12_focus_mode_2 = build_hk_12_focus_mode_2()
 
 
+# --- alt 1,2,3,4,5
 def build_hk_alt_5():
     hk = Hotkey(
         name="Alt 5",
@@ -364,6 +365,14 @@ def build_hk_alt_5():
                     act.Target.TARGET_SELF,
                     act.Priest.HOLY_SPEC_CIRCLE_OF_HEALING,
                 ]
+            ),
+            SendLabel(
+                name=TC.shaman.name,
+                to=config.lbs_by_tc(tc=TC.shaman),
+                actions=[
+                    act.Target.TARGET_FOCUS_TARGET,
+                    act.Shaman.ALL_SPEC_CHAIN_HEAL,
+                ]
             )
         ],
         script=script,
@@ -372,3 +381,11 @@ def build_hk_alt_5():
 
 
 hk_alt_5 = build_hk_alt_5()
+
+
+def build_hk_alt_6():
+    pass
+
+
+def build_hk_alt_7():
+    pass

@@ -8,9 +8,9 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 #--- Temp
 # Mode.set_mode_temp(config)
 
-#------------------------------------------------------------------------------
+#==============================================================================
 #                                   Solo RAID
-#------------------------------------------------------------------------------
+#==============================================================================
 
 ### General
 # Mode.set_mode_solo_raid_10p_batlefury_luxiaofeng_core_team(config)
@@ -26,13 +26,22 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 # Mode.set_mode_solo_raid_10p_udr10_team1_kindhearted_litgoatdk_lgsm(config)
 # Mode.set_mode_solo_raid_25p_udr25_team2_litgoatss_litgugua_lgms(config)
 
-### VOA 10 宝库摸奖
+#------------------------------------------------------------------------------
+#                                   VOA 10
+#------------------------------------------------------------------------------
 # Mode.set_mode_solo_raid_10p_voa10_team1_batlefury_team(config)
 # Mode.set_mode_solo_raid_10p_voa10_team2_glowyy_team(config)
 # Mode.set_mode_solo_raid_10p_voa10_team4_luxiaofeng_2_priest_2_shaman_team(config)
 # Mode.set_mode_solo_raid_10p_voa10_team5_flydps_2_priest_2_shaman_team(config)
 
-### VOA 25 宝库摸奖
+# Mode.set_mode_solo_raid_10p_voa10_team5(config)
+# Mode.set_mode_solo_raid_10p_voa10_team6(config)
+# Mode.set_mode_solo_raid_10p_voa10_team7(config)
+# Mode.set_mode_solo_raid_10p_voa10_team8(config)
+
+#------------------------------------------------------------------------------
+#                                   VOA 25
+#------------------------------------------------------------------------------
 # Mode.set_mode_solo_raid_22p_voa25_batlefury_2_priest_2_shaman_team1(config)
 # Mode.set_mode_solo_raid_22p_voa25_litgoatdk_2_priest_2_shaman_team2(config)
 # Mode.set_mode_solo_raid_22p_voa25_team3(config)
@@ -43,18 +52,23 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 
 # Mode.set_mode_solo_raid_10p_icc10_lich_king_team(config)
 
-#------------------------------------------------------------------------------
+#==============================================================================
 #                                   Solo RDF
-#------------------------------------------------------------------------------
-# Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
+#==============================================================================
+Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
 # Mode.set_mode_solo_dungeon_batlefury_litgugu_abcd(config)
 
 # Mode.set_mode_solo_dungeon_litgoatdk_abcd_bunnysisters(config)
 # Mode.set_mode_solo_dungeon_litgoatdk_abcd_glowyy(config)
 
 # Mode.set_mode_solo_dungeon_glowyy_and_litgugu_abcd(config)
-# Mode.set_mode_solo_dungeon_batlefury_carry_4_priest(config)
-Mode.set_mode_solo_dungeon_batlefury_carry_4_shaman(config)
+# Mode.set_mode_solo_dungeon_batlefury_carry_4_priest(config)  fatmulti19   ypN7mgdJ5715
+
+# Mode.set_mode_solo_dungeon_batlefury_carry_4_shaman(config)
+
+
+# Mode.set_mode_solo_dungeon_ganjj_2_priest_2_shaman_team1(config)
+# Mode.set_mode_solo_dungeon_laoshou_2_priest_2_shaman_team2(config)
 
 # Naxx
 
@@ -67,11 +81,14 @@ Mode.set_mode_solo_dungeon_batlefury_carry_4_shaman(config)
 #--- Leveling
 # Mode.set_mode_leveling_two_team_carry_in_dungeon(config)
 
+#==============================================================================
+#                                 Questing
+#==============================================================================
+
 #------------------------------------------------------------------------------
-#                                   Questing
+#                            Grizzly Hill 灰熊丘陵日常
 #------------------------------------------------------------------------------
 
-#--- 灰熊丘陵日常 Grizzily Hill Daily Quest
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team0_fatmulti_1_to_5(config)
 #
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team1_litgugu_druid(config)
@@ -81,14 +98,26 @@ Mode.set_mode_solo_dungeon_batlefury_carry_4_shaman(config)
 # Mode.set_mode_questing_4_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
 
 
-#--- 冬拥湖周常 Wintergraps Weekly Quest
-# Mode.set_mode_questing_5_ppl_batlefury_team(config)              # Paladin Main Team
-# Mode.set_mode_questing_5_ppl_litgoat_warlock_team(config)         # Warlock
-# Mode.set_mode_questing_5_ppl_litgoat_dk_team(config)              # DK
-#
-# Mode.set_mode_questing_4_ppl_litgugu_abcd_bunnysisters_druid_team(config) # 5 Druid PK
-# # Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgms_priest_ganjj_team(config) # Priest
+#------------------------------------------------------------------------------
+#                            Winter Grasp 冬拥湖周常
+#------------------------------------------------------------------------------
+# Mode.set_mode_questing_5_ppl_batlefury_team(config)
+# Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_ss_and_ganjj_priest(config)
+# Mode.set_mode_questing_5_ppl_litgoat_dk_team(config)
+
+# Mode.set_mode_questing_5_ppl_litgugu_abcd_bunnysisters_druid_team(config)
+# Mode.set_mode_questing_5_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
+
+# Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgms_priest_ganjj_team(config) # Priest
 # Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgsm_shaman_laoshou_team(config) # Shaman
+
+
+
+
+
+
+
+# Mode.set_mode_questing_5_ppl_bset_mode_questing_4_ppl_litgugu_efgh_bunnysisters_druid_teamwg_5_ppl_lgsm_shaman_laoshou_team(config) # Shaman
 #
 # Mode.set_mode_questing_4_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
 
