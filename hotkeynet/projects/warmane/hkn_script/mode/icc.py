@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
 
+from .....script import Hotkey, Key, SendLabel
+from ... import act
+from ..... import keyname
+from .._config_and_script import config, script
 from ...config import Config, ActiveCharacterConfig
 from ...constant.characters import CharacterFactory
+from ...constant.talent_category_association import TC
 
 
 class Mode:
     @classmethod
-    def set_mode_leveling_two_team_carry_in_dungeon(cls, config: Config):
+    def set_mode_icc_1_marrowgar(cls, config: Config):
         """
-        10个号分成两队 防止爆本, 刷 5人副本升级.
-
         Batlefury Retri paladin + 4 alts
         Opiitou Bear druid + 4 alts
         """
         config.game_client_config.use_1600_900_resolution()
         config.game_client_config.use_n_windows(22)
         config.game_client_config.use_credential_list_default()
-        config.toggle_window_config.key1_to_25_window_index = [
-            1, 15, 16, 17, 18,
-            3, 19, 20, 21, 22,
-        ]
         config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
         config.active_character_config = ActiveCharacterConfig(
             active_characters=[
@@ -39,3 +38,45 @@ class Mode:
             ]
         )
         config.active_character_config.set_leader1_window_index(1)
+
+        hk_c = Hotkey(
+            name="C",
+            key=keyname.SCROLOCK_ON(keyname.C),
+            actions=[
+                SendLabel(
+                    name=TC.shaman_resto.name,
+                    to=config.lbs_by_tc(tc=TC.shaman_resto),
+                    actions=[
+                        act.Target.TARGET_PARTY,
+                        act.Shaman.ALL_SPEC_CHAIN_HEAL,
+                    ]
+                ),
+                SendLabel(
+                    name=TC.paladin_holy.name,
+                    to=config.lbs_by_tc(tc=TC.paladin_holy),
+                    actions=[
+                        act.Target.TARGET_PARTY,
+                        act.Paladin.HOLY_SPEC_KEY_5_HOLY_LIGHT,
+                    ]
+                ),
+                SendLabel(
+                    name=TC.shaman_resto.name,
+                    to=config.lbs_by_tc(tc=TC.shaman_resto),
+                    actions=[
+                        act.Target.TARGET_SELF,
+                        act.Shaman.ALL_SPEC_CHAIN_HEAL,
+                    ]
+                ),
+                SendLabel(
+                    name=TC.shaman_resto.name,
+                    to=config.lbs_by_tc(tc=TC.shaman_resto),
+                    actions=[
+                        act.Target.TARGET_SELF,
+                        act.Shaman.ALL_SPEC_CHAIN_HEAL,
+                    ]
+                ),
+            ],
+            script=script,
+        )
+
+

@@ -47,16 +47,22 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 # Mode.set_mode_solo_raid_22p_voa25_team3(config)
 
 ### Onyxia
+# Mode.set_mode_solo_raid_10p_onyxia(config)
 
-### ICC
+#------------------------------------------------------------------------------
+#                                   ICC 10
+#------------------------------------------------------------------------------
+
+# Mode.set_mode_icc_1_marrowgar(config)
 
 # Mode.set_mode_solo_raid_10p_icc10_lich_king_team(config)
 
 #==============================================================================
 #                                   Solo RDF
 #==============================================================================
-Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
+# Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
 # Mode.set_mode_solo_dungeon_batlefury_litgugu_abcd(config)
+# Mode.set_mode_questing_5_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
 
 # Mode.set_mode_solo_dungeon_litgoatdk_abcd_bunnysisters(config)
 # Mode.set_mode_solo_dungeon_litgoatdk_abcd_glowyy(config)
@@ -105,7 +111,7 @@ Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_ss_and_ganjj_priest(config)
 # Mode.set_mode_questing_5_ppl_litgoat_dk_team(config)
 
-# Mode.set_mode_questing_5_ppl_litgugu_abcd_bunnysisters_druid_team(config)
+Mode.set_mode_questing_5_ppl_litgugu_abcd_bunnysisters_druid_team(config)
 # Mode.set_mode_questing_5_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
 
 # Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgms_priest_ganjj_team(config) # Priest

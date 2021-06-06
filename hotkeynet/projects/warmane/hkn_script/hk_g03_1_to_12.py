@@ -317,7 +317,7 @@ hk_11_focus_mode_1 = build_hk_11_focus_mode_1()
 def build_hk_12_focus_mode_2():
     actions = list()
     for char in config.active_character_config.iter_by_window_index():
-        print(char.name, char.leader2_window_index)
+        # print(char.name, char.leader2_window_index)
         if char.leader2_window_index:
             try:
                 sl = SendLabel(

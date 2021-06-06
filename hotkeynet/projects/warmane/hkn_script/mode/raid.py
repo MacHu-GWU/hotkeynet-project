@@ -2,7 +2,11 @@
 
 from ...config import Config, ActiveCharacterConfig
 from ...constant.characters import CharacterFactory
-from .....script import Script
+from ...constant.talent_category_association import T, TC
+from .....script import Script, Hotkey, SendLabel, Key
+from ... import act
+from ..... import keyname, utils
+from .._config_and_script import script
 
 
 class Mode:
@@ -750,6 +754,8 @@ class Mode:
                 # 11 - 14
                 CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid().evolve(),
                 CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid().evolve(),
+                # CharacterFactory.make_char_fatmulti11_litgugua_pvp_resto_druid().evolve(),
+                # CharacterFactory.make_char_fatmulti12_litgugub_pvp_resto_druid().evolve(),
                 CharacterFactory.make_char_fatmulti13_litguguc_pvp_resto_druid().evolve(), # Healer
                 CharacterFactory.make_char_fatmulti14_litgugud_pve_balance_druid().evolve(),
 
@@ -833,3 +839,118 @@ class Mode:
         config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
         config.active_character_config.set_leader1_window_index(1)
         config.active_character_config.set_leader2_window_index(10)
+
+
+    @classmethod
+    def set_mode_solo_raid_10p_onyxia(cls, config: Config):
+        """
+
+        :param config:
+        :return:
+        """
+        config.game_client_config.use_1600_900_resolution()
+
+        config.game_client_config.use_n_windows(22)
+        config.game_client_config.use_credential_list_default()
+        config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))
+        config.active_character_config = ActiveCharacterConfig(
+            active_characters=[
+                # 1 - 5
+                CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().evolve(leader2_window_index=10),
+
+                CharacterFactory.make_char_fatmulti2_quentin_pve_elemental_shaman().evolve(leader1_window_index=10, leader2_window_index=10),
+
+                CharacterFactory.make_char_fatmulti3_opiitou_pve_balance_druid().evolve(leader1_window_index=10, leader2_window_index=10),
+
+                CharacterFactory.make_char_fatmulti4_swagsonic_pve_arcane_mage().evolve(leader1_window_index=10, leader2_window_index=10),
+
+                CharacterFactory.make_char_fatmulti5_kangliu_pve_shadow_priest().evolve(leader1_window_index=10, leader2_window_index=10),
+
+                # 6 - 10
+                CharacterFactory.make_char_fitsheep_kindhearted_pve_demonology_warlock().evolve(leader1_window_index=10, leader2_window_index=10),
+
+                CharacterFactory.make_char_fatmulti6_kapacuk_pve_marksman_hunter().evolve(leader1_window_index=10, leader2_window_index=10),
+
+                CharacterFactory.make_char_fatmulti8_bunnysisters_pve_resto_druid().evolve(leader1_window_index=10, leader2_window_index=10),
+
+                CharacterFactory.make_char_fatmulti9_glowyy_pve_holy_pala().evolve(leader1_window_index=1, leader2_window_index=10),
+
+                CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().evolve(),
+            ]
+        )
+        config.toggle_window_config.round_robin_window_index = list(range(1, 22 + 1))
+
+        from .. import hk_g03_1_to_12
+        from .. import hk_g07_skills
+
+        send_label = hk_g03_1_to_12.hk_1.get_send_label_by_name(T.paladin_pve_holy.name)
+        send_label.actions = [
+            act.Target.TARGET_FOCUS,
+            Key(name=keyname.KEY_1),
+        ]
+
+        send_label = hk_g03_1_to_12.hk_2.get_send_label_by_name(T.paladin_pve_holy.name)
+        send_label.actions = [
+            act.Target.TARGET_FOCUS,
+            Key(name=keyname.KEY_2),
+        ]
+
+        send_label = hk_g03_1_to_12.hk_0_short_term_buff.get_send_label_by_name(TC.paladin_healer.name)
+        send_label.actions = [
+            act.Target.TARGET_W10_LUXIAOFENG,
+            act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT,
+        ]
+
+        hk_c = Hotkey(
+            name="C",
+            key=keyname.SCROLOCK_ON(keyname.C),
+            actions=[
+                SendLabel(
+                    name=TC.priest.name,
+                    to=config.lbs_by_tc(tc=TC.priest),
+                    actions=[
+                        act.Target.TARGET_W10_LUXIAOFENG,
+                        act.Priest.ALL_SPEC_FEAR_WARD,
+                    ]
+                ),
+            ],
+            script=script,
+        )
+
+        hk_v = Hotkey(
+            name="V",
+            key=keyname.SCROLOCK_ON(keyname.V),
+            actions=[
+                SendLabel(
+                    name=TC.paladin_protect.name,
+                    to=config.lbs_by_tc(tc=TC.paladin_protect),
+                    actions=[
+                        act.Paladin.ALL_SPEC_DIVINE_PROTECTION,
+                    ]
+                ),
+            ],
+            script=script,
+        )
+
+        hk_b = Hotkey(
+            name="B",
+            key=keyname.SCROLOCK_ON(keyname.B),
+            actions=[
+                SendLabel(
+                    name=TC.paladin_protect.name,
+                    to=config.lbs_by_tc(tc=TC.paladin_protect),
+                    actions=[
+                        act.Paladin.ALL_SPEC_DIVINE_SACRIFICE,
+                    ]
+                ),
+                SendLabel(
+                    name=TC.paladin_non_protect.name,
+                    to=config.lbs_by_tc(tc=TC.paladin_non_protect),
+                    actions=[
+                        act.Paladin.ALL_SPEC_AURA_MASTERY,
+                    ]
+                ),
+            ],
+            script=script,
+        )
+
