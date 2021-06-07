@@ -54,11 +54,12 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 #------------------------------------------------------------------------------
 
 # Mode.set_mode_icc_1_marrowgar(config)
+Mode.set_mode_icc_4_death_bringer(config)
 
 # Mode.set_mode_solo_raid_10p_icc10_lich_king_team(config)
 
 #==============================================================================
-#                                   Solo RDF
+#                                   Solo RDF®
 #==============================================================================
 # Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
 # Mode.set_mode_solo_dungeon_batlefury_litgugu_abcd(config)
@@ -153,6 +154,6 @@ else:
 
 #=== Dump Script
 Path(__file__).change(new_basename="warmane.js").write_text(
-    script.dump(),
+    script.dump(verbose=False),
     encoding="utf-8",
 )

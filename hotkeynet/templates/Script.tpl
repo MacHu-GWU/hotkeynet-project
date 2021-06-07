@@ -1,5 +1,5 @@
 {%- for command in script.commands.values() %}
-{{ command.dump() }}
+{{ command.dump(verbose=verbose) }}
 {% endfor %}
 
 // HotkeyNet 中有两个命令可以发送键盘鼠标按键到窗口,
@@ -12,5 +12,5 @@
 {% endfor %}
 
 {%- for hotkey in script.hotkeys.values() %}
-{{ hotkey.dump() }}
+{{ hotkey.dump(verbose=verbose) }}
 {% endfor %}

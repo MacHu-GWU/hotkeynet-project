@@ -3,11 +3,11 @@
 import jinja2
 
 
-def render_template(content, **kwargs):
+def render_template(content, verbose=True, **kwargs):
     """
     Render jinja2 string template
     """
-    return jinja2.Template(content).render(**kwargs)
+    return jinja2.Template(content).render(verbose=verbose, **kwargs)
 
 
 def remove_comments(content: str) -> str:

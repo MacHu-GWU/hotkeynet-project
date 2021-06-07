@@ -51,7 +51,9 @@ class Mode:
         )
         config.active_character_config.set_leader1_window_index(1)
         config.active_character_config.set_leader2_window_index(1)
-        config.post_hook = post_hooks.boomkin_round_robin_starfall
+        config.post_hook = [
+            post_hooks.boomkin_round_robin_starfall
+        ]
 
     @classmethod
     def set_mode_solo_dungeon_litgoatdk_abcd_bunnysisters(cls, config: Config):
@@ -110,7 +112,9 @@ class Mode:
         )
         config.active_character_config.set_leader1_window_index(9)
         config.active_character_config.set_leader2_window_index(9)
-        config.post_hook = post_hooks.boomkin_round_robin_starfall
+        config.post_hook = [
+            post_hooks.boomkin_round_robin_starfall
+        ]
 
     @classmethod
     def set_mode_solo_dungeon_batlefury_carry_4_priest(cls, config: Config):

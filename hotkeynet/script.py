@@ -48,8 +48,8 @@ class Script:
                 raise ValueError(msg)
         self.hotkeys[hotkey.key] = hotkey
 
-    def dump(self):
-        return render_template(_ScriptTemplate, script=self)
+    def dump(self, verbose=True):
+        return render_template(_ScriptTemplate, script=self, verbose=verbose)
 
 
 @attr.s
@@ -82,13 +82,14 @@ class Command:
             " " + " ".join(args) if len(args) else ""
         )
 
-    def dump(self) -> str:
+    def dump(self, verbose=True) -> str:
         """
         渲染整个 Command 代码块
 
         :return:
         """
-        print(f"dump Command({self.name}) ...")
+        if verbose:
+            print(f"dump Command({self.name}) ...")
         return remove_empty_line(
             render_template(
                 self._template,
@@ -148,8 +149,9 @@ class Hotkey:
 
 
 
-    def dump(self) -> str:
-        print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")
+    def dump(self, verbose=True) -> str:
+        if verbose:
+            print(f"dump Hotkey(name='{self.name}', key='{self.key}') ...")
         self.validate()
         if len(self.actions):
             content = remove_empty_line(render_template(
@@ -158,12 +160,14 @@ class Hotkey:
                 render_action=render_action,
             ))
             if content.count("\n") == 0:
-                print("    no action, skip")
+                if verbose:
+                    print("    no action, skip")
                 return ""
             else:
                 return content
         else:
-            print("    no action, skip")
+            if verbose:
+                print("    no action, skip")
             return ""
 
 @attr.s

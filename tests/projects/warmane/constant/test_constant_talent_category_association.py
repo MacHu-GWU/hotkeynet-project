@@ -35,7 +35,6 @@ def test_get_talent_by_category():
     assert T.shaman_pvp_elemental in get_talent_by_category(TC.shaman_non_resto)
 
 
-
 def test_get_category_by_talent():
     pass
 

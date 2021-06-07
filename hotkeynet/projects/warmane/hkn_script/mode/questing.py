@@ -95,7 +95,10 @@ class Mode:
         )
         config.active_character_config.set_leader1_window_index(ind=11)
         config.active_character_config.set_leader2_window_index(ind=11)
-        config.post_hook = post_hooks.boomkin_round_robin_starfall
+        config.post_hook = [
+            post_hooks.boomkin_round_robin_starfall,
+            post_hooks.druid_all_stealth,
+        ]
 
     @classmethod
     def set_mode_questing_5_ppl_litgugu_efgh_luxiaofeng_druid_team(cls, config: Config):
@@ -116,7 +119,9 @@ class Mode:
         )
         config.active_character_config.set_leader1_window_index(ind=10)
         config.active_character_config.set_leader2_window_index(ind=11)
-        config.post_hook = post_hooks.boomkin_round_robin_starfall
+        config.post_hook = [
+            post_hooks.boomkin_round_robin_starfall
+        ]
 
     @classmethod
     def set_mode_questing_5_ppl_lgms_priest_ganjj_team(cls, config: Config):

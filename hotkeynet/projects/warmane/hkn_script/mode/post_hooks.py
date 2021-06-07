@@ -153,6 +153,8 @@ def boomkin_round_robin_starfall(config: 'Config', script: Script):
         )
     )
 
+
+def druid_all_stealth(config: 'Config', script: Script):
     from .. import hk_g07_skills
 
     hk_g07_skills.hk_alt_f1.actions = [
