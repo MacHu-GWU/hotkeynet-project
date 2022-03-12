@@ -39,6 +39,7 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 # Mode.set_mode_solo_raid_10p_voa10_team7(config)
 # Mode.set_mode_solo_raid_10p_voa10_team8(config)
 
+
 #------------------------------------------------------------------------------
 #                                   VOA 25
 #------------------------------------------------------------------------------
@@ -54,22 +55,21 @@ from hotkeynet.projects.warmane.hkn_script.mode import Mode
 #------------------------------------------------------------------------------
 
 # Mode.set_mode_icc_1_marrowgar(config)
-Mode.set_mode_icc_4_death_bringer(config)
+# Mode.set_mode_icc_4_death_bringer(config)
 
 # Mode.set_mode_solo_raid_10p_icc10_lich_king_team(config)
 
 #==============================================================================
-#                                   Solo RDF®
-#==============================================================================
-# Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
+#                                   Solo RDF
+# ==============================================================================
+Mode.set_mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(config)
 # Mode.set_mode_solo_dungeon_batlefury_litgugu_abcd(config)
 # Mode.set_mode_questing_5_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
-
 # Mode.set_mode_solo_dungeon_litgoatdk_abcd_bunnysisters(config)
 # Mode.set_mode_solo_dungeon_litgoatdk_abcd_glowyy(config)
 
 # Mode.set_mode_solo_dungeon_glowyy_and_litgugu_abcd(config)
-# Mode.set_mode_solo_dungeon_batlefury_carry_4_priest(config)  fatmulti19   ypN7mgdJ5715
+# Mode.set_mode_solo_dungeon_batlefury_carry_4_priest(config)
 
 # Mode.set_mode_solo_dungeon_batlefury_carry_4_shaman(config)
 
@@ -101,8 +101,7 @@ Mode.set_mode_icc_4_death_bringer(config)
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team1_litgugu_druid(config)
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_ss_and_ganjj_priest(config)
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team3_litgoat_dk_and_laoshou_shaman(config)
-#
-# Mode.set_mode_questing_4_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
+
 
 
 #------------------------------------------------------------------------------
@@ -112,7 +111,8 @@ Mode.set_mode_icc_4_death_bringer(config)
 # Mode.set_mode_questing_grizzly_hill_daily_gold_farm_team2_litgoat_ss_and_ganjj_priest(config)
 # Mode.set_mode_questing_5_ppl_litgoat_dk_team(config)
 
-Mode.set_mode_questing_5_ppl_litgugu_abcd_bunnysisters_druid_team(config)
+# Mode.set_mode_questing_5_ppl_litgugu_abcd_bunnysisters_druid_team(config)
+# druid_team(config)
 # Mode.set_mode_questing_5_ppl_litgugu_efgh_luxiaofeng_druid_team(config)
 
 # Mode.set_mode_pvp_wintergrasp_wg_5_ppl_lgms_priest_ganjj_team(config) # Priest
@@ -132,7 +132,7 @@ Mode.set_mode_questing_5_ppl_litgugu_abcd_bunnysisters_druid_team(config)
 #                                   PvP
 #------------------------------------------------------------------------------
 # Mode.set_mode_questing_4_ppl_litgugu_abcd_bunnysisters_druid_team(config) # 5 Druid PK
-
+#
 # Mode.set_mode_questing_4_ppl_litgugu_efgh_bunnysisters_druid_team(config) # 5 Druid PK
 
 # Mode.set_mode_pvp_wintergraps_team1(config)

@@ -78,7 +78,8 @@ class Mode:
 
     @classmethod
     def set_mode_questing_5_ppl_litgugu_abcd_bunnysisters_druid_team(cls, config: Config):
-        config.game_client_config.use_1600_900_resolution()
+        # config.game_client_config.use_1600_900_resolution()
+        config.game_client_config.use_1176_664_resolution()
         config.game_client_config.use_n_windows(22)
         config.game_client_config.use_credential_list_default()
         config.toggle_window_config.key1_to_25_window_index = list(range(1, 22 + 1))

@@ -63,7 +63,7 @@ class Mode:
                 # CharacterFactory.make_char_fatmulti8_bunnysisters_pve_balance_druid().evolve(),
                 #
                 # CharacterFactory.make_char_fatmulti9_glowyy_pve_holy_pala().evolve(),
-                CharacterFactory.make_char_fatmulti9_glowyy_pve_protect_pala().evolve(),
+                # CharacterFactory.make_char_fatmulti9_glowyy_pve_protect_pala().evolve(),
                 #
                 # CharacterFactory.make_char_monkey130_flydps_pve_blood_tank_dk().evolve(),
                 # CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().evolve(),
@@ -71,11 +71,12 @@ class Mode:
                 # CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().evolve(),
                 # CharacterFactory.make_char_makun7551_ganjj_pve_unholy_dps_dk().evolve(),
                 # CharacterFactory.make_char_makun7551_laoshou_retri_paladin().evolve(),
+                CharacterFactory.make_char_makun7551_laoshou_protect_paladin().evolve(),
 
 
                 # CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().evolve(),
                 # 11 - 14
-                # CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid().evolve(),
+                CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid().evolve(),
                 # CharacterFactory.make_char_fatmulti11_litgugua_pvp_resto_druid().evolve(),
                 #
                 # CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid().evolve(),
@@ -88,7 +89,7 @@ class Mode:
                 # CharacterFactory.make_char_fatmulti14_litgugud_pvp_resto_druid().evolve(),
 
                 # 15 - 18
-                CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
+                # CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().evolve(),
                 # CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().evolve(),
                 # CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().evolve(),
                 # CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().evolve(),
@@ -105,6 +106,6 @@ class Mode:
                 # CharacterFactory.make_char_fatmulti26_lgsmp_pve_resto_shaman().evolve(),
             ]
         )
-        config.active_character_config.set_leader1_window_index(9)
-        config.active_character_config.set_leader2_window_index(10)
+        config.active_character_config.set_leader1_window_index(10)
+        config.active_character_config.set_leader2_window_index(11)
 

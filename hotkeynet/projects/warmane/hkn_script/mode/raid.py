@@ -897,7 +897,7 @@ class Mode:
 
         send_label = hk_g03_1_to_12.hk_0_short_term_buff.get_send_label_by_name(TC.paladin_healer.name)
         send_label.actions = [
-            act.Target.TARGET_W10_LUXIAOFENG,
+            act.Target.TARGET_W1_BATLEFURY,
             act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT,
         ]
 

@@ -15,6 +15,7 @@ def extract_tank_and_dpssendlabel_actions(config: Config, hotkey: Hotkey):
     for send_label in hotkey.actions:
         if isinstance(send_label, SendLabel):
             if len(send_label.to):
+                pass
             
     config.lbs_by_tc(tc=TC.non_dps)
     # print(TC.non_dps)
