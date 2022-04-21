@@ -1,0 +1,2 @@
+.. autotoctree::
+    :maxdepth: 1
