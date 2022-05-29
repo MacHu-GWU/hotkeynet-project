@@ -3,6 +3,8 @@ hotkeynet_venv/
 hotkeynet.egg-info/
 hotkeynet-*/
 tmp/
+credentials.json
+*.js
 
 
 # Byte-compiled / optimized / DLL files

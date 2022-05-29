@@ -5,8 +5,15 @@ Hotkeynet 脚本入门
     :depth: 1
     :local:
 
-::
 
-    <Hotkey ScrollLockOn 1, 2, 5, 6, 7, 8, 9, 0, R, Minus, Plus, J, G, X, Oem5>
-        <SendLabel w2, w3, w4, w5>
+Hotkeynet 脚本的最小组成部分
+------------------------------------------------------------------------------
+下面一段代码是 Hotkeynet 脚本中的最小元素. 其功能是你在 ``ScrollLock`` 打开的情况下, 按下 1, 2, 3, 4, 5 按键, 那么以下五个 w1, w2, w3, w4, w5 窗口都会按下同样的按键::
+
+    <Hotkey ScrollLockOn 1, 2, 3, 4, 5>
+        <SendLabel w1, w2, w3, w4, w5>
         <Key %Trigger%>
+
+在这段代码中 ``<Hotkey ScrollLockOn 1, 2, 3, 4, 5>`` 是 ``触发器``, 也就是 ``ScrollLockOn 1, 2, 3, 4, 5`` 都可以触发下面的 ``响应`` 而这个 ``响应`` 里 ``<Key %Trigger%>`` 定义了动作是跟触发器一样的按键, 触发器是由 1 触发的, 那么动作也是一样的 1. 而 ``<SendLabel w1, w2, w3, w4, w5>`` 则定义了 ``广播``, 指定将动作发送到五个窗口中.
+
+<>

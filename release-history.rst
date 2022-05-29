@@ -4,7 +4,7 @@ Release and Version History
 ==============================================================================
 
 
-0.0.6 (TODO)
+0.0.3 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
 
@@ -15,16 +15,9 @@ Release and Version History
 **Miscellaneous**
 
 
-0.0.5 (TODO)
+0.0.2 (TODO)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Features and Improvements**
-
-- Re-implement the interactive repo initialization script. Allows complex inter-option dependency logic which is not available in ``cookiecutter``
-- If you are not using ``pyenv-virtualenv``, allows to activate virtualenv with ``source ./bin/py/activate.sh``.
-- Add a powerful Centralized config management framework allows you to read and inject config values to any programming language, any system like AWS parameter store. And you can easily customize how's config been dynamically created.
-- Add a Deployment on AWS best practice framework allows you to easily manage a multi-env dev/test/prod continues deployment workflow.
-- Add CI/CD integration with CircleCI
-- improve CI/CD integration with TravisCI
 
 **Minor Improvements**
 
@@ -33,7 +26,7 @@ Release and Version History
 **Miscellaneous**
 
 
-0.0.1 (2020-12-25)
+0.0.1 (2022-04-21)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - First release

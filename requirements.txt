@@ -1,3 +1,9 @@
-attrs
-jinja2
-varname
+asttokens==2.0.5
+attrs==21.4.0
+attrs-mate==1.0.2
+executing==0.8.3
+Jinja2==3.1.1
+MarkupSafe==2.1.1
+pure-eval==0.2.2
+six==1.16.0
+varname==0.8.3
