@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import typing as T
 import jinja2
 
 
@@ -25,7 +26,7 @@ def remove_empty_line(content: str) -> str:
     return new_content
 
 
-def union_list(*lists: list) -> list:
+def union_list(*lists: T.Iterable) -> list:
     """
     Union elements in all given lists.
     """
@@ -34,7 +35,7 @@ def union_list(*lists: list) -> list:
     return l
 
 
-def intersection_list(*lists: list) -> list:
+def intersection_list(*lists: T.Iterable) -> list:
     """
     Common elements in all given lists.
     """
@@ -43,7 +44,7 @@ def intersection_list(*lists: list) -> list:
     return l
 
 
-def difference_list(lst: list, *other_lsts: list) -> list:
+def difference_list(lst: T.Iterable, *other_lsts: T.Iterable) -> list:
     """
     Remove all item in ``lst`` that exists in all ``other_lsts``
     """

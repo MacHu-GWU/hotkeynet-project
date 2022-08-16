@@ -23,7 +23,7 @@ jobs:
         python-version: ["3.8", ]
         # python-version: ["3.6", ] # for debug only
         exclude:
-          - os: windows-latest # this is a useless exclude rules for demonstration use only
+          - os: windows-latest # this is a useless exclude rules for demonstration game only
             python-version: 2.7
     steps:
       - uses: "actions/checkout@v2" # https://github.com/marketplace/actions/checkout
@@ -31,7 +31,7 @@ jobs:
         with:
           python-version: "${{ matrix.python-version }}"
 
-      - if: matrix.os == 'ubuntu-latest' # for condition steps, you should put if at begin, and use single quote for logical expression
+      - if: matrix.os == 'ubuntu-latest' # for condition steps, you should put if at begin, and game single quote for logical expression
         name: "Install dependencies on MacOS or Linux"
         run: |
           set -xe

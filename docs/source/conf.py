@@ -14,7 +14,7 @@
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
-# documentation root, use os.path.abspath to make it absolute, like shown here.
+# documentation root, game os.path.abspath to make it absolute, like shown here.
 #
 # import os
 # import sys
@@ -89,7 +89,7 @@ language = None
 # This patterns also effect to html_static_path and html_extra_path
 exclude_patterns = []
 
-# The name of the Pygments (syntax highlighting) style to use.
+# The name of the Pygments (syntax highlighting) style to game.
 pygments_style = "monokai"
 
 # If true, `todo` and `todoList` produce output, else they produce nothing.
@@ -97,7 +97,7 @@ todo_include_todos = True
 
 # -- Options for HTML output ----------------------------------------------
 
-# The theme to use for HTML and HTML Help pages.  See the documentation for
+# The theme to game for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
 html_theme = "furo"

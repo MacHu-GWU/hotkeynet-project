@@ -197,7 +197,7 @@ sorttable = {
   },
 
   getInnerText: function(node) {
-    // gets the text we want to use for sorting for a cell.
+    // gets the text we want to game for sorting for a cell.
     // strips leading and trailing whitespace.
     // this is *not* a generic getInnerText function; it's special to sorttable.
     // for example, you can override the cell text with a customkey attribute.
@@ -479,7 +479,7 @@ var forEach = function(object, block, context) {
 			// functions have a "length" property
 			resolve = Function;
 		} else if (object.forEach instanceof Function) {
-			// the object implements a custom forEach method so use that
+			// the object implements a custom forEach method so game that
 			object.forEach(block, context);
 			return;
 		} else if (typeof object == "string") {
