@@ -4,17 +4,24 @@ import os
 from hotkeynet import utils
 
 
-def test_remove_indent():
-    content = """
-    <div>
-        <strong></strong>
-    </div>
-    """
-    assert utils.remove_indent(content) == "\n".join([
-        "<div>",
-        "    <strong></strong>",
-        "</div>",
-    ])
+def test_render_template():
+    content = "Hello {{ name }}"
+    assert utils.render_template(content, data={"name": "Alice"}) == "Hello Alice"
+
+
+def test_remove_empty_line():
+    content = (
+        "<div>\n"
+        "    \n"
+        "    <strong></strong>\n"
+        "    \n"
+        "</div>\n"
+    )
+    assert utils.remove_empty_line(content) == (
+        "<div>\n"
+        "    <strong></strong>\n"
+        "</div>"
+    )
 
 
 def test_union_list():
@@ -27,6 +34,11 @@ def test_intersection_list():
 
 def test_difference_list():
     assert utils.difference_list([1, 2, 3, 4, 5], [1, 3], [5, 3]) == [2, 4]
+
+
+def test_set_to_list():
+    assert utils.set_to_list({3, 1, 2}) == [1, 2, 3]
+    assert utils.set_to_list({3, 1, 2}, reverse=True) == [3, 2, 1]
 
 
 if __name__ == "__main__":
@@ -54,4 +66,4 @@ if __name__ == "__main__":
         "--cov-report", f"html:{dir_htmlcov}",
         abspath,
     ]
-    subprocess.run(args, check=True)
+    subprocess.run(args)
