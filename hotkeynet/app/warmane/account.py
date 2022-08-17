@@ -31,9 +31,10 @@ def load_account(username: str) -> Account:
     return Account(username=username, password=accounts_data[username])
 
 
-# Enumerate all username password data object
-# 枚举出所有的用户名密码的数据对象, 以供之后引用
 class AccountEnum(Enum):
+    """
+    枚举出所有的用户名密码的数据对象, 以供之后引用.
+    """
     account_fatmulti1 = load_account("fatmulti1")
     account_fatmulti2 = load_account("fatmulti2")
     account_fatmulti3 = load_account("fatmulti3")
@@ -66,16 +67,3 @@ class AccountEnum(Enum):
     account_fatmulti27 = load_account("fatmulti27")
     account_fatmulti28 = load_account("fatmulti28")
     account_fatmulti29 = load_account("fatmulti29")
-
-
-all_window = TP
-
-window_list = [
-    Window(title="WoW{}".format(ind + 1), label="w{}".format( str(ind + 1).zfill(2)))
-    for ind in range(25)
-]  # type: T.List[Window]
-
-window_index = {
-    ind + 1: window
-    for ind, window in enumerate(window_list)
-}  # type: typing.Dict[int, Window]
