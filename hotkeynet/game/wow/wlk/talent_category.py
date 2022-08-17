@@ -4,15 +4,18 @@
 枚举所有职业天赋的分类.
 """
 
-from enum import IntEnum, auto
+from enum import auto
+
+from ..model import TalentCategory
 
 
-class TalentCategory(IntEnum):
+class TalentCategory(TalentCategory):
     """
     对天赋的分类方式有很多. 比如有:
 
     - 按照 PvP / PvE
     - 按照副本角色, Tank, DPS, 近战, 远程, 施法者, 治疗
+    - 按照职业, 比如 战士, 骑士, 盗贼
     """
     all = auto()
 

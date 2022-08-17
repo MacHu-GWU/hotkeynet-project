@@ -2,22 +2,28 @@
 
 import pytest
 
-from hotkeynet.projects.warmane.constant.talent import Talent
+from hotkeynet.game.wow.wlk.talent_category import TalentCategory
 
 
-class TestTalent:
-    def test_value_is_string(self):
-        assert Talent.dk_pve_blood_tank.name == "dk_pve_blood_tank"
-        assert isinstance(Talent.dk_pve_blood_tank.value, int)
+class TestTalentCategory:
+    def test_name_is_string_value_is_int(self):
+        assert TalentCategory.warrior_tank.name == "warrior_tank"
+        assert isinstance(TalentCategory.warrior_tank.value, int)
 
     def test_sortable(self):
-        l = [
-            Talent.druid_pve_balance,
-            Talent.dk_pve_blood_tank,
-            Talent.priest_pve_disco
+        talent_category_list = [
+            TalentCategory.tank,
+            TalentCategory.dps,
+            TalentCategory.healer
         ]
-        l.sort()
+        talent_category_list.sort()
 
+        talent_category_code_list = [t.value for t in talent_category_list]
+        talent_category_code_list.sort()
+        assert (
+            talent_category_code_list[1] > talent_category_code_list[0]
+            and talent_category_code_list[2] > talent_category_code_list[1]
+        )
 
 
 if __name__ == "__main__":
