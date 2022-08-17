@@ -36,12 +36,18 @@ class Account(AttrsClass):
 @attr.s
 class Character(AttrsClass):
     """
-    代表着一个任务角色.
+    代表着一个正在进行的游戏角色. 有着具体的天赋. 比如一个圣骑士角色有两套天赋.
+    在天赋 1 下就算是一个 Character, 在天赋 2 下算是另一个 Character.
+
+    :param account: 与该游戏角色所绑定的账号密码信息
+    :param name: 游戏角色名
+    :param talent: 角色天赋
+    :param window_index: 游戏窗口的序号
     """
     account: Account = attr.ib(default=None)
-    credential = attr.ib(default=None)
     name: str = attr.ib(default=None)
     talent: Talent = attr.ib(default=None)
+    window: Window = attr.ib(default=None)
     # window_index = attr.ib(default=None)  # type: int
     # leader1_window_index = attr.ib(default=None)  # type: int
     # leader2_window_index = attr.ib(default=None)  # type: int

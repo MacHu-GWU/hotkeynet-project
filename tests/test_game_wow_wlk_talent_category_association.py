@@ -4,40 +4,40 @@ import os
 from hotkeynet.game.wow.wlk.talent_category_association import (
     get_talent_by_category,
     get_category_by_talent,
-    Talent as T,
+    Talent as TL,
     TalentCategory as TC,
 )
 
 
 def test_get_talent_by_category():
-    assert T.druid_pve_bear in get_talent_by_category(TC.tank)
+    assert TL.druid_pve_bear in get_talent_by_category(TC.tank)
     assert len(get_talent_by_category(TC.tank)) == 6
 
-    assert T.paladin_pve_protect not in get_talent_by_category(TC.non_tank)
+    assert TL.paladin_pve_protect not in get_talent_by_category(TC.non_tank)
 
-    assert T.druid_pve_balance in get_talent_by_category(TC.druid_balance)
-    assert T.druid_pvp_balance in get_talent_by_category(TC.druid_balance)
+    assert TL.druid_pve_balance in get_talent_by_category(TC.druid_balance)
+    assert TL.druid_pvp_balance in get_talent_by_category(TC.druid_balance)
 
-    assert T.paladin_pvp_protect in get_talent_by_category(TC.paladin_dps)
+    assert TL.paladin_pvp_protect in get_talent_by_category(TC.paladin_dps)
 
-    assert T.paladin_pve_protect in get_talent_by_category(TC.paladin_non_dps)
-    assert T.paladin_pve_holy in get_talent_by_category(TC.paladin_non_dps)
-    assert T.paladin_pvp_holy in get_talent_by_category(TC.paladin_non_dps)
+    assert TL.paladin_pve_protect in get_talent_by_category(TC.paladin_non_dps)
+    assert TL.paladin_pve_holy in get_talent_by_category(TC.paladin_non_dps)
+    assert TL.paladin_pvp_holy in get_talent_by_category(TC.paladin_non_dps)
 
-    assert T.paladin_pvp_retri in get_talent_by_category(TC.dispeler)
-    assert T.shaman_pve_enhancement in get_talent_by_category(TC.dispeler)
-    assert T.druid_pve_bear not in get_talent_by_category(TC.dispeler)
-    assert T.druid_pvp_cat not in get_talent_by_category(TC.dispeler)
+    assert TL.paladin_pvp_retri in get_talent_by_category(TC.dispeler)
+    assert TL.shaman_pve_enhancement in get_talent_by_category(TC.dispeler)
+    assert TL.druid_pve_bear not in get_talent_by_category(TC.dispeler)
+    assert TL.druid_pvp_cat not in get_talent_by_category(TC.dispeler)
 
     # 测试 TC.${class}_non_${spec}
-    assert T.warrior_pve_fury not in get_talent_by_category(TC.shaman_non_resto)
-    assert T.shaman_pve_resto not in get_talent_by_category(TC.shaman_non_resto)
-    assert T.shaman_pve_elemental in get_talent_by_category(TC.shaman_non_resto)
-    assert T.shaman_pvp_elemental in get_talent_by_category(TC.shaman_non_resto)
+    assert TL.warrior_pve_fury not in get_talent_by_category(TC.shaman_non_resto)
+    assert TL.shaman_pve_resto not in get_talent_by_category(TC.shaman_non_resto)
+    assert TL.shaman_pve_elemental in get_talent_by_category(TC.shaman_non_resto)
+    assert TL.shaman_pvp_elemental in get_talent_by_category(TC.shaman_non_resto)
 
 
 def test_get_category_by_talent():
-    assert get_category_by_talent(T.warrior_pvp_fury) == [
+    assert get_category_by_talent(TL.warrior_pvp_fury) == [
         TC.all,
         TC.pvp,
         TC.dps,
@@ -64,7 +64,7 @@ def test_get_category_by_talent():
         TC.non_priest,
     ]
 
-    assert get_category_by_talent(T.paladin_pve_holy) == [
+    assert get_category_by_talent(TL.paladin_pve_holy) == [
         TC.all,
         TC.pve,
         TC.healer,
@@ -114,7 +114,7 @@ if __name__ == "__main__":
         bin_pytest,
         "-s", "--tb=native", "-vv",
         f"--rootdir={dir_project_root}",
-        "--cov=hotkeynet.game.warmane.wlk.talent_category_association",
+        "--cov=hotkeynet.game.wow.wlk.talent_category_association",
         "--cov-report", "term-missing",
         "--cov-report", f"html:{dir_htmlcov}",
         abspath,

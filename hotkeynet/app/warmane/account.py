@@ -5,8 +5,21 @@
 并安全地在 HotkeyNet 脚本中引用这些信息.
 """
 
+import typing as T
+
 from superjson import json
-from hotkeynet.game.wow.model import Account
+from hotkeynet.game.wow.model import (
+    Account,
+    Window,
+    Character,
+)
+from hotkeynet.game.wow.wlk.talent_category_association import (
+    Talent as TL,
+    TalentCategory as TC,
+    get_talent_by_category,
+    get_category_by_talent,
+)
+from hotkeynet.game.wow.wlk.talent import Talent
 from hotkeynet.paths import path_accounts_json
 
 from enum import Enum
@@ -53,3 +66,16 @@ class AccountEnum(Enum):
     account_fatmulti27 = load_account("fatmulti27")
     account_fatmulti28 = load_account("fatmulti28")
     account_fatmulti29 = load_account("fatmulti29")
+
+
+all_window = TP
+
+window_list = [
+    Window(title="WoW{}".format(ind + 1), label="w{}".format( str(ind + 1).zfill(2)))
+    for ind in range(25)
+]  # type: T.List[Window]
+
+window_index = {
+    ind + 1: window
+    for ind, window in enumerate(window_list)
+}  # type: typing.Dict[int, Window]
