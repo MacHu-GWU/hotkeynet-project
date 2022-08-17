@@ -51,7 +51,7 @@ extensions = [
     'docfly.directives',
 ]
 
-# Add any paths that contain templates here, relative to this directory.
+# Add any paths that contain tpl here, relative to this directory.
 templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
@@ -124,7 +124,7 @@ html_js_files = [
 html_logo = "./_static/{}-logo.png".format(package_name)
 html_favicon = "./_static/{}-favicon.ico".format(package_name)
 
-# Custom sidebar templates, must be a dictionary that maps document names
+# Custom sidebar tpl, must be a dictionary that maps document names
 # to template names.
 #
 # This is required for the alabaster theme
