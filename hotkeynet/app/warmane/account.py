@@ -5,24 +5,13 @@
 并安全地在 HotkeyNet 脚本中引用这些信息.
 """
 
-import typing as T
+from enum import Enum
 
 from superjson import json
-from hotkeynet.game.wow.model import (
-    Account,
-    Window,
-    Character,
-)
-from hotkeynet.game.wow.wlk.talent_category_association import (
-    Talent as TL,
-    TalentCategory as TC,
-    get_talent_by_category,
-    get_category_by_talent,
-)
-from hotkeynet.game.wow.wlk.talent import Talent
-from hotkeynet.paths import path_accounts_json
 
-from enum import Enum
+from hotkeynet.paths import path_accounts_json
+from hotkeynet.enumerate import EnumGetter
+from hotkeynet.game.wow.model import Account
 
 accounts_data = json.load(path_accounts_json.abspath, verbose=False)
 
@@ -67,3 +56,7 @@ class AccountEnum(Enum):
     account_fatmulti27 = load_account("fatmulti27")
     account_fatmulti28 = load_account("fatmulti28")
     account_fatmulti29 = load_account("fatmulti29")
+
+
+class AccountGetter(EnumGetter[AccountEnum, Account]):
+    enum_class = AccountEnum
