@@ -3,6 +3,7 @@ hotkeynet_venv/
 hotkeynet.egg-info/
 hotkeynet-*/
 tmp/
+app/
 credentials.json
 *.js
 

@@ -114,7 +114,7 @@ if __name__ == "__main__":
         bin_pytest,
         "-s", "--tb=native", "-vv",
         f"--rootdir={dir_project_root}",
-        "--cov=hotkeynet.game.wow.wlk.talent_category_association",
+        "--cov=hotkeynet.game.warmane.wlk.talent_category_association",
         "--cov-report", "term-missing",
         "--cov-report", f"html:{dir_htmlcov}",
         abspath,

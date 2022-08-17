@@ -7,3 +7,5 @@ MarkupSafe==2.1.1
 pure-eval==0.2.2
 six==1.16.0
 varname==0.8.3
+pathlib_mate==1.0.3
+superjson==1.0.2
