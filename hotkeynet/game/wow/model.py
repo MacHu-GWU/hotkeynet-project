@@ -48,10 +48,10 @@ class Character(AttrsClass):
     name: str = attr.ib(default=None)
     talent: Talent = attr.ib(default=None)
     window: Window = attr.ib(default=None)
-    # window_index = attr.ib(default=None)  # type: int
-    # leader1_window_index = attr.ib(default=None)  # type: int
-    # leader2_window_index = attr.ib(default=None)  # type: int
-    # is_tank1 = attr.ib(default=False)  # type: bool
-    # is_tank2 = attr.ib(default=False)  # type: bool
-    # is_dr_pala1 = attr.ib(default=False)  # type: bool
-    # is_dr_pala2 = attr.ib(default=False)  # type: bool
+
+    leader1_window: Window = attr.ib(default=None)
+    leader2_window: Window = attr.ib(default=None)
+    is_tank1: bool = attr.ib(default=False)
+    is_tank2: bool = attr.ib(default=False)
+    is_dr_pala1: bool = attr.ib(default=False)
+    is_dr_pala2: bool = attr.ib(default=False)

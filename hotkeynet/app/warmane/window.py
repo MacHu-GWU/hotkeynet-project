@@ -41,7 +41,8 @@ class WindowEnum(enum.Enum):
 class WindowGetter(EnumGetter[WindowEnum, Window]):
     enum_class = WindowEnum
 
-    def get_window(self, index: int) -> Window:
+    @classmethod
+    def get_window(cls, index: int) -> Window:
         return _window_mapper[index]
 
 
