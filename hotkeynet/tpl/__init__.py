@@ -13,7 +13,4 @@ env = Environment(
     )
 )
 
-command_tpl = env.get_template("Command.tpl")
-hotkey_tpl = env.get_template("Hotkey.tpl")
-send_label_tpl = env.get_template("SendLabel.tpl")
-script_tpl = env.get_template("Script.tpl")
+block_tpl = env.get_template("Block.tpl")

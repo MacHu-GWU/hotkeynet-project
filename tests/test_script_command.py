@@ -1,24 +1,27 @@
 # -*- coding: utf-8 -*-
 
 import os
-import typing as T
 
 from rich import print
 
 from hotkeynet.script import (
     Command,
     SendPC,
+    Run,
 )
 
 
 class TestLabel:
     def test(self):
-        with Command(name="command") as cmd:
-            SendPC(
+        with Command(name="RunWoW") as cmd:
+            with SendPC():
+                Run(path=r"C:\Games\World of Warcraft\Wow.exe")
 
-            )
-        print(cmd.render())
-        # assert cmd.render() == "<Label w1 local SendWinM wow1>"
+        assert cmd.render() == (
+            "<Command RunWoW>\n"
+            "    <SendPC local>\n"
+            "        <Run \"C:\\Games\\World of Warcraft\\Wow.exe\">"
+        )
 
 
 if __name__ == "__main__":

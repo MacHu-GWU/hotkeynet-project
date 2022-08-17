@@ -79,8 +79,10 @@ class Block(AttrsClass, T.Generic[BLOCK]):
     def title(self) -> str:
         raise NotImplementedError
 
-    def render(self) -> str:
-        raise NotImplementedError
+    def render(self, verbose=False) -> str:
+        if verbose:
+            print(f"render {self.title} ...")
+        return tpl.block_tpl.render(block=self, render=render)
 
 
 @attr.s
@@ -111,9 +113,6 @@ class Label(Block['Script']):
     def title(self):
         return f"<Label {self.name} {self.ip} {self.send_mode} {self.window}>"
 
-    def render(self):
-        return self.title
-
 
 @attr.s
 class Command(Block['Command']):
@@ -123,20 +122,23 @@ class Command(Block['Command']):
     def title(self):
         return f"<Command {self.name}>"
 
-    def render(self, verbose=True):
-        if verbose:
-            print(f"dump {self.title}) ...")
-        return remove_empty_line(
-            tpl.command_tpl.render(
-                command=self,
-                render=render,
-            )
-        )
+
+@attr.s
+class SendPC(Block['SendPC.tpl']):
+    ip: str = attr.ib(default="local")
+
+    @property
+    def title(self):
+        return f"<SendPC {self.ip}>"
 
 
 @attr.s
-class SendPC(Block['SendPC']):
-    name: str = attr.ib(default=None)
+class Run(Block['Run']):
+    path: str = attr.ib(default=None)
+
+    @property
+    def title(self):
+        return f"<Run \"{self.path}\">"
 
 
 @attr.s
@@ -144,16 +146,36 @@ class Hotkey(Block['Hotkey']):
     name: str = attr.ib(default=None)
     key: str = attr.ib(default=None)
 
+    @property
+    def title(self):
+        return f"<Hotkey {self.key}>"
+
 
 @attr.s
 class Key(Block['Key']):
-    name: str = attr.ib(default=None)
+    key: str = attr.ib(default=None)
+
+    @property
+    def title(self):
+        return f"<Key {self.key}>"
+
+    @classmethod
+    def trigger(cls) -> 'Key':
+        return cls(key="%Trigger%")
 
 
 @attr.s
 class SendLabel(Block['SendLabel']):
     name: str = attr.ib(default=None)
     to: T.List[Label] = attr.ib(factory=list)
+
+    @property
+    def targets(self) -> str:
+        return ", ".join([label.title for label in self.to])
+
+    @property
+    def title(self) -> str:
+        return f"<SendLabel {self.targets}>"
 
 
 def render(
