@@ -4,15 +4,17 @@ SendLabel
 ==============================================================================
 Specifies the mailing labels to which keystrokes get sent.
 
-Syntax::
+**Syntax**
+
+::
 
     <SendLabel label [, label [, label ...]]>
 
-Parameters
+**Parameters**
 
     Each label is a mailing label that has been defined with the Label keyword. You must specify at least one. Labels are separated by commas.
 
-Example
+**Example**
 
     The following example creates a hotkey that sends a keystroke to both Joe and Sam::
 
@@ -22,3 +24,7 @@ Example
         <Hotkey F1>
            <SendLabel sam, joe>
               <Key %Trigger%>
+
+**Related pages**
+
+- :ref:`Label`

@@ -4,15 +4,17 @@ SendWin
 ==============================================================================
 Specifies window that will receive keystrokes and mouse clicks. Input will be injected with Windows's SendInput command.
 
-Syntax::
+**Syntax**
+
+::
 
     <SendWin window>
 
-Parameters
+**Parameters**
 
     Window is the name of the window that will receive keystrokes and mouse clicks.
 
-Remarks
+**Remarks**
 
     If you use SendWin with a background window, HotkeyNet tells the operating system to bring the window to the foreground. The operating system takes a long time to do this. But HotkeyNet doesn't wait. It sends your keystrokes immediately. If they are sent before the window arrives in the foreground, they won't be received by the window. To avoid this problem, add a Wait after SendWin. This is illustrated in the second example below.
 
@@ -20,7 +22,7 @@ Remarks
 
     SendWin is only one of several send modes. One of the others may be more suitable for your purpose. See Related Topics below for more information.
 
-Examples
+**Examples**
 
     ::
 
@@ -41,3 +43,16 @@ Examples
               <Wait 50>
               <SendWin UberOne>
                  <Text slowpoke!>
+
+**Related topics**
+
+- :ref:`comparison-chart-of-send-modes`
+- :ref:`9-Sending-Keystokes-to-Windows`
+- :ref:`10-Sending-to-Background-Windows`
+- :ref:`SendWin`
+- :ref:`SendFocusWin`
+- :ref:`SendWinM`
+- :ref:`SendWinMF`
+- :ref:`SendWinS`
+- :ref:`SendWinSF`
+- :ref:`Restore`

@@ -16,7 +16,7 @@ Creates a mailing label.
 
     IP is "local" or an IP address.
 
-    Sendmode is SendWin, SendFocusWin, SendWinM, SendWinMF, SendWinS, or SendWinSF.
+    Sendmode is :ref:`SendWin`, :ref:`SendFocusWin`, :ref:`SendWinM`, :ref:`SendWinMF`, :ref:`SendWinS`, or :ref:`SendWinSF`.
 
     Window is the name of the target window. This parameter should be omitted when Sendmode is SendFocusWin; otherwise it is required. This parameter is case-sensitive like all window names in HotkeyNet.
 
