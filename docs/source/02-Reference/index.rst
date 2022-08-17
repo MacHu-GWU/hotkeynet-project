@@ -1,6 +1,6 @@
-.. _02-编程参考:
+.. _02-HotKeyNet-编程参考:
 
-02-编程参考
+02 HotKeyNet 编程参考
 ==============================================================================
 
 https://web.archive.org/web/20200813072751/http://hotkeynet.com/ref/functions.html
