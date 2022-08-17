@@ -33,7 +33,8 @@ BLOCK = T.TypeVar("BLOCK")
 class Block(AttrsClass, T.Generic[BLOCK]):
     blocks: T.List['Block'] = attr.ib(factory=list)
 
-    _tpl: Template = None
+    def __call__(self) -> BLOCK:
+        return self.__enter__()
 
     def __enter__(self) -> BLOCK:
         _context.push(self)
@@ -58,11 +59,18 @@ class Block(AttrsClass, T.Generic[BLOCK]):
             if isinstance(block, type)
         ]
 
+    def iter_label(self) -> T.List['Label']:
+        return self._iter_by_type(Label)
+
     def iter_command(self) -> T.List['Command']:
         return self._iter_by_type(Command)
 
     def iter_hotkey(self) -> T.List['Hotkey']:
         return self._iter_by_type(Hotkey)
+
+    @property
+    def template(self) -> Template:
+        raise NotImplementedError
 
     def render(self) -> str:
         raise NotImplementedError
@@ -77,7 +85,7 @@ class Script(Block['Script']):
 class Label(Block['Script']):
     name: str = attr.ib(default=None)
     ip: str = attr.ib(default="local")
-    send_mode: str = attr.ib(default=None)
+    send_mode: str = attr.ib(default="SendWinM")
     window: str = attr.ib(default=None)
 
 
@@ -87,8 +95,10 @@ class Command(Block['Command']):
 
     name: str = attr.ib(default=None)
 
+
 @attr.s
 class SendPC(Block['SendPC']):
+    name: str = attr.ib(default=None)
 
 
 @attr.s
@@ -105,4 +115,4 @@ class Key(Block['Key']):
 @attr.s
 class SendLabel(Block['SendLabel']):
     name: str = attr.ib(default=None)
-    to: list = attr.ib(factory=list)
+    to: T.List[Label] = attr.ib(factory=list)

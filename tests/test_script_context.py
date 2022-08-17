@@ -1,23 +1,65 @@
 # -*- coding: utf-8 -*-
 
 import os
+import typing as T
+
+from rich import print
+
 from hotkeynet.script import (
     Script,
-    Command,
+    Label,
     Hotkey,
+    SendLabel,
+    Key,
 )
 from hotkeynet import keyname
 
 
+class MyScript:
+    def __init__(self):
+        self.script = Script()
+
+        self.make_labels()
+        self.make_hotkeys()
+
+    def make_labels(self):
+        with self.script():
+            self.labels: T.List[Label] = list()
+            for i in range(1, 1 + 5):
+                self.labels.append(
+                    Label(name=f"w{i}", window=f"WoW{i}")
+                )
+
+    def make_hotkeys(self):
+        with self.script():
+            with Hotkey(
+                name="Key1",
+                key=keyname.SCROLOCK_ON(keyname.KEY_1),
+            ) as self.hk_1:
+                with SendLabel(
+                    name="",
+                    to=self.labels,
+                ):
+                    Key(name=keyname.KEY_1)
+
+
 def test_context():
-    with Script() as script:
-        with Command(name="Hello") as cmd_hello:
-            hk_f1 = Hotkey(name="F1", key=keyname.F1)
+    my_script = MyScript()
+    # print(my_script.script)
 
+    assert len(my_script.script.blocks) == 5 + 1
+    assert len(my_script.script.iter_label()) == 5
+    assert len(my_script.script.iter_hotkey()) == 1
 
+    assert isinstance(my_script.hk_1, Hotkey)
+    assert len(my_script.hk_1.blocks) == 1
 
-    print(script.blocks)
-    print(cmd_hello)
+    assert isinstance(my_script.hk_1.blocks[0], SendLabel)
+    assert len(my_script.hk_1.blocks[0].to) == 5
+    assert len(my_script.hk_1.blocks[0].blocks) == 1
+
+    assert isinstance(my_script.hk_1.blocks[0].blocks[0], Key)
+
 
 if __name__ == "__main__":
     import sys
