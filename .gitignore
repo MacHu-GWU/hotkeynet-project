@@ -3,7 +3,6 @@ hotkeynet_venv/
 hotkeynet.egg-info/
 hotkeynet-*/
 tmp/
-app/
 *.js
 
 
