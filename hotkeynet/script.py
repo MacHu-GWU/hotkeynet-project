@@ -111,12 +111,30 @@ class Block(AttrsClass, T.Generic[BLOCK]):
         if self.is_null():
             return ""
         else:
-            return tpl.block_tpl.render(block=self, render=render)
+            return tpl.block_tpl.render(
+                block=self,
+                render=render,
+                verbose=verbose,
+            )
 
 
 @attr.s
 class Script(Block['Script']):
-    pass
+    @property
+    def title(self) -> str:
+        return ""
+
+    def render(self, verbose=False) -> str:
+        if self.is_null():
+            return ""
+        else:
+            return remove_empty_line(
+                tpl.script_tpl.render(
+                    block=self,
+                    render=render,
+                    verbose=verbose,
+                )
+            )
 
 
 class SendModeEnum(enum.Enum):
@@ -498,13 +516,14 @@ class RenameWin(Block['RenameWin']):
 
 def render(
     obj: T.Union[Block, str],
+    verbose: bool = False,
     **kwargs
 ) -> str:
     """
     A global function that take any object as argument and render it.
     """
     if isinstance(obj, Block):
-        return obj.render()
+        return obj.render(verbose=verbose)
     elif isinstance(obj, str):
         return obj
     else:  # pragma: no cover

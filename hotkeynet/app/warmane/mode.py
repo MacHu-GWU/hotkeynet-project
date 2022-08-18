@@ -18,6 +18,7 @@ from .game_client import GameClient
 from .hkn import HknScript
 from .paths import path_warmane_hkn
 
+
 @attr.s
 class Mode(AttrsClass):
     """
@@ -36,13 +37,15 @@ class Mode(AttrsClass):
     game_client: GameClient = attr.ib(factory=GameClient)
     active_chars: T.List[Character] = attr.ib(factory=list)
     login_chars: T.List[Character] = attr.ib(factory=list)
-    script: HknScript = attr.ib(default=None)
+    hkn_script: HknScript = attr.ib(default=None)
 
     def __attrs_post_init__(self):
-        self.script = HknScript(mode=self)
+        self.hkn_script = HknScript(mode=self)
 
     def dump(self):
-        self.script.script
+        path_warmane_hkn.write_text(
+            self.hkn_script.script.render(verbose=False),
+        )
 
     @classmethod
     def use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(cls):

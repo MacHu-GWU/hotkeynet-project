@@ -14,3 +14,4 @@ env = Environment(
 )
 
 block_tpl = env.get_template("Block.tpl")
+script_tpl = env.get_template("Script.tpl")

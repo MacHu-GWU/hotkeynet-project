@@ -20,11 +20,11 @@ if T.TYPE_CHECKING:
 
 @attr.s
 class HknScript(AttrsClass):
-    mode: Mode = attr.ib(default=None)
-    script: hk.Script = attr.ib(default=hk.Script)
-    
+    mode: 'Mode' = attr.ib(default=None)
+    script: hk.Script = attr.ib(factory=hk.Script)
+
     def __attrs_post_init__(self):
-        pass
+        hk.context.push(self.script)
 
     def build_cmd_launch_and_rename_game_client(self):
         """
