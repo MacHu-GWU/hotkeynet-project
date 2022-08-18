@@ -9,9 +9,10 @@ from enum import Enum
 
 from superjson import json
 
-from hotkeynet.paths import path_accounts_json
 from hotkeynet.enumerate import EnumHelper
 from hotkeynet.game.wow.model import Account
+
+from .paths import path_accounts_json
 
 accounts_data = json.load(path_accounts_json.abspath, verbose=False)
 
