@@ -73,6 +73,9 @@ HotkeyNet 作者在 2012 年就停止了更新. 由于 HotkeyNet 本身是对 Wi
 由于 HotkeyNet 官方网站已经不在了, 本项目在 https://hotkeynet.readthedocs.io/index.html 维护了一个文档的镜像, 以供查阅.
 
 
+
+
+
 .. _install:
 
 Install
