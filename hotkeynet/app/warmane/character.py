@@ -744,6 +744,90 @@ class CharacterFactory:
         )
 
 
+class LoginCharactersFactory:
+    @classmethod
+    def login_chars_1_to_9(cls) -> T.List[Character]:
+        return [
+            CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().set_inactive(),
+            CharacterFactory.make_char_fatmulti2_quentin_pve_elemental_shaman().set_inactive(),
+            CharacterFactory.make_char_fatmulti3_opiitou_pve_balance_druid().set_inactive(),
+            CharacterFactory.make_char_fatmulti4_swagsonic_pve_arcane_mage().set_inactive(),
+            CharacterFactory.make_char_fatmulti5_kangliu_pve_shadow_priest().set_inactive(),
+            CharacterFactory.make_char_fitsheep_kindhearted_pve_demonology_warlock().set_inactive(),
+            CharacterFactory.make_char_fatmulti6_kapacuk_pve_marksman_hunter().set_inactive(),
+            CharacterFactory.make_char_fatmulti8_bunnysisters_pve_resto_druid().set_inactive(),
+            CharacterFactory.make_char_fatmulti9_glowyy_pve_holy_pala().set_inactive(),
+            CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().set_inactive(),
+        ]
+
+    @classmethod
+    def login_chars_10_luxiaofeng(cls) -> T.List[Character]:
+        return [
+            CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().set_inactive(),
+        ]
+
+    @classmethod
+    def login_chars_10_ganjj(cls) -> T.List[Character]:
+        return [
+            CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_inactive(),
+        ]
+
+    @classmethod
+    def login_chars_10_flydps(cls) -> T.List[Character]:
+        return [
+            CharacterFactory.make_char_monkey130_flydps_pve_blood_tank_dk().set_inactive(),
+        ]
+
+    @classmethod
+    def login_chars_11_to_14_litgugu_abcd(cls) -> T.List[Character]:
+        return [
+            CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid().set_inactive(),
+            CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid().set_inactive(),
+            CharacterFactory.make_char_fatmulti13_litguguc_pve_balance_druid().set_inactive(),
+            CharacterFactory.make_char_fatmulti14_litgugud_pve_balance_druid().set_inactive(),
+        ]
+
+    @classmethod
+    def login_chars_11_to_14_litgugu_efgh(cls) -> T.List[Character]:
+        return [
+            CharacterFactory.make_char_fatmulti15_litgugue_pvp_balance_druid().set_inactive(),
+            CharacterFactory.make_char_fatmulti16_litguguf_pvp_balance_druid().set_inactive(),
+            CharacterFactory.make_char_fatmulti17_litgugug_pvp_balance_druid().set_inactive(),
+            CharacterFactory.make_char_fatmulti18_litguguh_pvp_balance_druid().set_inactive(),
+        ]
+
+    @classmethod
+    def login_chars_15_to_22(cls) -> T.List[Character]:
+        return [
+            CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().set_inactive(),
+            CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().set_inactive(),
+            CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest().set_inactive(),
+            CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest().set_inactive(),
+            CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman().set_inactive(),
+            CharacterFactory.make_char_fatmulti24_lgsmn_pve_elemental_shaman().set_inactive(),
+            CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman().set_inactive(),
+            CharacterFactory.make_char_fatmulti26_lgsmp_pve_elemental_shaman().set_inactive(),
+        ]
+
+    @classmethod
+    def login_chars_setup_1(cls) -> T.List[Character]:
+        return (
+            cls.login_chars_1_to_9()
+            + cls.login_chars_10_luxiaofeng()
+            + cls.login_chars_11_to_14_litgugu_abcd()
+            + cls.login_chars_15_to_22()
+        )
+
+    @classmethod
+    def login_chars_setup_2(cls) -> T.List[Character]:
+        return (
+            cls.login_chars_1_to_9()
+            + cls.login_chars_10_luxiaofeng()
+            + cls.login_chars_11_to_14_litgugu_efgh()
+            + cls.login_chars_15_to_22()
+        )
+
+
 class ActiveCharactersFactory:
     @classmethod
     def _set_5p_team_leader(cls, chars: T.List[Character]):
@@ -763,7 +847,7 @@ class ActiveCharactersFactory:
         if leader_char_window is None:
             for char in chars:
                 if TC.tank in char.talent.categories:
-                    tank_char_window = char.window
+                    leader_char_window = char.window
 
         # try to find a plate char
         if leader_char_window is None:
@@ -774,7 +858,7 @@ class ActiveCharactersFactory:
                     or TC.dk in categories
                     or TC.paladin in categories
                 ):
-                    tank_char_window = char.window
+                    leader_char_window = char.window
 
         if leader_char_window is None:
             raise ValueError("you have to define at least one TANK or one Plate char")
