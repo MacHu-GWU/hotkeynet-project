@@ -18,9 +18,9 @@ try:
     KN = keyname
 
     from .script import (
+        context,
         Command,
         CommandArgEnum,
-        Context,
         Hotkey,
         Key,
         KeyDown,

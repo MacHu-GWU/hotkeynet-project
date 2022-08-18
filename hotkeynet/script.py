@@ -47,7 +47,7 @@ class Context:
         return self._auto_name("MovementHotkey")
 
 
-_context = Context()
+context = Context()
 
 BLOCK = T.TypeVar("BLOCK")
 
@@ -60,15 +60,15 @@ class Block(AttrsClass, T.Generic[BLOCK]):
         return self.__enter__()
 
     def __enter__(self) -> BLOCK:
-        _context.push(self)
+        context.push(self)
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        _context.pop()
+        context.pop()
 
     def __attrs_post_init__(self):
         try:
-            _context.current.blocks.append(self)
+            context.current.blocks.append(self)
         except IndexError as e:
             if str(e) == "list index out of range":
                 pass
@@ -155,7 +155,7 @@ class Label(Block['Script']):
 
 @attr.s
 class Command(Block['Command']):
-    name: str = attr.ib(factory=_context.auto_command_name)
+    name: str = attr.ib(factory=context.auto_command_name)
 
     @classmethod
     def make(cls, name: str) -> 'Command':
@@ -253,7 +253,7 @@ class Run(Block['Run']):
 
 @attr.s
 class Hotkey(Block['Hotkey']):
-    name: str = attr.ib(factory=_context.auto_hotkey_name)
+    name: str = attr.ib(factory=context.auto_hotkey_name)
     key: str = attr.ib(default=None)
 
     @property
@@ -266,7 +266,7 @@ class Hotkey(Block['Hotkey']):
 
 @attr.s
 class MovementHotkey(Block['MovementHotkey']):
-    name: str = attr.ib(factory=_context.auto_movement_hotkey_name)
+    name: str = attr.ib(factory=context.auto_movement_hotkey_name)
     key: str = attr.ib(default=None)
 
     @property

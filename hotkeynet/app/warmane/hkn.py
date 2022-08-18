@@ -15,11 +15,14 @@ from hotkeynet.game.wow.wlk import (
 )
 
 if T.TYPE_CHECKING:
-    from .setup.setup import Setup
+    from .mode import Mode
 
 
 @attr.s
-class MyScript(AttrsClass):
+class HknScript(AttrsClass):
+    mode: Mode = attr.ib(default=None)
+    script: hk.Script = attr.ib(default=hk.Script)
+    
     def __attrs_post_init__(self):
         pass
 
@@ -36,22 +39,9 @@ class MyScript(AttrsClass):
         """
         with hk.Command(name="LaunchAndRenameGameClient") as self.cmd_launch_and_rename_game_client:
             with hk.SendPC():
-                hk.Run("")
-        #
-        # return Command(
-        #     name="LaunchAndRenameGameClient",
-        #     actions=[
-        #         remove_indent(f"""
-        #         <SendPC %1%>
-        #             <Run "{config.game_client_config.wow_exe_path}">
-        #             <RenameWin "World of Warcraft" %2%>
-        #         """)
-        #     ],
-        #     script=script,
-        # )
+                hk.Run.make(self.mode.game_client_setup.wow_exe_path)
+                hk.RenameWin(old="World of Warcraft", new=hk.CommandArgEnum.Arg1)
 
-#
-# cmd_launch_and_rename_game_client = build_cmd_launch_and_rename_game_client()
 #
 #
 # def build_cmd_launch_and_rename_all_game_client():

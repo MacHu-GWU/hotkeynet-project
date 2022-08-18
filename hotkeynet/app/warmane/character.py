@@ -746,7 +746,7 @@ class CharacterFactory:
 
 class LoginCharactersFactory:
     @classmethod
-    def login_chars_1_to_9(cls) -> T.List[Character]:
+    def _make_chars_1_to_9(cls) -> T.List[Character]:
         return [
             CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().set_inactive(),
             CharacterFactory.make_char_fatmulti2_quentin_pve_elemental_shaman().set_inactive(),
@@ -761,25 +761,25 @@ class LoginCharactersFactory:
         ]
 
     @classmethod
-    def login_chars_10_luxiaofeng(cls) -> T.List[Character]:
+    def _make_chars_10_luxiaofeng(cls) -> T.List[Character]:
         return [
             CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().set_inactive(),
         ]
 
     @classmethod
-    def login_chars_10_ganjj(cls) -> T.List[Character]:
+    def _make_chars_10_ganjj(cls) -> T.List[Character]:
         return [
             CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_inactive(),
         ]
 
     @classmethod
-    def login_chars_10_flydps(cls) -> T.List[Character]:
+    def _make_chars_10_flydps(cls) -> T.List[Character]:
         return [
             CharacterFactory.make_char_monkey130_flydps_pve_blood_tank_dk().set_inactive(),
         ]
 
     @classmethod
-    def login_chars_11_to_14_litgugu_abcd(cls) -> T.List[Character]:
+    def _make_chars_11_to_14_litgugu_abcd(cls) -> T.List[Character]:
         return [
             CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid().set_inactive(),
             CharacterFactory.make_char_fatmulti12_litgugub_pve_balance_druid().set_inactive(),
@@ -788,7 +788,7 @@ class LoginCharactersFactory:
         ]
 
     @classmethod
-    def login_chars_11_to_14_litgugu_efgh(cls) -> T.List[Character]:
+    def _make_chars_11_to_14_litgugu_efgh(cls) -> T.List[Character]:
         return [
             CharacterFactory.make_char_fatmulti15_litgugue_pvp_balance_druid().set_inactive(),
             CharacterFactory.make_char_fatmulti16_litguguf_pvp_balance_druid().set_inactive(),
@@ -797,7 +797,7 @@ class LoginCharactersFactory:
         ]
 
     @classmethod
-    def login_chars_15_to_22(cls) -> T.List[Character]:
+    def _make_chars_15_to_22(cls) -> T.List[Character]:
         return [
             CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest().set_inactive(),
             CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest().set_inactive(),
@@ -810,21 +810,44 @@ class LoginCharactersFactory:
         ]
 
     @classmethod
-    def login_chars_setup_1(cls) -> T.List[Character]:
+    def make_chars_10p(cls) -> T.List[Character]:
         return (
-            cls.login_chars_1_to_9()
-            + cls.login_chars_10_luxiaofeng()
-            + cls.login_chars_11_to_14_litgugu_abcd()
-            + cls.login_chars_15_to_22()
+            cls._make_chars_1_to_9()
+            + cls._make_chars_10_luxiaofeng()
         )
 
     @classmethod
-    def login_chars_setup_2(cls) -> T.List[Character]:
+    def make_chars_14p_litgugu_abcd(cls) -> T.List[Character]:
         return (
-            cls.login_chars_1_to_9()
-            + cls.login_chars_10_luxiaofeng()
-            + cls.login_chars_11_to_14_litgugu_efgh()
-            + cls.login_chars_15_to_22()
+            cls._make_chars_1_to_9()
+            + cls._make_chars_10_luxiaofeng()
+            + cls._make_chars_11_to_14_litgugu_abcd()
+        )
+
+    @classmethod
+    def make_chars_14p_litgugu_efgh(cls) -> T.List[Character]:
+        return (
+            cls._make_chars_1_to_9()
+            + cls._make_chars_10_luxiaofeng()
+            + cls._make_chars_11_to_14_litgugu_efgh()
+        )
+
+    @classmethod
+    def make_chars_22p_litgugu_abcd(cls) -> T.List[Character]:
+        return (
+            cls._make_chars_1_to_9()
+            + cls._make_chars_10_luxiaofeng()
+            + cls._make_chars_11_to_14_litgugu_abcd()
+            + cls._make_chars_15_to_22()
+        )
+
+    @classmethod
+    def make_chars_22p_litgugu_efgh(cls) -> T.List[Character]:
+        return (
+            cls._make_chars_1_to_9()
+            + cls._make_chars_10_luxiaofeng()
+            + cls._make_chars_11_to_14_litgugu_efgh()
+            + cls._make_chars_15_to_22()
         )
 
 

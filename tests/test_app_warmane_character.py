@@ -17,8 +17,9 @@ class TestCharacterFactory:
 
 class TestLoginCharactersFactory:
     def test(self):
-        _ = LoginCharactersFactory.login_chars_setup_1()
-        _ = LoginCharactersFactory.login_chars_setup_2()
+        _ = LoginCharactersFactory.make_chars_10p()
+        _ = LoginCharactersFactory.make_chars_14p_litgugu_abcd()
+        _ = LoginCharactersFactory.make_chars_22p_litgugu_abcd()
 
 
 class TestActiveCharactersFactory:
