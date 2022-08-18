@@ -73,8 +73,8 @@ class Character(AttrsClass):
     talent: Talent = attr.ib(default=None)
     window: Window = attr.ib(default=None)
 
-    leader1_window: Window = attr.ib(default=None)
-    leader2_window: Window = attr.ib(default=None)
+    leader1_window: Window = attr.ib(default=_get_win(1))
+    leader2_window: Window = attr.ib(default=_get_win(10))
     is_tank1: bool = attr.ib(default=False)
     is_tank2: bool = attr.ib(default=False)
     is_dr_pala1: bool = attr.ib(default=False)
