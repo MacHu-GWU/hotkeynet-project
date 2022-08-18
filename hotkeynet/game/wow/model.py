@@ -56,7 +56,21 @@ class Character(AttrsClass):
     :param account: 与该游戏角色所绑定的账号密码信息
     :param name: 游戏角色名
     :param talent: 角色天赋
-    :param window_index: 游戏窗口的序号
+    :param window: 游戏窗口
+    :param leader1_window: 1 号司机的游戏窗口
+    :param leader2_window: 2 号司机的游戏窗口
+    :param active: 设置这个人物是否是属于 HotkeyNet 的快捷键所操作的人物.
+        例如你在一场游戏中定义了 5 个人物, 但是只启用了 1, 2, 3 号 3 个人物. 4, 5 号
+        设置为 active = False. 在此情况下多开脚本的行为是这样的:
+
+        1. 启动游戏时启动所有窗口
+        2. 批量输入账号密码登录时, 只登录 3 个人物
+        3. 按 1234 操作的时候只操作 3 个人物
+        4. 使用单个窗口登录时, 可以选择全部的 5 个人物进行登录
+        5. 可以用切换单个窗口快捷键切换到 5 个人物之一的窗口
+        6. 用 Round robin 切换窗口时, 只在 3 个人物之间切换
+
+        这样适合于专注于玩几个人物, 但保留快速登录其他人物的能力. 比如登录小号聊天, 倒东西等.
 
     **设计思路**
 
