@@ -1,37 +1,37 @@
 # -*- coding: utf-8 -*-
 
-import typing as T
 import attr
 from attrs_mate import AttrsClass
+
 from hotkeynet.game.wow.wlk import coordinator
 
 
 @attr.s
 class GameClient(AttrsClass):
     """
-    Number of windows.
+    定义了你所使用的游戏客户端的详细信息.
     """
-    wow_exe_path = attr.ib(default=None)  # type: str
+    wow_exe_path: str = attr.ib(default=None)
 
-    window_left_top_x = attr.ib(default=None)  # type: int
-    window_left_top_y = attr.ib(default=None)  # type: int
-    window_width = attr.ib(default=None)  # type: int
-    window_height = attr.ib(default=None)  # type: int
-    wrong_password_pop_up_x = attr.ib(default=None)  # type: int
-    wrong_password_pop_up_y = attr.ib(default=None)  # type: int
-    username_input_box_x = attr.ib(default=None)  # type: int
-    username_input_box_y = attr.ib(default=None)  # type: int
-    log_out_button_x = attr.ib(default=None)  # type: int
-    log_out_button_y = attr.ib(default=None)  # type: int
-    return_to_game_button_x = attr.ib(default=None)  # type: int
-    return_to_game_button_y = attr.ib(default=None)  # type: int
-    pass_item_button_x = attr.ib(default=None)  # type: int
-    pass_item_button_1_y = attr.ib(default=None)  # type: int
-    pass_item_button_2_y = attr.ib(default=None)  # type: int
-    pass_item_button_3_y = attr.ib(default=None)  # type: int
-    pass_item_button_4_y = attr.ib(default=None)  # type: int
+    window_left_top_x: int = attr.ib(default=None)
+    window_left_top_y: int = attr.ib(default=None)
+    window_width: int = attr.ib(default=None)
+    window_height: int = attr.ib(default=None)
+    wrong_password_pop_up_x: int = attr.ib(default=None)
+    wrong_password_pop_up_y: int = attr.ib(default=None)
+    username_input_box_x: int = attr.ib(default=None)
+    username_input_box_y: int = attr.ib(default=None)
+    log_out_button_x: int = attr.ib(default=None)
+    log_out_button_y: int = attr.ib(default=None)
+    return_to_game_button_x: int = attr.ib(default=None)
+    return_to_game_button_y: int = attr.ib(default=None)
+    pass_item_button_x: int = attr.ib(default=None)
+    pass_item_button_1_y: int = attr.ib(default=None)
+    pass_item_button_2_y: int = attr.ib(default=None)
+    pass_item_button_3_y: int = attr.ib(default=None)
+    pass_item_button_4_y: int = attr.ib(default=None)
 
-    def _use_resolution(self, resolution: str):
+    def _use_resolution(self, resolution: str) -> 'GameClient':
         keyword = f"_at_{resolution}"
         for attr in coordinator.__dict__:
             if keyword in attr:
@@ -40,12 +40,13 @@ class GameClient(AttrsClass):
                     attr.replace(keyword, ""),
                     getattr(coordinator, attr)
                 )
+        return self
 
     def use_1920_1080_resolution(self):
-        self._use_resolution("1920_1080")
+        return self._use_resolution("1920_1080")
 
     def use_1600_900_resolution(self):
-        self._use_resolution("1600_900")
+        return self._use_resolution("1600_900")
 
     def use_1176_664_resolution(self):
-        self._use_resolution("1176_664")
+        return self._use_resolution("1176_664")
