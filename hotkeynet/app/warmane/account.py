@@ -10,7 +10,7 @@ from enum import Enum
 from superjson import json
 
 from hotkeynet.paths import path_accounts_json
-from hotkeynet.enumerate import EnumGetter
+from hotkeynet.enumerate import EnumHelper
 from hotkeynet.game.wow.model import Account
 
 accounts_data = json.load(path_accounts_json.abspath, verbose=False)
@@ -58,5 +58,5 @@ class AccountEnum(Enum):
     account_fatmulti29 = load_account("fatmulti29")
 
 
-class AccountGetter(EnumGetter[AccountEnum, Account]):
+class AccountHelper(EnumHelper[AccountEnum, Account]):
     enum_class = AccountEnum

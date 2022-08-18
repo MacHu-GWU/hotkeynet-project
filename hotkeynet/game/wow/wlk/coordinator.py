@@ -7,10 +7,16 @@
 相对于游戏窗口内部的相对坐标.
 """
 
-window_left_top_x = 120
-window_left_top_y = 0
-
 # 我们有三个分辨率模式, 分别对应高, 中, 低
+window_left_top_x_at_1920_1080 = 120
+window_left_top_y_at_1920_1080 = 0
+
+window_left_top_x_at_1600_900 = 120
+window_left_top_y_at_1600_900 = 0
+
+window_left_top_x_at_1176_664 = 120
+window_left_top_y_at_1176_664 = 0
+
 window_width_at_1920_1080 = 1800
 window_height_at_1920_1080 = 1012
 

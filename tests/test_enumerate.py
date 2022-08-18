@@ -2,7 +2,7 @@
 
 import os
 import enum
-from hotkeynet.enumerate import EnumGetter
+from hotkeynet.enumerate import EnumHelper
 
 
 class NameEnum(enum.Enum):
@@ -10,28 +10,41 @@ class NameEnum(enum.Enum):
     bob = "Bob"
 
 
-class NameGetter(EnumGetter[NameEnum, str]):
+class NameHelper(EnumHelper[NameEnum, str]):
     enum_class = NameEnum
+
+
+class InvalidEnum(enum.Enum):
+    foo = "foo"
 
 
 class TestEnumGetter:
     def test(self):
-        assert NameGetter.get_name("alice") == "alice"
-        assert NameGetter.get_name(NameEnum.alice) == "alice"
+        assert NameHelper.get_name("alice") == "alice"
+        assert NameHelper.get_name(NameEnum.alice) == "alice"
 
-        assert NameGetter.get_enum("alice") is NameEnum.alice
-        assert NameGetter.get_enum(NameEnum.alice) is NameEnum.alice
+        assert NameHelper.get_enum("alice") is NameEnum.alice
+        assert NameHelper.get_enum(NameEnum.alice) is NameEnum.alice
 
-        assert NameGetter.get_value("alice") == "Alice"
-        assert NameGetter.get_value(NameEnum.alice) == "Alice"
+        assert NameHelper.get_value("alice") == "Alice"
+        assert NameHelper.get_value(NameEnum.alice) == "Alice"
 
-        assert NameGetter.iter_keys()[0] == "alice"
-        assert NameGetter.iter_enum()[0] is NameEnum.alice
-        assert NameGetter.iter_values()[0] == "Alice"
+        assert NameHelper.iter_names()[0] == "alice"
+        assert NameHelper.iter_enums()[0] is NameEnum.alice
+        assert NameHelper.iter_values()[0] == "Alice"
 
-        assert NameGetter.iter_items()[0][0] == "alice"
-        assert NameGetter.iter_items()[0][1] is NameEnum.alice
-        assert NameGetter.iter_items()[0][2] == "Alice"
+        assert NameHelper.iter_items()[0][0] == "alice"
+        assert NameHelper.iter_items()[0][1] is NameEnum.alice
+        assert NameHelper.iter_items()[0][2] == "Alice"
+
+        assert NameHelper.has_name("alice") is True
+        assert NameHelper.has_name("invalid") is False
+
+        assert NameHelper.has_enum(NameEnum.alice) is True
+        assert NameHelper.has_enum(InvalidEnum.foo) is False
+
+        assert NameHelper.has_value("Alice") is True
+        assert NameHelper.has_value("Foo") is False
 
 
 if __name__ == "__main__":

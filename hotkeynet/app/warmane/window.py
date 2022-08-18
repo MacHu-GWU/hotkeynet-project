@@ -3,7 +3,7 @@
 import typing as T
 import enum
 
-from hotkeynet.enumerate import EnumGetter
+from hotkeynet.enumerate import EnumHelper
 from hotkeynet.game.wow.model import Window
 
 
@@ -38,7 +38,7 @@ class WindowEnum(enum.Enum):
     wow25 = Window(title="WoW25", label="w25")
 
 
-class WindowGetter(EnumGetter[WindowEnum, Window]):
+class WindowHelper(EnumHelper[WindowEnum, Window]):
     enum_class = WindowEnum
 
     @classmethod
@@ -48,5 +48,5 @@ class WindowGetter(EnumGetter[WindowEnum, Window]):
 
 _window_mapper: T.Dict[int, Window] = {
     ind + 1: window
-    for ind, window in enumerate(WindowGetter.iter_values())
+    for ind, window in enumerate(WindowHelper.iter_values())
 }

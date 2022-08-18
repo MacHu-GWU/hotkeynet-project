@@ -23,6 +23,20 @@ class Window(AttrsClass):
     title: str = attr.ib()
     label: str = attr.ib()
 
+    @classmethod
+    def make(cls, index: int) -> 'Window':
+        return cls(
+            title=f"WoW{str(index).zfill(2)}",
+            label=f"w{str(index).zfill(2)}",
+        )
+
+
+def _get_win(index_or_window: T.Union[int, Window]) -> 'Window':
+    if isinstance(index_or_window, Window):
+        return index_or_window
+    else:
+        return Window.make(index=index_or_window)
+
 
 @attr.s
 class Account(AttrsClass):
@@ -43,6 +57,16 @@ class Character(AttrsClass):
     :param name: 游戏角色名
     :param talent: 角色天赋
     :param window_index: 游戏窗口的序号
+
+    **设计思路**
+
+    一次游戏中我们会需要知道哪些角色是坦克, 哪些角色是治疗. 或者说那个角色是扮演主坦,
+    哪个角色是副坦. 我们有两种方法可以定义这件事. 一种是在顶层的 Setup 中设计一个属性:
+    tank1, 其值是一个 Character 对象. 还有一种方式是在 Character 对象中设计一个属性,
+    is_tank1, 其值是一个 boolean 对象.
+
+    个人认为第二种方式更好. 因为玩魔兽玩的就是角色, 从角色的视角出发更符合人类直觉. 而且
+    扁平化的枚举所有用到的人物, 以及它们扮演的不同角色, 这样的代码更容易读和编辑.
     """
     account: Account = attr.ib(default=None)
     name: str = attr.ib(default=None)
@@ -55,3 +79,31 @@ class Character(AttrsClass):
     is_tank2: bool = attr.ib(default=False)
     is_dr_pala1: bool = attr.ib(default=False)
     is_dr_pala2: bool = attr.ib(default=False)
+
+    def set_window(self, index: T.Union[int, Window]) -> 'Character':
+        self.window = _get_win(index)
+        return self
+
+    def set_leader1_window(self, index: T.Union[int, Window]) -> 'Character':
+        self.leader1_window = _get_win(index)
+        return self
+
+    def set_leader2_window(self, index: T.Union[int, Window]) -> 'Character':
+        self.leader2_window = _get_win(index)
+        return self
+
+    def set_tank1(self) -> 'Character':
+        self.is_tank1 = True
+        return self
+
+    def set_tank2(self) -> 'Character':
+        self.is_tank2 = True
+        return self
+
+    def set_dr_pala1(self) -> 'Character':
+        self.is_dr_pala1 = True
+        return self
+
+    def set_dr_pala2(self) -> 'Character':
+        self.is_dr_pala2 = True
+        return self

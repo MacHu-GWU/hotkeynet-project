@@ -10,8 +10,8 @@ from hotkeynet.game.wow.wlk.talent_category_association import (
 )
 from hotkeynet.game.wow.model import Character
 
-from .account import AccountEnum, AccountGetter
-from .window import WindowEnum, WindowGetter
+from .account import AccountEnum, AccountHelper
+from .window import WindowEnum, WindowHelper
 
 
 class CharacterFactory:
@@ -21,7 +21,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti1.value,
             name="batlefury",
             talent=TL.paladin_pve_protect,
-            window=WindowGetter.get_window(1),
+            window=WindowHelper.get_window(1),
         )
 
     @classmethod
@@ -30,7 +30,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti1.value,
             name="batlefury",
             talent=TL.paladin_pve_retri,
-            window=WindowGetter.get_window(1),
+            window=WindowHelper.get_window(1),
         )
 
     @classmethod
@@ -39,7 +39,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti2.value,
             name="quentin",
             talent=TL.shaman_pve_elemental,
-            window=WindowGetter.get_window(2),
+            window=WindowHelper.get_window(2),
         )
 
     @classmethod
@@ -48,7 +48,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti2.value,
             name="quentin",
             talent=TL.shaman_pve_resto,
-            window=WindowGetter.get_window(2),
+            window=WindowHelper.get_window(2),
         )
 
     @classmethod
@@ -57,7 +57,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti3.value,
             name="opiitou",
             talent=TL.druid_pve_balance,
-            window=WindowGetter.get_window(3),
+            window=WindowHelper.get_window(3),
         )
 
     @classmethod
@@ -66,7 +66,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti3.value,
             name="opiitou",
             talent=TL.druid_pve_resto,
-            window=WindowGetter.get_window(3),
+            window=WindowHelper.get_window(3),
         )
 
     @classmethod
@@ -75,7 +75,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti4.value,
             name="swagsonic",
             talent=TL.mage_pve_arcane,
-            window=WindowGetter.get_window(4),
+            window=WindowHelper.get_window(4),
         )
 
     @classmethod
@@ -84,7 +84,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti4.value,
             name="swagsonic",
             talent=TL.mage_pve_fire,
-            window=WindowGetter.get_window(4),
+            window=WindowHelper.get_window(4),
         )
 
     @classmethod
@@ -93,7 +93,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti5.value,
             name="kangliu",
             talent=TL.priest_pve_shadow,
-            window=WindowGetter.get_window(5),
+            window=WindowHelper.get_window(5),
         )
 
     @classmethod
@@ -102,7 +102,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti5.value,
             name="kangliu",
             talent=TL.priest_pve_disco,
-            window=WindowGetter.get_window(5),
+            window=WindowHelper.get_window(5),
         )
 
     @classmethod
@@ -111,7 +111,7 @@ class CharacterFactory:
             account=AccountEnum.account_fitsheep.value,
             name="kindhearted",
             talent=TL.warlock_pve_demonology,
-            window=WindowGetter.get_window(6),
+            window=WindowHelper.get_window(6),
         )
 
     @classmethod
@@ -120,7 +120,7 @@ class CharacterFactory:
             account=AccountEnum.account_fitsheep.value,
             name="kindhearted",
             talent=TL.warlock_pvp_destruction,
-            window=WindowGetter.get_window(6),
+            window=WindowHelper.get_window(6),
         )
 
     @classmethod
@@ -129,7 +129,7 @@ class CharacterFactory:
             account=AccountEnum.account_fitsheep.value,
             name="bordercollie",
             talent=TL.priest_pve_shadow,
-            window=WindowGetter.get_window(6),
+            window=WindowHelper.get_window(6),
         )
 
     @classmethod
@@ -138,7 +138,7 @@ class CharacterFactory:
             account=AccountEnum.account_fitsheep.value,
             name="bordercollie",
             talent=TL.priest_pve_disco,
-            window=WindowGetter.get_window(6),
+            window=WindowHelper.get_window(6),
         )
 
     @classmethod
@@ -147,7 +147,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti6.value,
             name="kapacuk",
             talent=TL.hunter_pve_marksman,
-            window=WindowGetter.get_window(7),
+            window=WindowHelper.get_window(7),
         )
 
     @classmethod
@@ -156,7 +156,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti6.value,
             name="kapacuk",
             talent=TL.hunter_pve_beast,
-            window=WindowGetter.get_window(7),
+            window=WindowHelper.get_window(7),
         )
 
     @classmethod
@@ -165,7 +165,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti8.value,
             name="bunnysisters",
             talent=TL.druid_pve_resto,
-            window=WindowGetter.get_window(8),
+            window=WindowHelper.get_window(8),
         )
 
     @classmethod
@@ -174,7 +174,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti8.value,
             name="bunnysisters",
             talent=TL.druid_pve_balance,
-            window=WindowGetter.get_window(8),
+            window=WindowHelper.get_window(8),
         )
 
     @classmethod
@@ -183,7 +183,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti9.value,
             name="glowyy",
             talent=TL.paladin_pve_holy,
-            window=WindowGetter.get_window(9),
+            window=WindowHelper.get_window(9),
         )
 
     @classmethod
@@ -192,7 +192,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti9.value,
             name="glowyy",
             talent=TL.paladin_pve_protect,
-            window=WindowGetter.get_window(9),
+            window=WindowHelper.get_window(9),
         )
 
     @classmethod
@@ -201,7 +201,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti10.value,
             name="luxiaofeng",
             talent=TL.dk_pve_blood_tank,
-            window=WindowGetter.get_window(10),
+            window=WindowHelper.get_window(10),
         )
 
     @classmethod
@@ -210,7 +210,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti10.value,
             name="luxiaofeng",
             talent=TL.dk_pve_unholy_tank,
-            window=WindowGetter.get_window(10),
+            window=WindowHelper.get_window(10),
         )
 
     @classmethod
@@ -219,7 +219,7 @@ class CharacterFactory:
             account=AccountEnum.account_monkey130.value,
             name="flydps",
             talent=TL.dk_pve_blood_tank,
-            window=WindowGetter.get_window(10),
+            window=WindowHelper.get_window(10),
         )
 
     @classmethod
@@ -228,7 +228,7 @@ class CharacterFactory:
             account=AccountEnum.account_makun7551.value,
             name="ganjj",
             talent=TL.dk_pve_blood_tank,
-            window=WindowGetter.get_window(10),
+            window=WindowHelper.get_window(10),
         )
 
     @classmethod
@@ -237,7 +237,7 @@ class CharacterFactory:
             account=AccountEnum.account_makun7551.value,
             name="ganjj",
             talent=TL.dk_pve_unholy_dps,
-            window=WindowGetter.get_window(10),
+            window=WindowHelper.get_window(10),
         )
 
     @classmethod
@@ -246,7 +246,7 @@ class CharacterFactory:
             account=AccountEnum.account_makun7551.value,
             name="ganjj",
             talent=TL.dk_pve_unholy_dps,
-            window=WindowGetter.get_window(22),
+            window=WindowHelper.get_window(22),
         )
 
     @classmethod
@@ -255,7 +255,7 @@ class CharacterFactory:
             account=AccountEnum.account_makun7551.value,
             name="laoshou",
             talent=TL.paladin_pve_protect,
-            window=WindowGetter.get_window(10),
+            window=WindowHelper.get_window(10),
         )
 
     @classmethod
@@ -264,7 +264,7 @@ class CharacterFactory:
             account=AccountEnum.account_makun7551.value,
             name="laoshou",
             talent=TL.paladin_pve_retri,
-            window=WindowGetter.get_window(10),
+            window=WindowHelper.get_window(10),
         )
 
     @classmethod
@@ -273,7 +273,7 @@ class CharacterFactory:
             account=AccountEnum.account_makun7551.value,
             name="laoshou",
             talent=TL.paladin_pve_protect,
-            window=WindowGetter.get_window(9),
+            window=WindowHelper.get_window(9),
         )
 
     @classmethod
@@ -282,7 +282,7 @@ class CharacterFactory:
             account=AccountEnum.account_makun7551.value,
             name="laoshou",
             talent=TL.paladin_pve_retri,
-            window=WindowGetter.get_window(19),
+            window=WindowHelper.get_window(19),
         )
 
     @classmethod
@@ -291,7 +291,7 @@ class CharacterFactory:
             account=AccountEnum.account_freiliheng.value,
             name="stophealing",
             talent=TL.dk_pve_blood_tank,
-            window=WindowGetter.get_window(10),
+            window=WindowHelper.get_window(10),
         )
 
     # --- litgoat ss
@@ -301,7 +301,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti1.value,
             name="litgoatssa",
             talent=TL.warlock_pve_demonology,
-            window=WindowGetter.get_window(1),
+            window=WindowHelper.get_window(1),
         )
 
     @classmethod
@@ -310,7 +310,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti2.value,
             name="litgoatssb",
             talent=TL.warlock_pve_demonology,
-            window=WindowGetter.get_window(2),
+            window=WindowHelper.get_window(2),
         )
 
     @classmethod
@@ -319,7 +319,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti3.value,
             name="litgoatssc",
             talent=TL.warlock_pve_demonology,
-            window=WindowGetter.get_window(3),
+            window=WindowHelper.get_window(3),
         )
 
     @classmethod
@@ -328,7 +328,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti4.value,
             name="litgoatssd",
             talent=TL.warlock_pve_demonology,
-            window=WindowGetter.get_window(4),
+            window=WindowHelper.get_window(4),
         )
 
     @classmethod
@@ -337,7 +337,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti5.value,
             name="litgoatsse",
             talent=TL.warlock_pve_demonology,
-            window=WindowGetter.get_window(5),
+            window=WindowHelper.get_window(5),
         )
 
     # --- litgoat dk
@@ -347,7 +347,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti1.value,
             name="litgoatdka",
             talent=TL.dk_pvp_frost,
-            window=WindowGetter.get_window(1),
+            window=WindowHelper.get_window(1),
         )
 
     @classmethod
@@ -356,7 +356,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti2.value,
             name="litgoatdkb",
             talent=TL.dk_pvp_frost,
-            window=WindowGetter.get_window(2),
+            window=WindowHelper.get_window(2),
         )
 
     @classmethod
@@ -365,7 +365,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti3.value,
             name="litgoatdkc",
             talent=TL.dk_pvp_frost,
-            window=WindowGetter.get_window(3),
+            window=WindowHelper.get_window(3),
         )
 
     @classmethod
@@ -374,7 +374,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti4.value,
             name="litgoatdkd",
             talent=TL.dk_pvp_frost,
-            window=WindowGetter.get_window(4),
+            window=WindowHelper.get_window(4),
         )
 
     @classmethod
@@ -383,7 +383,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti5.value,
             name="litgoatdke",
             talent=TL.dk_pvp_frost,
-            window=WindowGetter.get_window(5),
+            window=WindowHelper.get_window(5),
         )
 
     @classmethod
@@ -392,7 +392,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti1.value,
             name="litgoatdka",
             talent=TL.dk_pve_unholy_dps,
-            window=WindowGetter.get_window(1),
+            window=WindowHelper.get_window(1),
         )
 
     @classmethod
@@ -401,7 +401,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti2.value,
             name="litgoatdkb",
             talent=TL.dk_pve_unholy_dps,
-            window=WindowGetter.get_window(2),
+            window=WindowHelper.get_window(2),
         )
 
     @classmethod
@@ -410,7 +410,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti3.value,
             name="litgoatdkc",
             talent=TL.dk_pve_unholy_dps,
-            window=WindowGetter.get_window(3),
+            window=WindowHelper.get_window(3),
         )
 
     @classmethod
@@ -419,7 +419,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti4.value,
             name="litgoatdkd",
             talent=TL.dk_pve_unholy_dps,
-            window=WindowGetter.get_window(4),
+            window=WindowHelper.get_window(4),
         )
 
     @classmethod
@@ -428,7 +428,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti5.value,
             name="litgoatdke",
             talent=TL.dk_pve_unholy_dps,
-            window=WindowGetter.get_window(5),
+            window=WindowHelper.get_window(5),
         )
 
     # --- litgugu abcd
@@ -438,7 +438,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti11.value,
             name="litgugua",
             talent=TL.druid_pvp_balance,
-            window=WindowGetter.get_window(11),
+            window=WindowHelper.get_window(11),
         )
 
     @classmethod
@@ -447,7 +447,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti11.value,
             name="litgugud",
             talent=TL.druid_pvp_resto,
-            window=WindowGetter.get_window(11),
+            window=WindowHelper.get_window(11),
         )
 
     @classmethod
@@ -456,7 +456,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti11.value,
             name="litgugua",
             talent=TL.druid_pve_balance,
-            window=WindowGetter.get_window(11),
+            window=WindowHelper.get_window(11),
         )
 
     @classmethod
@@ -465,7 +465,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti12.value,
             name="litgugub",
             talent=TL.druid_pvp_balance,
-            window=WindowGetter.get_window(12),
+            window=WindowHelper.get_window(12),
         )
 
     @classmethod
@@ -474,7 +474,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti12.value,
             name="litgugub",
             talent=TL.druid_pvp_resto,
-            window=WindowGetter.get_window(12),
+            window=WindowHelper.get_window(12),
         )
 
     @classmethod
@@ -483,7 +483,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti12.value,
             name="litgugub",
             talent=TL.druid_pve_balance,
-            window=WindowGetter.get_window(12),
+            window=WindowHelper.get_window(12),
         )
 
     @classmethod
@@ -492,7 +492,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti13.value,
             name="litguguc",
             talent=TL.druid_pvp_balance,
-            window=WindowGetter.get_window(13),
+            window=WindowHelper.get_window(13),
         )
 
     @classmethod
@@ -501,7 +501,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti13.value,
             name="litguguc",
             talent=TL.druid_pvp_resto,
-            window=WindowGetter.get_window(13),
+            window=WindowHelper.get_window(13),
         )
 
     @classmethod
@@ -510,7 +510,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti13.value,
             name="litguguc",
             talent=TL.druid_pve_balance,
-            window=WindowGetter.get_window(13),
+            window=WindowHelper.get_window(13),
         )
 
     @classmethod
@@ -519,7 +519,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti14.value,
             name="litgugud",
             talent=TL.druid_pvp_balance,
-            window=WindowGetter.get_window(14),
+            window=WindowHelper.get_window(14),
         )
 
     @classmethod
@@ -528,7 +528,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti14.value,
             name="litgugud",
             talent=TL.druid_pvp_resto,
-            window=WindowGetter.get_window(14),
+            window=WindowHelper.get_window(14),
         )
 
     @classmethod
@@ -537,7 +537,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti14.value,
             name="litgugud",
             talent=TL.druid_pve_balance,
-            window=WindowGetter.get_window(14),
+            window=WindowHelper.get_window(14),
         )
 
     # --- litgugu e, f, g, h
@@ -547,7 +547,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti15.value,
             name="litgugue",
             talent=TL.druid_pvp_balance,
-            window=WindowGetter.get_window(11),
+            window=WindowHelper.get_window(11),
         )
 
     @classmethod
@@ -556,7 +556,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti16.value,
             name="litguguf",
             talent=TL.druid_pvp_balance,
-            window=WindowGetter.get_window(12),
+            window=WindowHelper.get_window(12),
         )
 
     @classmethod
@@ -565,7 +565,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti17.value,
             name="litgugug",
             talent=TL.druid_pvp_balance,
-            window=WindowGetter.get_window(13),
+            window=WindowHelper.get_window(13),
         )
 
     @classmethod
@@ -574,7 +574,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti18.value,
             name="litguguh",
             talent=TL.druid_pvp_balance,
-            window=WindowGetter.get_window(14),
+            window=WindowHelper.get_window(14),
         )
 
     @classmethod
@@ -583,7 +583,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti18.value,
             name="litguguh",
             talent=TL.druid_pvp_resto,
-            window=WindowGetter.get_window(14),
+            window=WindowHelper.get_window(14),
         )
 
     # --- lg ms i, j, k, l
@@ -593,7 +593,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti19.value,
             name="lgmsi",
             talent=TL.priest_pve_shadow,
-            window=WindowGetter.get_window(15),
+            window=WindowHelper.get_window(15),
         )
 
     @classmethod
@@ -602,7 +602,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti19.value,
             name="lgmsi",
             talent=TL.priest_pve_disco,
-            window=WindowGetter.get_window(15),
+            window=WindowHelper.get_window(15),
         )
 
     @classmethod
@@ -611,7 +611,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti20.value,
             name="lgmsj",
             talent=TL.priest_pve_shadow,
-            window=WindowGetter.get_window(16),
+            window=WindowHelper.get_window(16),
         )
 
     @classmethod
@@ -620,7 +620,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti20.value,
             name="lgmsj",
             talent=TL.priest_pve_disco,
-            window=WindowGetter.get_window(16),
+            window=WindowHelper.get_window(16),
         )
 
     @classmethod
@@ -629,7 +629,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti21.value,
             name="lgmsk",
             talent=TL.priest_pve_shadow,
-            window=WindowGetter.get_window(17),
+            window=WindowHelper.get_window(17),
         )
 
     @classmethod
@@ -638,7 +638,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti21.value,
             name="lgmsk",
             talent=TL.priest_pve_holy,
-            window=WindowGetter.get_window(17),
+            window=WindowHelper.get_window(17),
         )
 
     @classmethod
@@ -647,7 +647,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti22.value,
             name="lgmsl",
             talent=TL.priest_pve_shadow,
-            window=WindowGetter.get_window(18),
+            window=WindowHelper.get_window(18),
         )
 
     @classmethod
@@ -656,7 +656,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti22.value,
             name="lgmsl",
             talent=TL.priest_pve_holy,
-            window=WindowGetter.get_window(18),
+            window=WindowHelper.get_window(18),
         )
 
     # --- lg sm m, n, o, p
@@ -666,7 +666,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti23.value,
             name="lgsmm",
             talent=TL.shaman_pve_elemental,
-            window=WindowGetter.get_window(19),
+            window=WindowHelper.get_window(19),
         )
 
     @classmethod
@@ -675,7 +675,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti23.value,
             name="lgsmm",
             talent=TL.shaman_pve_resto,
-            window=WindowGetter.get_window(19),
+            window=WindowHelper.get_window(19),
         )
 
     @classmethod
@@ -684,7 +684,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti24.value,
             name="lgsmn",
             talent=TL.shaman_pve_elemental,
-            window=WindowGetter.get_window(20),
+            window=WindowHelper.get_window(20),
         )
 
     @classmethod
@@ -693,7 +693,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti24.value,
             name="lgsmn",
             talent=TL.shaman_pve_resto,
-            window=WindowGetter.get_window(20),
+            window=WindowHelper.get_window(20),
         )
 
     @classmethod
@@ -702,7 +702,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti25.value,
             name="lgsmo",
             talent=TL.shaman_pve_elemental,
-            window=WindowGetter.get_window(21),
+            window=WindowHelper.get_window(21),
         )
 
     @classmethod
@@ -711,7 +711,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti25.value,
             name="lgsmo",
             talent=TL.shaman_pve_resto,
-            window=WindowGetter.get_window(21),
+            window=WindowHelper.get_window(21),
         )
 
     @classmethod
@@ -720,7 +720,7 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti26.value,
             name="lgsmp",
             talent=TL.shaman_pve_elemental,
-            window=WindowGetter.get_window(22),
+            window=WindowHelper.get_window(22),
         )
 
     @classmethod
@@ -729,5 +729,5 @@ class CharacterFactory:
             account=AccountEnum.account_fatmulti26.value,
             name="lgsmp",
             talent=TL.shaman_pve_resto,
-            window=WindowGetter.get_window(22),
+            window=WindowHelper.get_window(22),
         )

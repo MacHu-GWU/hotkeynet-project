@@ -14,7 +14,7 @@ ENUM = T.TypeVar("ENUM")
 ENUM_VALUE = T.TypeVar("ENUM_VALUE")
 
 
-class EnumGetter(T.Generic[ENUM, ENUM_VALUE]):
+class EnumHelper(T.Generic[ENUM, ENUM_VALUE]):
     enum_class: ENUM = None
 
     @classmethod
@@ -39,14 +39,14 @@ class EnumGetter(T.Generic[ENUM, ENUM_VALUE]):
             return key.value
 
     @classmethod
-    def iter_keys(cls) -> T.List[str]:
+    def iter_names(cls) -> T.List[str]:
         return [
             enum.name
             for enum in cls.enum_class
         ]
 
     @classmethod
-    def iter_enum(cls) -> T.List[ENUM]:
+    def iter_enums(cls) -> T.List[ENUM]:
         return list(cls.enum_class)
 
     @classmethod
@@ -62,3 +62,19 @@ class EnumGetter(T.Generic[ENUM, ENUM_VALUE]):
             (enum.name, enum, enum.value)
             for enum in cls.enum_class
         ]
+
+    @classmethod
+    def has_name(cls, key: str) -> bool:
+        return key in cls.enum_class.__members__
+
+    @classmethod
+    def has_enum(cls, enum_: enum.Enum) -> bool:
+        return enum_ in cls.enum_class
+
+    _values: list = None
+
+    @classmethod
+    def has_value(cls, value) -> bool:
+        if cls._values is None:
+            cls._values = [e.value for e in cls.enum_class]
+        return value in cls._values
