@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from hotkeynet.app.warmane.setup.game_client import GameClientSetUp
+from hotkeynet.app.warmane.game_client import GameClientSetUp
 
 
 class TestGameClientSetUp:
