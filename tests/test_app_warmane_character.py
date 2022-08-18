@@ -3,6 +3,7 @@
 import os
 from hotkeynet.app.warmane.character import (
     CharacterFactory,
+    LoginCharactersFactory,
     ActiveCharactersFactory,
 )
 
@@ -12,6 +13,12 @@ class TestCharacterFactory:
         for attr in CharacterFactory.__dict__:
             if attr.startswith("make_char"):
                 getattr(CharacterFactory, attr)()
+
+
+class TestLoginCharactersFactory:
+    def test(self):
+        _ = LoginCharactersFactory.login_chars_setup_1()
+        _ = LoginCharactersFactory.login_chars_setup_2()
 
 
 class TestActiveCharactersFactory:

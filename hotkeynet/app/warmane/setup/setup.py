@@ -4,10 +4,13 @@
 第一步先定义游戏用什么窗口, 什么分辨率, 上哪些角色
 """
 
+import typing as T
+
 import attr
 from attrs_mate import AttrsClass
 
-from .character import CharacterFactory
+# from .character import CharacterFactory
+from ..character import Character
 
 
 @attr.s
@@ -21,8 +24,8 @@ class Setup(AttrsClass):
     4. 各个角色分别扮演团队中的什么位置
     5. 等等
     """
-
-    # def
+    active_chars: T.List[Character]
+    login_chars: T.List[Character]
 
 #
 # Setup(
