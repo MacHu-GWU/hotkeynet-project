@@ -10,7 +10,8 @@ import attr
 from attrs_mate import AttrsClass
 
 # from .character import CharacterFactory
-from ..character import Character
+from .character import Character
+from .game_client import GameClientSetup
 
 
 @attr.s
@@ -24,10 +25,11 @@ class Setup(AttrsClass):
     4. 各个角色分别扮演团队中的什么位置
     5. 等等
     """
+    game_client:
     active_chars: T.List[Character]
     login_chars: T.List[Character]
 
-#
+
 # Setup(
 #     active_characters=[
 #         CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().

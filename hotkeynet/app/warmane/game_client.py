@@ -7,7 +7,7 @@ from hotkeynet.game.wow.wlk import coordinator
 
 
 @attr.s
-class GameClientSetUp(AttrsClass):
+class GameClientSetup(AttrsClass):
     """
     Number of windows.
     """
