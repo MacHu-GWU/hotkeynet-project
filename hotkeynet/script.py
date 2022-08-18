@@ -154,6 +154,32 @@ class Command(Block['Command']):
     def is_null(self) -> bool:
         return self._are_sub_blocks_all_null()
 
+    def call(self, args: T.List[str]) -> 'CallCommand':
+        return CallCommand(cmd=self, args=args)
+
+
+@attr.s
+class CallCommand(Block['Command']):
+    cmd: T.Union[str, Command] = attr.ib(default=None)
+    args: T.List[str] = attr.ib(factory=list)
+
+    @property
+    def cmd_name(self) -> str:
+        if isinstance(self.cmd, Command):
+            return self.cmd.name
+        else:
+            return self.cmd
+
+    @property
+    def title(self):
+        if len(self.args) == 0:
+            return f"<{self.cmd_name}"
+        else:
+            return "<{cmd_name} {args}>".format(
+                cmd_name=self.cmd_name,
+                args=" ".join(self.args),
+            )
+
 
 @attr.s
 class SendPC(Block['SendPC.tpl']):
