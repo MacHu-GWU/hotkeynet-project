@@ -16,7 +16,6 @@ from enum import auto
 from ordered_set import OrderedSet
 
 from .. import model
-from ....utils import union_list, intersection_list, difference_list
 
 
 class Talent(model.Talent):
@@ -107,6 +106,10 @@ class Talent(model.Talent):
     priest_pvp_shadow = auto()
     priest_pvp_disco = auto()
     priest_pvp_holy = auto()
+
+    @property
+    def categories(self) -> OrderedSet['TalentCategory']:
+        return get_category_by_talent(self)
 
     def is_tank(self) -> bool:
         return TalentCategory.tank in get_category_by_talent(self)
@@ -276,6 +279,10 @@ class TalentCategory(model.TalentCategory):
     priest_non_healer = auto()
 
     non_priest = auto()
+
+    @property
+    def talents(self) -> OrderedSet['Talent']:
+        return get_talent_by_category(self)
 
 
 TL = Talent

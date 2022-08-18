@@ -70,15 +70,9 @@ class Character(AttrsClass):
     """
     account: Account = attr.ib(default=None)
     name: str = attr.ib(default=None)
-    talent: Talent = attr.ib(default=None)
     window: Window = attr.ib(default=None)
-
     leader1_window: Window = attr.ib(default=_get_win(1))
     leader2_window: Window = attr.ib(default=_get_win(10))
-    is_tank1: bool = attr.ib(default=False)
-    is_tank2: bool = attr.ib(default=False)
-    is_dr_pala1: bool = attr.ib(default=False)
-    is_dr_pala2: bool = attr.ib(default=False)
 
     def set_window(self, index: T.Union[int, Window]) -> 'Character':
         self.window = _get_win(index)
@@ -90,20 +84,4 @@ class Character(AttrsClass):
 
     def set_leader2_window(self, index: T.Union[int, Window]) -> 'Character':
         self.leader2_window = _get_win(index)
-        return self
-
-    def set_tank1(self) -> 'Character':
-        self.is_tank1 = True
-        return self
-
-    def set_tank2(self) -> 'Character':
-        self.is_tank2 = True
-        return self
-
-    def set_dr_pala1(self) -> 'Character':
-        self.is_dr_pala1 = True
-        return self
-
-    def set_dr_pala2(self) -> 'Character':
-        self.is_dr_pala2 = True
         return self
