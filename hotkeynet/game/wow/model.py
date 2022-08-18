@@ -73,6 +73,7 @@ class Character(AttrsClass):
     window: Window = attr.ib(default=None)
     leader1_window: Window = attr.ib(default=_get_win(1))
     leader2_window: Window = attr.ib(default=_get_win(10))
+    active: bool = attr.ib(default=True)
 
     def set_window(self, index: T.Union[int, Window]) -> 'Character':
         self.window = _get_win(index)
@@ -84,4 +85,12 @@ class Character(AttrsClass):
 
     def set_leader2_window(self, index: T.Union[int, Window]) -> 'Character':
         self.leader2_window = _get_win(index)
+        return self
+
+    def set_active(self) -> 'Character':
+        self.active = True
+        return self
+
+    def set_inactive(self) -> 'Character':
+        self.active = False
         return self
