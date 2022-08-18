@@ -5,56 +5,7 @@ from hotkeynet import keyname
 from hotkeynet.script import Command, Hotkey, Key, SendLabel
 
 
-# from hotkeynet.utils import remove_indent
-
-
 class TestHotkey:
-    # def test_title(self):
-    #     hk = Hotkey(
-    #         name="Test",
-    #         key=keyname.SCROLOCK_ON(keyname.KEY_1)
-    #     )
-    #     assert hk.title == "<Hotkey ScrollLockOn 1>"
-
-    # def test_render(self):
-    #     cmd = Command(name="MyCommand")
-    #
-    #     hk = Hotkey(
-    #         name="Test",
-    #         key=keyname.SCROLOCK_ON(keyname.SPACE),
-    #         actions=[
-    #             SendLabel(
-    #                 to=["w1", ],
-    #                 actions=[
-    #                     Key(keyname.NUMPAD_1),
-    #                     Key(keyname.KEY_1),
-    #                 ]
-    #             ),
-    #             SendLabel(
-    #                 to=["w2", ],
-    #                 actions=[
-    #                     Key(keyname.NUMPAD_2),
-    #                     Key(keyname.KEY_2),
-    #                 ]
-    #             ),
-    #             CallCommand(cmd=cmd),
-    #             cmd.call(),
-    #             "<MyCommand>",
-    #         ]
-    #     )
-    #     assert hk.dump().strip() == remove_indent("""
-    #     <Hotkey ScrollLockOn Space>
-    #         <SendLabel w1>
-    #             <Key Numpad1>
-    #             <Key 1>
-    #         <SendLabel w2>
-    #             <Key Numpad2>
-    #             <Key 2>
-    #         <MyCommand>
-    #         <MyCommand>
-    #         <MyCommand>
-    #     """)
-
     def test_render_edge_case_no_sub_blocks(self):
         # just no sub block
         hk = Hotkey(
