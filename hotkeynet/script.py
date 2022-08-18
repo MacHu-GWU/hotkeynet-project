@@ -131,9 +131,19 @@ class SendModeEnum(enum.Enum):
 @attr.s
 class Label(Block['Script']):
     name: str = attr.ib(default=None)
+    window: str = attr.ib(default=None)
     ip: str = attr.ib(default="local")
     send_mode: str = attr.ib(default=SendModeEnum.SendWinM.value)
-    window: str = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        name: str,
+        window: str,
+        ip: str = "local",
+        send_mode: str = SendModeEnum.SendWinM.value,
+    ) -> 'Label':
+        return cls(name=name, window=window, ip=ip, send_mode=send_mode)
 
     @property
     def title(self):
@@ -147,6 +157,10 @@ class Label(Block['Script']):
 class Command(Block['Command']):
     name: str = attr.ib(factory=_context.auto_command_name)
 
+    @classmethod
+    def make(cls, name: str) -> 'Command':
+        return cls(name=name)
+
     @property
     def title(self):
         return f"<Command {self.name}>"
@@ -156,6 +170,30 @@ class Command(Block['Command']):
 
     def call(self, args: T.List[str]) -> 'CallCommand':
         return CallCommand(cmd=self, args=args)
+
+
+class CommandArgEnum:
+    Arg1 = "%1%"
+    Arg2 = "%2%"
+    Arg3 = "%3%"
+    Arg4 = "%4%"
+    Arg5 = "%5%"
+    Arg6 = "%6%"
+    Arg7 = "%7%"
+    Arg8 = "%8%"
+    Arg9 = "%9%"
+    Arg10 = "%10%"
+
+    @classmethod
+    def is_arg(cls, arg: str) -> bool:
+        return (arg.startswith("%") and arg.endswith("%"))
+
+    @classmethod
+    def encode_arg(cls, arg: str) -> str:
+        if cls.is_arg(arg):
+            return arg
+        else:
+            return f"\"{arg}\""
 
 
 @attr.s
@@ -185,6 +223,10 @@ class CallCommand(Block['Command']):
 class SendPC(Block['SendPC.tpl']):
     ip: str = attr.ib(default="local")
 
+    @classmethod
+    def make(cls, ip: str) -> 'SendPC':
+        return cls(ip=ip)
+
     @property
     def title(self):
         return f"<SendPC {self.ip}>"
@@ -197,9 +239,13 @@ class SendPC(Block['SendPC.tpl']):
 class Run(Block['Run']):
     path: str = attr.ib(default=None)
 
+    @classmethod
+    def make(cls, path: str) -> 'Run':
+        return cls(path=path)
+
     @property
     def title(self):
-        return f"<Run \"{self.path}\">"
+        return f"<Run {CommandArgEnum.encode_arg(self.path)}>"
 
     def is_null(self) -> bool:
         return self.path is None
@@ -380,6 +426,10 @@ def _build_modified_mouse_click(modifier, button):
 
 
 class ModifiedMouseClick:
+    """
+    This is not a Block object, it is just a factory class.
+    """
+
     @classmethod
     def _make(cls, modifier: str, button: str) -> T.List[T.Union[KeyDown, KeyUp, Mouse]]:
         return [
@@ -424,6 +474,26 @@ class ModifiedMouseClick:
     @classmethod
     def ctrl_middle_click(cls):
         return cls._make(modifier=KN.CTRL, button=KN.MOUSE_MButton)
+
+
+@attr.s
+class RenameWin(Block['RenameWin']):
+    old: str = attr.ib(default=None)
+    new: str = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, old: str, new: str) -> 'RenameWin':
+        return cls(old=old, new=new)
+
+    @property
+    def title(self) -> str:
+        return "<RenameWin {old} {new}>".format(
+            old=CommandArgEnum.encode_arg(self.old),
+            new=CommandArgEnum.encode_arg(self.new),
+        )
+
+    def is_null(self) -> bool:
+        return (self.old is None) or (self.new is None)
 
 
 def render(
