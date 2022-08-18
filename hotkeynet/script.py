@@ -2,6 +2,7 @@
 
 import typing as T
 import enum
+from functools import cached_property
 
 import attr
 from attrs_mate import AttrsClass
@@ -16,6 +17,10 @@ from .utils import remove_empty_line
 class Context:
     def __init__(self):
         self.stack: list = list()
+        self.auto_name_index: T.Dict[str, int] = {
+            "Command": 0,
+            "Hotkey": 0,
+        }
 
     def push(self, obj):
         self.stack.append(obj)
@@ -26,6 +31,20 @@ class Context:
     @property
     def current(self) -> 'Block':
         return self.stack[-1]
+
+    def _auto_name(self, block_type: str) -> str:
+        name = f"{block_type}{str(self.auto_name_index[block_type] + 1).zfill(3)}"
+        self.auto_name_index[block_type] += 1
+        return name
+
+    def auto_command_name(self) -> str:
+        return self._auto_name("Command")
+
+    def auto_hotkey_name(self) -> str:
+        return self._auto_name("Hotkey")
+
+    def auto_movement_hotkey_name(self) -> str:
+        return self._auto_name("MovementHotkey")
 
 
 _context = Context()
@@ -80,10 +99,19 @@ class Block(AttrsClass, T.Generic[BLOCK]):
     def title(self) -> str:
         raise NotImplementedError
 
+    def _are_sub_blocks_all_null(self) -> bool:
+        return all([block.is_null() for block in self.blocks])
+
+    def is_null(self) -> bool:
+        return False
+
     def render(self, verbose=False) -> str:
         if verbose:
             print(f"render {self.title} ...")
-        return tpl.block_tpl.render(block=self, render=render)
+        if self.is_null():
+            return ""
+        else:
+            return tpl.block_tpl.render(block=self, render=render)
 
 
 @attr.s
@@ -111,14 +139,20 @@ class Label(Block['Script']):
     def title(self):
         return f"<Label {self.name} {self.ip} {self.send_mode} {self.window}>"
 
+    def is_null(self) -> bool:
+        return self.name is None
+
 
 @attr.s
 class Command(Block['Command']):
-    name: str = attr.ib(default=None)
+    name: str = attr.ib(factory=_context.auto_command_name)
 
     @property
     def title(self):
         return f"<Command {self.name}>"
+
+    def is_null(self) -> bool:
+        return self._are_sub_blocks_all_null()
 
 
 @attr.s
@@ -129,6 +163,9 @@ class SendPC(Block['SendPC.tpl']):
     def title(self):
         return f"<SendPC {self.ip}>"
 
+    def is_null(self) -> bool:
+        return self.ip is None
+
 
 @attr.s
 class Run(Block['Run']):
@@ -138,25 +175,34 @@ class Run(Block['Run']):
     def title(self):
         return f"<Run \"{self.path}\">"
 
+    def is_null(self) -> bool:
+        return self.path is None
+
 
 @attr.s
 class Hotkey(Block['Hotkey']):
-    name: str = attr.ib(default=None)
+    name: str = attr.ib(factory=_context.auto_hotkey_name)
     key: str = attr.ib(default=None)
 
     @property
     def title(self):
         return f"<Hotkey {self.key}>"
 
+    def is_null(self) -> bool:
+        return (self.key is None) or self._are_sub_blocks_all_null()
+
 
 @attr.s
 class MovementHotkey(Block['MovementHotkey']):
-    name: str = attr.ib(default=None)
+    name: str = attr.ib(factory=_context.auto_movement_hotkey_name)
     key: str = attr.ib(default=None)
 
     @property
     def title(self) -> str:
         return f"<MovementHotkey {self.key}>"
+
+    def is_null(self) -> bool:
+        return (self.key is None) or self._are_sub_blocks_all_null()
 
 
 @attr.s
@@ -166,6 +212,10 @@ class Key(Block['Key']):
     @property
     def title(self):
         return f"<Key {self.key}>"
+
+    @classmethod
+    def make(cls, key: str) -> 'Key':
+        return cls(key=key)
 
     @classmethod
     def trigger(cls) -> 'Key':
@@ -197,11 +247,14 @@ class SendLabel(Block['SendLabel']):
 
     @property
     def targets(self) -> str:
-        return ", ".join([label.title for label in self.to])
+        return ", ".join([label.name for label in self.to])
 
     @property
     def title(self) -> str:
         return f"<SendLabel {self.targets}>"
+
+    def is_null(self) -> bool:
+        return (len(self.to) == 0) or self._are_sub_blocks_all_null()
 
 
 class MouseButtonEnum(enum.Enum):
@@ -301,7 +354,8 @@ def _build_modified_mouse_click(modifier, button):
 
 
 class ModifiedMouseClick:
-    def _make(self, modifier: str, button: str) -> T.List[]:
+    @classmethod
+    def _make(cls, modifier: str, button: str) -> T.List[T.Union[KeyDown, KeyUp, Mouse]]:
         return [
             KeyDown(key=modifier),
             Mouse(button=button, stroke="Down"),
@@ -311,39 +365,39 @@ class ModifiedMouseClick:
 
     @classmethod
     def shift_left_click(cls):
-        return cls(modifier=keyname.SHIFT, button=keyname.MOUSE_LButton)
+        return cls._make(modifier=KN.SHIFT, button=KN.MOUSE_LButton)
 
     @classmethod
     def shift_right_click(cls):
-        return cls(modifier=keyname.SHIFT, button=keyname.MOUSE_LButton)
+        return cls._make(modifier=KN.SHIFT, button=KN.MOUSE_LButton)
 
     @classmethod
     def shift_middle_click(cls):
-        return cls(modifier=keyname.SHIFT, button=keyname.MOUSE_MButton)
+        return cls._make(modifier=KN.SHIFT, button=KN.MOUSE_MButton)
 
     @classmethod
     def alt_left_click(cls):
-        return cls(modifier=keyname.ALT, button=keyname.MOUSE_LButton)
+        return cls._make(modifier=KN.ALT, button=KN.MOUSE_LButton)
 
     @classmethod
     def alt_right_click(cls):
-        return cls(modifier=keyname.ALT, button=keyname.MOUSE_LButton)
+        return cls._make(modifier=KN.ALT, button=KN.MOUSE_LButton)
 
     @classmethod
     def alt_middle_click(cls):
-        return cls(modifier=keyname.ALT, button=keyname.MOUSE_MButton)
+        return cls._make(modifier=KN.ALT, button=KN.MOUSE_MButton)
 
     @classmethod
     def ctrl_left_click(cls):
-        return cls(modifier=keyname.CTRL, button=keyname.MOUSE_LButton)
+        return cls._make(modifier=KN.CTRL, button=KN.MOUSE_LButton)
 
     @classmethod
     def ctrl_right_click(cls):
-        return cls(modifier=keyname.CTRL, button=keyname.MOUSE_LButton)
+        return cls._make(modifier=KN.CTRL, button=KN.MOUSE_LButton)
 
     @classmethod
     def ctrl_middle_click(cls):
-        return cls(modifier=keyname.CTRL, button=keyname.MOUSE_MButton)
+        return cls._make(modifier=KN.CTRL, button=KN.MOUSE_MButton)
 
 
 def render(

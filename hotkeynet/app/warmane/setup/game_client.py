@@ -34,6 +34,7 @@ class GameClientSetUp(AttrsClass):
     pass_item_button_2_y = attr.ib(default=None)  # type: int
     pass_item_button_3_y = attr.ib(default=None)  # type: int
     pass_item_button_4_y = attr.ib(default=None)  # type: int
+
     # credential_list = attr.ib(default=lambda: list())  # type: typing.List[credentials.Credentials.Credential]
 
     def use_n_windows(self, n):

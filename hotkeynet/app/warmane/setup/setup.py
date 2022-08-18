@@ -24,9 +24,9 @@ class Setup(AttrsClass):
 
     # def
 
-
-Setup(
-    active_characters=[
-        CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().
-    ]
-)
+#
+# Setup(
+#     active_characters=[
+#         CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().
+#     ]
+# )

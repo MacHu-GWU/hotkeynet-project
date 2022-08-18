@@ -40,7 +40,7 @@ class MyScript:
                     name="",
                     to=self.labels,
                 ):
-                    Key(name=keyname.KEY_1)
+                    Key(key=keyname.KEY_1)
 
 
 def test_context():
