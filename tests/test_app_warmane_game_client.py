@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
-from hotkeynet.app.warmane.game_client import GameClientSetup
+from hotkeynet.app.warmane.game_client import GameClient
 
 
 class TestGameClientSetup:
     def test(self):
-        game_client_setup = GameClientSetup()
+        game_client_setup = GameClient()
         game_client_setup.use_1920_1080_resolution()
         game_client_setup.use_1600_900_resolution()
         game_client_setup.use_1176_664_resolution()

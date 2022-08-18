@@ -11,11 +11,11 @@ from attrs_mate import AttrsClass
 
 # from .character import CharacterFactory
 from .character import Character
-from .game_client import GameClientSetup
+from .game_client import GameClient
 
 
 @attr.s
-class Setup(AttrsClass):
+class Mode(AttrsClass):
     """
     代表你使用多开脚本进行游戏的设置, 包含了以下内容:
 
@@ -25,10 +25,12 @@ class Setup(AttrsClass):
     4. 各个角色分别扮演团队中的什么位置
     5. 等等
     """
-    game_client:
-    active_chars: T.List[Character]
-    login_chars: T.List[Character]
+    game_client_setup: GameClient = attr.ib(default=None)
+    active_chars: T.List[Character] = attr.ib(factory=list)
+    login_chars: T.List[Character] = attr.ib(factory=list)
 
+    def mode_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(self):
+        pass
 
 # Setup(
 #     active_characters=[
