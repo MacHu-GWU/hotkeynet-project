@@ -10,8 +10,10 @@
     根据 TalentCategory 找到里面包含了哪些天赋.
 """
 
-import typing as TP
+import typing as T
 from enum import auto
+
+from ordered_set import OrderedSet
 
 from .. import model
 from ....utils import union_list, intersection_list, difference_list
@@ -105,6 +107,9 @@ class Talent(model.Talent):
     priest_pvp_shadow = auto()
     priest_pvp_disco = auto()
     priest_pvp_holy = auto()
+
+    def is_tank(self) -> bool:
+        return TalentCategory.tank in get_category_by_talent(self)
 
 
 class TalentCategory(model.TalentCategory):
@@ -489,18 +494,20 @@ _association = [
 ]
 
 # 我们先专注于计算 类别 -> 天赋 的关系, 最后把它反过来就得到了 天赋 -> 类别 的关系
-category_to_talent_mapper = {category: [] for category in TC}
+category_to_talent_mapper: T.Dict[TalentCategory, OrderedSet[Talent]] = {
+    category: OrderedSet() for category in TC
+}
 for category, talent in _association:
-    category_to_talent_mapper[category].append(talent)
+    category_to_talent_mapper[category].add(talent)
 
 _c2t_map = category_to_talent_mapper
-_all_talent = set(Talent)
+_all_talent = OrderedSet(Talent)
 _c2t_map[TC.all] = _all_talent
 
 # 先处理 pve, pvp, 这个最简单
 _pve_and_pvp = ["pve", "pvp"]
 for pvn in _pve_and_pvp:
-    _c2t_map[TC[pvn]] = [t for t in Talent if pvn in t.name]
+    _c2t_map[TC[pvn]] = OrderedSet([t for t in Talent if pvn in t.name])
 
 # 然后处理各个职业
 _all_class = [
@@ -510,8 +517,10 @@ _all_class = [
     "mage", "warlock", "priest"
 ]
 for class_ in _all_class:
-    _c2t_map[TC[class_]] = [t for t in Talent if t.name.startswith(class_)]
-    _c2t_map[TC[f"non_{class_}"]] = difference_list(_all_talent, _c2t_map[TC[class_]])
+    _c2t_map[TC[class_]] = OrderedSet([
+        t for t in Talent if t.name.startswith(class_)
+    ])
+    _c2t_map[TC[f"non_{class_}"]] = _all_talent.difference(_c2t_map[TC[class_]])
 
 # 处理各个职业的各系天赋
 for tc in TC:
@@ -519,17 +528,16 @@ for tc in TC:
     class_ = tc_name_chunks[0]
     if class_ in _all_class and len(tc_name_chunks) == 2:
         spec = tc.name.split("_")[-1]
-        _c2t_map[TC[f"{class_}_{spec}"]] = [
+        _c2t_map[TC[f"{class_}_{spec}"]] = OrderedSet([
             t
             for t in Talent
             if (class_ in t.name) and (spec in t.name)
-        ]
+        ])
 
     elif class_ in _all_class and len(tc_name_chunks) == 3:
         spec = tc.name.split("_")[-1]
-        _c2t_map[TC[f"{class_}_non_{spec}"]] = difference_list(
-            _c2t_map[TC[f"{class_}"]],
-            _c2t_map[TC[f"{class_}_{spec}"]],
+        _c2t_map[TC[f"{class_}_non_{spec}"]] = (
+            _c2t_map[TC[f"{class_}"]].difference(_c2t_map[TC[f"{class_}_{spec}"]])
         )
 
     else:  # pragma: no cover
@@ -538,56 +546,56 @@ for tc in TC:
 # 处理 tank, dps, healer
 _all_role = ["tank", "dps", "healer"]
 for role in _all_role:
-    _c2t_map[TC[f"non_{role}"]] = difference_list(_all_talent, _c2t_map[TC[role]])
+    _c2t_map[TC[f"non_{role}"]] = _all_talent.difference(_c2t_map[TC[role]])
 
 # 处理 近战, 远程, 物理, 魔法
 _all_detailed_role = ["melee", "ranger", "physics", "caster"]
 for role in _all_detailed_role:
-    _c2t_map[TC[f"non_{role}"]] = difference_list(_all_talent, _c2t_map[TC[role]])
+    _c2t_map[TC[f"non_{role}"]] = _all_talent.difference(_c2t_map[TC[role]])
 
 for class_ in _all_class:
     for role in _all_role:
         tc_name_1 = f"{class_}_{role}"
         try:
-            _c2t_map[TC[tc_name_1]] = intersection_list(
-                _c2t_map[TC[class_]],
-                _c2t_map[TC[role]],
+            _c2t_map[TC[tc_name_1]] = (
+                _c2t_map[TC[class_]].intersection(_c2t_map[TC[role]])
             )
         except KeyError:
             pass
 
         tc_name_2 = f"{class_}_non_{role}"
         try:
-            _c2t_map[TC[tc_name_2]] = difference_list(
-                _c2t_map[TC[class_]],
-                _c2t_map[TC[tc_name_1]],
+            _c2t_map[TC[tc_name_2]] = (
+                _c2t_map[TC[class_]].difference(_c2t_map[TC[tc_name_1]])
             )
         except KeyError:
             pass
 
-_c2t_map[TC.dispeler] = difference_list(
-    union_list(
-        _c2t_map[TC.paladin],
-        _c2t_map[TC.druid],
-        _c2t_map[TC.shaman],
-        _c2t_map[TC.mage],
-        _c2t_map[TC.priest],
-    ),
+_c2t_map[TC.dispeler] = OrderedSet.union(
+    _c2t_map[TC.paladin],
+    _c2t_map[TC.druid],
+    _c2t_map[TC.shaman],
+    _c2t_map[TC.mage],
+    _c2t_map[TC.priest],
+).difference(
     _c2t_map[TC.druid_bear],
     _c2t_map[TC.druid_cat],
 )
-_c2t_map[TC.non_dispeler] = difference_list(_all_talent, _c2t_map[TC.dispeler])
+_c2t_map[TC.non_dispeler] = _all_talent.difference(_c2t_map[TC.dispeler])
 
-talent_to_category_mapper = {talent: [] for talent in Talent}
+talent_to_category_mapper: T.Dict[Talent, OrderedSet[TalentCategory]] = {
+    talent: OrderedSet()
+    for talent in Talent
+}
 _t2c_map = talent_to_category_mapper
 for category, talent_list in _c2t_map.items():
     for talent in talent_list:
-        _t2c_map[talent].append(category)
+        _t2c_map[talent].add(category)
 
 
-def get_talent_by_category(category: TC) -> TP.List[Talent]:
+def get_talent_by_category(category: TC) -> OrderedSet[Talent]:
     return category_to_talent_mapper[category]
 
 
-def get_category_by_talent(talent: TL) -> TP.List[TC]:
+def get_category_by_talent(talent: TL) -> OrderedSet[TC]:
     return talent_to_category_mapper[talent]

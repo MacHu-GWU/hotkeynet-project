@@ -6,6 +6,7 @@ from hotkeynet.game.wow.wlk.talent import (
     TC,
     get_talent_by_category,
     get_category_by_talent,
+    OrderedSet,
 )
 
 
@@ -79,7 +80,7 @@ def test_get_talent_by_category():
 
 
 def test_get_category_by_talent():
-    assert get_category_by_talent(TL.warrior_pvp_fury) == [
+    assert get_category_by_talent(TL.warrior_pvp_fury) == OrderedSet([
         TC.all,
         TC.pvp,
         TC.dps,
@@ -104,9 +105,9 @@ def test_get_category_by_talent():
         TC.non_mage,
         TC.non_warlock,
         TC.non_priest,
-    ]
+    ])
 
-    assert get_category_by_talent(TL.paladin_pve_holy) == [
+    assert get_category_by_talent(TL.paladin_pve_holy) == OrderedSet([
         TC.all,
         TC.pve,
         TC.healer,
@@ -133,7 +134,10 @@ def test_get_category_by_talent():
         TC.non_mage,
         TC.non_warlock,
         TC.non_priest,
-    ]
+    ])
+
+    assert TL.druid_pve_bear.is_tank() is True
+    assert TL.druid_pvp_cat.is_tank() is False
 
 
 if __name__ == "__main__":
