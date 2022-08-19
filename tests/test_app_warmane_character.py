@@ -17,27 +17,16 @@ class TestCharacterFactory:
 
 class TestLoginCharactersFactory:
     def test(self):
-        _ = LoginCharactersFactory.make_chars_10p()
-        _ = LoginCharactersFactory.make_chars_14p_litgugu_abcd()
-        _ = LoginCharactersFactory.make_chars_22p_litgugu_abcd()
+        for attr in LoginCharactersFactory.__dict__:
+            if attr.startswith("make_chars"):
+                getattr(LoginCharactersFactory, attr)()
 
 
 class TestActiveCharactersFactory:
     def test(self):
-        ActiveCharactersFactory.make_team_solo_dungeon_1_tank_3_dps_1_healer()
-        ActiveCharactersFactory.make_team_solo_dungeon_festival_team_1_dk()
-        ActiveCharactersFactory.make_team_solo_dungeon_festival_team_2_ss()
-        ActiveCharactersFactory.make_team_solo_dungeon_festival_team_3_mix()
-        ActiveCharactersFactory.make_team_solo_dungeon_festival_team_4_ms_sm()
-        ActiveCharactersFactory.make_team_solo_dungeon_festival_team_5_ms_sm()
-
-        ActiveCharactersFactory.make_team_daily_gold_farm_team_1_druid()
-        ActiveCharactersFactory.make_team_daily_gold_farm_team_2_druid()
-        ActiveCharactersFactory.make_team_daily_gold_farm_team_3_dk()
-        ActiveCharactersFactory.make_team_daily_gold_farm_team_4_ss()
-        ActiveCharactersFactory.make_team_daily_gold_farm_team_5_ms()
-        ActiveCharactersFactory.make_team_daily_gold_farm_team_6_sm()
-        ActiveCharactersFactory.make_team_daily_gold_farm_team_7()
+        for attr in ActiveCharactersFactory.__dict__:
+            if attr.startswith("make_team"):
+                getattr(ActiveCharactersFactory, attr)()
 
 
 if __name__ == "__main__":
