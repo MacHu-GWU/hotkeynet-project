@@ -25,15 +25,8 @@ class HknScript(AttrsClass):
 
     def __attrs_post_init__(self):
         hk.context.push(self.script)
-
-        self.build_cmd_launch_and_rename_game_client()
-        self.build_cmd_launch_and_rename_all_game_client()
-        self.build_cmd_bring_window_to_foreground()
-        self.build_cmd_resize_and_relocate_window()
-        self.build_cmd_center_overlap_layout()
-        self.build_cmd_enter_username_and_password()
-        self.build_cmd_batch_login()
-
+        self.build_cmd()
+        
     def build_cmd_launch_and_rename_game_client(self):
         """
         运行一个游戏客户端, 并重命名游戏窗口.
@@ -195,3 +188,12 @@ class HknScript(AttrsClass):
                     char.account.username,
                     char.account.password,
                 ])
+
+    def build_cmd(self):
+        self.build_cmd_launch_and_rename_game_client()
+        self.build_cmd_launch_and_rename_all_game_client()
+        self.build_cmd_bring_window_to_foreground()
+        self.build_cmd_resize_and_relocate_window()
+        self.build_cmd_center_overlap_layout()
+        self.build_cmd_enter_username_and_password()
+        self.build_cmd_batch_login()
