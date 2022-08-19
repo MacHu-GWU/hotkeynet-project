@@ -874,7 +874,7 @@ class CreateButton(Block['CreateButton']):
             ]
             if i
         ]
-        return "<CreateButton {}".format(
+        return "<CreateButton {}>".format(
             " ".join(non_null_args)
         )
 
@@ -920,7 +920,7 @@ class CreatePictureButton(Block['CreatePictureButton']):
             ]
             if i is not None
         ]
-        return "<CreatePictureButton {}".format(
+        return "<CreatePictureButton {}>".format(
             " ".join(non_null_args)
         )
 
@@ -968,7 +968,7 @@ class AddButtonToPanel(Block['AddButtonToPanel']):
             ]
             if i is not None
         ]
-        return "<AddButtonToPanel {}".format(
+        return "<AddButtonToPanel {}>".format(
             " ".join(non_null_args)
         )
 
@@ -1087,7 +1087,7 @@ class SetPanelLayout(Block['SetPanelLayout']):
             ]
             if i is not None
         ]
-        return "<SetPanelLayout {}".format(
+        return "<SetPanelLayout {}>".format(
             " ".join(non_null_args)
         )
 
