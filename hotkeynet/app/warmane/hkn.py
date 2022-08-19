@@ -341,13 +341,7 @@ class HknScript(AttrsClass):
                     y=self.mode.game_client.return_to_game_button_y,
                 )
                 hk.Wait.make(50)
-                (
-                    hk.ClickMouse()
-                    .set_left_click()
-                    .set_stroke_as_both()
-                    .set_target_as_window()
-                    .set_mode_as_no_move()
-                )
+                hk.ClickMouse.make_left_click_on_window()
                 hk.Wait.make(50)
                 # 现在菜单按钮确保已经关上了, 然后可以打开菜单
                 act.General.TOGGLE_MAIN_GAME_MENU()
@@ -358,13 +352,7 @@ class HknScript(AttrsClass):
                     y=self.mode.game_client.log_out_button_y,
                 )
                 hk.Wait.make(50)
-                (
-                    hk.ClickMouse()
-                    .set_left_click()
-                    .set_stroke_as_both()
-                    .set_target_as_window()
-                    .set_mode_as_no_move()
-                )
+                hk.ClickMouse.make_left_click_on_window()
 
     def build_hk_logout_on_current_window(self):
         with hk.Hotkey(
@@ -389,13 +377,7 @@ class HknScript(AttrsClass):
                     y=self.mode.game_client.return_to_game_button_y,
                 )
                 hk.Wait.make(50)
-                (
-                    hk.ClickMouse()
-                    .set_left_click()
-                    .set_stroke_as_both()
-                    .set_target_as_window()
-                    .set_mode_as_no_move()
-                )
+                hk.ClickMouse.make_left_click_on_window()
                 hk.Wait.make(50)
                 # 现在菜单按钮确保已经关上了, 然后可以打开菜单
                 act.General.TOGGLE_MAIN_GAME_MENU()
@@ -406,13 +388,7 @@ class HknScript(AttrsClass):
                     y=self.mode.game_client.log_out_button_y,
                 )
                 hk.Wait.make(50)
-                (
-                    hk.ClickMouse()
-                    .set_left_click()
-                    .set_stroke_as_both()
-                    .set_target_as_window()
-                    .set_mode_as_no_move()
-                )
+                hk.ClickMouse.make_left_click_on_window()
 
     def build_hk_01(self):
         self.build_hk_round_robin_toggle_window()

@@ -396,7 +396,7 @@ class MouseModeEnum(enum.Enum):
 @attr.s
 class ClickMouse(Block['Mouse']):
     """
-    Click Mouse action
+    Click Mouse
     """
     # LButton, MButton, RButton, Button4, or Button5
     button: str = attr.ib(default=None)
@@ -408,6 +408,40 @@ class ClickMouse(Block['Mouse']):
     mode: str = attr.ib(default="")
     # Restore or NoRestore
     restore: str = attr.ib(default="")
+
+    @classmethod
+    def make_left_click_on_window(cls) -> 'ClickMouse':
+        return cls(
+            button=MouseButtonEnum.LButton.value,
+            stroke=MouseStrokeEnum.Both.value,
+            target=MouseTargetEnum.Window.value,
+            mode=MouseModeEnum.NoMove.value,
+        )
+
+    @classmethod
+    def make_left_click_on_window_at(cls, x: int, y: int) -> 'ClickMouse':
+        return cls(
+            button=MouseButtonEnum.LButton.value,
+            stroke=MouseStrokeEnum.Both.value,
+            target=MouseTargetEnum.Window.value,
+        ).set_mode_as_x_y(x, y)
+
+    @classmethod
+    def make_right_click_on_window(cls) -> 'ClickMouse':
+        return cls(
+            button=MouseButtonEnum.RButton.value,
+            stroke=MouseStrokeEnum.Both.value,
+            target=MouseTargetEnum.Window.value,
+            mode=MouseModeEnum.NoMove.value,
+        )
+
+    @classmethod
+    def make_right_click_on_window_at(cls, x: int, y: int) -> 'ClickMouse':
+        return cls(
+            button=MouseButtonEnum.RButton.value,
+            stroke=MouseStrokeEnum.Both.value,
+            target=MouseTargetEnum.Window.value,
+        ).set_mode_as_x_y(x, y)
 
     def set_left_click(self) -> 'ClickMouse':
         self.button = MouseButtonEnum.LButton.value
