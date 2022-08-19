@@ -19,6 +19,9 @@ class TalentCategory(enum.IntEnum):
 class Window(AttrsClass):
     """
     代表着一个 魔兽世界 客户端窗口.
+
+    :param title: Windows 里的窗口上面的 Title
+    :param label: HotkeyNet 脚本里定义的 Label
     """
     title: str = attr.ib()
     label: str = attr.ib()

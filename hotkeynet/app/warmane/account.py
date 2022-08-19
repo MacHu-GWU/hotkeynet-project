@@ -15,7 +15,7 @@ from hotkeynet.game.wow.model import Account
 
 from .paths import path_accounts_json, path_test_accounts_json
 
-if "CI" in os:
+if "CI" in os.environ:
     accounts_data = json.load(path_test_accounts_json.abspath, verbose=False)
 else:
     accounts_data = json.load(path_accounts_json.abspath, verbose=False)

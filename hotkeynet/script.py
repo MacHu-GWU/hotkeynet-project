@@ -218,8 +218,10 @@ class CommandArgEnum:
     def encode_arg(cls, arg: str) -> str:
         if cls.is_arg(arg):
             return arg
-        else:
+        elif " " in arg:
             return f"\"{arg}\""
+        else:
+            return arg
 
 
 @attr.s
@@ -368,6 +370,7 @@ class Mouse(Block['Mouse']):
     """
     Click Mouse action
     """
+    # LButton, MButton, RButton, Button4, or Button5
     button: str = attr.ib(default=None)
     # Down, Up, Both, or NoClick
     stroke: str = attr.ib(default="")
@@ -598,6 +601,167 @@ class ToggleWin(Block['ToggleWin']):
 
     def is_null(self) -> bool:
         return len(self.windows) == 0
+
+
+@attr.s
+class SendWin(Block['SendWin']):
+    window: str = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, window: str) -> 'SendWin':
+        return cls(window=window)
+
+    @property
+    def title(self) -> str:
+        return f"<SendWin {CommandArgEnum.encode_arg(self.window)}>"
+
+    def is_null(self) -> bool:
+        return self.window is None
+
+
+@attr.s
+class SendWinM(Block['SendWinM']):
+    window: str = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, window: str) -> 'SendWinM':
+        return cls(window=window)
+
+    @property
+    def title(self) -> str:
+        return f"<SendWinM {CommandArgEnum.encode_arg(self.window)}>"
+
+    def is_null(self) -> bool:
+        return self.window is None
+
+
+@attr.s
+class SendWinMF(Block['SendWinMF']):
+    window: str = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, window: str) -> 'SendWinMF':
+        return cls(window=window)
+
+    @property
+    def title(self) -> str:
+        return f"<SendWinMF {CommandArgEnum.encode_arg(self.window)}>"
+
+    def is_null(self) -> bool:
+        return self.window is None
+
+
+@attr.s
+class SendWinS(Block['SendWinS']):
+    window: str = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, window: str) -> 'SendWinS':
+        return cls(window=window)
+
+    @property
+    def title(self) -> str:
+        return f"<SendWinS {CommandArgEnum.encode_arg(self.window)}>"
+
+    def is_null(self) -> bool:
+        return self.window is None
+
+
+@attr.s
+class SendWinSF(Block['SendWinSF']):
+    window: str = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, window: str) -> 'SendWinSF':
+        return cls(window=window)
+
+    @property
+    def title(self) -> str:
+        return f"<SendWinSF {CommandArgEnum.encode_arg(self.window)}>"
+
+    def is_null(self) -> bool:
+        return self.window is None
+
+
+@attr.s
+class SendFocusWin(Block['SendFocusWin']):
+    @property
+    def title(self) -> str:
+        return f"<SendFocusWin>"
+
+
+@attr.s
+class SetWinPos(Block['SetWinPos']):
+    x: int = attr.ib(default=None)
+    y: int = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, x: int, y: int) -> 'SetWinPos':
+        return cls(x=x, y=y)
+
+    @property
+    def title(self) -> str:
+        return f"<SetWinPos {self.x} {self.y}>"
+
+    def is_null(self) -> bool:
+        return (self.x is None) or (self.y is None)
+
+
+@attr.s
+class SetWinSize(Block['SetWinSize']):
+    x: int = attr.ib(default=None)
+    y: int = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, x: int, y: int) -> 'SetWinSize':
+        return cls(x=x, y=y)
+
+    @property
+    def title(self) -> str:
+        return f"<SetWinSize {self.x} {self.y}>"
+
+    def is_null(self) -> bool:
+        return (self.x is None) or (self.y is None)
+
+
+@attr.s
+class SetWinRect(Block['SetWinRect']):
+    x: int = attr.ib(default=None)
+    y: int = attr.ib(default=None)
+    width: int = attr.ib(default=None)
+    height: int = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, x: int, y: int, width: int, height: int) -> 'SetWinRect':
+        return cls(x=x, y=y, width=width, height=height)
+
+    @property
+    def title(self) -> str:
+        return f"<SetWinRect {self.x} {self.y} {self.width} {self.height}>"
+
+    def is_null(self) -> bool:
+        return (
+            (self.x is None)
+            or (self.y is None)
+            or (self.width is None)
+            or (self.height is None)
+        )
+
+
+@attr.s
+class Text(Block['Text']):
+    text: str = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, text: str) -> 'Text':
+        return cls(text=text)
+
+    @property
+    def title(self) -> str:
+        return f"<Text {self.text}>"
+
+    def is_null(self) -> bool:
+        return self.text is None
 
 
 def render(

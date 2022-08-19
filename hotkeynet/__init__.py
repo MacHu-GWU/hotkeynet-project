@@ -36,6 +36,22 @@ try:
         SendLabel,
         SendModeEnum,
         SendPC,
+        SetActiveWin,
+        SetForegroundWin,
+        TargetWin,
+        Toggle,
+        ToggleHotkeys,
+        ToggleWin,
+        Wait,
+        SendWin,
+        SendWinM,
+        SendWinMF,
+        SendWinS,
+        SendWinSF,
+        SetWinPos,
+        SetWinRect,
+        SetWinSize,
+        Text,
     )
 
 except ImportError as e:
