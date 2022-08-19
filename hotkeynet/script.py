@@ -55,6 +55,17 @@ class Block(AttrsClass, T.Generic[BLOCK]):
         return self.__enter__()
 
     def __enter__(self) -> BLOCK:
+        """
+        __enter__ 是为 ``with Block() as block:`` 这样的上下文管理器语法服务的. 这个
+        语法能自动将被上下文包括起来的 子 Block, 添加到 上下文所在的 Block 中去. 从而让
+        这些 Block 的关系人类可读, 机器也可解析. 这些上下文解析的逻辑是在 Block 实例被创建
+        的时候执行的. 但是这样做就要求所有的 Block 只能在它 "该被创建" 的时候, 被创建.
+
+        如果你提前在没有上下文的时候创建 Block 的实例, 而在需要它的时候直接引用它, 这样会
+        导致父 Block 无法感知到被引用的 Block 的存在. 所以如果你需要定义一些常用的 Block
+        然后直接引用, 期望这样做可以减少代码重复, 这时你需要确保这些引用的定义是一个函数,
+        而不是一个具体的实例.
+        """
         context.push(self)
         return self
 
@@ -330,7 +341,7 @@ class Key(Block['Key']):
 
     @classmethod
     def trigger(cls) -> 'Key':
-        return cls(key="%Trigger%")
+        return cls(key=KN.TRIGGER)
 
 
 @attr.s

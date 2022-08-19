@@ -8,6 +8,7 @@
 """
 
 ESC = "Esc"
+TRIGGER = "%Trigger%"
 
 F1 = "F1"
 F2 = "F2"
