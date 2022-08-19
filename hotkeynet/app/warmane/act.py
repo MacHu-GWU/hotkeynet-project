@@ -12,13 +12,19 @@ Hotkey 代码本身就能反映出想要实现的功能, 避免了写注释. 因
 
 注: 在游戏中按照本模块的设置绑定好所有按键后, 一定要记得备份 WFT 中的配置文件, 以及 Domino
 动作条的数据文件.
+
+**开发者注意**
+
+请参考 :meth:`hotkeynet.script.Block.__enter__` 中的文档. 因为上下文机制的存在,
+这里所有的属性都 **不能够** 直接定义预先被创建好的 Block 实例. 而是要用工厂函数定义成
+一个函数. 这样才能保证被引用的 Block 自动被添加到上下文中去.
 """
 
 import typing as TP
 
 from hotkeynet.keyname import *
 from hotkeynet.script import (
-    Key, ClickMouse, ModifiedClickMouse
+    Block, Key, ClickMouse, ModifiedClickMouse
 )
 from hotkeynet.game.wow.model import Window
 
@@ -42,8 +48,12 @@ def convert_to_key_maker(klass: TP.Type):
     """
     for key, value in klass.__dict__.items():
         if not key.startswith("_"):
-            if isinstance(value, str):
+            if isinstance(value, Block):
+                raise TypeError("You cannot use BLOCK here! you will break the Context!")
+            elif isinstance(value, str):
                 setattr(klass, key, KeyMaker(key=value))
+            else:
+                pass
 
 
 class Movement:
@@ -243,7 +253,7 @@ class General:
     在游戏内的按键绑定实现的.
     """
     ESC = ESC  # 按 ECS 键
-    TRIGGER = Key.trigger()
+    TRIGGER = TRIGGER
 
     STOP_CASTING_KEY_OEM1_SEMICOLUMN = OEM1_SEMICOLUMN  # 取消施法
     STOP_ATTACKING_KEY_OEM7_QUOTE = OEM7_QUOTE  # 取消攻击
@@ -359,7 +369,7 @@ class Paladin:
     """
     圣骑士职业的按键绑定.
     """
-    ALL_SPEC_DIVINE_PLEA = ClickMouse(button=MOUSE_MButton)  # 神圣恩求 (回蓝技能)
+    ALL_SPEC_DIVINE_PLEA = lambda: ClickMouse(button=MOUSE_MButton)  # 神圣恩求 (回蓝技能)
     ALL_SPEC_AVENGING_WRATH = SHIFT_(F)  # 复仇之怒 (爆发技能)
 
     # --- Defensive CD 防御性CD技能 ---
@@ -459,24 +469,24 @@ class Paladin:
 
     # --- Healbot 团队框架快捷键 ---
     # Left | Right | Middle Click
-    HEAL_BOT_LEFT_CLICK_HOLY_LIGHT = ClickMouse(button=MOUSE_LButton)  # 圣光术
-    HEAL_BOT_RIGHT_CLICK_FLASH_OF_LIGHT = ClickMouse(button=MOUSE_RButton)  # 圣光闪现
-    HEAL_BOT_MIDDLE_CLICK_BEACON_OF_LIGHT = ClickMouse(button=MOUSE_MButton)  # 圣光道标
+    HEAL_BOT_LEFT_CLICK_HOLY_LIGHT = lambda: ClickMouse(button=MOUSE_LButton)  # 圣光术
+    HEAL_BOT_RIGHT_CLICK_FLASH_OF_LIGHT = lambda: ClickMouse(button=MOUSE_RButton)  # 圣光闪现
+    HEAL_BOT_MIDDLE_CLICK_BEACON_OF_LIGHT = lambda: ClickMouse(button=MOUSE_MButton)  # 圣光道标
 
     # Shift | Alt | Ctrl + Left Click
-    HEAL_BOT_BEACON_OF_LIGHT = ModifiedClickMouse.shift_left_click()  # 圣光道标
-    HEAL_BOT_SACRED_SHIELD = ModifiedClickMouse.alt_left_click()  # 圣洁护盾
-    HEAL_BOT_CLEANSE = ModifiedClickMouse.ctrl_left_click()  # 清洁术
+    HEAL_BOT_BEACON_OF_LIGHT = lambda: ModifiedClickMouse.shift_left_click()  # 圣光道标
+    HEAL_BOT_SACRED_SHIELD = lambda: ModifiedClickMouse.alt_left_click()  # 圣洁护盾
+    HEAL_BOT_CLEANSE = lambda: ModifiedClickMouse.ctrl_left_click()  # 清洁术
 
     # Shift | Alt | Ctrl + Right Click
-    HEAL_BOT_HOLY_SHOCK = ModifiedClickMouse.shift_right_click()  # 神圣震击
-    HEAL_BOT_HAND_OF_FREEDOM = ModifiedClickMouse.alt_right_click()  # 自由祝福
+    HEAL_BOT_HOLY_SHOCK = lambda: ModifiedClickMouse.shift_right_click()  # 神圣震击
+    HEAL_BOT_HAND_OF_FREEDOM = lambda: ModifiedClickMouse.alt_right_click()  # 自由祝福
     # HEAL_BOT_UNKNOWN = ModifiedMouseClick.ctrl_left_click()  #
 
     # Shift | Alt | Ctrl + Middle Click
-    HEAL_BOT_HAND_OF_SACRIFICE = ModifiedClickMouse.shift_middle_click()  # 牺牲祝福
-    HEAL_BOT_HAND_OF_SALVATION = ModifiedClickMouse.alt_middle_click()  # 拯救祝福
-    HEAL_BOT_HAND_OF_PROTECTION = ModifiedClickMouse.ctrl_middle_click()  # 保护祝福
+    HEAL_BOT_HAND_OF_SACRIFICE = lambda: ModifiedClickMouse.shift_middle_click()  # 牺牲祝福
+    HEAL_BOT_HAND_OF_SALVATION = lambda: ModifiedClickMouse.alt_middle_click()  # 拯救祝福
+    HEAL_BOT_HAND_OF_PROTECTION = lambda: ModifiedClickMouse.ctrl_middle_click()  # 保护祝福
 
 
 convert_to_key_maker(Paladin)
@@ -719,18 +729,18 @@ class Shaman:
     ENHANCEMENT_SPEC_CURE_TOXIC = T  # 净化疾病中毒
 
     # Left | Right | Middle
-    HEAL_BOT_HEALING_WAVE_LEFT_CLICK = ClickMouse(button=MOUSE_LButton)  # 治疗波
-    HEAL_BOT_RIPTIDE_RIGHT_CLICK = ClickMouse(button=MOUSE_RButton)  # 激流
-    HEAL_BOT_CHAIN_HEAL_MIDDLE_CLICK = ClickMouse(button=MOUSE_MButton)  # 治疗链
+    HEAL_BOT_HEALING_WAVE_LEFT_CLICK = lambda: ClickMouse(button=MOUSE_LButton)  # 治疗波
+    HEAL_BOT_RIPTIDE_RIGHT_CLICK = lambda: ClickMouse(button=MOUSE_RButton)  # 激流
+    HEAL_BOT_CHAIN_HEAL_MIDDLE_CLICK = lambda: ClickMouse(button=MOUSE_MButton)  # 治疗链
 
     # Shift, Alt, Ctrl Left Click
-    HEAL_BOT_CHAIN_HEAL_SHIFT_LEFT_CLIICK = ModifiedClickMouse.shift_left_click()  # 治疗链
-    HEAL_BOT_LESS_HEALING_WAVE_ALT_LEFT_CLICK = ModifiedClickMouse.alt_left_click()  # 次级治疗波
-    HEAL_BOT_CLEANSE_CTRL_LEFT_CLICK = ModifiedClickMouse.ctrl_left_click()  # 先祖驱散
+    HEAL_BOT_CHAIN_HEAL_SHIFT_LEFT_CLIICK = lambda: ModifiedClickMouse.shift_left_click()  # 治疗链
+    HEAL_BOT_LESS_HEALING_WAVE_ALT_LEFT_CLICK = lambda: ModifiedClickMouse.alt_left_click()  # 次级治疗波
+    HEAL_BOT_CLEANSE_CTRL_LEFT_CLICK = lambda: ModifiedClickMouse.ctrl_left_click()  # 先祖驱散
 
     # Shift, Alt, Ctrl Right Click
-    HEAL_BOT_EARTH_SHIELD_ALT_RIGHT_CLICK = ModifiedClickMouse.alt_right_click()  # 大地之盾
-    HEAL_BOT_CURE_TOXINS_CTRL_RIGHT_CLICK = ModifiedClickMouse.ctrl_right_click()  # 驱毒术
+    HEAL_BOT_EARTH_SHIELD_ALT_RIGHT_CLICK = lambda: ModifiedClickMouse.alt_right_click()  # 大地之盾
+    HEAL_BOT_CURE_TOXINS_CTRL_RIGHT_CLICK = lambda: ModifiedClickMouse.ctrl_right_click()  # 驱毒术
 
 
 convert_to_key_maker(Shaman)
@@ -780,7 +790,7 @@ class Druid:
     BALANCE_SPEC_FAERI_FIRE_KEY_6 = KEY_6  # 精灵之火
     BALANCE_SPEC_STAR_FALL_ALT_F = ALT_(F)  # 星落 (强力 AOE 技能, 天赋技能)
     BALANCE_SPEC_TYPHOON_KEY_G = G  # 台风 (击退面前的敌人)
-    BALANCE_SPEC_FORCE_OF_NATURE = ClickMouse(button=MOUSE_LButton)  # 自然之力 (召唤树人)
+    BALANCE_SPEC_FORCE_OF_NATURE = lambda: ClickMouse(button=MOUSE_LButton)  # 自然之力 (召唤树人)
 
     BALANCE_SPEC_DPS_ROTATE_MACRO = KEY_2
     """
@@ -814,25 +824,25 @@ class Druid:
     RESTO_SPEC_NOURISH_KEY_7 = KEY_7  # 滋养
 
     RESTO_SPEC_LIFE_BLOOM = KEY_1  # 自然之花
-    RESTO_SPEC_NATURE_SWIFTNESS = ClickMouse(button=MOUSE_MButton)  # 自然迅捷
+    RESTO_SPEC_NATURE_SWIFTNESS = lambda: ClickMouse(button=MOUSE_MButton)  # 自然迅捷
     RESTO_SPEC_HEALING_TOUCH = KEY_1  # 治疗之触
 
     FERAL_SPEC_SURVIVAL_INSTINCT = SHIFT_(F2)  # 生存本能 (类似于战士的破釜沉舟)
 
     # Left | Right | Middle
-    HEAL_BOT_LEFT_CLICK_REJUVENATION = ClickMouse(button=MOUSE_LButton)  # 回春术
-    HEAL_BOT_RIGHT_CLICK_NOURISH = ClickMouse(button=MOUSE_RButton)  # 滋养
-    HEAL_BOT_MIDDLE_CLICK_INNERVATE = ClickMouse(button=MOUSE_MButton)  # 激活
+    HEAL_BOT_LEFT_CLICK_REJUVENATION = lambda: ClickMouse(button=MOUSE_LButton)  # 回春术
+    HEAL_BOT_RIGHT_CLICK_NOURISH = lambda: ClickMouse(button=MOUSE_RButton)  # 滋养
+    HEAL_BOT_MIDDLE_CLICK_INNERVATE = lambda: ClickMouse(button=MOUSE_MButton)  # 激活
 
     # Shift | Alt | Ctrl + Left
-    HEAL_BOT_WILD_GROWTH = ModifiedClickMouse.shift_left_click()
-    HEAL_BOT_REGROWTH = ModifiedClickMouse.alt_left_click()
-    HEAL_BOT_REMOVE_CURSE = ModifiedClickMouse.ctrl_left_click()
+    HEAL_BOT_WILD_GROWTH = lambda: ModifiedClickMouse.shift_left_click()
+    HEAL_BOT_REGROWTH = lambda: ModifiedClickMouse.alt_left_click()
+    HEAL_BOT_REMOVE_CURSE = lambda: ModifiedClickMouse.ctrl_left_click()
 
     # Shift | Alt | Ctrl + Right
-    HEAL_BOT_HEALING_TOUCH = ModifiedClickMouse.shift_right_click()
-    HEAL_BOT_SWIFT_MEND = ModifiedClickMouse.alt_right_click()
-    HEAL_BOT_ABOLISH_POISON = ModifiedClickMouse.ctrl_right_click()
+    HEAL_BOT_HEALING_TOUCH = lambda: ModifiedClickMouse.shift_right_click()
+    HEAL_BOT_SWIFT_MEND = lambda: ModifiedClickMouse.alt_right_click()
+    HEAL_BOT_ABOLISH_POISON = lambda: ModifiedClickMouse.ctrl_right_click()
 
 
 convert_to_key_maker(Druid)
@@ -899,7 +909,7 @@ class Mage:
     ARCANE_SPEC_ARCANE_POWER = ALT_(G)  # 奥术强化
     ARCANE_SPEC_ICY_VEINS = SHIFT_(C)  # 冰冷血脉 (冰系天赋 短时间内提高施法速度, 施法无法不受伤害影响)
     ARCANE_SPEC_SLOW = G  # 减速术 (奥系天赋 减少 移动, 施法, 远程攻击速度)
-    ARCANE_SPEC_PRESENCE_OF_MIND = ClickMouse(button=MOUSE_MButton)  # 气定神闲 (奥系天赋, 法术瞬发)
+    ARCANE_SPEC_PRESENCE_OF_MIND = lambda: ClickMouse(button=MOUSE_MButton)  # 气定神闲 (奥系天赋, 法术瞬发)
 
     FROST_SPEC_DPS_ROTATE_MACRO = KEY_1  # 冰法 用于 dps 循环的宏
     """
@@ -915,10 +925,10 @@ class Mage:
     FROST_SPEC_ELEMENTAL_WATER_NOVA = G  # 水元素霜冻新星
     FROST_SPEC_ = KEY_1  # 技能
 
-    HEAL_BOT_TARGET_RAID_FRAME = ClickMouse(button=MOUSE_LButton)  # 选择目标
-    HEAL_BOT_FOCUS_MAGIC = ClickMouse(button=MOUSE_RButton)  # 专注魔法
-    HEAL_BOT_REMOVE_CURSE = ClickMouse(button=MOUSE_MButton)  # 驱散诅咒
-    HEAL_BOT_REMOVE_CURSE_CTRL_LEFT = ModifiedClickMouse.ctrl_left_click()  # 驱散诅咒
+    HEAL_BOT_TARGET_RAID_FRAME = lambda: ClickMouse(button=MOUSE_LButton)  # 选择目标
+    HEAL_BOT_FOCUS_MAGIC = lambda: ClickMouse(button=MOUSE_RButton)  # 专注魔法
+    HEAL_BOT_REMOVE_CURSE = lambda: ClickMouse(button=MOUSE_MButton)  # 驱散诅咒
+    HEAL_BOT_REMOVE_CURSE_CTRL_LEFT = lambda: ModifiedClickMouse.ctrl_left_click()  # 驱散诅咒
 
 
 convert_to_key_maker(Mage)
@@ -993,7 +1003,7 @@ class Warlock:
     DESTRUCTION_SPEC_CONFLAGRATE = KEY_1  # 点燃
     DESTRUCTION_SPEC_CHAOS_BOLT = KEY_1  # 混乱箭
 
-    HEAL_BOT_TARGET_RAID_FRAME = ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
+    HEAL_BOT_TARGET_RAID_FRAME = lambda: ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
 
 
 convert_to_key_maker(Warlock)
@@ -1024,19 +1034,19 @@ class Priest:
 
     ALL_SPEC_INNER_FIRE = Z  # 心灵之火
     ALL_SPEC_FLASH_HEAL = X  # 快速治疗
-    ALL_SPEC_PHYCHIC_SCREAM = ClickMouse(button=MOUSE_MButton)  # 心灵尖啸 (群体恐惧)
+    ALL_SPEC_PHYCHIC_SCREAM = lambda: ClickMouse(button=MOUSE_MButton)  # 心灵尖啸 (群体恐惧)
 
     # 暗影天赋下
     SHADOW_SPEC_DPS_ROTATE_SPEC = KEY_2  # 暗牧 一键输出循环宏
     SHADOW_SPEC_DISPERSION = ALT_(F)  # 影散 (暗影系 51点天赋, 大量减伤, 回蓝)
     SHADOW_SPEC_SILENCE = SHIFT_(C)  # 沉默
     SHADOW_SPEC_PSYCHIC_HORROR = ALT_(E)  # 心灵恐惧
-    SHADOW_SPEC_SHASOW_FORM = KEY_1  # 暗影形态
+    SHADOW_SPEC_SHADOW_FORM = KEY_1  # 暗影形态
 
     SHADOW_SPEC_SHADOW_WORD_PAIN = KEY_6  # 暗言术: 痛
     SHADOW_SPEC_DEVOURING_PLAGUE = KEY_1  # 噬灵瘟疫
     SHADOW_SPEC_VAMPIRIC_TOUCH = KEY_1  # 吸血鬼之触
-    SHADOW_SPEC_VAMPRIC_EMBRACE = KEY_1  # 吸血鬼之吻
+    SHADOW_SPEC_VAMPIRIC_EMBRACE = KEY_1  # 吸血鬼之吻
 
     DISC_SPEC_DESPERATE_PRAYER = ALT_(F1)  # 绝望祷言
     DISC_SPEC_POWER_INFUSION = ALT_(F2)  # 灌注魔法
@@ -1076,20 +1086,20 @@ class Priest:
     """
 
     # Left | Right | Middle
-    HEAL_BOT_TARGET_RAID_FRAME = ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
-    HEAL_BOT_HOLY_SPEC_FLASH_HEAL = ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
-    HEAL_BOT_POWER_WORD_SHIELD = ClickMouse(button=MOUSE_RButton)  # 真言术盾
-    HEAL_BOT_RENEW = ClickMouse(button=MOUSE_MButton)  # 恢复
+    HEAL_BOT_TARGET_RAID_FRAME = lambda: ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
+    HEAL_BOT_HOLY_SPEC_FLASH_HEAL = lambda: ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
+    HEAL_BOT_POWER_WORD_SHIELD = lambda: ClickMouse(button=MOUSE_RButton)  # 真言术盾
+    HEAL_BOT_RENEW = lambda: ClickMouse(button=MOUSE_MButton)  # 恢复
 
     # Shift | Alt | Ctrl + Left
-    HEAL_BOT_FLASH_HEAL = ModifiedClickMouse.shift_left_click()  # 快速治疗
-    HEAL_BOT_PRAYER_OF_MENDING = ModifiedClickMouse.alt_left_click()  # 愈合祷言
-    HEAL_BOT_ABOLISH_DISEASE = ModifiedClickMouse.ctrl_left_click()  # 驱除疾病
+    HEAL_BOT_FLASH_HEAL = lambda: ModifiedClickMouse.shift_left_click()  # 快速治疗
+    HEAL_BOT_PRAYER_OF_MENDING = lambda: ModifiedClickMouse.alt_left_click()  # 愈合祷言
+    HEAL_BOT_ABOLISH_DISEASE = lambda: ModifiedClickMouse.ctrl_left_click()  # 驱除疾病
 
     # Shift | Alt | Ctrl + Right
-    HEAL_BOT_PENANCE = ModifiedClickMouse.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
-    HEAL_BOT_CIRCLE_OF_HEALING = ModifiedClickMouse.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
-    HEAL_BOT_DISPEL_MAGIC = ModifiedClickMouse.ctrl_right_click()  # 驱散魔法
+    HEAL_BOT_PENANCE = lambda: ModifiedClickMouse.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
+    HEAL_BOT_CIRCLE_OF_HEALING = lambda: ModifiedClickMouse.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
+    HEAL_BOT_DISPEL_MAGIC = lambda: ModifiedClickMouse.ctrl_right_click()  # 驱散魔法
 
 
 convert_to_key_maker(Priest)
