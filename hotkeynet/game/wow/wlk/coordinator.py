@@ -47,8 +47,8 @@ username_input_box_x_at_1176_664 = 585
 username_input_box_y_at_1176_664 = 347
 
 # 在游戏界面按下 ECS 的弹出菜单中的 登出按钮
-log_out_button_x_at_1920_1080 = None
-log_out_button_y_at_1920_1080 = None
+log_out_button_x_at_1920_1080 = 999
+log_out_button_y_at_1920_1080 = 999
 
 log_out_button_x_at_1600_900 = 804
 log_out_button_y_at_1600_900 = 476
@@ -57,8 +57,8 @@ log_out_button_x_at_1176_664 = 585
 log_out_button_y_at_1176_664 = 347
 
 # 在游戏界面按下 ECS 的弹出菜单中的 返回按钮
-return_to_game_button_x_at_1920_1080 = None
-return_to_game_button_y_at_1920_1080 = None
+return_to_game_button_x_at_1920_1080 = 999
+return_to_game_button_y_at_1920_1080 = 999
 
 return_to_game_button_x_at_1600_900 = 801
 return_to_game_button_y_at_1600_900 = 525

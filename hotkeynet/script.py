@@ -194,7 +194,7 @@ class Command(Block['Command']):
     def is_null(self) -> bool:
         return self._are_sub_blocks_all_null()
 
-    def call(self, args: T.List[str]=None) -> 'CallCommand':
+    def call(self, args: T.List[str] = None) -> 'CallCommand':
         if args is None:
             return CallCommand(cmd=self)
         else:
@@ -375,8 +375,26 @@ class MouseButtonEnum(enum.Enum):
     Button5 = "Button5"
 
 
+class MouseStrokeEnum(enum.Enum):
+    Down = "Down"
+    Up = "Up"
+    Both = "Both"
+    NoClick = "NoClick"
+
+
+class MouseTargetEnum(enum.Enum):
+    Window = "Window"
+    Screen = "Screen"
+
+
+class MouseModeEnum(enum.Enum):
+    NoMove = "NoMove"
+    Dupe = "Dupe"
+    Scale = "Scale"
+
+
 @attr.s
-class Mouse(Block['Mouse']):
+class ClickMouse(Block['Mouse']):
     """
     Click Mouse action
     """
@@ -391,51 +409,71 @@ class Mouse(Block['Mouse']):
     # Restore or NoRestore
     restore: str = attr.ib(default="")
 
-    def set_stroke_down(self) -> 'Mouse':
-        self.stroke = "Down"
+    def set_left_click(self) -> 'ClickMouse':
+        self.button = MouseButtonEnum.LButton.value
         return self
 
-    def set_stroke_as_up(self) -> 'Mouse':
-        self.stroke = "Up"
+    def set_right_click(self) -> 'ClickMouse':
+        self.button = MouseButtonEnum.RButton.value
         return self
 
-    def set_stroke_as_both(self) -> 'Mouse':
-        self.stroke = "Both"
+    def set_middle_click(self) -> 'ClickMouse':
+        self.button = MouseButtonEnum.MButton.value
         return self
 
-    def set_stroke_as_no_click(self) -> 'Mouse':
-        self.stroke = "NoClick"
+    def set_click_button4(self) -> 'ClickMouse':
+        self.button = MouseButtonEnum.Button4.value
         return self
 
-    def set_target_as_window(self) -> 'Mouse':
-        self.target = "Window"
+    def set_click_button5(self) -> 'ClickMouse':
+        self.button = MouseButtonEnum.Button5.value
         return self
 
-    def set_target_as_screen(self) -> 'Mouse':
-        self.target = "Screen"
+    def set_stroke_down(self) -> 'ClickMouse':
+        self.stroke = MouseStrokeEnum.Down.value
         return self
 
-    def set_mode_as_no_move(self) -> 'Mouse':
-        self.mode = "NoMove"
+    def set_stroke_as_up(self) -> 'ClickMouse':
+        self.stroke = MouseStrokeEnum.Up.value
         return self
 
-    def set_mode_as_dupe(self) -> 'Mouse':
-        self.mode = "Dupe"
+    def set_stroke_as_both(self) -> 'ClickMouse':
+        self.stroke = MouseStrokeEnum.Both.value
         return self
 
-    def set_mode_as_scale(self) -> 'Mouse':
-        self.mode = "Scale"
+    def set_stroke_as_no_click(self) -> 'ClickMouse':
+        self.stroke = MouseStrokeEnum.NoClick.value
         return self
 
-    def set_mode_as_x_y(self, x: int, y: int) -> 'Mouse':
+    def set_target_as_window(self) -> 'ClickMouse':
+        self.target = MouseTargetEnum.Window.value
+        return self
+
+    def set_target_as_screen(self) -> 'ClickMouse':
+        self.target = MouseTargetEnum.Screen.value
+        return self
+
+    def set_mode_as_no_move(self) -> 'ClickMouse':
+        self.mode = MouseModeEnum.NoMove.value
+        return self
+
+    def set_mode_as_dupe(self) -> 'ClickMouse':
+        self.mode = MouseModeEnum.Dupe.value
+        return self
+
+    def set_mode_as_scale(self) -> 'ClickMouse':
+        self.mode = MouseModeEnum.Scale.value
+        return self
+
+    def set_mode_as_x_y(self, x: int, y: int) -> 'ClickMouse':
         self.mode = f"{x} {y}"
         return self
 
-    def set_restore_as_yes(self) -> 'Mouse':
+    def set_restore_as_yes(self) -> 'ClickMouse':
         self.restore = "Restore"
         return self
 
-    def set_restore_as_no(self) -> 'Mouse':
+    def set_restore_as_no(self) -> 'ClickMouse':
         self.restore = "NoRestore"
         return self
 
@@ -451,30 +489,33 @@ class Mouse(Block['Mouse']):
             ).strip()
         )
 
+    def is_null(self) -> bool:
+        return self.button is None
+
 
 def _build_modified_mouse_click(modifier, button):
     return "\n".join([
         action.dump()
         for action in [
             KeyDown(key=modifier),
-            Mouse(button=button, stroke="Down"),
-            Mouse(button=button, stroke="Up"),
+            ClickMouse(button=button, stroke="Down"),
+            ClickMouse(button=button, stroke="Up"),
             KeyUp(key=modifier),
         ]
     ])
 
 
-class ModifiedMouseClick:
+class ModifiedClickMouse:
     """
     This is not a Block object, it is just a factory class.
     """
 
     @classmethod
-    def _make(cls, modifier: str, button: str) -> T.List[T.Union[KeyDown, KeyUp, Mouse]]:
+    def _make(cls, modifier: str, button: str) -> T.List[T.Union[KeyDown, KeyUp, ClickMouse]]:
         return [
             KeyDown(key=modifier),
-            Mouse(button=button, stroke="Down"),
-            Mouse(button=button, stroke="Up"),
+            ClickMouse(button=button, stroke="Down"),
+            ClickMouse(button=button, stroke="Up"),
             KeyUp(key=modifier),
         ]
 
@@ -513,6 +554,34 @@ class ModifiedMouseClick:
     @classmethod
     def ctrl_middle_click(cls):
         return cls._make(modifier=KN.CTRL, button=KN.MOUSE_MButton)
+
+
+@attr.s
+class MoveMouse(Block['MoveMouse']):
+    x: int = attr.ib(default=None)
+    y: int = attr.ib(default=None)
+    target: T.Optional[str] = attr.ib(default=None)
+
+    def set_target_as_window(self) -> 'MoveMouse':
+        self.target = "window"
+        return self
+
+    def set_target_as_screen(self) -> 'MoveMouse':
+        self.target = "screen"
+        return self
+
+    @property
+    def title(self) -> str:
+        if self.target is None:
+            return f"<MoveMouse {self.x} {self.y}>"
+        else:
+            return f"<MoveMouse {self.target} {self.x} {self.y}>"
+
+    def is_null(self) -> bool:
+        return (
+            (self.x is None)
+            or (self.y is None)
+        )
 
 
 @attr.s

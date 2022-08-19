@@ -8,7 +8,7 @@ from hotkeynet import keyname as KN
 class TestSendLabel:
     def test_render(self):
         sl = SendLabel(
-            to=[Label(name="w1"), ],
+            to=["w1", ],
             blocks=[
                 Key.make(KN.KEY_1),
             ]
@@ -24,7 +24,7 @@ class TestSendLabel:
 
     def test_render_edge_case_no_sub_blocks(self):
         sl = SendLabel(
-            to=[Label(name="w1"), Label(name="w2")],
+            to=["w1", "w2"],
         )
         assert sl.render() == ""
 

@@ -2,18 +2,15 @@
 
 import os
 
-from hotkeynet.script import SendLabel, Label, ModifiedMouseClick
+from hotkeynet.script import SendLabel, Label, ModifiedClickMouse
 
 
 class TestModifiedMouseClick:
     def test_dump_minimal(self):
         with SendLabel(
-            to=[
-                Label(name="w1"),
-                Label(name="w2"),
-            ]
+            to=["w1", "w2"],
         ) as send_label:
-            ModifiedMouseClick.shift_left_click()
+            ModifiedClickMouse.shift_left_click()
 
         assert send_label.render() == (
             "<SendLabel w1, w2>\n"

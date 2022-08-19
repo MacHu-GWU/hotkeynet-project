@@ -14,6 +14,8 @@ from hotkeynet.game.wow.wlk import (
     TalentCategory,
 )
 
+from . import act
+
 if T.TYPE_CHECKING:
     from .mode import Mode
 
@@ -143,7 +145,7 @@ class HknScript(AttrsClass):
                     hk.Wait.make(500)
                     # Click OK on Wrong Pass Word Pop Out; 清除可能的密码错误窗口, 移除遮挡
                     (
-                        hk.Mouse(button=hk.MouseButtonEnum.LButton.value)
+                        hk.ClickMouse(button=hk.MouseButtonEnum.LButton.value)
                         .set_stroke_as_both()
                         .set_target_as_window()
                         .set_mode_as_x_y(
@@ -155,7 +157,7 @@ class HknScript(AttrsClass):
                     hk.Wait.make(300)
                     # Click on username Input Box; 在用户名输入框点击左键
                     (
-                        hk.Mouse(button=hk.MouseButtonEnum.LButton.value)
+                        hk.ClickMouse(button=hk.MouseButtonEnum.LButton.value)
                         .set_stroke_as_both()
                         .set_target_as_window()
                         .set_mode_as_x_y(
@@ -319,71 +321,106 @@ class HknScript(AttrsClass):
                 ])
                 self.hk_list_toggle_specific_window.append(hotkey)
 
-    #
-    # def build_hk_batch_logout():
-    #     return Hotkey(
-    #         name="BatchLogout",
-    #         key=KN.SCROLOCK_ON(KN.CTRL_ALT_(KN.O)),
-    #         actions=[
-    #             SendLabel(
-    #                 name="",
-    #                 to=config.lbs_all(),
-    #                 actions=[
-    #                     "<Wait 100>",
-    #                     act.General.TOGGLE_MAIN_GAME_MENU,
-    #                     "<Wait 50>",
-    #                     act.General.TOGGLE_MAIN_GAME_MENU,
-    #                     "<Wait 50>",
-    #                     f"<MoveMouse {config.game_client_config.return_to_game_button_x} {config.game_client_config.return_to_game_button_y}>",
-    #                     "<ClickMouse LButton Both Window NoMove>"
-    #                     "<Wait 50>",
-    #                     act.General.TOGGLE_MAIN_GAME_MENU,
-    #                     "<Wait 50>",
-    #                     f"<MoveMouse {config.game_client_config.log_out_button_x} {config.game_client_config.log_out_button_y}>",
-    #                     "<Wait 50>",
-    #                     "<ClickMouse LButton Both Window NoMove>"
-    #                 ]
-    #             )
-    #         ],
-    #         script=script,
-    #     )
-    #
-    # hk_batch_logout = build_hk_batch_logout()
+    def build_hk_batch_logout(self):
+        with hk.Hotkey(
+            name="BatchLogout",
+            key=KN.SCROLOCK_ON(KN.CTRL_ALT_(KN.O)),
+        ) as self.hk_batch_logout:
+            with hk.SendLabel(
+                to=self.mode.lbs_all,
+            ):
+                # 确保菜单界面是关闭的状态
+                hk.Wait.make(100),
+                act.General.TOGGLE_MAIN_GAME_MENU(),
+                hk.Wait.make(50),
+                act.General.TOGGLE_MAIN_GAME_MENU(),
+                hk.Wait.make(50),
+                # 点击关闭菜单按钮
+                hk.MoveMouse(
+                    x=self.mode.game_client.return_to_game_button_x,
+                    y=self.mode.game_client.return_to_game_button_y,
+                )
+                hk.Wait.make(50)
+                (
+                    hk.ClickMouse()
+                    .set_left_click()
+                    .set_stroke_as_both()
+                    .set_target_as_window()
+                    .set_mode_as_no_move()
+                )
+                hk.Wait.make(50)
+                # 现在菜单按钮确保已经关上了, 然后可以打开菜单
+                act.General.TOGGLE_MAIN_GAME_MENU()
+                hk.Wait.make(50)
+                # 点击登出按钮
+                hk.MoveMouse(
+                    x=self.mode.game_client.log_out_button_x,
+                    y=self.mode.game_client.log_out_button_y,
+                )
+                hk.Wait.make(50)
+                (
+                    hk.ClickMouse()
+                    .set_left_click()
+                    .set_stroke_as_both()
+                    .set_target_as_window()
+                    .set_mode_as_no_move()
+                )
+
+    def build_hk_logout_on_current_window(self):
+        with hk.Hotkey(
+            name="LogoutOnCurrentWindow",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.O)),
+        ) as self.hk_logout_on_current_window:
+            with hk.SendFocusWin():
+                # 确保菜单界面是关闭的状态
+                hk.Wait.make(100),
+                act.General.TOGGLE_MAIN_GAME_MENU(),
+                hk.Wait.make(50),
+                act.General.TOGGLE_MAIN_GAME_MENU(),
+                hk.Wait.make(50),
+                # 点击关闭菜单按钮
+                hk.MoveMouse(
+                    x=self.mode.game_client.return_to_game_button_x,
+                    y=self.mode.game_client.return_to_game_button_y,
+                )
+                # 点击关闭菜单按钮
+                hk.MoveMouse(
+                    x=self.mode.game_client.return_to_game_button_x,
+                    y=self.mode.game_client.return_to_game_button_y,
+                )
+                hk.Wait.make(50)
+                (
+                    hk.ClickMouse()
+                    .set_left_click()
+                    .set_stroke_as_both()
+                    .set_target_as_window()
+                    .set_mode_as_no_move()
+                )
+                hk.Wait.make(50)
+                # 现在菜单按钮确保已经关上了, 然后可以打开菜单
+                act.General.TOGGLE_MAIN_GAME_MENU()
+                hk.Wait.make(50)
+                # 点击登出按钮
+                hk.MoveMouse(
+                    x=self.mode.game_client.log_out_button_x,
+                    y=self.mode.game_client.log_out_button_y,
+                )
+                hk.Wait.make(50)
+                (
+                    hk.ClickMouse()
+                    .set_left_click()
+                    .set_stroke_as_both()
+                    .set_target_as_window()
+                    .set_mode_as_no_move()
+                )
 
     def build_hk_01(self):
         self.build_hk_round_robin_toggle_window()
         self.build_hk_toggle_specific_window()
         self.build_hk_center_overlap_layout()
         self.build_hk_login_specific_account()
-
-    # def build_hk_logout_on_current_window():
-    #     return Hotkey(
-    #         name="LogoutOnCurrentWindow",
-    #         key=KN.SCROLOCK_ON(KN.CTRL_(KN.O)),
-    #         actions=[
-    #             SendFocusWindow(
-    #                 name="",
-    #                 actions=[
-    #                     "<Wait 500>",
-    #                     act.General.TOGGLE_MAIN_GAME_MENU,
-    #                     "<Wait 50>",
-    #                     act.General.TOGGLE_MAIN_GAME_MENU,
-    #                     "<Wait 50>",
-    #                     f"<MoveMouse {config.game_client_config.return_to_game_button_x} {config.game_client_config.return_to_game_button_y}>",
-    #                     "<ClickMouse LButton Both Window NoMove>"
-    #                     "<Wait 50>",
-    #                     act.General.TOGGLE_MAIN_GAME_MENU,
-    #                     "<Wait 50>",
-    #                     f"<MoveMouse {config.game_client_config.log_out_button_x} {config.game_client_config.log_out_button_y}>",
-    #                     "<Wait 50>",
-    #                     "<ClickMouse LButton Both Window NoMove>"
-    #                 ]
-    #             )
-    #         ],
-    #         script=script,
-    #     )
-    #
-    # hk_logout_on_current_window = build_hk_logout_on_current_window()
+        self.build_hk_batch_logout()
+        self.build_hk_logout_on_current_window()
 
     def build_control_panel(self):
         with hk.Command(name="AutoExec") as self.cmd_auto_exec:

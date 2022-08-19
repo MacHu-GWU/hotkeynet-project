@@ -2,14 +2,14 @@
 
 import os
 from hotkeynet import keyname
-from hotkeynet.script import Mouse
+from hotkeynet.script import ClickMouse
 
 
 class TestMouse:
     def test_render(self):
-        assert Mouse(button=keyname.MOUSE_LButton).render() == "<ClickMouse LButton>"
+        assert ClickMouse(button=keyname.MOUSE_LButton).render() == "<ClickMouse LButton>"
         assert (
-            Mouse(button=keyname.MOUSE_LButton)
+            ClickMouse(button=keyname.MOUSE_LButton)
             .set_mode_as_x_y(640, 480)
             .set_restore_as_no()
             .render()

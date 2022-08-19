@@ -10,7 +10,13 @@ import attr
 from attrs_mate import AttrsClass
 
 import hotkeynet as hk
-from hotkeynet.game.wow.wlk import Window
+from hotkeynet.game.wow.wlk import (
+    Window,
+    Talent as TL,
+    TalentCategory as TC,
+    get_talent_by_category,
+    get_category_by_talent,
+)
 
 from .character import (
     sort_chars_by_window_label,
@@ -81,7 +87,55 @@ class Mode(AttrsClass):
                 self.occupied_labels.add(char.window.label)
         self.managed_chars = sort_chars_by_window_label(self.managed_chars)
 
+    @property
+    def lbs_all(self) -> T.List[str]:
+        return [char.window.label for char in self.active_chars]
+
+    def lbs_by_tc(self, tc: TC) -> T.List[str]:
+        talent_set = get_talent_by_category(category=tc)
+        return [
+            char.window.label
+            for char in self.active_chars
+            if char.talent in talent_set
+        ]
+
+    @property
+    def lbs_tank1(self) -> T.List[str]:
+        return [
+            char.window.label
+            for char in self.active_chars
+            if char.is_tank1
+        ]
+
+    @property
+    def lbs_tank2(self) -> T.List[str]:
+        return [
+            char.window.label
+            for char in self.active_chars
+            if char.is_tank2
+        ]
+
+    @property
+    def lbs_dr_pala1(self) -> T.List[str]:
+        return [
+            char.window.label
+            for char in self.active_chars
+            if char.is_dr_pala1
+        ]
+
+    @property
+    def lbs_dr_pala2(self) -> T.List[str]:
+        return [
+            char.window.label
+            for char in self.active_chars
+            if char.is_dr_pala2
+        ]
+
     # --------------------------------------------------------------------------
+    # Mode definition
+    # --------------------------------------------------------------------------
+    __anchore_mode_definition = None
+
     @classmethod
     def use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(cls):
         return cls(
