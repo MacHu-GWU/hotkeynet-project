@@ -52,6 +52,7 @@ try:
         SetButtonCommand,
         SetButtonHotkey,
         SetForegroundWin,
+        SetPanelLayout,
         SetWinPos,
         SetWinRect,
         SetWinSize,

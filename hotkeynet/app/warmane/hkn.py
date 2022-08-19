@@ -26,7 +26,8 @@ class HknScript(AttrsClass):
     def __attrs_post_init__(self):
         hk.context.push(self.script)
         self.build_cmd()
-        
+        self.build_control_panel()
+
     def build_cmd_launch_and_rename_game_client(self):
         """
         运行一个游戏客户端, 并重命名游戏窗口.
@@ -197,3 +198,26 @@ class HknScript(AttrsClass):
         self.build_cmd_center_overlap_layout()
         self.build_cmd_enter_username_and_password()
         self.build_cmd_batch_login()
+
+    def build_control_panel(self):
+        with hk.Command(name="AutoExec") as self.cmd_auto_exec:
+            with hk.CreatePanel(name="MBControlPanel", x=0, y=120, width=120, height=1000) as main_panel:
+                hk.CreateButton(name="ButtonBar11", x=0, y=0, width=36, height=36, text="Alt")
+                hk.AddButtonToPanel(button="ButtonBar11", panel=main_panel.name)
+                hk.CreateButton(name="ButtonBar12", x=0, y=0, width=36, height=36, text="+")
+                hk.AddButtonToPanel(button="ButtonBar12", panel=main_panel.name)
+                hk.CreateButton(name="ButtonBar13", x=0, y=0, width=36, height=36, text="N1-12")
+                hk.AddButtonToPanel(button="ButtonBar13", panel=main_panel.name)
+
+
+                hk.CreatePictureButton
+
+                hk.SetPanelLayout(
+                    panel=main_panel.name,
+                    row_length=3,
+                    margin=1,
+                    button_width=36,
+                    button_height=36,
+                )
+                hk.TargetWin(window=main_panel.name)
+                hk.AlwaysOnTop()

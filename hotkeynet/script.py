@@ -839,7 +839,6 @@ class CreatePanel(Block['CreatePanel']):
             or (self.height is None)
         )
 
-
 @attr.s
 class CreateButton(Block['CreateButton']):
     name: str = attr.ib(default=None)
@@ -867,13 +866,13 @@ class CreateButton(Block['CreateButton']):
             i
             for i in [
                 self.name,
-                self.x,
-                self.y,
-                self.width,
-                self.height,
-                self.text,
+                str(self.x) if self.x else None,
+                str(self.y) if self.y else None,
+                str(self.width) if self.width else None,
+                str(self.height) if self.height else None,
+                f"\"{self.text}\"" if self.text else None,
             ]
-            if i is not None
+            if i
         ]
         return "<CreateButton {}".format(
             " ".join(non_null_args)
@@ -1048,6 +1047,57 @@ class AlwaysOnTop(Block['AlwaysOnTop']):
             return f"<AlwaysOnTop on>"
         else:
             return f"<AlwaysOnTop off>"
+
+
+@attr.s
+class SetPanelLayout(Block['SetPanelLayout']):
+    panel: str = attr.ib(default=None)
+    row_length: int = attr.ib(default=None)
+    margin: int = attr.ib(default=None)
+    button_width: T.Optional[int] = attr.ib(default=None)
+    button_height: T.Optional[int] = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        panel: str,
+        row_length: int,
+        margin: int,
+        button_width: int = None,
+        button_height: int = None,
+    ) -> 'SetPanelLayout':
+        return cls(
+            panel=panel,
+            row_length=row_length,
+            margin=margin,
+            button_width=button_width,
+            button_height=button_height,
+        )
+
+    @property
+    def title(self) -> str:
+        non_null_args = [
+            i
+            for i in [
+                self.panel,
+                str(self.row_length) if self.row_length else None,
+                str(self.margin) if self.margin else None,
+                str(self.button_width) if self.button_width else None,
+                str(self.button_height) if self.button_height else None,
+            ]
+            if i is not None
+        ]
+        return "<SetPanelLayout {}".format(
+            " ".join(non_null_args)
+        )
+
+    def is_null(self) -> bool:
+        return (
+            (self.panel is None)
+            or (self.row_length is None)
+            or (self.margin is None)
+        )
+
 
 
 def render(
