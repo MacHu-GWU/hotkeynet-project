@@ -353,11 +353,11 @@ class KeyDown(Block['KeyDown']):
 @attr.s
 class SendLabel(Block['SendLabel']):
     name: str = attr.ib(default=None)
-    to: T.List[Label] = attr.ib(factory=list)
+    to: T.List[str] = attr.ib(factory=list)
 
     @property
     def targets(self) -> str:
-        return ", ".join([label.name for label in self.to])
+        return ", ".join(self.to)
 
     @property
     def title(self) -> str:
