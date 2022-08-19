@@ -11,9 +11,8 @@ from jinja2 import Template
 from . import keyname as KN
 from . import tpl
 
-
 # from .enumerate import EnumHelper
-# from .utils import remove_empty_line
+from .utils import remove_empty_line
 
 
 class Context:
@@ -144,19 +143,19 @@ class Script(Block['Script']):
         if self.is_null():
             return ""
         else:
-            # return remove_empty_line(
-            #     tpl.script_tpl.render(
-            #         block=self,
-            #         render=render,
-            #         verbose=verbose,
-            #     )
-            # )
             self.validate()
-            return tpl.script_tpl.render(
-                block=self,
-                render=render,
-                verbose=verbose,
+            return remove_empty_line(
+                tpl.script_tpl.render(
+                    block=self,
+                    render=render,
+                    verbose=verbose,
+                )
             )
+            # return tpl.script_tpl.render(
+            #     block=self,
+            #     render=render,
+            #     verbose=verbose,
+            # )
 
 
 class SendModeEnum(enum.Enum):
