@@ -5,6 +5,7 @@
 并安全地在 HotkeyNet 脚本中引用这些信息.
 """
 
+import os
 from enum import Enum
 
 from superjson import json
@@ -12,9 +13,12 @@ from superjson import json
 from hotkeynet.enumerate import EnumHelper
 from hotkeynet.game.wow.model import Account
 
-from .paths import path_accounts_json
+from .paths import path_accounts_json, path_test_accounts_json
 
-accounts_data = json.load(path_accounts_json.abspath, verbose=False)
+if "CI" in os:
+    accounts_data = json.load(path_test_accounts_json.abspath, verbose=False)
+else:
+    accounts_data = json.load(path_accounts_json.abspath, verbose=False)
 
 
 def load_account(username: str) -> Account:
