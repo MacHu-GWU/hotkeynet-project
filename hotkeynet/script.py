@@ -194,8 +194,11 @@ class Command(Block['Command']):
     def is_null(self) -> bool:
         return self._are_sub_blocks_all_null()
 
-    def call(self, args: T.List[str]) -> 'CallCommand':
-        return CallCommand(cmd=self, args=args)
+    def call(self, args: T.List[str]=None) -> 'CallCommand':
+        if args is None:
+            return CallCommand(cmd=self)
+        else:
+            return CallCommand(cmd=self, args=args)
 
 
 class CommandArgEnum:
@@ -239,7 +242,7 @@ class CallCommand(Block['Command']):
     @property
     def title(self):
         if len(self.args) == 0:
-            return f"<{self.cmd_name}"
+            return f"<{self.cmd_name}>"
         else:
             return "<{cmd_name} {args}>".format(
                 cmd_name=self.cmd_name,
@@ -839,6 +842,7 @@ class CreatePanel(Block['CreatePanel']):
             or (self.height is None)
         )
 
+
 @attr.s
 class CreateButton(Block['CreateButton']):
     name: str = attr.ib(default=None)
@@ -1097,7 +1101,6 @@ class SetPanelLayout(Block['SetPanelLayout']):
             or (self.row_length is None)
             or (self.margin is None)
         )
-
 
 
 def render(

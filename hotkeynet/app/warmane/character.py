@@ -13,6 +13,14 @@ from hotkeynet.game.wow.wlk import (
 from .account import AccountEnum, AccountHelper
 
 
+def sort_chars_by_window_label(chars: T.Iterable[Character]) -> T.List[Character]:
+    return list(sorted(chars, key=lambda char: char.window.label))
+
+
+def sort_chars_by_window_title(chars: T.Iterable[Character]) -> T.List[Character]:
+    return list(sorted(chars, key=lambda char: char.window.title))
+
+
 class CharacterFactory:
     """
     枚举出所有账号下的所有角色的所有天赋.
@@ -757,7 +765,6 @@ class LoginCharactersFactory:
             CharacterFactory.make_char_fatmulti6_kapacuk_pve_marksman_hunter().set_inactive(),
             CharacterFactory.make_char_fatmulti8_bunnysisters_pve_resto_druid().set_inactive(),
             CharacterFactory.make_char_fatmulti9_glowyy_pve_holy_pala().set_inactive(),
-            CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().set_inactive(),
         ]
 
     @classmethod

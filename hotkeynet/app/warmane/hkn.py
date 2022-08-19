@@ -25,9 +25,21 @@ class HknScript(AttrsClass):
 
     def __attrs_post_init__(self):
         hk.context.push(self.script)
+        self.build_labels()
         self.build_cmd()
+        self.build_hk_01()
         self.build_control_panel()
 
+    def build_labels(self):
+        self.labels = [
+            hk.Label.make(name=char.window.label, window=char.window.title)
+            for char in self.mode.managed_chars
+        ]
+        self.n_labels = len(self.labels)
+
+    # -------------------------------------------------------------------------
+    # 实现各种 "命令".
+    # -------------------------------------------------------------------------
     def build_cmd_launch_and_rename_game_client(self):
         """
         运行一个游戏客户端, 并重命名游戏窗口.
@@ -58,8 +70,8 @@ class HknScript(AttrsClass):
         with hk.Command(
             name="LaunchAndRenameAllGameClient",
         ) as self.cmd_launch_and_rename_all_game_client:
-            for window in self.mode.launched_windows:
-                self.cmd_launch_and_rename_game_client.call(args=[window.title, ])
+            for char in self.mode.managed_chars:
+                self.cmd_launch_and_rename_game_client.call(args=[char.window.title, ])
 
     def build_cmd_bring_window_to_foreground(self):
         """
@@ -109,8 +121,8 @@ class HknScript(AttrsClass):
         with hk.Command(
             name="CenterOverlapLayout",
         ) as self.cmd_center_overlap_layout:
-            for window in self.mode.launched_windows:
-                self.cmd_resize_and_relocate_window.call(args=[window.title, ])
+            for char in self.mode.managed_chars:
+                self.cmd_resize_and_relocate_window.call(args=[char.window.title, ])
 
     def build_cmd_enter_username_and_password(self):
         """
@@ -198,6 +210,180 @@ class HknScript(AttrsClass):
         self.build_cmd_center_overlap_layout()
         self.build_cmd_enter_username_and_password()
         self.build_cmd_batch_login()
+
+    # -------------------------------------------------------------------------
+    # 实现与 "切换游戏客户端" 以及 "账号登录" 有关的快捷键.
+    # -------------------------------------------------------------------------
+    __anchor_hk_01_window_and_login = None
+
+    def build_hk_round_robin_toggle_window(self):
+        with hk.Hotkey(
+            name="RoundRobinToggleWindow",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.TAB)),
+        ) as self.hk_round_robin_toggle_window:
+            for char in self.mode.active_chars:
+                with hk.Toggle():
+                    self.cmd_bring_window_to_foreground.call(args=[char.window.title, ])
+
+    def build_hk_toggle_specific_window(self):
+        """
+        定义切换到指定窗口的快捷键.
+
+        我们一共最多有 25 个窗口, 但不止 25 个可玩的角色. 这些角色可能今天在 1 号窗口玩,
+         可能明天就在 2 号窗口玩. 为了降低人类的记忆成本, 所以我们有如下设计:
+
+        切换到 1 ~ 25 号窗口的快捷键分别是:
+
+        - Ctrl + F1 ~ F10, WoW1 - WoW10 窗口 (Ctrl F11, F12 留给了快捷键)
+        - Shift + F5 ~ F12: WoW11 - WoW18 窗口 (Shift, F1, F2, F3, F4 留给了快捷键)
+        - Shift + 小键盘的 Insert Home PgUp Delete, End, PgDn: WoW19 - WoW24 窗口
+
+        具体这个窗口里的人物是谁我们不管.
+        """
+        # 10 + 8 + 6 = 24
+        ctrl_f1_to_10 = [
+            KN.CTRL_(key)
+            for key in KN.F1_to_F12[:10]
+        ]
+        shift_f5_to_f12 = [
+            KN.SHIFT_(key)
+            for key in KN.F1_to_F12[4:]
+        ]
+        shift_insert_to_pgdn = [
+            KN.SHIFT_(key)
+            for key in KN.INSERT_TO_PGDN
+        ]
+        HOTKEY_LIST_TOGGLE_SPECIFIC_WINDOW_1_TO_25 = ctrl_f1_to_10 + shift_f5_to_f12 + shift_insert_to_pgdn
+        assert len(HOTKEY_LIST_TOGGLE_SPECIFIC_WINDOW_1_TO_25) == 24
+
+        self.hk_list_toggle_specific_window: T.List[hk.Hotkey] = list()
+        for index, key in enumerate(HOTKEY_LIST_TOGGLE_SPECIFIC_WINDOW_1_TO_25, start=1):
+            with hk.Hotkey(
+                name=f"ToggleToSpecificWindow {key}",
+                key=key,
+            ) as hotkey:
+                self.cmd_bring_window_to_foreground.call(args=[Window.make(index).title, ])
+                self.hk_list_toggle_specific_window.append(hotkey)
+
+    def build_hk_center_overlap_layout(self):
+        with hk.Hotkey(
+            name="CenterOverlapLayout",
+            key=KN.SCROLOCK_ON(KN.CTRL_SHIFT_ALT(KN.NUMPAD_11_DIVIDE)),
+        ) as self.hk_center_overlap_layout:
+            self.cmd_center_overlap_layout.call()
+
+    def build_hk_login_specific_account(self):
+        """
+        定义在指定窗口登录指定账号的快捷键.
+
+        我们一共最多有 25 个窗口, 但不止 25 个可玩的角色. 这些角色可能今天在 1 号窗口玩,
+         可能明天就在 2 号窗口玩. 为了降低人类的记忆成本, 所以我们有如下设计:
+
+        切换到 1 ~ 25 号窗口并登录的快捷键分别是:
+
+        - Ctrl Alt + F1 ~ F10, WoW1 - WoW10 窗口 (Ctrl Alt F11, F12 留给了快捷键)
+        - Shift Alt + F5 ~ F12: WoW11 - WoW18 窗口 (Shift Alt, F1, F2, F3, F4 留给了快捷键)
+        - Shift Alt + 小键盘的 Insert Home PgUp Delete, End, PgDn: WoW19 - WoW24 窗口
+
+        具体这个窗口里的人物是谁, 这个由 Mode.login_chars 和 Mode.active_chars 共同决定.
+        """
+        # 10 + 8 + 6 = 24
+        ctrl_alt_f1_to_10 = [
+            KN.CTRL_ALT_(key)
+            for key in KN.F1_to_F12[:10]
+        ]
+        shift_alt_f5_to_f12 = [
+            KN.ALT_SHIFT_(key)
+            for key in KN.F1_to_F12[4:]
+        ]
+        shift_alt_insert_to_pgdn = [
+            KN.ALT_SHIFT_(key)
+            for key in KN.INSERT_TO_PGDN
+        ]
+        HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + shift_alt_insert_to_pgdn
+        assert len(HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25) == 24
+
+        self.hk_list_toggle_specific_window: T.List[hk.Hotkey] = list()
+
+        for char in self.mode.managed_chars:
+            with hk.Hotkey(
+                name=f"SingleLogin{char.account.username.title()}",
+                key=KN.SCROLOCK_ON(
+                    HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[int(char.window.label.replace("w", "")) - 1]
+                ),
+            ) as hotkey:
+                self.cmd_enter_username_and_password.call(args=[
+                    char.window.title,
+                    char.account.username,
+                    char.account.password,
+                ])
+                self.hk_list_toggle_specific_window.append(hotkey)
+
+    #
+    # def build_hk_batch_logout():
+    #     return Hotkey(
+    #         name="BatchLogout",
+    #         key=KN.SCROLOCK_ON(KN.CTRL_ALT_(KN.O)),
+    #         actions=[
+    #             SendLabel(
+    #                 name="",
+    #                 to=config.lbs_all(),
+    #                 actions=[
+    #                     "<Wait 100>",
+    #                     act.General.TOGGLE_MAIN_GAME_MENU,
+    #                     "<Wait 50>",
+    #                     act.General.TOGGLE_MAIN_GAME_MENU,
+    #                     "<Wait 50>",
+    #                     f"<MoveMouse {config.game_client_config.return_to_game_button_x} {config.game_client_config.return_to_game_button_y}>",
+    #                     "<ClickMouse LButton Both Window NoMove>"
+    #                     "<Wait 50>",
+    #                     act.General.TOGGLE_MAIN_GAME_MENU,
+    #                     "<Wait 50>",
+    #                     f"<MoveMouse {config.game_client_config.log_out_button_x} {config.game_client_config.log_out_button_y}>",
+    #                     "<Wait 50>",
+    #                     "<ClickMouse LButton Both Window NoMove>"
+    #                 ]
+    #             )
+    #         ],
+    #         script=script,
+    #     )
+    #
+    # hk_batch_logout = build_hk_batch_logout()
+
+    def build_hk_01(self):
+        self.build_hk_round_robin_toggle_window()
+        self.build_hk_toggle_specific_window()
+        self.build_hk_center_overlap_layout()
+        self.build_hk_login_specific_account()
+
+    # def build_hk_logout_on_current_window():
+    #     return Hotkey(
+    #         name="LogoutOnCurrentWindow",
+    #         key=KN.SCROLOCK_ON(KN.CTRL_(KN.O)),
+    #         actions=[
+    #             SendFocusWindow(
+    #                 name="",
+    #                 actions=[
+    #                     "<Wait 500>",
+    #                     act.General.TOGGLE_MAIN_GAME_MENU,
+    #                     "<Wait 50>",
+    #                     act.General.TOGGLE_MAIN_GAME_MENU,
+    #                     "<Wait 50>",
+    #                     f"<MoveMouse {config.game_client_config.return_to_game_button_x} {config.game_client_config.return_to_game_button_y}>",
+    #                     "<ClickMouse LButton Both Window NoMove>"
+    #                     "<Wait 50>",
+    #                     act.General.TOGGLE_MAIN_GAME_MENU,
+    #                     "<Wait 50>",
+    #                     f"<MoveMouse {config.game_client_config.log_out_button_x} {config.game_client_config.log_out_button_y}>",
+    #                     "<Wait 50>",
+    #                     "<ClickMouse LButton Both Window NoMove>"
+    #                 ]
+    #             )
+    #         ],
+    #         script=script,
+    #     )
+    #
+    # hk_logout_on_current_window = build_hk_logout_on_current_window()
 
     def build_control_panel(self):
         with hk.Command(name="AutoExec") as self.cmd_auto_exec:

@@ -9,7 +9,6 @@ class TestMode:
     def test_launched_windows(self):
         mode = Mode.use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu()
         # print(mode.launched_windows)
-        # print(mode.labels)
 
 
 if __name__ == "__main__":

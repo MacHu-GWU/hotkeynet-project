@@ -13,6 +13,7 @@ import hotkeynet as hk
 from hotkeynet.game.wow.wlk import Window
 
 from .character import (
+    sort_chars_by_window_label,
     Character,
     LoginCharactersFactory,
     ActiveCharactersFactory,
@@ -42,7 +43,24 @@ class Mode(AttrsClass):
     login_chars: T.List[Character] = attr.ib(factory=list)
     hkn_script: HknScript = attr.ib(default=None)
 
+    def _ensure_no_duplicate_window(self, chars: T.List[Character]):
+        if len({char.window.label for char in chars}) != len(chars):
+            for char in chars:
+                print(char.window.label, char.account.username)
+            raise ValueError(f"Character list {chars} cannot has duplicate window label!")
+
+    @active_chars.validator
+    def check_active_chars(self, attribute, value):
+        self._ensure_no_duplicate_window(value)
+
+    @login_chars.validator
+    def check_login_chars(self, attribute, value):
+        self._ensure_no_duplicate_window(value)
+
     def __attrs_post_init__(self):
+        self.active_chars = sort_chars_by_window_label(self.active_chars)
+        self.login_chars = sort_chars_by_window_label(self.login_chars)
+        self._resolve_login()
         self.hkn_script = HknScript(mode=self)
 
     def dump(self, verbose: bool = False):
@@ -50,34 +68,18 @@ class Mode(AttrsClass):
             self.hkn_script.script.render(verbose=verbose),
         )
 
-    @property
-    def launched_windows(self) -> T.List[Window]:
-        launched_labels = set()
-        launched_windows = list()
+    def _resolve_login(self):
+        self.occupied_labels: T.Set[str] = set()
+        self.managed_chars: T.List[Character] = list()
         for char in self.active_chars:
-            if char.window.label not in launched_labels:
-                launched_windows.append(char.window)
-                launched_labels.add(char.window.label)
+            if char.window.label not in self.occupied_labels:
+                self.managed_chars.append(char)
+                self.occupied_labels.add(char.window.label)
         for char in self.login_chars:
-            if char.window.label not in launched_labels:
-                launched_windows.append(char.window)
-                launched_labels.add(char.window.label)
-        launched_windows = list(sorted(
-            launched_windows,
-            key=lambda w: w.label
-        ))
-        return launched_windows
-
-    @property
-    def labels(self) -> T.List[hk.Label]:
-        return [
-            hk.Label.make(name=window.label, window=window.title)
-            for window in self.launched_windows
-        ]
-
-    # @property
-    # def logins(self):
-    #     pass
+            if char.window.label not in self.occupied_labels:
+                self.managed_chars.append(char)
+                self.occupied_labels.add(char.window.label)
+        self.managed_chars = sort_chars_by_window_label(self.managed_chars)
 
     # --------------------------------------------------------------------------
     @classmethod
