@@ -291,6 +291,13 @@ class Hotkey(Block['Hotkey']):
     def is_null(self) -> bool:
         return (self.key is None) or self._are_sub_blocks_all_null()
 
+    @property
+    def ref(self) -> str:
+        """
+        used by SetButtonHotkey
+        """
+        return self.title[1:-1]
+
 
 @attr.s
 class MovementHotkey(Block['MovementHotkey']):
@@ -558,6 +565,42 @@ class Wait(Block['Wait']):
 
 
 @attr.s
+class WaitForWin(Block['WaitForWin']):
+    window: str = attr.ib(default=None)
+    timeout: int = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, window: str, timeout: int) -> 'WaitForWin':
+        return cls(window=window, timeout=timeout)
+
+    @property
+    def title(self) -> str:
+        return f"<WaitForWin {self.window} {self.timeout}>"
+
+    def is_null(self) -> bool:
+        return (
+            (self.window is None)
+            or (self.timeout is None)
+        )
+
+
+@attr.s
+class WaitForWinEnabled(Block['WaitForWinEnabled']):
+    timeout: int = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, timeout: int) -> 'WaitForWinEnabled':
+        return cls(timeout=timeout)
+
+    @property
+    def title(self) -> str:
+        return f"<WaitForWinEnabled {self.timeout}>"
+
+    def is_null(self) -> bool:
+        return self.timeout is None
+
+
+@attr.s
 class SetForegroundWin(Block['SetForegroundWin']):
     @property
     def title(self) -> str:
@@ -762,6 +805,249 @@ class Text(Block['Text']):
 
     def is_null(self) -> bool:
         return self.text is None
+
+
+@attr.s
+class CreatePanel(Block['CreatePanel']):
+    name: str = attr.ib(default=None)
+    x: int = attr.ib(default=None)
+    y: int = attr.ib(default=None)
+    width: int = attr.ib(default=None)
+    height: int = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        name: str,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+    ) -> 'CreatePanel':
+        return cls(name=name, x=x, y=y, width=width, height=height)
+
+    @property
+    def title(self) -> str:
+        return f"<CreatePanel {self.name} {self.x} {self.y} {self.width} {self.height}>"
+
+    def is_null(self) -> bool:
+        return (
+            (self.name is None)
+            or (self.x is None)
+            or (self.y is None)
+            or (self.width is None)
+            or (self.height is None)
+        )
+
+
+@attr.s
+class CreateButton(Block['CreateButton']):
+    name: str = attr.ib(default=None)
+    x: int = attr.ib(default=None)
+    y: int = attr.ib(default=None)
+    width: int = attr.ib(default=None)
+    height: int = attr.ib(default=None)
+    text: T.Optional[str] = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        name: str,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+        text: T.Optional[str] = None
+    ) -> 'CreateButton':
+        return cls(name=name, x=x, y=y, width=width, height=height, text=text)
+
+    @property
+    def title(self) -> str:
+        non_null_args = [
+            i
+            for i in [
+                self.name,
+                self.x,
+                self.y,
+                self.width,
+                self.height,
+                self.text,
+            ]
+            if i is not None
+        ]
+        return "<CreateButton {}".format(
+            " ".join(non_null_args)
+        )
+
+    def is_null(self) -> bool:
+        return (
+            (self.name is None)
+            or (self.x is None)
+            or (self.y is None)
+            or (self.width is None)
+            or (self.height is None)
+        )
+
+
+@attr.s
+class CreatePictureButton(Block['CreatePictureButton']):
+    name: str = attr.ib(default=None)
+    x: int = attr.ib(default=None)
+    y: int = attr.ib(default=None)
+    file: str = attr.ib(default=None)
+    text: T.Optional[str] = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        name: str,
+        x: int,
+        y: int,
+        file: str,
+        text: T.Optional[str] = None
+    ) -> 'CreatePictureButton':
+        return cls(name=name, x=x, y=y, file=file, text=text)
+
+    @property
+    def title(self) -> str:
+        non_null_args = [
+            i
+            for i in [
+                self.name,
+                self.x,
+                self.y,
+                f"\"{self.file}\"",
+                self.text,
+            ]
+            if i is not None
+        ]
+        return "<CreatePictureButton {}".format(
+            " ".join(non_null_args)
+        )
+
+    def is_null(self) -> bool:
+        return (
+            (self.name is None)
+            or (self.x is None)
+            or (self.y is None)
+            or (self.file is None)
+        )
+
+
+@attr.s
+class AddButtonToPanel(Block['AddButtonToPanel']):
+    button: str = attr.ib(default=None)
+    panel: str = attr.ib(default=None)
+    x: T.Optional[int] = attr.ib(default=None)
+    y: T.Optional[int] = attr.ib(default=None)
+    width: T.Optional[int] = attr.ib(default=None)
+    height: T.Optional[int] = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        button: str,
+        panel: str,
+        x: int = None,
+        y: int = None,
+        width: int = None,
+        height: int = None,
+    ) -> 'AddButtonToPanel':
+        return cls(button=button, panel=panel, x=x, y=y, width=width, height=height)
+
+    @property
+    def title(self) -> str:
+        non_null_args = [
+            i
+            for i in [
+                self.button,
+                self.panel,
+                self.x,
+                self.y,
+                self.width,
+                self.height,
+            ]
+            if i is not None
+        ]
+        return "<AddButtonToPanel {}".format(
+            " ".join(non_null_args)
+        )
+
+    def is_null(self) -> bool:
+        return (
+            (self.button is None)
+            or (self.panel is None)
+        )
+
+
+@attr.s
+class SetButtonHotkey(Block['SetButtonHotkey']):
+    button: str = attr.ib(default=None)
+    hotkey: 'Hotkey' = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        button: str,
+        hotkey: Hotkey,
+    ) -> 'SetButtonHotkey':
+        return cls(button=button, hotkey=hotkey)
+
+    @property
+    def title(self) -> str:
+        return f"<SetButtonHotkey {self.button} {self.hotkey.ref}>"
+
+    def is_null(self) -> bool:
+        return (
+            (self.button is None)
+            or (self.hotkey is None)
+        )
+
+
+@attr.s
+class SetButtonCommand(Block['SetButtonCommand']):
+    button: str = attr.ib(default=None)
+    command: 'Command' = attr.ib(default=None)
+    args: tuple = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        button: str,
+        command: Command,
+        args: tuple = None,
+    ) -> 'SetButtonCommand':
+        return cls(button=button, command=command, args=args)
+
+    @property
+    def title(self) -> str:
+        if self.args:
+            args_part = " {}".format(" ".join(self.args))
+        else:
+            args_part = ""
+        return f"<SetButtonCommand {self.command.name}{args_part}>"
+
+    def is_null(self) -> bool:
+        return (
+            (self.button is None)
+            or (self.command is None)
+        )
+
+
+@attr.s
+class AlwaysOnTop(Block['AlwaysOnTop']):
+    on: bool = attr.ib(default=True)
+
+    @classmethod
+    def make(cls, on: bool = True) -> 'AlwaysOnTop':
+        return cls(on=on)
+
+    @property
+    def title(self) -> str:
+        if self.on:
+            return f"<AlwaysOnTop on>"
+        else:
+            return f"<AlwaysOnTop off>"
 
 
 def render(
