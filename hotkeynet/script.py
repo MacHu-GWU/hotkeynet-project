@@ -2,7 +2,7 @@
 
 import typing as T
 import enum
-from functools import cached_property
+# from functools import cached_property
 
 import attr
 from attrs_mate import AttrsClass
@@ -10,17 +10,16 @@ from jinja2 import Template
 
 from . import keyname as KN
 from . import tpl
-from .enumerate import EnumHelper
-from .utils import remove_empty_line
+
+
+# from .enumerate import EnumHelper
+# from .utils import remove_empty_line
 
 
 class Context:
     def __init__(self):
         self.stack: list = list()
-        self.auto_name_index: T.Dict[str, int] = {
-            "Command": 0,
-            "Hotkey": 0,
-        }
+        self.auto_id_index: T.Dict[str, int] = dict()
 
     def push(self, obj):
         self.stack.append(obj)
@@ -32,19 +31,14 @@ class Context:
     def current(self) -> 'Block':
         return self.stack[-1]
 
-    def _auto_name(self, block_type: str) -> str:
-        name = f"{block_type}{str(self.auto_name_index[block_type] + 1).zfill(3)}"
-        self.auto_name_index[block_type] += 1
+    def make_id(self, block_type: str = "Block") -> str:
+        try:
+            name = f"{block_type}{str(self.auto_id_index[block_type] + 1).zfill(4)}"
+        except KeyError:
+            self.auto_id_index[block_type] = 0
+            name = f"{block_type}0001"
+        self.auto_id_index[block_type] += 1
         return name
-
-    def auto_command_name(self) -> str:
-        return self._auto_name("Command")
-
-    def auto_hotkey_name(self) -> str:
-        return self._auto_name("Hotkey")
-
-    def auto_movement_hotkey_name(self) -> str:
-        return self._auto_name("MovementHotkey")
 
 
 context = Context()
@@ -54,6 +48,7 @@ BLOCK = T.TypeVar("BLOCK")
 
 @attr.s
 class Block(AttrsClass, T.Generic[BLOCK]):
+    id: str = attr.ib(factory=context.make_id)
     blocks: T.List['Block'] = attr.ib(factory=list)
 
     def __call__(self) -> BLOCK:
@@ -75,11 +70,11 @@ class Block(AttrsClass, T.Generic[BLOCK]):
             else:
                 raise e
 
-    def _iter_by_type(self, type: T.Type['Block']) -> T.List:
+    def _iter_by_type(self, type_: T.Type['Block']) -> T.List:
         return [
             block
             for block in self.blocks
-            if isinstance(block, type)
+            if isinstance(block, type_)
         ]
 
     def iter_label(self) -> T.List['Label']:
@@ -90,10 +85,6 @@ class Block(AttrsClass, T.Generic[BLOCK]):
 
     def iter_hotkey(self) -> T.List['Hotkey']:
         return self._iter_by_type(Hotkey)
-
-    @property
-    def template(self) -> Template:
-        raise NotImplementedError
 
     @property
     def title(self) -> str:
@@ -109,7 +100,7 @@ class Block(AttrsClass, T.Generic[BLOCK]):
         if verbose:
             try:
                 print(f"render {self.title} ...")
-            except:
+            except Exception:
                 print(f"render <{self.__class__.__name__}>")
         if self.is_null():
             return ""
@@ -127,6 +118,17 @@ class Script(Block['Script']):
     def title(self) -> str:
         return ""
 
+    def check_duplicate_command_name(self):
+        cmd_name_list = list()
+        for block in self.blocks:
+            if isinstance(block, Command):
+                cmd_name_list.append(block.name)
+        if len(cmd_name_list) != len(set(cmd_name_list)):
+            raise ValueError(f"Found duplicate command name: {cmd_name_list}")
+
+    def validate(self):
+        self.check_duplicate_command_name()
+
     def render(self, verbose=False) -> str:
         if self.is_null():
             return ""
@@ -138,6 +140,7 @@ class Script(Block['Script']):
             #         verbose=verbose,
             #     )
             # )
+            self.validate()
             return tpl.script_tpl.render(
                 block=self,
                 render=render,
@@ -181,7 +184,7 @@ class Label(Block['Script']):
 
 @attr.s
 class Command(Block['Command']):
-    name: str = attr.ib(factory=context.auto_command_name)
+    name: str = attr.ib(default=None)
 
     @classmethod
     def make(cls, name: str) -> 'Command':
@@ -215,7 +218,7 @@ class CommandArgEnum:
 
     @classmethod
     def is_arg(cls, arg: str) -> bool:
-        return (arg.startswith("%") and arg.endswith("%"))
+        return arg.startswith("%") and arg.endswith("%")
 
     @classmethod
     def encode_arg(cls, arg: str) -> str:
@@ -284,7 +287,6 @@ class Run(Block['Run']):
 
 @attr.s
 class Hotkey(Block['Hotkey']):
-    name: str = attr.ib(factory=context.auto_hotkey_name)
     key: str = attr.ib(default=None)
 
     @property
@@ -304,7 +306,6 @@ class Hotkey(Block['Hotkey']):
 
 @attr.s
 class MovementHotkey(Block['MovementHotkey']):
-    name: str = attr.ib(factory=context.auto_movement_hotkey_name)
     key: str = attr.ib(default=None)
 
     @property
@@ -667,7 +668,7 @@ class Wait(Block['Wait']):
         return f"<Wait {self.milli}>"
 
     def is_null(self) -> bool:
-        return (not bool(self.milli))
+        return not bool(self.milli)
 
 
 @attr.s
@@ -1209,7 +1210,6 @@ class SetPanelLayout(Block['SetPanelLayout']):
 def render(
     obj: T.Union[Block, str],
     verbose: bool = False,
-    **kwargs
 ) -> str:
     """
     A global function that take any object as argument and render it.

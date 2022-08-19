@@ -33,12 +33,12 @@ class MyScript:
     def make_hotkeys(self):
         with self.script():
             with Hotkey(
-                name="Key1",
+                id="Key1",
                 key=keyname.SCROLOCK_ON(keyname.KEY_1),
             ) as self.hk_1:
                 with SendLabel(
                     name="",
-                    to=self.labels,
+                    to=[label.name for label in self.labels],
                 ):
                     Key(key=keyname.KEY_1)
 
