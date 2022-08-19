@@ -522,6 +522,84 @@ class RenameWin(Block['RenameWin']):
         return (self.old is None) or (self.new is None)
 
 
+@attr.s
+class TargetWin(Block['TargetWin']):
+    window: str = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, window: str) -> 'TargetWin':
+        return cls(window=window)
+
+    @property
+    def title(self) -> str:
+        return f"<TargetWin {CommandArgEnum.encode_arg(self.window)}>"
+
+    def is_null(self) -> bool:
+        return self.window is None
+
+
+@attr.s
+class Wait(Block['Wait']):
+    milli: int = attr.ib(default=None)
+
+    @classmethod
+    def make(cls, milli: int) -> 'Wait':
+        return cls(milli=milli)
+
+    @property
+    def title(self) -> str:
+        return f"<Wait {self.milli}>"
+
+    def is_null(self) -> bool:
+        return (not bool(self.milli))
+
+
+@attr.s
+class SetForegroundWin(Block['SetForegroundWin']):
+    @property
+    def title(self) -> str:
+        return "<SetForegroundWin>"
+
+
+@attr.s
+class SetActiveWin(Block['SetActiveWin']):
+    @property
+    def title(self) -> str:
+        return "<SetActiveWin>"
+
+
+@attr.s
+class Toggle(Block['Toggle']):
+    @property
+    def title(self) -> str:
+        return "<Toggle>"
+
+
+@attr.s
+class ToggleHotkeys(Block['ToggleHotkeys']):
+    @property
+    def title(self) -> str:
+        return "<ToggleHotkeys>"
+
+
+@attr.s
+class ToggleWin(Block['ToggleWin']):
+    windows: T.List[str] = attr.ib(factory=list)
+
+    @classmethod
+    def make(cls, windows: T.List[str]) -> 'ToggleWin':
+        return cls(windows=windows)
+
+    @property
+    def title(self) -> str:
+        return "<ToggleWin {windows}>".format(
+            windows=" ".join(self.windows)
+        )
+
+    def is_null(self) -> bool:
+        return len(self.windows) == 0
+
+
 def render(
     obj: T.Union[Block, str],
     verbose: bool = False,
