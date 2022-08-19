@@ -866,10 +866,10 @@ class CreateButton(Block['CreateButton']):
             i
             for i in [
                 self.name,
-                str(self.x) if self.x else None,
-                str(self.y) if self.y else None,
-                str(self.width) if self.width else None,
-                str(self.height) if self.height else None,
+                None if self.x is None else str(self.x),
+                None if self.y is None else str(self.x),
+                None if self.width is None else str(self.x),
+                None if self.height is None else str(self.x),
                 f"\"{self.text}\"" if self.text else None,
             ]
             if i
@@ -937,8 +937,8 @@ class CreatePictureButton(Block['CreatePictureButton']):
 class AddButtonToPanel(Block['AddButtonToPanel']):
     button: str = attr.ib(default=None)
     panel: str = attr.ib(default=None)
-    x: T.Optional[int] = attr.ib(default=None)
-    y: T.Optional[int] = attr.ib(default=None)
+    x: T.Optional[int] = attr.ib(default=0)
+    y: T.Optional[int] = attr.ib(default=0)
     width: T.Optional[int] = attr.ib(default=None)
     height: T.Optional[int] = attr.ib(default=None)
 
@@ -947,8 +947,8 @@ class AddButtonToPanel(Block['AddButtonToPanel']):
         cls,
         button: str,
         panel: str,
-        x: int = None,
-        y: int = None,
+        x: int = 0,
+        y: int = 0,
         width: int = None,
         height: int = None,
     ) -> 'AddButtonToPanel':
@@ -957,7 +957,7 @@ class AddButtonToPanel(Block['AddButtonToPanel']):
     @property
     def title(self) -> str:
         non_null_args = [
-            i
+            str(i)
             for i in [
                 self.button,
                 self.panel,
@@ -1024,7 +1024,7 @@ class SetButtonCommand(Block['SetButtonCommand']):
             args_part = " {}".format(" ".join(self.args))
         else:
             args_part = ""
-        return f"<SetButtonCommand {self.command.name}{args_part}>"
+        return f"<SetButtonCommand {self.button} {self.command.name}{args_part}>"
 
     def is_null(self) -> bool:
         return (

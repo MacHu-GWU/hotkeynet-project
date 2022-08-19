@@ -209,8 +209,13 @@ class HknScript(AttrsClass):
                 hk.CreateButton(name="ButtonBar13", x=0, y=0, width=36, height=36, text="N1-12")
                 hk.AddButtonToPanel(button="ButtonBar13", panel=main_panel.name)
 
+                hk.CreateButton(name="ButtonA01", x=0, y=0, width=36, height=36, text="启动")
+                hk.AddButtonToPanel(button="ButtonA01", panel=main_panel.name)
+                hk.SetButtonCommand(button="ButtonA01", command=self.cmd_launch_and_rename_all_game_client)
 
-                hk.CreatePictureButton
+                hk.CreateButton(name="ButtonA02", x=0, y=0, width=36, height=36, text="登录")
+                hk.AddButtonToPanel(button="ButtonA02", panel=main_panel.name)
+                hk.SetButtonCommand(button="ButtonA02", command=self.cmd_batch_login)
 
                 hk.SetPanelLayout(
                     panel=main_panel.name,
