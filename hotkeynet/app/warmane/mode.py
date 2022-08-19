@@ -9,6 +9,9 @@ import typing as T
 import attr
 from attrs_mate import AttrsClass
 
+import hotkeynet as hk
+from hotkeynet.game.wow.wlk import Window
+
 from .character import (
     Character,
     LoginCharactersFactory,
@@ -42,11 +45,41 @@ class Mode(AttrsClass):
     def __attrs_post_init__(self):
         self.hkn_script = HknScript(mode=self)
 
-    def dump(self):
+    def dump(self, verbose: bool = False):
         path_warmane_hkn.write_text(
-            self.hkn_script.script.render(verbose=False),
+            self.hkn_script.script.render(verbose=verbose),
         )
 
+    @property
+    def launched_windows(self) -> T.List[Window]:
+        launched_labels = set()
+        launched_windows = list()
+        for char in self.active_chars:
+            if char.window.label not in launched_labels:
+                launched_windows.append(char.window)
+                launched_labels.add(char.window.label)
+        for char in self.login_chars:
+            if char.window.label not in launched_labels:
+                launched_windows.append(char.window)
+                launched_labels.add(char.window.label)
+        launched_windows = list(sorted(
+            launched_windows,
+            key=lambda w: w.label
+        ))
+        return launched_windows
+
+    @property
+    def labels(self) -> T.List[hk.Label]:
+        return [
+            hk.Label.make(name=window.label, window=window.title)
+            for window in self.launched_windows
+        ]
+
+    # @property
+    # def logins(self):
+    #     pass
+
+    # --------------------------------------------------------------------------
     @classmethod
     def use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(cls):
         return cls(

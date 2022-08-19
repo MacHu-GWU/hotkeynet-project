@@ -107,7 +107,10 @@ class Block(AttrsClass, T.Generic[BLOCK]):
 
     def render(self, verbose=False) -> str:
         if verbose:
-            print(f"render {self.title} ...")
+            try:
+                print(f"render {self.title} ...")
+            except:
+                print(f"render <{self.__class__.__name__}>")
         if self.is_null():
             return ""
         else:
@@ -128,12 +131,17 @@ class Script(Block['Script']):
         if self.is_null():
             return ""
         else:
-            return remove_empty_line(
-                tpl.script_tpl.render(
-                    block=self,
-                    render=render,
-                    verbose=verbose,
-                )
+            # return remove_empty_line(
+            #     tpl.script_tpl.render(
+            #         block=self,
+            #         render=render,
+            #         verbose=verbose,
+            #     )
+            # )
+            return tpl.script_tpl.render(
+                block=self,
+                render=render,
+                verbose=verbose,
             )
 
 

@@ -5,13 +5,15 @@ from attrs_mate import AttrsClass
 
 from hotkeynet.game.wow.wlk import coordinator
 
+from .config import config
+
 
 @attr.s
 class GameClient(AttrsClass):
     """
     定义了你所使用的游戏客户端的详细信息.
     """
-    wow_exe_path: str = attr.ib(default=None)
+    wow_exe_path: str = attr.ib(default=config.wow_exe_path)
 
     window_left_top_x: int = attr.ib(default=None)
     window_left_top_y: int = attr.ib(default=None)

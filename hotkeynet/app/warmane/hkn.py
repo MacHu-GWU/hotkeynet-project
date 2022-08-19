@@ -26,6 +26,9 @@ class HknScript(AttrsClass):
     def __attrs_post_init__(self):
         hk.context.push(self.script)
 
+        self.build_cmd_launch_and_rename_game_client()
+        self.build_cmd_launch_and_rename_all_game_client()
+
     def build_cmd_launch_and_rename_game_client(self):
         """
         运行一个游戏客户端, 并重命名游戏窗口.
@@ -37,38 +40,28 @@ class HknScript(AttrsClass):
 
         这里的窗口的新名称是用来指定给哪个窗口发送键盘鼠标命令的关键.
         """
-        with hk.Command(name="LaunchAndRenameGameClient") as self.cmd_launch_and_rename_game_client:
+        with hk.Command(
+            name="LaunchAndRenameGameClient",
+        ) as self.cmd_launch_and_rename_game_client:
             with hk.SendPC():
-                hk.Run.make(self.mode.game_client_setup.wow_exe_path)
+                hk.Run.make(self.mode.game_client.wow_exe_path)
                 hk.RenameWin(old="World of Warcraft", new=hk.CommandArgEnum.Arg1)
 
-#
-#
-# def build_cmd_launch_and_rename_all_game_client():
-#     """
-#     批量启动多个游戏窗口并全部重命名.
-#
-#     注意!!! 在 HotketNet 界面菜单上的 Options -> Settings 中有一项
-#     Window name match 一定要勾选 Exact Match. 如果勾选的是 Partial Match,
-#     则你在调用 WoW1 窗口的时候, 由于是用的部分匹配, WoW10 也会被匹配到,
-#     导致你的 WoW1 和 WoW10 无法被区分开来.
-#
-#     参数定义:
-#
-#     无
-#     """
-#     return Command(
-#         name="LaunchAndRenameAllGameClient",
-#         actions=[
-#             cmd_launch_and_rename_game_client.call("Local", window.title)
-#             for window in window_list[:config.game_client_config.n_windows]
-#         ],
-#         script=script,
-#     )
-#
-#
-# cmd_launch_and_rename_all_game_client = build_cmd_launch_and_rename_all_game_client()
-#
+    def build_cmd_launch_and_rename_all_game_client(self):
+        """
+        批量启动多个游戏窗口并全部重命名.
+
+        注意!!! 在 HotketNet 界面菜单上的 Options -> Settings 中有一项
+        Window name match 一定要勾选 Exact Match. 如果勾选的是 Partial Match,
+        则你在调用 WoW1 窗口的时候, 由于是用的部分匹配, WoW10 也会被匹配到,
+        导致你的 WoW1 和 WoW10 无法被区分开来.
+        """
+        with hk.Command(
+            name="LaunchAndRenameAllGameClient",
+        ) as self.cmd_launch_and_rename_all_game_client:
+            for window in self.mode.launched_windows:
+                self.cmd_launch_and_rename_game_client.call(args=[window.title, ])
+
 #
 # def build_cmd_bring_window_to_foreground():
 #     """

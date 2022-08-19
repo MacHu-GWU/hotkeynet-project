@@ -1,15 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import os
-from hotkeynet.app.warmane.game_client import GameClient
+from rich import print
+from hotkeynet.app.warmane.mode import Mode
 
 
-class TestGameClientSetup:
-    def test(self):
-        game_client_setup = GameClient()
-        game_client_setup.use_1920_1080_resolution()
-        game_client_setup.use_1600_900_resolution()
-        game_client_setup.use_1176_664_resolution()
+class TestMode:
+    def test_launched_windows(self):
+        mode = Mode.use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu()
+        # print(mode.launched_windows)
+        # print(mode.labels)
 
 
 if __name__ == "__main__":
@@ -32,7 +32,7 @@ if __name__ == "__main__":
         bin_pytest,
         "-s", "--tb=native",
         f"--rootdir={dir_project_root}",
-        "--cov=hotkeynet.app.warmane.game_client",
+        "--cov=hotkeynet.app.warmane.mode",
         "--cov-report", "term-missing",
         "--cov-report", f"html:{dir_htmlcov}",
         abspath,
