@@ -4,7 +4,9 @@ WaitForWinEnabled
 ==============================================================================
 Waits until the currently targeted window is enabled.
 
-**Syntax**::
+**Syntax**
+
+::
 
     <WaitForWinEnabled timeout>
 
