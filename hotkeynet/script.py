@@ -345,6 +345,9 @@ class Key(Block['Key']):
     def trigger(cls) -> 'Key':
         return cls(key=KN.TRIGGER)
 
+    def is_null(self) -> bool:
+        return self.key is None
+
 
 @attr.s
 class KeyUp(Block['KeyUp']):
@@ -354,6 +357,9 @@ class KeyUp(Block['KeyUp']):
     def title(self):
         return f"<KeyUp {self.key}>"
 
+    def is_null(self) -> bool:
+        return self.key is None
+
 
 @attr.s
 class KeyDown(Block['KeyDown']):
@@ -362,6 +368,9 @@ class KeyDown(Block['KeyDown']):
     @property
     def title(self):
         return f"<KeyDown {self.key}>"
+
+    def is_null(self) -> bool:
+        return self.key is None
 
 
 @attr.s
