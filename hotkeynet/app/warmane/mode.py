@@ -19,10 +19,10 @@ from hotkeynet.game.wow.wlk import (
 )
 
 from .character import (
-    sort_chars_by_window_label,
     Character,
     LoginCharactersFactory,
     ActiveCharactersFactory,
+    CharacterHelper,
 )
 from .game_client import GameClient
 from .hkn import HknScript
@@ -64,8 +64,8 @@ class Mode(AttrsClass):
         self._ensure_no_duplicate_window(value)
 
     def __attrs_post_init__(self):
-        self.active_chars = sort_chars_by_window_label(self.active_chars)
-        self.login_chars = sort_chars_by_window_label(self.login_chars)
+        self.active_chars = CharacterHelper.sort_chars_by_window_label(self.active_chars)
+        self.login_chars = CharacterHelper.sort_chars_by_window_label(self.login_chars)
         self._resolve_login()
         self.hkn_script = HknScript(mode=self)
 
@@ -85,7 +85,7 @@ class Mode(AttrsClass):
             if char.window.label not in self.occupied_labels:
                 self.managed_chars.append(char)
                 self.occupied_labels.add(char.window.label)
-        self.managed_chars = sort_chars_by_window_label(self.managed_chars)
+        self.managed_chars = CharacterHelper.sort_chars_by_window_label(self.managed_chars)
 
     @property
     def lbs_all(self) -> T.List[str]:
