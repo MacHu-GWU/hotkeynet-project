@@ -21,6 +21,7 @@ try:
         context,
         AddButtonToPanel,
         AlwaysOnTop,
+        Block,
         Command,
         CommandArgEnum,
         CreateButton,

@@ -6,6 +6,7 @@ import typing as T
 from rich import print
 
 from hotkeynet.script import (
+    context,
     Script,
     Label,
     Hotkey,
@@ -15,50 +16,55 @@ from hotkeynet.script import (
 from hotkeynet import keyname
 
 
-class MyScript:
-    def __init__(self):
-        self.script = Script()
-
-        self.make_labels()
-        self.make_hotkeys()
-
-    def make_labels(self):
-        with self.script():
-            self.labels: T.List[Label] = list()
-            for i in range(1, 1 + 5):
-                self.labels.append(
-                    Label(name=f"w{i}", window=f"WoW{i}")
-                )
-
-    def make_hotkeys(self):
-        with self.script():
-            with Hotkey(
-                id="Key1",
-                key=keyname.SCROLOCK_ON(keyname.KEY_1),
-            ) as self.hk_1:
-                with SendLabel(
-                    name="",
-                    to=[label.name for label in self.labels],
-                ):
-                    Key(key=keyname.KEY_1)
-
-
 def test_context():
-    my_script = MyScript()
+    context.reset()
+    assert len(context.stack) == 0
+    script = Script()
+    assert len(context.stack) == 0
+    with script():
+        assert len(context.stack) == 1
+        assert context.current is script
+        labels: T.List[Label] = list()
+        for i in range(1, 1 + 5):
+            labels.append(
+                Label(name=f"w{i}", window=f"WoW{i}")
+            )
+            assert len(context.stack) == 1
+            assert context.current is script
+
+    with script():
+        with Hotkey(
+            id="Key1",
+            key=keyname.SCROLOCK_ON(keyname.KEY_1),
+        ) as hk_1:
+            assert len(context.stack) == 2
+            assert context.current is hk_1
+            with SendLabel(
+                name="",
+                to=[label.name for label in labels],
+            ) as hk_1_send_label:
+                Key(key=keyname.KEY_1)
+
+    with hk_1_send_label():
+        assert len(context.stack) == 1
+        assert context.current is hk_1_send_label
+        Key(key=keyname.KEY_2)
+
     # print(my_script.script)
 
-    assert len(my_script.script.blocks) == 5 + 1
-    assert len(my_script.script.iter_label()) == 5
-    assert len(my_script.script.iter_hotkey()) == 1
+    assert len(script.blocks) == 5 + 1
+    assert len(script.iter_label()) == 5
+    assert len(script.iter_hotkey()) == 1
 
-    assert isinstance(my_script.hk_1, Hotkey)
-    assert len(my_script.hk_1.blocks) == 1
+    assert isinstance(hk_1, Hotkey)
+    assert len(hk_1.blocks) == 1
 
-    assert isinstance(my_script.hk_1.blocks[0], SendLabel)
-    assert len(my_script.hk_1.blocks[0].to) == 5
-    assert len(my_script.hk_1.blocks[0].blocks) == 1
+    assert isinstance(hk_1.blocks[0], SendLabel)
+    assert len(hk_1.blocks[0].to) == 5
+    assert len(hk_1.blocks[0].blocks) == 2
 
-    assert isinstance(my_script.hk_1.blocks[0].blocks[0], Key)
+    assert isinstance(hk_1.blocks[0].blocks[0], Key)
+    assert isinstance(hk_1.blocks[0].blocks[1], Key)
 
 
 if __name__ == "__main__":

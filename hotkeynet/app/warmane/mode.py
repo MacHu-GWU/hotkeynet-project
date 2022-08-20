@@ -96,17 +96,28 @@ class Mode(AttrsClass):
         """
         return [char.window.label for char in self.active_chars]
 
+    def lbs_by_tl(self, tl: TL) -> T.List[str]:
+        """
+        返回所有要进行游戏的人物角色中, 匹配某个具体天赋的角色所对应的游戏窗口的 label.
+
+        在多开热键定义中, 常用于根据天赋筛选部分角色.
+        """
+        return [
+            char.window.label
+            for char in CharacterHelper.filter_by_talent(self.active_chars, tl)
+        ]
+
     def lbs_by_tc(self, tc: TC) -> T.List[str]:
         """
         返回所有要进行游戏的人物角色中, 匹配某个天赋分组的角色所对应的游戏窗口的 label.
 
         在多开热键定义中, 常用于根据天赋筛选部分角色.
         """
-        talent_set = get_talent_by_category(category=tc)
         return [
             char.window.label
-            for char in self.active_chars
-            if char.talent in talent_set
+            for char in CharacterHelper.filter_by_talent_category(
+                self.active_chars, tc,
+            )
         ]
 
     @property
@@ -180,4 +191,14 @@ class Mode(AttrsClass):
             # game_client=GameClient().use_1176_664_resolution(),
             login_chars=LoginCharactersFactory.make_chars_10p(),
             active_chars=ActiveCharactersFactory.make_team_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(),
+        )
+
+    @classmethod
+    def use_solo_raid_10p_batlefury_luxiaofeng_core_team(cls):
+        return cls(
+            game_client=GameClient().use_1920_1080_resolution(),
+            # game_client=GameClient().use_1600_900_resolution(),
+            # game_client=GameClient().use_1176_664_resolution(),
+            login_chars=LoginCharactersFactory.make_chars_10p(),
+            active_chars=ActiveCharactersFactory.make_team_solo_raid_10p_batlefury_luxiaofeng_core_team(),
         )

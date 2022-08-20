@@ -26,6 +26,9 @@ class Context:
     def pop(self):
         return self.stack.pop()
 
+    def reset(self):
+        self.__init__()
+
     @property
     def current(self) -> 'Block':
         return self.stack[-1]
@@ -51,7 +54,7 @@ class Block(AttrsClass, T.Generic[BLOCK]):
     blocks: T.List['Block'] = attr.ib(factory=list)
 
     def __call__(self) -> BLOCK:
-        return self.__enter__()
+        return self
 
     def __enter__(self) -> BLOCK:
         """

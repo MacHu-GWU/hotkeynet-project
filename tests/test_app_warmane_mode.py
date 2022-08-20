@@ -2,12 +2,15 @@
 
 import os
 from rich import print
+import hotkeynet as hk
 from hotkeynet.app.warmane.mode import Mode
 
 
 class TestMode:
     def test_launched_windows(self):
-        mode = Mode.use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu()
+        hk.context.reset()
+        mode = Mode.use_solo_raid_10p_batlefury_luxiaofeng_core_team()
+        mode.hkn_script.script.render(verbose=False),
         # print(mode.launched_windows)
 
 

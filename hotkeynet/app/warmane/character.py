@@ -808,6 +808,39 @@ class _ActiveCharactersFactory:
 
         return chars
 
+    def _set_22p_team_leader(self, chars: T.List[Character]):  # pragma: no cover
+        # find leader char window
+        leader1_char_window: T.Optional[Window] = None
+        leader2_char_window: T.Optional[Window] = None
+
+        if leader1_char_window is None:
+            for char in chars:
+                if char.is_tank1:
+                    leader1_char_window = char.window
+
+        if leader2_char_window is None:
+            for char in chars:
+                if char.is_tank2:
+                    leader2_char_window = char.window
+
+        if leader1_char_window is None:
+            raise ValueError("you have to define at least one TANK or one Plate char")
+
+        # set other char leader1 as the tank
+        for char in chars:
+            if char.window.label != leader1_char_window.label:
+                char.set_leader1_window(leader1_char_window)
+
+        # (if possible) set other char leader2 as the tank
+        if leader2_char_window is not None:
+            for char in chars:
+                if char.window.label != leader2_char_window.label:
+                    char.set_leader2_window(leader2_char_window)
+
+        return chars
+
+    __anchore_active_chars_solo_dungeon = None
+
     def make_team_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(self) -> T.List[Character]:
         """
         主力 5 人组
@@ -860,7 +893,6 @@ class _ActiveCharactersFactory:
 
     # === 情人节 2 月中, 美酒节 9 月中, 万圣节 10 月中, 节日刷牌子 ===
     # 把 DK 5 人组 和 术士 5 人组 加上 Ganjj 和 Laoshou 分成 3 队 分别刷节日任务
-
     def make_team_solo_dungeon_festival_team_1_dk(self) -> T.List[Character]:
         return self._set_5p_team_leader(chars=[
             CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().set_tank1(),
@@ -889,7 +921,6 @@ class _ActiveCharactersFactory:
         ])
 
     # 把 牧师 4 人组 和 萨满 4 人组 加上 Ganjj 和 Laoshou 分成 2 队分别刷节日任务
-
     def make_team_solo_dungeon_festival_team_4_ms_sm(self) -> T.List[Character]:
         return self._set_5p_team_leader(chars=[
             CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_tank1(),
@@ -908,8 +939,9 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti26_lgsmp_pve_resto_shaman(),
         ])
 
-    # === 灰熊丘陵日常刷金 ===
+    __anchore_active_chars_daily_quest = None
 
+    # === 灰熊丘陵日常刷金 ===
     def make_team_daily_gold_farm_team_1_druid(self) -> T.List[Character]:
         """
         灰熊秋林日常刷金 - 防骑 + 3 鸟德 + 1 奶德
@@ -992,6 +1024,22 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti3_opiitou_pve_balance_druid(),
             CharacterFactory.make_char_fatmulti4_swagsonic_pve_arcane_mage(),
             CharacterFactory.make_char_fatmulti5_kangliu_pve_shadow_priest(),
+        ])
+
+    __anchore_active_chars_raid_10 = None
+
+    def make_team_solo_raid_10p_batlefury_luxiaofeng_core_team(self) -> T.List[Character]:
+        return self._set_22p_team_leader(chars=[
+            CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().set_tank1(),
+            CharacterFactory.make_char_fatmulti2_quentin_pve_elemental_shaman(),
+            CharacterFactory.make_char_fatmulti3_opiitou_pve_balance_druid(),
+            CharacterFactory.make_char_fatmulti4_swagsonic_pve_arcane_mage(),
+            CharacterFactory.make_char_fatmulti5_kangliu_pve_shadow_priest(),
+            CharacterFactory.make_char_fitsheep_kindhearted_pve_demonology_warlock(),
+            CharacterFactory.make_char_fatmulti6_kapacuk_pve_marksman_hunter(),
+            CharacterFactory.make_char_fatmulti8_bunnysisters_pve_resto_druid(),
+            CharacterFactory.make_char_fatmulti9_glowyy_pve_holy_pala(),
+            CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_unholy_tank_dk().set_tank2(),
         ])
 
 
