@@ -27,12 +27,15 @@ class HknScript(AttrsClass):
     script: hk.Script = attr.ib(factory=hk.Script)
 
     def __attrs_post_init__(self):
+        # 此时 Script 已经不再 context 中, 我们也不希望没定义一个 Hotkey 就一直用
+        # with script 的语法. 所以我们手动将 script 对象设置为 Context 的顶层
         hk.context.push(self.script)
         self.build_labels()
         self.build_cmd()
         self.build_hk_group_01()
         self.build_hk_group_02()
         self.build_hk_group_03()
+        self.build_hk_group_12()
         self.build_control_panel()
 
     def build_labels(self):
@@ -733,16 +736,16 @@ class HknScript(AttrsClass):
 
         return send_label_list
 
-    def build_hk_1(self):
+    def build_hk_1_heal_tank(self):
         with hk.Hotkey(
             id="Key1",
             key=KN.SCROLOCK_ON(KN.KEY_1),
         ) as self.hk_1:
             send_label_list = self.build_actions_default(
                 key=KN.KEY_1,
-                healer_target_focus=True,
+                healer_target_focus=True,  # 治疗选择 焦点
             )
-
+            # 特殊职业的特殊设定
             send_label = self._get_send_label_by_id(
                 id_=TL.paladin_pve_holy.name,
                 blocks=send_label_list,
@@ -753,293 +756,480 @@ class HknScript(AttrsClass):
                     act.General.TRIGGER(),
                 ]
 
-    # def build_hk_2():
-    #     actions = build_actions_default(
-    #         config=config, is_healer_target_focus=False, key=Key(name=KN.KEY_2))
-    #     hk = Hotkey(
-    #         name="Key2",
-    #         key=KN.SCROLOCK_ON(KN.KEY_2),
-    #         actions=actions,
-    #         script=script,
-    #     )
-    #     hk.get_send_label_by_name(Talent.paladin_pve_holy.name).actions = [
-    #         act.Target.TARGET_RAID,
-    #         act.General.TRIGGER,
-    #     ]
-    #     return hk
-    #
-    # hk_2 = build_hk_2()
-    #
-    # def build_hk_3():
-    #     actions = build_actions_default(
-    #         config=config, is_healer_target_focus=True, key=Key(name=KN.KEY_3))
-    #     hk = Hotkey(
-    #         name="Key3",
-    #         key=KN.SCROLOCK_ON(KN.KEY_3),
-    #         actions=actions,
-    #         script=script,
-    #     )
-    #     hk.get_send_label_by_name(Talent.paladin_pve_holy.name).actions = [
-    #         act.General.TRIGGER,
-    #     ]
-    #     return hk
-    #
-    # hk_3 = build_hk_3()
-    #
-    # def build_hk_4():
-    #     actions = build_actions_default(
-    #         config=config, is_healer_target_focus=False, key=Key(name=KN.KEY_4))
-    #     hk = Hotkey(
-    #         name="Key4",
-    #         key=KN.SCROLOCK_ON(KN.KEY_4),
-    #         actions=actions,
-    #         script=script,
-    #     )
-    #     return hk
-    #
-    # hk_4 = build_hk_4()
-    #
-    # def build_hk_5():
-    #     actions = build_actions_default(
-    #         config=config, is_healer_target_focus=False, key=Key(name=KN.KEY_5))
-    #     hk = Hotkey(
-    #         name="Key5",
-    #         key=KN.SCROLOCK_ON(KN.KEY_5),
-    #         actions=actions,
-    #         script=script,
-    #     )
-    #     hk.get_send_label_by_name(Talent.paladin_pve_holy.name).actions = [
-    #         act.Target.TARGET_SELF,
-    #         act.Paladin.HOLY_SPEC_KEY_5_HOLY_LIGHT,
-    #     ]
-    #     hk.get_send_label_by_name(Talent.shaman_pve_resto.name).actions = [
-    #         act.Target.TARGET_SELF,
-    #         act.Shaman.ALL_SPEC_CHAIN_HEAL,
-    #     ]
-    #     hk.get_send_label_by_name(Talent.druid_pve_resto.name).actions = [
-    #         act.Target.TARGET_SELF,
-    #         act.Druid.RESTO_SPEC_WILD_GROWTH_KEY_5,
-    #     ]
-    #     hk.get_send_label_by_name(Talent.priest_pve_disco.name).actions = [
-    #         act.Priest.ALL_SPEC_PRAYER_OF_HEALING,
-    #     ]
-    #     hk.get_send_label_by_name(Talent.priest_pve_holy.name).actions = [
-    #         act.Priest.ALL_SPEC_PRAYER_OF_HEALING,
-    #     ]
-    #     return hk
-    #
-    # hk_5 = build_hk_5()
-    #
-    # def build_hk_6_one_time_debuff():
-    #     actions = build_actions_default(
-    #         config=config, is_healer_target_focus=True, key=Key(name=KN.KEY_6))
-    #     hk = Hotkey(
-    #         name="Key6",
-    #         key=KN.SCROLOCK_ON(KN.KEY_6),
-    #         actions=actions,
-    #         script=script,
-    #     )
-    #     return hk
-    #
-    # hk_6 = build_hk_6_one_time_debuff()
-    #
-    # def build_hk_7():
-    #     actions = build_actions_default(
-    #         config=config, is_healer_target_focus=True, key=Key(name=KN.KEY_7))
-    #     hk = Hotkey(
-    #         name="Key7",
-    #         key=KN.SCROLOCK_ON(KN.KEY_7),
-    #         actions=actions,
-    #         script=script,
-    #     )
-    #     return hk
-    #
-    # hk_7 = build_hk_7()
-    #
-    # def build_hk_8_buff_self():
-    #     return Hotkey(
-    #         name="Key8",
-    #         key=KN.SCROLOCK_ON(KN.KEY_8),
-    #         actions=[
-    #             SendLabel(
-    #                 name="all",
-    #                 to=config.lbs_all(),
-    #                 actions=[
-    #                     Key(name=KN.KEY_8)
-    #                 ]
-    #             )
-    #         ],
-    #         script=script,
-    #     )
-    #
-    # hk_8_buff_self = build_hk_8_buff_self()
-    #
-    # def build_hk_9_buff_raid():
-    #     return Hotkey(
-    #         name="Key9",
-    #         key=KN.SCROLOCK_ON(KN.KEY_9),
-    #         actions=[
-    #             SendLabel(
-    #                 name="all",
-    #                 to=config.lbs_all(),
-    #                 actions=[
-    #                     Key(name=KN.KEY_9)
-    #                 ]
-    #             )
-    #         ],
-    #         script=script,
-    #     )
-    #
-    # hk_9_buff_raid = build_hk_9_buff_raid()
-    #
-    # def build_hk_0_short_term_buff():
-    #     return Hotkey(
-    #         name="Key0",
-    #         key=KN.SCROLOCK_ON(KN.KEY_0),
-    #         actions=[
-    #             SendLabel(
-    #                 name=TalentCategory.dk.name,
-    #                 to=config.lbs_by_tc(TalentCategory.dk),
-    #                 actions=[
-    #                     act.DK.ALL_SPEC_HORN_OF_WINTER_KEY_SHIFT_TAB,
-    #                 ]
-    #             ),
-    #             SendLabel(
-    #                 name=TalentCategory.paladin_healer.name,
-    #                 to=config.lbs_by_tc(TalentCategory.paladin_healer),
-    #                 actions=[
-    #                     act.Target.TARGET_FOCUS,
-    #                     act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT,
-    #                 ]
-    #             ),
-    #             SendLabel(
-    #                 name=TalentCategory.shaman.name,
-    #                 to=config.lbs_by_tc(TalentCategory.shaman),
-    #                 actions=[
-    #                     act.Shaman.ALL_SPEC_KEY_0_WATER_OR_LIGHTNING_SHIELD,
-    #                 ]
-    #             ),
-    #             SendLabel(
-    #                 name=TalentCategory.warlock.name,
-    #                 to=config.lbs_by_tc(TalentCategory.warlock),
-    #                 actions=[
-    #                     act.Warlock.ALL_SPEC_FEL_ARMOR,
-    #                 ]
-    #             ),
-    #         ],
-    #         script=script,
-    #     )
-    #
-    # hk_0_short_term_buff = build_hk_0_short_term_buff()
-    #
-    # def build_hk_11_focus_mode_1():
-    #     actions = list()
-    #     for char in config.active_character_config.iter_by_window_index():
-    #         if char.leader1_window_index:
-    #             try:
-    #                 sl = SendLabel(
-    #                     name=char.id,
-    #                     to=[char.window_label, ],
-    #                     actions=[
-    #                         act.target_leader_key_mapper[char.leader1_window_label],
-    #                         act.General.SET_FOCUS_KEY_NUMPAD_6,
-    #                     ]
-    #                 )
-    #                 actions.append(sl)
-    #             except KeyError:
-    #                 pass
-    #         else:
-    #             sl = SendLabel(
-    #                 name=char.id,
-    #                 to=[char.window_label, ],
-    #                 actions=[
-    #                     act.General.CLEAR_FOCUS_NUMPAD_7,
-    #                 ]
-    #             )
-    #             actions.append(sl)
-    #
-    #     return Hotkey(
-    #         name="SetFocusMode1",
-    #         key=KN.SCROLOCK_ON(KN.KEY_11_MINUS),
-    #         actions=actions,
-    #         script=script,
-    #     )
-    #
-    # hk_11_focus_mode_1 = build_hk_11_focus_mode_1()
-    #
-    # def build_hk_12_focus_mode_2():
-    #     actions = list()
-    #     for char in config.active_character_config.iter_by_window_index():
-    #         # print(char.name, char.leader2_window_index)
-    #         if char.leader2_window_index:
-    #             try:
-    #                 sl = SendLabel(
-    #                     name=char.id,
-    #                     to=[char.window_label, ],
-    #                     actions=[
-    #                         act.target_leader_key_mapper[char.leader2_window_label],
-    #                         act.General.SET_FOCUS_KEY_NUMPAD_6,
-    #                     ]
-    #                 )
-    #                 actions.append(sl)
-    #             except KeyError:
-    #                 pass
-    #         else:
-    #             sl = SendLabel(
-    #                 name=char.id,
-    #                 to=[char.window_label, ],
-    #                 actions=[
-    #                     act.General.CLEAR_FOCUS_NUMPAD_7,
-    #                 ]
-    #             )
-    #             actions.append(sl)
-    #
-    #     return Hotkey(
-    #         name="SetFocusMode2",
-    #         key=KN.SCROLOCK_ON(KN.KEY_12_PLUS),
-    #         actions=actions,
-    #         script=script,
-    #     )
-    #
-    # hk_12_focus_mode_2 = build_hk_12_focus_mode_2()
-    #
+    def build_hk_2_heal_nothing(self):
+        with hk.Hotkey(
+            id="Key2",
+            key=KN.SCROLOCK_ON(KN.KEY_2),
+        ) as self.hk_2:
+            send_label_list = self.build_actions_default(
+                key=KN.KEY_2,
+                healer_target_focus_target=True,  # 治疗选择 焦点的目标
+            )
+            # 特殊职业的特殊设定
+            send_label = self._get_send_label_by_id(
+                id_=TL.paladin_pve_holy.name,
+                blocks=send_label_list,
+            )
+            with send_label():
+                send_label.blocks = [
+                    act.Target.TARGET_RAID(),
+                    act.General.TRIGGER(),
+                ]
+
+    def build_hk_3_heal_tank(self):
+        with hk.Hotkey(
+            id="Key3",
+            key=KN.SCROLOCK_ON(KN.KEY_3),
+        ) as self.hk_3:
+            send_label_list = self.build_actions_default(
+                key=KN.KEY_3,
+                healer_target_focus=True,  # 治疗选择 焦点
+            )
+            # 特殊职业的特殊设定
+            send_label = self._get_send_label_by_id(
+                id_=TL.paladin_pve_holy.name,
+                blocks=send_label_list,
+            )
+            with send_label():
+                send_label.blocks = [
+                    act.General.TRIGGER(),
+                ]
+
+    def build_hk_4_heal_nothing(self):
+        with hk.Hotkey(
+            id="Key4",
+            key=KN.SCROLOCK_ON(KN.KEY_4),
+        ) as self.hk_4:
+            send_label_list = self.build_actions_default(
+                key=KN.KEY_4,
+                healer_target_focus_target=True,  # 选择 焦点的目标
+            )
+
+    def build_hk_5_aoe_heal_self(self):
+        with hk.Hotkey(
+            id="Key5",
+            key=KN.SCROLOCK_ON(KN.KEY_5),
+        ) as self.hk_5:
+            send_label_list = self.build_actions_default(
+                key=KN.KEY_5,
+                healer_target_focus_target=True,  # 选择 焦点的目标
+            )
+
+            # 奶骑对自己放圣光术
+            send_label = self._get_send_label_by_id(
+                id_=TL.paladin_pve_holy.name,
+                blocks=send_label_list,
+            )
+            with send_label():
+                send_label.blocks = [
+                    act.Target.TARGET_SELF(),
+                    act.Paladin.HOLY_SPEC_KEY_5_HOLY_LIGHT(),
+                ]
+
+            # 奶萨对自己放治疗链
+            send_label = self._get_send_label_by_id(
+                id_=TL.shaman_pve_resto.name,
+                blocks=send_label_list,
+            )
+            with send_label():
+                send_label.blocks = [
+                    act.Target.TARGET_SELF(),
+                    act.Shaman.ALL_SPEC_CHAIN_HEAL(),
+                ]
+
+            # 奶德对自己放野性生长
+            send_label = self._get_send_label_by_id(
+                id_=TL.druid_pve_resto.name,
+                blocks=send_label_list,
+            )
+            with send_label():
+                send_label.blocks = [
+                    act.Target.TARGET_SELF(),
+                    act.Druid.RESTO_SPEC_WILD_GROWTH_KEY_5(),
+                ]
+
+            # 戒律牧放治疗祷言
+            send_label = self._get_send_label_by_id(
+                id_=TL.priest_pve_disco.name,
+                blocks=send_label_list,
+            )
+            with send_label():
+                send_label.blocks = [
+                    act.Priest.ALL_SPEC_PRAYER_OF_HEALING(),
+                ]
+
+            # 神圣牧放治疗祷言
+            send_label = self._get_send_label_by_id(
+                id_=TL.priest_pve_holy.name,
+                blocks=send_label_list,
+            )
+            with send_label():
+                send_label.blocks = [
+                    act.Priest.ALL_SPEC_PRAYER_OF_HEALING(),
+                ]
+
+    def build_hk_6_one_time_debuff(self):
+        with hk.Hotkey(
+            id="Key6",
+            key=KN.SCROLOCK_ON(KN.KEY_6),
+        ) as self.hk_6:
+            send_label_list = self.build_actions_default(
+                key=KN.KEY_6,
+                healer_target_focus=True,  # 选择 焦点
+            )
+
+    def build_hk_7(self):
+        with hk.Hotkey(
+            id="Key7",
+            key=KN.SCROLOCK_ON(KN.KEY_7),
+        ) as self.hk_7:
+            send_label_list = self.build_actions_default(
+                key=KN.KEY_7,
+                healer_target_focus=True,  # 选择 焦点
+            )
+
+    def build_hk_8_buff_self(self):
+        with hk.Hotkey(
+            id="Key8",
+            key=KN.SCROLOCK_ON(KN.KEY_8),
+        ) as self.hk_8:
+            with hk.SendLabel(
+                id="all",
+                to=self.mode.lbs_all,
+            ):
+                hk.Key(key=KN.KEY_8)
+
+    def build_hk_9_buff_raid(self):
+
+        with hk.Hotkey(
+            id="Key9",
+            key=KN.SCROLOCK_ON(KN.KEY_9),
+        ) as self.hk_9:
+            with hk.SendLabel(
+                id="all",
+                to=self.mode.lbs_all,
+            ):
+                hk.Key(key=KN.KEY_8)
+
+    def build_hk_0_short_term_buff(self):
+        """
+        补刷持续时间短的 Buff.
+        """
+        with hk.Hotkey(
+            id="Key0",
+            key=KN.SCROLOCK_ON(KN.KEY_0),
+        ) as self.hk_0_short_term_buff:
+            with hk.SendLabel(
+                id=TC.dk.name,
+                to=self.mode.lbs_by_tc(TC.dk),
+            ):
+                act.DK.ALL_SPEC_HORN_OF_WINTER_KEY_SHIFT_TAB()
+            with hk.SendLabel(
+                id=TC.paladin_healer.name,
+                to=self.mode.lbs_by_tc(TC.paladin_healer),
+            ):
+                act.Target.TARGET_FOCUS()
+                act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT()
+            with hk.SendLabel(
+                id=TC.shaman.name,
+                to=self.mode.lbs_by_tc(TC.shaman),
+            ):
+                act.Shaman.ALL_SPEC_KEY_0_WATER_OR_LIGHTNING_SHIELD()
+            with hk.SendLabel(
+                id=TC.warlock.name,
+                to=self.mode.lbs_by_tc(TC.warlock),
+            ):
+                act.Warlock.ALL_SPEC_FEL_ARMOR()
+
+    def build_hk_11_focus_mode_1(self):
+        """
+        所有人的焦点设置为它们的 1 号司机 (除了司机本人)
+        """
+        with hk.Hotkey(
+            id="SetFocusMode1",
+            key=KN.SCROLOCK_ON(KN.KEY_11_MINUS),
+        ) as self.hk_11_focus_mode_1:
+            for char in self.mode.active_chars:
+                if char.is_leader_1:  # 司机本人清除焦点
+                    with hk.SendLabel(
+                        id=char.account.username,
+                        to=[char.window.label, ],
+                    ):
+                        act.General.CLEAR_FOCUS_NUMPAD_7()
+                else:  # 其他人设置焦点
+                    with hk.SendLabel(
+                        id=char.account.username,
+                        to=[char.window.label, ],
+                    ):
+                        act.target_leader_key_mapper[char.leader_1_window.label]()
+                        act.General.SET_FOCUS_KEY_NUMPAD_6()
+
+    def build_hk_12_focus_mode_2(self):
+        """
+        所有人的焦点设置为它们的 2 号司机 (除了司机本人)
+        """
+        with hk.Hotkey(
+            id="SetFocusMode2",
+            key=KN.SCROLOCK_ON(KN.KEY_12_PLUS),
+        ) as self.hk_12_focus_mode_2:
+            for char in self.mode.active_chars:
+                if char.is_leader_2:  # 司机本人清除焦点
+                    with hk.SendLabel(
+                        id=char.account.username,
+                        to=[char.window.label, ],
+                    ):
+                        act.General.CLEAR_FOCUS_NUMPAD_7()
+                else:  # 其他人设置焦点
+                    with hk.SendLabel(
+                        name=char.account.username,
+                        to=[char.window.label, ],
+                    ):
+                        act.target_leader_key_mapper[char.leader_2_window.label]()
+                        act.General.SET_FOCUS_KEY_NUMPAD_6()
+
     # # --- alt 1,2,3,4,5
-    # def build_hk_alt_5():
-    #     hk = Hotkey(
-    #         name="Alt 5",
-    #         key=KN.SCROLOCK_ON(KN.ALT_(KN.KEY_5)),
-    #         actions=[
-    #             SendLabel(
-    #                 name=TC.priest_holy.name,
-    #                 to=config.lbs_by_tc(tc=TC.priest_holy),
-    #                 actions=[
-    #                     act.Target.TARGET_SELF,
-    #                     act.Priest.HOLY_SPEC_CIRCLE_OF_HEALING,
-    #                 ]
-    #             ),
-    #             SendLabel(
-    #                 name=TC.shaman.name,
-    #                 to=config.lbs_by_tc(tc=TC.shaman),
-    #                 actions=[
-    #                     act.Target.TARGET_FOCUS_TARGET,
-    #                     act.Shaman.ALL_SPEC_CHAIN_HEAL,
-    #                 ]
-    #             )
-    #         ],
-    #         script=script,
-    #     )
-    #     return hk
-    #
-    # hk_alt_5 = build_hk_alt_5()
-    #
-    # def build_hk_alt_6():
-    #     pass
-    #
-    # def build_hk_alt_7():
-    #     pass
+    def build_hk_alt_5(self):
+        """
+        对自己放大型群刷技能.
+        """
+        with hk.Hotkey(
+            id="Alt 5",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.KEY_5)),
+        ) as self.hk_alt_5:
+            with hk.SendLabel(
+                id=TC.priest_holy.name,
+                to=self.mode.lbs_by_tc(tc=TC.priest_holy),
+            ):
+                act.Target.TARGET_SELF()
+                act.Priest.HOLY_SPEC_CIRCLE_OF_HEALING()
+
+            with hk.SendLabel(
+                id=TC.shaman.name,
+                to=self.mode.lbs_by_tc(tc=TC.shaman),
+            ):
+                act.Target.TARGET_FOCUS_TARGET()
+                act.Shaman.ALL_SPEC_CHAIN_HEAL()
 
     def build_hk_group_03(self):
-        self.build_hk_1()
+        self.build_hk_1_heal_tank()
+        self.build_hk_2_heal_nothing()
+        self.build_hk_3_heal_tank()
+        self.build_hk_4_heal_nothing()
+        self.build_hk_5_aoe_heal_self()
+        self.build_hk_6_one_time_debuff()
+        self.build_hk_7()
+        self.build_hk_8_buff_self()
+        self.build_hk_9_buff_raid()
+        self.build_hk_0_short_term_buff()
+        self.build_hk_11_focus_mode_1()
+        self.build_hk_12_focus_mode_2()
+
+        self.build_hk_alt_5()
+
+    # -------------------------------------------------------------------------
+    # 实现由在主控角色界面下, 用鼠标在团队框架上进行单机来实现治疗的快捷键.
+    # 需要配合团队框架 Healbot 插件使用.
+    # -------------------------------------------------------------------------
+    __anchor_hk_12_heal_bot = None
+
+    """
+    下面的这批名字为 ``_build_send_label_...`` 的函数是用于生成 ... 的工厂函数. 
+    
+    我们为 5 大治疗职业: 奶骑, 奶萨, 奶德, 神/戒牧, 准备了工厂函数, 这些工厂函数定义了
+    SendLabel.to 的部分, 留给用户自行定义具体的动作
+    """
+
+    def _build_send_label_holy_paladin(self, funcs: T.List[callable]):
+        with hk.SendLabel(
+            id=TC.paladin_holy.name,
+            to=self.mode.lbs_by_tc(TC.paladin_holy),
+        ) as send_label:
+            for func in funcs:
+                func()
+            return send_label
+
+    def _build_send_label_resto_shaman(self, funcs: T.List[callable]):
+        with hk.SendLabel(
+            id=TC.shaman_resto.name,
+            to=self.mode.lbs_by_tc(TC.shaman_resto),
+        ) as send_label:
+            for func in funcs:
+                func()
+            return send_label
+
+    def _build_send_label_resto_druid(self, funcs: T.List[callable]):
+        with hk.SendLabel(
+            id=TC.druid_resto.name,
+            to=self.mode.lbs_by_tc(TC.druid_resto),
+        ) as send_label:
+            for func in funcs:
+                func()
+            return send_label
+
+    def _build_send_label_disco_priest(self, funcs: T.List[callable]):
+        with hk.SendLabel(
+            id=TC.priest_disco.name,
+            to=self.mode.lbs_by_tc(TC.priest_disco),
+        ) as send_label:
+            for func in funcs:
+                func()
+            return send_label
+
+    def _build_send_label_holy_priest(self, funcs: T.List[callable]):
+        with hk.SendLabel(
+            id=TC.priest_holy.name,
+            to=self.mode.lbs_by_tc(TC.priest_holy),
+        ) as send_label:
+            for func in funcs:
+                func()
+            return send_label
+
+    def _build_send_label_tank(self):
+        with hk.SendLabel(
+            id=TC.tank.name,
+            to=self.mode.lbs_by_tc(TC.tank),
+        ) as send_label:
+            hk.Key(id=KN.KEY_2)
+            return send_label
+
+    def _build_send_label_shaman(self, funcs: T.List[callable]):
+        with hk.SendLabel(
+            id=TC.shaman.name,
+            to=self.mode.lbs_by_tc(TC.shaman),
+        ) as send_label:
+            for func in funcs:
+                func()
+            return send_label
+
+    def _build_send_label_dps(self):
+        with hk.SendLabel(
+            id=TC.dps.name,
+            to=self.mode.lbs_by_tc(TC.dps),
+        ) as send_label:
+            act.Target.TARGET_FOCUS_TARGET()
+            hk.Key(key=KN.KEY_2)
+            return send_label
+
+    def _build_send_label_non_shaman_dps(self):
+        """
+        点击 Healbot 的时候, 所有 DPS 继续攻击焦点的目标. 唯独 增强萨满 和 元素萨满 例外.
+        虽然它们是 DPS 职业, 但是依然要跟其他治疗一样, 对团队框架目标使用治疗链.
+        """
+        lbs_dps = self.mode.lbs_by_tc(TC.dps)
+        lbs_shaman_non_resto = self.mode.lbs_by_tc(TC.shaman_non_resto)
+        to = list(set(lbs_dps).difference(lbs_shaman_non_resto))
+        to.sort()
+        with hk.SendLabel(
+            id="non_shaman_dps",
+            to=to,
+        ) as send_label:
+            act.Target.TARGET_FOCUS_TARGET()
+            hk.Key(key=KN.KEY_2)
+            return send_label
+
+    def build_hk_healbot_small_heal(self):
+        with hk.Hotkey(
+            id="Healbot Small Heal",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.MOUSE_LButton)),
+        ) as self.hk_healbot_small_heal:
+            self._build_send_label_holy_paladin([
+                act.Paladin.HEAL_BOT_RIGHT_CLICK_FLASH_OF_LIGHT,
+            ])
+            self._build_send_label_resto_shaman([
+                act.Shaman.HEAL_BOT_RIPTIDE_RIGHT_CLICK,
+            ])
+            self._build_send_label_resto_druid([
+                act.Druid.HEAL_BOT_LEFT_CLICK_REJUVENATION,
+            ])
+            self._build_send_label_disco_priest([
+                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+            ])
+            self._build_send_label_holy_priest([
+                act.Priest.HEAL_BOT_HOLY_SPEC_FLASH_HEAL,
+            ])
+            self._build_send_label_tank()
+            self._build_send_label_dps()
+
+    def build_hk_healbot_big_heal(self):
+        with hk.Hotkey(
+            id="Healbot Big Heal",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.MOUSE_RButton)),
+        ) as self.hk_healbot_big_heal:
+            self._build_send_label_holy_paladin([
+                act.Paladin.HEAL_BOT_LEFT_CLICK_HOLY_LIGHT,
+            ]),
+            self._build_send_label_resto_shaman([
+                act.Shaman.HEAL_BOT_HEALING_WAVE_LEFT_CLICK,
+            ]),
+            self._build_send_label_resto_druid([
+                act.Druid.HEAL_BOT_RIGHT_CLICK_NOURISH,
+            ]),
+            self._build_send_label_disco_priest([
+                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+            ]),
+            self._build_send_label_holy_priest([
+                act.Priest.HEAL_BOT_HOLY_SPEC_FLASH_HEAL,
+            ]),
+            self._build_send_label_tank(),
+            self._build_send_label_dps(),
+
+    def build_hk_healbot_aoe_heal(self):
+        with hk.Hotkey(
+            id="Healbot Aoe Heal",
+            key=KN.SCROLOCK_ON(KN.SHIFT_(KN.MOUSE_LButton)),
+        ) as self.hk_healbot_aoe_heal:
+            self._build_send_label_holy_paladin([
+                act.Paladin.HEAL_BOT_LEFT_CLICK_HOLY_LIGHT,
+            ]),
+            self._build_send_label_shaman([
+                act.Shaman.HEAL_BOT_CHAIN_HEAL_MIDDLE_CLICK,
+            ]),
+            self._build_send_label_resto_druid([
+                act.Druid.HEAL_BOT_WILD_GROWTH,
+            ]),
+            self._build_send_label_disco_priest([
+                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+            ]),
+            self._build_send_label_holy_priest([
+                act.Priest.HEAL_BOT_CIRCLE_OF_HEALING,
+            ]),
+            self._build_send_label_tank(),
+            self._build_send_label_non_shaman_dps(),
+
+    def build_hk_healbot_dispel(self):
+        with hk.Hotkey(
+            id="Healbot Dispel",
+            key=KN.SCROLOCK_ON(KN.MOUSE_MButton),
+        ) as self.hk_healbot_dispel:
+            self._build_send_label_holy_paladin([
+                act.Paladin.HEAL_BOT_CLEANSE,
+            ]),
+            self._build_send_label_resto_shaman([
+                act.Shaman.HEAL_BOT_CLEANSE_CTRL_LEFT_CLICK,
+            ]),
+            self._build_send_label_resto_druid([
+                act.Druid.HEAL_BOT_REMOVE_CURSE,
+            ]),
+            self._build_send_label_disco_priest([
+                act.Priest.HEAL_BOT_DISPEL_MAGIC,
+            ]),
+            self._build_send_label_holy_priest([
+                act.Priest.HEAL_BOT_DISPEL_MAGIC,
+            ]),
+            self._build_send_label_tank(),
+            self._build_send_label_non_shaman_dps(),
+
+    def build_hk_group_12(self):
+        self.build_hk_healbot_small_heal()
+        self.build_hk_healbot_big_heal()
+        self.build_hk_healbot_aoe_heal()
+        self.build_hk_healbot_dispel()
+
+    # -------------------------------------------------------------------------
+    # 实现使用图形界面上的按钮, 替代一些不常用, 或是紧急情况需要用到的快捷键,
+    # 避免了记忆复杂快捷键的麻烦
+    # -------------------------------------------------------------------------
+    __anchor_control_panel = None
 
     def build_control_panel(self):
         with hk.Command(name="AutoExec") as self.cmd_auto_exec:

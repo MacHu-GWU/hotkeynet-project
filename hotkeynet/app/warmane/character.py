@@ -893,16 +893,16 @@ class _ActiveCharactersFactory:
             # --- Paladin
             # CharacterFactory.make_char_fatmulti1_batlefury_pve_retri_pala().set_is_leader_1(),
             CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().set_is_leader_1().set_tank_1().set_dr_pala_1(),
-            CharacterFactory.make_char_fatmulti9_glowyy_pve_protect_pala().set_is_leader_1().set_tank1().set_dr_pala1(),
-            CharacterFactory.make_char_makun7551_laoshou_retri_paladin().set_is_leader_1(),
+            # CharacterFactory.make_char_fatmulti9_glowyy_pve_protect_pala().set_is_leader_1().set_tank_1().set_dr_pala_1(),
+            # CharacterFactory.make_char_makun7551_laoshou_retri_paladin().set_is_leader_1(),
 
             # --- DK
-            # CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_unholy_tank_dk().set_is_leader_1().set_tank1(),
-            # CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().set_is_leader_1().set_tank1(),
-            # CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_is_leader_1().set_tank1(),
+            # CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_unholy_tank_dk().set_is_leader_1().set_tank_1(),
+            # CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().set_is_leader_1().set_tank_1(),
+            # CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_is_leader_1().set_tank_1(),
 
             # --- Druid
-            # CharacterFactory.make_char_fatmulti3_opiitou_pve_bear_druid().set_is_leader_1().set_tank1(),
+            # CharacterFactory.make_char_fatmulti3_opiitou_pve_bear_druid().set_is_leader_1().set_tank_1(),
 
             # === DPS 部分 ===
             CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid(),
@@ -925,7 +925,7 @@ class _ActiveCharactersFactory:
     # 把 DK 5 人组 和 术士 5 人组 加上 Ganjj 和 Laoshou 分成 3 队 分别刷节日任务
     def make_team_solo_dungeon_festival_team_1_dk(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
-            CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().set_tank_1(),
+            CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().set_is_leader_1().set_tank_1(),
             CharacterFactory.make_char_fatmulti2_litgoatdkb_pve_unholy_dk(),
             CharacterFactory.make_char_fatmulti3_litgoatdkc_pve_unholy_dk(),
             CharacterFactory.make_char_fatmulti4_litgoatdkd_pve_unholy_dk(),

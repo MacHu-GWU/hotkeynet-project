@@ -81,6 +81,14 @@ class Character(AttrsClass):
 
     个人认为第二种方式更好. 因为玩魔兽玩的就是角色, 从角色的视角出发更符合人类直觉. 而且
     扁平化的枚举所有用到的人物, 以及它们扮演的不同角色, 这样的代码更容易读和编辑.
+
+    **注意事项**
+
+    leader_1_window 和 leader_2_window 是要跟 HotkeyNet 脚本, 以及宏命令配合使用的.
+    通常 leader 就是其他队员的焦点目标, 游戏中肯定是要有一个宏命令来先选中这个焦点目标,
+    然后才能将其设置为焦点的. 由于宏命令和动作条, 我们不可能创建无数个宏命令. 所以我们会在
+    act 中定义我们设定好的, 有限的几个宏命令. 你设定的 leader 的窗口必须要属于那几个宏命令
+    之一才能工作.
     """
     account: Account = attr.ib(default=None)
     name: str = attr.ib(default=None)
