@@ -34,13 +34,6 @@ class Window(AttrsClass):
         )
 
 
-def _get_win(index_or_window: T.Union[int, Window]) -> 'Window':
-    if isinstance(index_or_window, Window):
-        return index_or_window
-    else:
-        return Window.make(index=index_or_window)
-
-
 @attr.s
 class Account(AttrsClass):
     """
@@ -58,10 +51,7 @@ class Character(AttrsClass):
 
     :param account: 与该游戏角色所绑定的账号密码信息
     :param name: 游戏角色名
-    :param talent: 角色天赋
     :param window: 游戏窗口
-    :param leader1_window: 1 号司机的游戏窗口
-    :param leader2_window: 2 号司机的游戏窗口
     :param active: 设置这个人物是否是属于 HotkeyNet 的快捷键所操作的人物.
         例如你在一场游戏中定义了 5 个人物, 但是只启用了 1, 2, 3 号 3 个人物. 4, 5 号
         设置为 active = False. 在此情况下多开脚本的行为是这样的:
@@ -74,6 +64,13 @@ class Character(AttrsClass):
         6. 用 Round robin 切换窗口时, 只在 3 个人物之间切换
 
         这样适合于专注于玩几个人物, 但保留快速登录其他人物的能力. 比如登录小号聊天, 倒东西等.
+    :param is_leader_1: 该角色是否为 1 号司机
+    :param is_leader_2: 该角色是否为 2 号司机
+    :param leader_1_window: 该角色的 1 号司机的游戏窗口
+    :param leader_2_window: 该角色的 2 号司机的游戏窗口
+
+    这里没有包含任何与职业, 天赋有关的设定. 因为该模块是所有 WoW 版本通用的. 跟职业, 天赋
+    有关的设定在具体版本的子模块中被定义.
 
     **设计思路**
 
@@ -88,20 +85,15 @@ class Character(AttrsClass):
     account: Account = attr.ib(default=None)
     name: str = attr.ib(default=None)
     window: Window = attr.ib(default=None)
-    leader1_window: Window = attr.ib(default=_get_win(1))
-    leader2_window: Window = attr.ib(default=_get_win(10))
     active: bool = attr.ib(default=True)
 
-    def set_window(self, index: T.Union[int, Window]) -> 'Character':
-        self.window = _get_win(index)
-        return self
+    is_leader_1: bool = attr.ib(default=False)
+    is_leader_2: bool = attr.ib(default=False)
+    leader_1_window: Window = attr.ib(default=None)
+    leader_2_window: Window = attr.ib(default=None)
 
-    def set_leader1_window(self, index: T.Union[int, Window]) -> 'Character':
-        self.leader1_window = _get_win(index)
-        return self
-
-    def set_leader2_window(self, index: T.Union[int, Window]) -> 'Character':
-        self.leader2_window = _get_win(index)
+    def set_window(self, window: Window) -> 'Character':
+        self.window = window
         return self
 
     def set_active(self) -> 'Character':
@@ -110,4 +102,28 @@ class Character(AttrsClass):
 
     def set_inactive(self) -> 'Character':
         self.active = False
+        return self
+
+    def set_is_leader_1(self) -> 'Character':
+        self.is_leader_1 = True
+        return self
+
+    def set_not_leader_1(self) -> 'Character':
+        self.is_leader_1 = False
+        return self
+
+    def set_is_leader_2(self) -> 'Character':
+        self.is_leader_2 = True
+        return self
+
+    def set_not_leader_2(self) -> 'Character':
+        self.is_leader_1 = False
+        return self
+
+    def set_leader_1_window(self, window: Window) -> 'Character':
+        self.leader_1_window = window
+        return self
+
+    def set_leader_2_window(self, window: Window) -> 'Character':
+        self.leader_2_window = window
         return self

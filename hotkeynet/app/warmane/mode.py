@@ -125,7 +125,7 @@ class Mode(AttrsClass):
         return [
             char.window.label
             for char in self.active_chars
-            if char.is_tank1
+            if char.is_tank_1
         ]
 
     @property
@@ -133,7 +133,7 @@ class Mode(AttrsClass):
         return [
             char.window.label
             for char in self.active_chars
-            if char.is_tank2
+            if char.is_tank_2
         ]
 
     @property
@@ -141,7 +141,7 @@ class Mode(AttrsClass):
         return [
             char.window.label
             for char in self.active_chars
-            if char.is_dr_pala1
+            if char.is_dr_pala_1
         ]
 
     @property
@@ -149,7 +149,7 @@ class Mode(AttrsClass):
         return [
             char.window.label
             for char in self.active_chars
-            if char.is_dr_pala2
+            if char.is_dr_pala_2
         ]
 
     def remove_inactive_labels(self, label_list: T.List[str]):
@@ -172,7 +172,7 @@ class Mode(AttrsClass):
         all_tank_labels = [
             char.window.label
             for char in self.active_chars
-            if char.is_tank1 or char.is_tank2
+            if char.is_tank_1 or char.is_tank_2
         ]
         for label in list(label_list):
             if label in all_tank_labels:

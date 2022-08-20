@@ -13,23 +13,42 @@ class Character(model.Character):
     """
     talent: Talent = attr.ib(default=None)
 
-    is_tank1: bool = attr.ib(default=False)
-    is_tank2: bool = attr.ib(default=False)
-    is_dr_pala1: bool = attr.ib(default=False)
-    is_dr_pala2: bool = attr.ib(default=False)
+    is_tank_1: bool = attr.ib(default=False)
+    is_tank_2: bool = attr.ib(default=False)
+    tank_1_window: model.Window = attr.ib(default=None)
+    tank_2_window: model.Window = attr.ib(default=None)
 
-    def set_tank1(self) -> 'Character':
-        self.is_tank1 = True
+    is_dr_pala_1: bool = attr.ib(default=False)
+    is_dr_pala_2: bool = attr.ib(default=False)
+
+    def set_tank_1(self) -> 'Character':
+        self.is_tank_1 = True
         return self
 
-    def set_tank2(self) -> 'Character':
-        self.is_tank2 = True
+    def set_not_tank_1(self) -> 'Character':
+        self.is_tank_1 = False
         return self
 
-    def set_dr_pala1(self) -> 'Character':
-        self.is_dr_pala1 = True
+    def set_tank_2(self) -> 'Character':
+        self.is_tank_2 = True
         return self
 
-    def set_dr_pala2(self) -> 'Character':
-        self.is_dr_pala2 = True
+    def set_not_tank_2(self) -> 'Character':
+        self.is_tank_2 = False
+        return self
+
+    def set_tank_1_window(self, window: model.Window) -> 'Character':
+        self.tank_1_window = window
+        return self
+
+    def set_tank_2_window(self, window: model.Window) -> 'Character':
+        self.tank_2_window = window
+        return self
+
+    def set_dr_pala_1(self) -> 'Character':
+        self.is_dr_pala_1 = True
+        return self
+
+    def set_dr_pala_2(self) -> 'Character':
+        self.is_dr_pala_2 = True
         return self
