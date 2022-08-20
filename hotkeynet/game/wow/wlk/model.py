@@ -8,6 +8,9 @@ from .talent import Talent
 
 @attr.s
 class Character(model.Character):
+    """
+    :param talent: 角色天赋
+    """
     talent: Talent = attr.ib(default=None)
 
     is_tank1: bool = attr.ib(default=False)
