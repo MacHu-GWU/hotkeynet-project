@@ -109,10 +109,37 @@ class Talent(model.Talent):
 
     @property
     def categories(self) -> OrderedSet['TalentCategory']:
-        return get_category_by_talent(self)
+        return _get_category_by_talent(self)
+
+    def is_pve(self) -> bool:
+        return TalentCategory.pve in _get_category_by_talent(self)
+
+    def is_pvp(self) -> bool:
+        return TalentCategory.pvp in _get_category_by_talent(self)
 
     def is_tank(self) -> bool:
-        return TalentCategory.tank in get_category_by_talent(self)
+        return TalentCategory.tank in _get_category_by_talent(self)
+
+    def is_dps(self) -> bool:
+        return TalentCategory.dps in _get_category_by_talent(self)
+
+    def is_healer(self) -> bool:
+        return TalentCategory.healer in _get_category_by_talent(self)
+
+    def is_melee(self) -> bool:
+        return TalentCategory.melee in _get_category_by_talent(self)
+
+    def is_ranger(self) -> bool:
+        return TalentCategory.ranger in _get_category_by_talent(self)
+
+    def is_physics(self) -> bool:
+        return TalentCategory.physics in _get_category_by_talent(self)
+
+    def is_caster(self) -> bool:
+        return TalentCategory.caster in _get_category_by_talent(self)
+
+    def is_dispeler(self) -> bool:
+        return TalentCategory.dispeler in _get_category_by_talent(self)
 
 
 class TalentCategory(model.TalentCategory):
@@ -282,7 +309,7 @@ class TalentCategory(model.TalentCategory):
 
     @property
     def talents(self) -> OrderedSet['Talent']:
-        return get_talent_by_category(self)
+        return _get_talent_by_category(self)
 
 
 TL = Talent
@@ -600,9 +627,9 @@ for category, talent_list in _c2t_map.items():
         _t2c_map[talent].add(category)
 
 
-def get_talent_by_category(category: TC) -> OrderedSet[Talent]:
+def _get_talent_by_category(category: TC) -> OrderedSet[Talent]:
     return category_to_talent_mapper[category]
 
 
-def get_category_by_talent(talent: TL) -> OrderedSet[TC]:
+def _get_category_by_talent(talent: TL) -> OrderedSet[TC]:
     return talent_to_category_mapper[talent]
