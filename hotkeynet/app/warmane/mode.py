@@ -14,8 +14,6 @@ from hotkeynet.game.wow.wlk import (
     Window,
     Talent as TL,
     TalentCategory as TC,
-    get_talent_by_category,
-    get_category_by_talent,
 )
 
 from .character import (

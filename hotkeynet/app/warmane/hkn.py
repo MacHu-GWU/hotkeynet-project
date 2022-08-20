@@ -12,8 +12,6 @@ from hotkeynet.game.wow.wlk import (
     Window,
     Talent as TL,
     TalentCategory as TC,
-    get_talent_by_category,
-    get_category_by_talent,
 )
 
 from . import act
@@ -689,7 +687,7 @@ class HknScript(AttrsClass):
         send_label_list = list()
 
         # Tank
-        for talent in get_talent_by_category(category=TC.tank):
+        for talent in TC.tank.talents:
             with hk.SendLabel(
                 id=talent.name,
                 to=self.mode.lbs_by_tl(talent),
@@ -698,7 +696,7 @@ class HknScript(AttrsClass):
                 send_label_list.append(send_label)
 
         # DPS
-        for talent in get_talent_by_category(category=TC.dps):
+        for talent in TC.dps.talents:
             with hk.SendLabel(
                 id=talent.name,
                 to=self.mode.lbs_by_tl(talent),
@@ -708,7 +706,7 @@ class HknScript(AttrsClass):
                 send_label_list.append(send_label)
 
         # Healer
-        for talent in get_talent_by_category(category=TC.healer):
+        for talent in TC.healer.talents:
             with hk.SendLabel(
                 id=talent.name,
                 to=self.mode.lbs_by_tl(talent),
