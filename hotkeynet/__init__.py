@@ -25,6 +25,7 @@ try:
         Command,
         CommandArgEnum,
         CreateButton,
+        CreateColoredButton,
         CreatePanel,
         CreatePictureButton,
         Hotkey,

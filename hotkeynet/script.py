@@ -1011,10 +1011,10 @@ class CreateButton(Block['CreateButton']):
     def is_null(self) -> bool:
         return (
             (self.name is None)
-            # or (self.x is None)
-            # or (self.y is None)
-            # or (self.width is None)
-            # or (self.height is None)
+            or (self.x is None)
+            or (self.y is None)
+            or (self.width is None)
+            or (self.height is None)
         )
 
 
@@ -1060,6 +1060,72 @@ class CreatePictureButton(Block['CreatePictureButton']):
             or (self.x is None)
             or (self.y is None)
             or (self.file is None)
+        )
+
+
+@attr.s
+class CreateColoredButton(Block['CreateColoredButton']):
+    name: str = attr.ib(default=None)
+    x: int = attr.ib(default=None)
+    y: int = attr.ib(default=None)
+    width: int = attr.ib(default=None)
+    height: int = attr.ib(default=None)
+    bkcolor: str = attr.ib(default=None)
+    textcolor: str = attr.ib(default=None)
+    text: T.Optional[str] = attr.ib(default=None)
+
+    @classmethod
+    def make(
+        cls,
+        name: str,
+        x: int,
+        y: int,
+        width: int,
+        height: int,
+        bkcolor: str,
+        textcolor: str,
+        text: T.Optional[str] = None
+    ) -> 'CreateColoredButton':
+        return cls(
+            name=name,
+            x=x,
+            y=y,
+            width=width,
+            height=height,
+            bkcolor=bkcolor,
+            textcolor=textcolor,
+            text=text,
+        )
+
+    @property
+    def title(self) -> str:
+        non_null_args = [
+            i
+            for i in [
+                self.name,
+                str(self.x),
+                str(self.y),
+                str(self.width),
+                str(self.height),
+                self.bkcolor,
+                self.textcolor,
+                self.text,
+            ]
+            if i is not None
+        ]
+        return "<CreateColoredButton {}>".format(
+            " ".join(non_null_args)
+        )
+
+    def is_null(self) -> bool:
+        return (
+            (self.name is None)
+            or (self.x is None)
+            or (self.y is None)
+            or (self.width is None)
+            or (self.height is None)
+            or (self.bkcolor is None)
+            or (self.textcolor is None)
         )
 
 
