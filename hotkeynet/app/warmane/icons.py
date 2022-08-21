@@ -12,9 +12,9 @@ class Icons:
     ability_hunter_misdirection = (dir_icons / "ability_hunter_misdirection.jpg").abspath
     ability_mount_whitetiger = (dir_icons / "ability_mount_whitetiger.jpg").abspath
     ability_theblackarrow = (dir_icons / "ability_theblackarrow.jpg").abspath
-    log_in = (dir_icons / "log-in.png").abspath
-    log_out = (dir_icons / "log-out.png").abspath
-    resize_window = (dir_icons / "resize-window.png").abspath
+    log_in = (dir_icons / "log_in.png").abspath
+    log_out = (dir_icons / "log_out.png").abspath
+    resize_window = (dir_icons / "resize_window.png").abspath
     spell_frost_iceshock = (dir_icons / "spell_frost_iceshock.jpg").abspath
     spell_holy_auramastery = (dir_icons / "spell_holy_auramastery.jpg").abspath
     spell_holy_dispelmagic = (dir_icons / "spell_holy_dispelmagic.jpg").abspath

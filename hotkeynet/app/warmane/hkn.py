@@ -2528,16 +2528,12 @@ class HknScript(AttrsClass):
                     text="1-12"
                 )
 
+                create_picture_button(
+                    name="Alt1",
+                    file=Icons.ability_hunter_misdirection,
+                    hotkey=self.hk_alt_numpad_1,
+                )
                 """
-                <CreatePanel MBControlPanel 0 120 120 1000>
-                <CreateButton ButtonBar11 0 0 36 36 "Alt">
-                <AddButtonToPanel ButtonBar11 MBControlPanel 0 0>
-            
-                <CreateButton ButtonBar12 0 0 36 36 "+">
-                <AddButtonToPanel ButtonBar12 MBControlPanel 0 0>
-            
-                <CreateButton ButtonBar13 0 0 36 36 "N1-12">
-                <AddButtonToPanel ButtonBar13 MBControlPanel 0 0>
                 
                 <CreatePictureButton Button1 0 0 "{Path(dir_icon, "ability_hunter_misdirection.jpg").abspath}">
                 <AddButtonToPanel Button1 MBControlPanel 0 0>
