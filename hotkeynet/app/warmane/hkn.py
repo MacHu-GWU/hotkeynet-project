@@ -7,6 +7,7 @@ from attrs_mate import AttrsClass
 
 import hotkeynet as hk
 from hotkeynet import KN
+from hotkeynet import utils
 from hotkeynet.game.wow.wlk import (
     Character,
     Window,
@@ -35,6 +36,7 @@ class HknScript(AttrsClass):
         self.build_hk_group_01()
         self.build_hk_group_02()
         self.build_hk_group_03()
+        self.build_hk_group_04()
         self.build_hk_group_05()
         self.build_hk_group_12()
         self.build_control_panel()
@@ -1028,6 +1030,27 @@ class HknScript(AttrsClass):
         self.build_hk_alt_5()
 
     # -------------------------------------------------------------------------
+    # 实现 Ctrl 1 ~ 6 的功能. 主要是宠物的动作条按键. 1 进攻主人目标, 2 撤回, 3 原地待命.
+    # -------------------------------------------------------------------------
+    __anchor_hk_04_ctrl_1_to_6_pet_action = None
+
+    def build_hk_ctrl_1_to_6(self):
+        for i in range(1, 1 + 6):
+            with hk.Hotkey(
+                id="Ctrl {}".format(i),
+                key=KN.SCROLOCK_ON(KN.CTRL_(getattr(KN, "KEY_{}".format(i)))),
+            ):
+                with hk.SendLabel(
+                    name="all",
+                    to=self.mode.lbs_all,
+                ):
+                    act.Target.TARGET_FOCUS_TARGET()
+                    act.General.TRIGGER()
+
+    def build_hk_group_04(self):
+        self.build_hk_ctrl_1_to_6()
+
+    # -------------------------------------------------------------------------
     # 实现在多开模式下 小键盘 Numpad 1-12 的功能. 这些按键可以用专用 MMORPG 鼠标的侧面
     # 轻松按到.
     # -------------------------------------------------------------------------
@@ -1261,10 +1284,9 @@ class HknScript(AttrsClass):
     # -------------------------------------------------------------------------
     # 实现每个游戏内所绑定的动作条快捷键, 会触发哪些职业的哪些功能.
     # -------------------------------------------------------------------------
-    def build_hk_group_07(self):
-        self.build_hk_skills()
-
     def build_hk_skills(self):
+        __anchor_action_bar_1 = "Domino Action Bar 1"
+
         # with hk.Hotkey(
         #     id="Alt F1",
         #     key=KN.SCROLOCK_ON(KN.ALT_(KN.F1)),
@@ -1381,7 +1403,8 @@ class HknScript(AttrsClass):
         #         to=self.mode.lbs_all,
         #     ):
         #         hk.Key.trigger()
-        #
+
+        __anchor_action_bar_2 = "Domino Action Bar 2"
         # with hk.Hotkey(
         #     id="MButton",
         #     key=KN.SCROLOCK_ON(KN.MOUSE_MButton),
@@ -1418,709 +1441,762 @@ class HknScript(AttrsClass):
             ):
                 act.General.MOUNT_DOWN_MACRO_CTRL_OEM3_WAVE()
 
+        # with hk.Hotkey(
+        #     id="Shift + `",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.OEM3_WAVE_OR_BACK_QUOTE)),
+        # ) as self.hk_shift_oem3_wave:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + `",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.OEM3_WAVE_OR_BACK_QUOTE)),
+        # ) as self.hk_alt_oem3_wave:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + A",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.A)),
+        # ) as self.hk_alt_a:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + S",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.S)),
+        # ) as self.hk_alt_s:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + D",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.D)),
+        # ) as self.hk_alt_d:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + E",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.E)),
+        # ) as self.hk_alt_e:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + R",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.R)),
+        # ) as self.hk_alt_r:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + F",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.F)),
+        # ) as self.hk_alt_f:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+
+        __anchor_action_bar_3 = "Domino Action Bar 3"
+
+        # with hk.Hotkey(
+        #     id="Shift + Z",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.Z)),
+        # ) as self.hk_shift_z:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Shift + T",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.T)),
+        # ) as self.hk_shift_t:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Shift + X",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.X)),
+        # ) as self.hk_shift_x:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+
+        # 所有人取消坐骑下地
         with hk.Hotkey(
-            id="Shift + `",
-            key=KN.SCROLOCK_ON(KN.SHIFT_(KN.OEM3_WAVE_OR_BACK_QUOTE)),
-        ) as self.hk_shift_oem3_wave:
+            id="Ctrl + Z",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.Z)),
+        ) as self.hk_ctrl_z:
+            with hk.SendLabel(
+                to=self.mode.lbs_all,
+            ):
+                act.General.LAND_MOUNT_SPELL_KEY_CTRL_Z()
+
+        # 吃食物
+        with hk.Hotkey(
+            id="Ctrl + T",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.T)),
+        ) as self.hk_ctrl_t:
+            with hk.SendLabel(
+                to=self.mode.lbs_all,
+            ):
+                act.General.EAT_FOOD_KEY_CTRL_T()
+
+        with hk.Hotkey(
+            id="Ctrl + G",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.G)),
+        ) as self.hk_ctrl_g:
             with hk.SendLabel(
                 to=self.mode.lbs_all,
             ):
                 hk.Key.trigger()
 
+        # with hk.Hotkey(
+        #     id="Ctrl + X",
+        #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.X)),
+        # ) as self.hk_ctrl_x:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + Z",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.Z)),
+        # ) as self.hk_alt_z:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt + T",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.T)),
+        # ) as self.hk_alt_t:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+
         with hk.Hotkey(
-            id="Alt + `",
-            key=KN.SCROLOCK_ON(KN.ALT_(KN.OEM3_WAVE_OR_BACK_QUOTE)),
-        ) as self.hk_alt_oem3_wave:
+            id="Alt + G - 所有鸟德放台风, 推波击退",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.G)),
+        ) as self.hk_alt_g_druid_typhoon:
             with hk.SendLabel(
-                to=self.mode.lbs_all,
+                to=self.mode.lbs_by_tc(TC.druid_balance),
             ):
+                act.Druid.BALANCE_SPEC_TYPHOON_KEY_G()
+
+        with hk.Hotkey(
+            id="Alt + X - 所有 AOE 职业放区域选定 AOE 技能, 例如法师暴风雪, DK死亡凋零",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.X)),
+        ) as self.hk_alt_x_aoe:
+            with hk.SendLabel(
+                id=TC.dk.name,
+                to=self.mode.lbs_by_tc(TC.dk),
+            ):
+                # act.General.ESC()
+                act.DK.ALL_SPEC_DEATH_AND_DECAY_KEY_ALT_X()
+
+            with hk.SendLabel(
+                id=TC.hunter.name,
+                to=self.mode.lbs_by_tc(TC.hunter),
+            ):
+                # act.General.ESC()
+                act.Hunter.ALL_SPEC_VOLLEY_ALT_X()
+
+            with hk.SendLabel(
+                id=TC.druid_balance.name,
+                to=self.mode.lbs_by_tc(TC.druid_balance),
+            ):
+                # act.General.ESC()
+                act.Druid.ALL_SPEC_HURRICANE()
+
+            with hk.SendLabel(
+                id=TC.warlock.name,
+                to=self.mode.lbs_by_tc(TC.warlock),
+            ):
+                # act.General.ESC()
+                act.Warlock.ALL_SPEC_RAIN_OF_FIRE()
+
+            with hk.SendLabel(
+                id=TC.mage.name,
+                to=self.mode.lbs_by_tc(TC.mage),
+            ):
+                # act.General.ESC()
+                act.Mage.ALL_SPEC_BLIZZARD()
+
+        # _ACTION_BAR_2_________________________________ = ""
+        # with hk.Hotkey(
+        #     id="R - 能打断的职业打断",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.G)),
+        # ) as self.hk_alt_g_druid_typhoon:
+        #     with hk.SendLabel(
+        #         id=TC.paladin_protect.name,
+        #         to=self.mode.lbs_by_tc(TC.paladin_protect),
+        #     ):
+        #         hk.Key(key=KN.R)
+        #
+        #
+        # _hk_r_actions = [
+        #     # paladin
+        #     SendLabel(
+        #         name=TC.paladin_protect.name,
+        #         to=self.mode.lbs_by_tc(TC.paladin_protect),
+        #         actions=[
+        #             Key(name=KN.R),
+        #         ]
+        #     ),
+        #     SendLabel(
+        #         name=TC.paladin_holy.name,
+        #         to=self.mode.lbs_by_tc(TC.paladin_holy),
+        #         actions=[
+        #             act.Paladin.HOLY_SPEC_KEY_R_FOCUS_JUDGEMENT,
+        #         ]
+        #     ),
+        #     # death knight
+        #     SendLabel(
+        #         name=TC.dk_tank.name,
+        #         to=self.mode.lbs_by_tc(TC.dk_tank),
+        #         actions=[
+        #             act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
+        #         ]
+        #     ),
+        #     SendLabel(
+        #         name=TC.dk_dps.name,
+        #         to=self.mode.lbs_by_tc(TC.dk_dps),
+        #         actions=[
+        #             act.Target.TARGET_FOCUS_TARGET,
+        #             act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
+        #         ]
+        #     ),
+        #     # hunter
+        #     SendLabel(
+        #         name=TC.hunter_marksman.name,
+        #         to=self.mode.lbs_by_tc(TC.hunter_marksman),
+        #         actions=[
+        #             act.Target.TARGET_FOCUS_TARGET,
+        #             act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
+        #         ]
+        #     ),
+        #     # shaman
+        #     SendLabel(
+        #         name=TC.shaman.name,
+        #         to=self.mode.lbs_by_tc(TC.shaman),
+        #         actions=[
+        #             act.Target.TARGET_FOCUS_TARGET,
+        #             act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
+        #         ]
+        #     ),
+        #
+        #     # mage
+        #     SendLabel(
+        #         name=TC.mage.name,
+        #         to=self.mode.lbs_by_tc(TC.mage),
+        #         actions=[
+        #             act.Target.TARGET_FOCUS_TARGET,
+        #             act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
+        #         ]
+        #     ),
+        # ]
+        #
+        # special_labels = union_list(*[
+        #     sl.to
+        #     for sl in _hk_r_actions
+        # ])
+        #
+        # regular_tank_labels = difference_list(
+        #     self.mode.lbs_by_tc(TC.tank),
+        #     special_labels,
+        # )
+        #
+        # regular_dps_labels = difference_list(
+        #     self.mode.lbs_by_tc(TC.dps),
+        #     special_labels,
+        # )
+        #
+        # regular_healer_labels = difference_list(
+        #     self.mode.lbs_by_tc(TC.healer),
+        #     special_labels,
+        # )
+        #
+        # _hk_r_actions.extend([
+        #     SendLabel(
+        #         name="other_tank",
+        #         to=regular_tank_labels,
+        #         actions=[
+        #             Key(name=KN.KEY_2),
+        #         ]
+        #     ),
+        #     SendLabel(
+        #         name="other_dps",
+        #         to=regular_dps_labels,
+        #         actions=[
+        #             act.Target.TARGET_FOCUS_TARGET,
+        #             Key(name=KN.KEY_3),
+        #         ]
+        #     ),
+        #     SendLabel(
+        #         name="other_healer",
+        #         to=regular_healer_labels,
+        #         actions=[
+        #             act.Target.TARGET_FOCUS,
+        #             Key(name=KN.KEY_3),
+        #         ]
+        #     ),
+        # ])
+        #
+        # hk_r = Hotkey(
+        #     name="R Interrupt Spell",
+        #     key=KN.SCROLOCK_ON(KN.R),
+        #     actions=_hk_r_actions,
+        #     script=script,
+        # )
+
+        # ABOVE IS TODO
+
+        # with hk.Hotkey(
+        #     id="Z",
+        #     key=KN.SCROLOCK_ON(KN.Z),
+        # ) as self.hk_z:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+
+        # pala put cleansing skill on Action Bar Key T
+        # shaman put curse toxin skill on Action Bar Key on T
+        # druid put remove curse skill on Action Bar Key on T
+        # mage put remove curse skill on Action Bar Key on T
+        # priest put dispel magic skill on Action Bar Key on T
+        with hk.Hotkey(
+            id="T - 所有驱散职业随机选择团队成员驱散",
+            key=KN.SCROLOCK_ON(KN.T),
+        ) as self.hk_t_dispel_raid:
+            with hk.SendLabel(
+                id=TC.dispeler.name,
+                to=self.mode.lbs_by_tc(TC.dispeler),
+            ):
+                act.Target.TARGET_RAID()
                 hk.Key.trigger()
 
-    # hk_alt_a = Hotkey(
-    #     name="Alt A",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.A)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_s = Hotkey(
-    #     name="Alt S",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.S)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_d = Hotkey(
-    #     name="Alt D",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.D)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_e = Hotkey(
-    #     name="Alt E",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.E)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_r = Hotkey(
-    #     name="Alt R",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.R)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_f = Hotkey(
-    #     name="Alt F",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.F)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # _ACTION_BAR_3_________________________________ = ""
-    #
-    # hk_shift_z = Hotkey(
-    #     name="Shift Z",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.Z)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_shift_t = Hotkey(
-    #     name="Shift T",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.T)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_shift_x = Hotkey(
-    #     name="Shift X",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.X)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_ctrl_z_land = Hotkey(
-    #     name="Ctrl Z",
-    #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.Z)),
-    #     actions=[
-    #         SendLabel(
-    #             name="",
-    #             to=config.lbs_all(),
-    #             actions=[
-    #                 act.General.LAND_MOUNT_SPELL_KEY_CTRL_Z
-    #             ]
-    #         )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_ctrl_t = Hotkey(
-    #     name="Ctrl T",
-    #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.T)),
-    #     actions=[
-    #         SendLabel(
-    #             name="all",
-    #             to=config.lbs_all(),
-    #             actions=[
-    #                 act.General.EAT_FOOD_KEY_CTRL_T
-    #             ]
-    #         )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_ctrl_g = Hotkey(
-    #     name="Ctrl G",
-    #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.G)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_ctrl_x = Hotkey(
-    #     name="Ctrl X",
-    #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.X)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_z = Hotkey(
-    #     name="Alt Z",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.Z)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_t = Hotkey(
-    #     name="Alt T",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.T)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_g = Hotkey(
-    #     name="Alt G",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.G)),
-    #     actions=[
-    #         SendLabel(
-    #             name="",
-    #             to=config.lbs_by_tc(TC.druid_balance),
-    #             actions=[
-    #                 act.Druid.BALANCE_SPEC_TYPHOON_KEY_G,
-    #             ]
-    #         )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_x_aoe = Hotkey(
-    #     name="Alt X",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.X)),
-    #     actions=[
-    #         SendLabel(
-    #             name=TC.dk.name,
-    #             to=config.lbs_by_tc(TC.dk),
-    #             actions=[
-    #                 # act.General.ESC,
-    #                 act.DK.ALL_SPEC_DEATH_AND_DECAY_KEY_ALT_X,
-    #             ]
-    #         ),
-    #         SendLabel(
-    #             name=TC.hunter.name,
-    #             to=config.lbs_by_tc(TC.hunter),
-    #             actions=[
-    #                 # act.General.ESC,
-    #                 act.Hunter.ALL_SPEC_VOLLEY_ALT_X,
-    #             ]
-    #         ),
-    #         SendLabel(
-    #             name=TC.druid_balance.name,
-    #             to=config.lbs_by_tc(TC.druid_balance),
-    #             actions=[
-    #                 # act.General.ESC,
-    #                 act.Druid.ALL_SPEC_HURRICANE,
-    #             ]
-    #         ),
-    #         SendLabel(
-    #             name=TC.warlock.name,
-    #             to=config.lbs_by_tc(TC.warlock),
-    #             actions=[
-    #                 # act.General.ESC,
-    #                 act.Warlock.ALL_SPEC_RAIN_OF_FIRE,
-    #             ]
-    #         ),
-    #         SendLabel(
-    #             name=TC.mage.name,
-    #             to=config.lbs_by_tc(TC.mage),
-    #             actions=[
-    #                 # act.General.ESC,
-    #                 act.Mage.ALL_SPEC_BLIZZARD,
-    #             ]
-    #         ),
-    #     ],
-    #     script=script,
-    # )
-    #
-    # _ACTION_BAR_2_________________________________ = ""
-    #
-    # _hk_r_actions = [
-    #     # paladin
-    #     SendLabel(
-    #         name=TC.paladin_protect.name,
-    #         to=config.lbs_by_tc(TC.paladin_protect),
-    #         actions=[
-    #             Key(name=KN.R),
-    #         ]
-    #     ),
-    #     SendLabel(
-    #         name=TC.paladin_holy.name,
-    #         to=config.lbs_by_tc(TC.paladin_holy),
-    #         actions=[
-    #             act.Paladin.HOLY_SPEC_KEY_R_FOCUS_JUDGEMENT,
-    #         ]
-    #     ),
-    #     # death knight
-    #     SendLabel(
-    #         name=TC.dk_tank.name,
-    #         to=config.lbs_by_tc(TC.dk_tank),
-    #         actions=[
-    #             act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
-    #         ]
-    #     ),
-    #     SendLabel(
-    #         name=TC.dk_dps.name,
-    #         to=config.lbs_by_tc(TC.dk_dps),
-    #         actions=[
-    #             act.Target.TARGET_FOCUS_TARGET,
-    #             act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
-    #         ]
-    #     ),
-    #     # hunter
-    #     SendLabel(
-    #         name=TC.hunter_marksman.name,
-    #         to=config.lbs_by_tc(TC.hunter_marksman),
-    #         actions=[
-    #             act.Target.TARGET_FOCUS_TARGET,
-    #             act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
-    #         ]
-    #     ),
-    #     # shaman
-    #     SendLabel(
-    #         name=TC.shaman.name,
-    #         to=config.lbs_by_tc(TC.shaman),
-    #         actions=[
-    #             act.Target.TARGET_FOCUS_TARGET,
-    #             act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
-    #         ]
-    #     ),
-    #
-    #     # mage
-    #     SendLabel(
-    #         name=TC.mage.name,
-    #         to=config.lbs_by_tc(TC.mage),
-    #         actions=[
-    #             act.Target.TARGET_FOCUS_TARGET,
-    #             act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
-    #         ]
-    #     ),
-    # ]
-    #
-    # special_labels = union_list(*[
-    #     sl.to
-    #     for sl in _hk_r_actions
-    # ])
-    #
-    # regular_tank_labels = difference_list(
-    #     config.lbs_by_tc(TC.tank),
-    #     special_labels,
-    # )
-    #
-    # regular_dps_labels = difference_list(
-    #     config.lbs_by_tc(TC.dps),
-    #     special_labels,
-    # )
-    #
-    # regular_healer_labels = difference_list(
-    #     config.lbs_by_tc(TC.healer),
-    #     special_labels,
-    # )
-    #
-    # _hk_r_actions.extend([
-    #     SendLabel(
-    #         name="other_tank",
-    #         to=regular_tank_labels,
-    #         actions=[
-    #             Key(name=KN.KEY_2),
-    #         ]
-    #     ),
-    #     SendLabel(
-    #         name="other_dps",
-    #         to=regular_dps_labels,
-    #         actions=[
-    #             act.Target.TARGET_FOCUS_TARGET,
-    #             Key(name=KN.KEY_3),
-    #         ]
-    #     ),
-    #     SendLabel(
-    #         name="other_healer",
-    #         to=regular_healer_labels,
-    #         actions=[
-    #             act.Target.TARGET_FOCUS,
-    #             Key(name=KN.KEY_3),
-    #         ]
-    #     ),
-    # ])
-    #
-    # hk_r = Hotkey(
-    #     name="R Interrupt Spell",
-    #     key=KN.SCROLOCK_ON(KN.R),
-    #     actions=_hk_r_actions,
-    #     script=script,
-    # )
-    #
-    # hk_z = Hotkey(
-    #     name="Z",
-    #     key=KN.SCROLOCK_ON(KN.Z),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # # pala put cleansing on T
-    # # shaman put curse toxin on T
-    # # druid put remove curse on T
-    # # mage put remove curse on T
-    # # priest put dispel magic on T
-    # hk_t = Hotkey(
-    #     name="T Random Dispel Raid",
-    #     key=KN.SCROLOCK_ON(KN.T),
-    #     actions=[
-    #         SendLabel(
-    #             name=TC.dispeler.name,
-    #             to=config.lbs_by_tc(TC.dispeler),
-    #             actions=[
-    #                 act.Target.TARGET_RAID,
-    #                 Key.trigger()
-    #             ]
-    #         )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_g = Hotkey(
-    #     name="G",
-    #     key=KN.SCROLOCK_ON(KN.G),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_x = Hotkey(
-    #     name="X",
-    #     key=KN.SCROLOCK_ON(KN.X),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # _ACTION_BAR_7_8_9_10_____________________________ = ""
+        # with hk.Hotkey(
+        #     id="G",
+        #     key=KN.SCROLOCK_ON(KN.G),
+        # ) as self.hk_g:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
 
-    # =========== 暂时不要
-    # hk_shift_insert = Hotkey(
-    #     name="Shift Insert",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.INSERT)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_shift_home = Hotkey(
-    #     name="Shift Home",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.HOME)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_shift_page_up = Hotkey(
-    #     name="Shift PageUp",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.PAGE_UP)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_shift_delete = Hotkey(
-    #     name="Shift Delete",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.DELETE)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_shift_end = Hotkey(
-    #     name="Shift End",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.END)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_shift_page_down = Hotkey(
-    #     name="Shift PageDown",
-    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.PAGE_DOWN)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_insert = Hotkey(
-    #     name="Alt Insert",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.INSERT)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_home = Hotkey(
-    #     name="Alt Home",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.HOME)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_page_up = Hotkey(
-    #     name="Alt PageUp",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.PAGE_UP)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_delete = Hotkey(
-    #     name="Alt Delete",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.DELETE)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_end = Hotkey(
-    #     name="Alt End",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.END)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
-    #
-    # hk_alt_page_down = Hotkey(
-    #     name="Alt PageDown",
-    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.PAGE_DOWN)),
-    #     actions=[
-    #         # SendLabel(
-    #         #     name="",
-    #         #     to=self.mode.lbs_all,
-    #         #     actions=[
-    #         #         Key.trigger()
-    #         #     ]
-    #         # )
-    #     ],
-    #     script=script,
-    # )
+        # with hk.Hotkey(
+        #     id="X",
+        #     key=KN.SCROLOCK_ON(KN.X),
+        # ) as self.hk_x:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
 
-    # _ACTION_BAR_UNDEFINED = ""
-    #
-    # hk_alt_shift_f_all_boomkin_star_fall = Hotkey(
-    #     name="Alt Shift F",
-    #     key=KN.SCROLOCK_ON(KN.ALT_SHIFT_(KN.F)),
-    #     actions=[
-    #         SendLabel(
-    #             name=TC.druid_balance.name,
-    #             to=config.lbs_by_tc(TC.druid_balance),
-    #             actions=[
-    #                 act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F
-    #             ]
-    #         ),
-    #         SendLabel(
-    #             name=TC.dk.name,
-    #             to=config.lbs_by_tc(TC.dk),
-    #             actions=[
-    #                 act.DK.UNHOLY_SPEC_CORPSE_EXPLOSION_ALF_F,
-    #             ]
-    #         ),
-    #     ],
-    #     script=script,
-    # )
+        __anchor_action_bar_7_8_9_10 = "Domino Action Bar 7 8 9 10"
+
+        _anchor_action_bar_7_8_9_10 = ""
+        _anchor_action_bar_undefined = ""
+
+        with hk.Hotkey(
+            id="Alt Shift + F - 鸟德星落",
+            key=KN.SCROLOCK_ON(KN.ALT_SHIFT_(KN.F)),
+        ) as self.hk_alt_shift_f_all_boomkin_star_fall:
+            with hk.SendLabel(
+                id=TC.druid_balance.name,
+                to=self.mode.lbs_by_tc(TC.druid_balance),
+            ):
+                act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F()
+
+            with hk.SendLabel(
+                id=TC.dk.name,
+                to=self.mode.lbs_by_tc(TC.dk),
+            ):
+                act.DK.UNHOLY_SPEC_CORPSE_EXPLOSION_ALF_F()
+
+    def build_hk_group_07(self):
+        self.build_hk_skills()
+
+    # -------------------------------------------------------------------------
+    # 实现 Alt + 小键盘 1-12 的快捷键功能. 通常是一些不常用, 但是关键时刻必备的技能.
+    # -------------------------------------------------------------------------
+    __anchor_hk_08_alt_numpad_1_to_12 = None
+
+    def build_hk_alt_numpad_1_misdirect_and_tot_focus(self):
+        with hk.Hotkey(
+            id="Alt Numpad1 - 猎人误导坦克",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_1)),
+        ) as self.hk_alt_numpad_1:
+            with hk.SendLabel(
+                id=TC.hunter.name,
+                to=self.mode.lbs_by_tc(TC.hunter),
+            ):
+                act.Hunter.ALL_SPEC_MISDIRECTION_FOCUS_MACRO()
+
+    def build_hk_alt_numpad_2_aspect_of_pact_or_hawk(self):
+        with hk.Hotkey(
+            id="Alt Numpad2 - 猎人在雄鹰和豹群守护之间切换",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_2)),
+        ) as self.hk_alt_numpad_2:
+            with hk.SendLabel(
+                id=TC.hunter.name,
+                to=self.mode.lbs_by_tc(TC.hunter),
+            ):
+                act.Hunter.ALL_SPEC_ASPECT_OF_PACT_OR_DRAGON_HAWK()
+
+    def build_hk_alt_numpad_3_aspect_of_viper_or_hawk(self):
+        with hk.Hotkey(
+            id="Alt Numpad3 - 猎人在雄鹰和蝮蛇守护之间切换",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_3)),
+        ) as self.hk_alt_numpad_3:
+            with hk.SendLabel(
+                name=TC.hunter.name,
+                to=self.mode.lbs_by_tc(TC.hunter),
+            ):
+                act.Hunter.ALL_SPEC_ASPECT_OF_VIPER_OR_DRAGON_HAWK()
+
+    def build_hk_alt_numpad_4_all_boomy_star_fall(self):
+        with hk.Hotkey(
+            id="Alt Numpad4 - 鸟德集体放星落",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_4)),
+        ) as self.hk_alt_numpad_4:
+            with hk.SendLabel(
+                id=TC.druid_balance.name,
+                to=self.mode.lbs_by_tc(TC.druid_balance),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F()
+
+    def build_hk_alt_numpad_5_all_dps_burst(self):
+        with hk.Hotkey(
+            id="Alt Numpad5 - DPS 开爆发技能",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_5)),
+        ) as self.hk_alt_numpad_5:
+            with hk.SendLabel(
+                id=TC.dps.name,
+                to=self.mode.lbs_by_tc(TC.dps),
+            ):
+                act.General.DPS_BURST_MACRO_KEY_ALT_D()
+
+    def build_hk_alt_numpad_6_all_dps_burst_and_hero(self):
+        with hk.Hotkey(
+            id="Alt Numpad6 - 开嗜血, 同时所有 DPS 开爆发技能",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_6)),
+        ) as self.hk_alt_numpad_6:
+            with hk.SendLabel(
+                id="all_non_shaman_dps",
+                to=utils.difference_list(
+                    self.mode.lbs_by_tc(TC.dps),
+                    self.mode.lbs_by_tc(TC.shaman),
+                ),
+            ):
+                act.General.DPS_BURST_MACRO_KEY_ALT_D()
+
+            with hk.SendLabel(
+                id=TC.shaman_elemental.name,
+                to=self.mode.lbs_by_tc(TC.shaman_elemental),
+            ):
+                act.Shaman.ALL_SPEC_BLOOD_THIRST_HEROISM()
+                act.General.DPS_BURST_MACRO_KEY_ALT_D()
+
+            with hk.SendLabel(
+                id=TC.shaman_resto.name,
+                to=self.mode.lbs_by_tc(TC.shaman_resto),
+            ):
+                act.Shaman.ALL_SPEC_BLOOD_THIRST_HEROISM()
+
+    def build_hk_alt_numpad_7_8_9_first_raid_damage_reduction(self):
+        with hk.Hotkey(
+            id="Alt Numpad7",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_7)),
+        ) as self.hk_alt_numpad_7:
+            with hk.SendLabel(
+                id=TC.paladin_protect.name,
+                to=self.mode.lbs_by_tc(TC.paladin_protect),
+            ):
+                # 要点两下, 启动神圣牺牲后自己取消
+                act.Paladin.ALL_SPEC_DIVINE_SACRIFICE()
+                act.Paladin.ALL_SPEC_DIVINE_SACRIFICE()
+
+        with hk.Hotkey(
+            id="Alt Numpad8",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_8)),
+        ) as self.hk_alt_numpad_8:
+            with hk.SendLabel(
+                id=TC.paladin_holy.name,
+                to=self.mode.lbs_by_tc(TC.paladin_holy),
+            ):
+                # 要点两下, 启动神圣牺牲后自己取消
+                act.Paladin.ALL_SPEC_DIVINE_SACRIFICE()
+                act.Paladin.ALL_SPEC_DIVINE_SACRIFICE()
+
+        with hk.Hotkey(
+            id="Alt Numpad9",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_9)),
+        ) as self.hk_alt_numpad_9:
+            with hk.SendLabel(
+                id=TC.paladin_holy.name,
+                to=self.mode.lbs_by_tc(TC.paladin_holy),
+            ):
+                act.Paladin.ALL_SPEC_AURA_MASTERY()
+
+    def build_hk_alt_numpad_10_cleansing_totem(self):
+        with hk.Hotkey(
+            id="Alt Numpad10 - 萨满放清毒图腾",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_0)),
+        ) as self.hk_alt_numpad_10:
+            with hk.SendLabel(
+                id=TC.shaman.name,
+                to=self.mode.lbs_by_tc(TC.shaman),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Shaman.ALL_SPEC_CLEANSING_TOTEM()
+
+    def build_hk_alt_numpad_11_tremor_totem(self):
+        with hk.Hotkey(
+            id="Alt Numpad11 - 萨满放战栗图腾",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_11_DIVIDE)),
+        ) as self.hk_alt_numpad_11:
+            with hk.SendLabel(
+                id=TC.shaman.name,
+                to=self.mode.lbs_by_tc(TC.shaman),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Shaman.ALL_SPEC_TREMOR_TOTEM()
+
+    def build_hk_alt_numpad_12_earth_binding_totem(self):
+        with hk.Hotkey(
+            id="Alt Numpad12 - 萨满放地缚图腾",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.NUMPAD_12_MULTIPLY)),
+        ) as self.hk_alt_numpad_12:
+            with hk.SendLabel(
+                id=TC.shaman.name,
+                to=self.mode.lbs_by_tc(TC.shaman),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Shaman.ALL_SPEC_EARTHBIND_TOTEM()
+
+    def build_hk_group_08(self):
+        self.build_hk_alt_numpad_1_misdirect_and_tot_focus()
+        self.build_hk_alt_numpad_2_aspect_of_pact_or_hawk()
+        self.build_hk_alt_numpad_3_aspect_of_viper_or_hawk()
+        self.build_hk_alt_numpad_4_all_boomy_star_fall()
+        self.build_hk_alt_numpad_5_all_dps_burst()
+        self.build_hk_alt_numpad_6_all_dps_burst_and_hero()
+        self.build_hk_alt_numpad_7_8_9_first_raid_damage_reduction()
+        self.build_hk_alt_numpad_10_cleansing_totem()
+        self.build_hk_alt_numpad_11_tremor_totem()
+        self.build_hk_alt_numpad_12_earth_binding_totem()
+
+    # -------------------------------------------------------------------------
+    # 实现 Ctrl + 小键盘 1-12 的快捷键功能. 通常是一些不常用, 但是关键时刻必备的技能.
+    # -------------------------------------------------------------------------
+    __anchor_hk_09_ctrl_1_to_12 = None
+
+    def build_hk_ctrl_numpad_1_silence_shot_focus_target(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad1 - 射击猎人对焦点的目标释放沉默射击",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_1)),
+        ) as self.hk_ctrl_numpad_1:
+            with hk.SendLabel(
+                id=TC.hunter.name,
+                to=self.mode.lbs_by_tc(TC.hunter),
+            ):
+                act.Target.TARGET_FOCUS_TARGET()
+                act.Hunter.MARKSMAN_SPEC_SILENCING_SHOT()
+
+    def build_hk_ctrl_numpad_2_counter_spell_focus_target(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad2 - 法师对焦点的目标释放法术反制",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_2)),
+        ) as self.hk_ctrl_numpad_2:
+            with hk.SendLabel(
+                id=TC.mage.name,
+                to=self.mode.lbs_by_tc(TC.mage),
+            ):
+                act.Target.TARGET_FOCUS_TARGET()
+                act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO()
+
+    def build_hk_ctrl_numpad_3_aggressive_dispel(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad3 - 进攻驱散",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_3)),
+        ) as self.hk_ctrl_numpad_3:
+            with hk.SendLabel(
+                id=TC.shaman.name,
+                to=self.mode.lbs_by_tc(TC.shaman),
+            ):
+                act.Target.TARGET_FOCUS_TARGET()
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Shaman.ALL_SPEC_PURGE()
+
+            with hk.SendLabel(
+                id=TC.priest.name,
+                to=self.mode.lbs_by_tc(TC.priest),
+            ):
+                act.Target.TARGET_FOCUS_TARGET()
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Priest.ALL_SPEC_DISPEL_MAGIC()
+
+    def build_hk_ctrl_numpad_4_aoe_fear(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad4",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_4)),
+        ) as self.hk_ctrl_numpad_4:
+            with hk.SendLabel(
+                id=TC.priest_shadow.name,
+                to=self.mode.lbs_by_tc(TC.priest_shadow),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Priest.SHADOW_SPEC_PSYCHIC_HORROR()
+
+    def build_hk_ctrl_numpad_5_typhoon(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad5",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_5)),
+        ) as self.hk_ctrl_numpad_5:
+            with hk.SendLabel(
+                id=TC.druid_balance.name,
+                to=self.mode.lbs_by_tc(TC.druid_balance),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Druid.BALANCE_SPEC_TYPHOON_KEY_G()
+
+    def build_hk_ctrl_numpad_6_thunder_storm(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad6",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_6)),
+        ) as self.hk_ctrl_numpad_6:
+            with hk.SendLabel(
+                id="all_elemental_shaman",
+                to=self.mode.lbs_by_tc(TC.shaman_elemental),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Shaman.ELEMENTAL_SPEC_THUNDER_STORM()
+
+    def build_hk_ctrl_numpad_7_hymn_of_life(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad7",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_7)),
+        ) as self.hk_ctrl_numpad_7:
+            with hk.SendLabel(
+                id=TC.priest.name,
+                to=self.mode.lbs_by_tc(TC.priest),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Priest.ALL_SPEC_DIVINE_HYMN()
+
+    def build_hk_ctrl_numpad_10_hymn_of_mana(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad10",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_0)),
+        ) as self.hk_ctrl_numpad_10:
+            with hk.SendLabel(
+                id=TC.priest.name,
+                to=self.mode.lbs_by_tc(TC.priest),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Priest.ALL_SPEC_HYMN_OF_HOPE()
+
+    def build_hk_ctrl_numpad_11_tank_1_taunt(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad11 - 主坦克嘲讽",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_11_DIVIDE)),
+        ) as self.hk_ctrl_numpad_11:
+            with hk.SendLabel(
+                id="tank1",
+                to=self.mode.lbs_tank1,
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Paladin.PROTECT_SPEC_KEY_Z_HAND_OF_RECKONING()
+
+    def build_hk_ctrl_numpad_12_tank_2_taunt(self):
+        with hk.Hotkey(
+            id="Ctrl Numpad12 - 副坦克嘲讽",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.NUMPAD_12_MULTIPLY)),
+        ) as self.hk_ctrl_numpad_12:
+            with hk.SendLabel(
+                id="tank2",
+                to=self.mode.lbs_tank2,
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.DK.ALL_SPEC_DARK_COMMAND_KEY_Z()
+
+    def build_hk_group_09(self):
+        self.build_hk_ctrl_numpad_1_silence_shot_focus_target()
+        self.build_hk_ctrl_numpad_2_counter_spell_focus_target()
+        self.build_hk_ctrl_numpad_3_aggressive_dispel()
+        self.build_hk_ctrl_numpad_4_aoe_fear()
+        self.build_hk_ctrl_numpad_5_typhoon()
+        self.build_hk_ctrl_numpad_6_thunder_storm()
+        self.build_hk_ctrl_numpad_7_hymn_of_life()
+        self.build_hk_ctrl_numpad_10_hymn_of_mana()
+        self.build_hk_ctrl_numpad_11_tank_1_taunt()
+        self.build_hk_ctrl_numpad_12_tank_2_taunt()
+
+    # -------------------------------------------------------------------------
+    # 实现 Shift + 小键盘 1-12 的快捷键功能. 通常是一些不常用, 但是关键时刻必备的技能.
+    # -------------------------------------------------------------------------
+    __anchor_hk_10_shift_numpad_1_to_12 = None
+
+    def build_hk_shift_numpad_1(self):
+        with hk.Hotkey(
+            id="Shift Numpad1",
+            key=KN.SCROLOCK_ON(KN.NUMPAD_SHIFT_1_END),
+        ) as self.hk_shift_numpad_1:
+            with hk.SendLabel(
+                name=TC.shaman.name,
+                to=self.mode.lbs_by_tc(TC.shaman),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Shaman.ALL_SPEC_CALL_OF_THE_ELEMENTS()
+
+    def build_hk_shift_numpad_2(self):
+        with hk.Hotkey(
+            id="Shift Numpad2",
+            key=KN.SCROLOCK_ON(KN.NUMPAD_SHIFT_2_DOWN),
+        ) as self.hk_shift_numpad_2:
+            with hk.SendLabel(
+                id=TC.shaman.name,
+                to=self.mode.lbs_by_tc(TC.shaman),
+            ):
+                act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                act.Shaman.ALL_SPEC_TOTEMIC_RECALL()
+
+    def build_hk_group_10(self):
+        self.build_hk_shift_numpad_1()
+        self.build_hk_shift_numpad_2()
 
     # -------------------------------------------------------------------------
     # 实现由在主控角色界面下, 用鼠标在团队框架上进行单机来实现治疗的快捷键.
     # 需要配合团队框架 Healbot 插件使用.
     # -------------------------------------------------------------------------
-    __anchor_hk_12_heal_bot = None
+    __anchor_hk_11_heal_bot = None
 
     """
     下面的这批名字为 ``_build_send_label_...`` 的函数是用于生成 ... 的工厂函数. 
@@ -2309,7 +2385,7 @@ class HknScript(AttrsClass):
             self._build_send_label_tank(),
             self._build_send_label_non_shaman_dps(),
 
-    def build_hk_group_12(self):
+    def build_hk_group_11(self):
         self.build_hk_healbot_small_heal()
         self.build_hk_healbot_big_heal()
         self.build_hk_healbot_aoe_heal()
