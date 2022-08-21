@@ -996,10 +996,10 @@ class CreateButton(Block['CreateButton']):
             i
             for i in [
                 self.name,
-                None if self.x is None else str(self.x),
-                None if self.y is None else str(self.x),
-                None if self.width is None else str(self.x),
-                None if self.height is None else str(self.x),
+                str(self.x),
+                str(self.x),
+                str(self.width),
+                str(self.height),
                 f"\"{self.text}\"" if self.text else None,
             ]
             if i
@@ -1011,10 +1011,10 @@ class CreateButton(Block['CreateButton']):
     def is_null(self) -> bool:
         return (
             (self.name is None)
-            or (self.x is None)
-            or (self.y is None)
-            or (self.width is None)
-            or (self.height is None)
+            # or (self.x is None)
+            # or (self.y is None)
+            # or (self.width is None)
+            # or (self.height is None)
         )
 
 
@@ -1043,8 +1043,8 @@ class CreatePictureButton(Block['CreatePictureButton']):
             i
             for i in [
                 self.name,
-                self.x,
-                self.y,
+                str(self.x),
+                str(self.y),
                 f"\"{self.file}\"",
                 self.text,
             ]

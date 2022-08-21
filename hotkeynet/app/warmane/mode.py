@@ -194,7 +194,7 @@ class Mode(AttrsClass):
     @classmethod
     def use_solo_raid_10p_batlefury_luxiaofeng_core_team(cls):
         return cls(
-            game_client=GameClient().use_1176_664_resolution(),
+            game_client=GameClient().use_1920_1080_resolution(),
             # game_client=GameClient().use_1600_900_resolution(),
             # game_client=GameClient().use_1176_664_resolution(),
             login_chars=LoginCharactersFactory.make_chars_10p(),

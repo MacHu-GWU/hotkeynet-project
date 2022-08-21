@@ -13,10 +13,13 @@ from hotkeynet.game.wow.wlk import (
     Window,
     Talent as TL,
     TalentCategory as TC,
+
 )
 
 from . import act
 from .character import CharacterHelper
+from .icons import Icons
+
 
 if T.TYPE_CHECKING:
     from .mode import Mode
@@ -503,7 +506,7 @@ class HknScript(AttrsClass):
         """
         with hk.MovementHotkey(
             id="Non Tank Move Up Down, Turn Left Right",
-            key=KN.SCROLOCK_ON(f"{KN.UP}, {KN.DOWN}, {KN.LEFT}, {KN.RIGHT}"),
+            key=KN.SCROLOCK_ON(KN.CTRL_(f"{KN.UP}, {KN.DOWN}, {KN.LEFT}, {KN.RIGHT}")),
         ) as self.hk_non_tank_move_up_down_turn_left_right:
             with hk.SendLabel(
                 to=self.mode.lbs_by_tc(TC.non_tank),
@@ -2404,15 +2407,8 @@ class HknScript(AttrsClass):
 
     def build_control_panel(self):
         with hk.Command(name="AutoExec") as self.cmd_auto_exec:
-            with hk.CreatePanel(name="MBControlPanel", x=0, y=120, width=120, height=1000) as main_panel:
-                hk.CreateButton(name="ButtonBar11", x=0, y=0, width=36, height=36, text="Alt")
-                hk.AddButtonToPanel(button="ButtonBar11", panel=main_panel.name)
-                hk.CreateButton(name="ButtonBar12", x=0, y=0, width=36, height=36, text="+")
-                hk.AddButtonToPanel(button="ButtonBar12", panel=main_panel.name)
-                hk.CreateButton(name="ButtonBar13", x=0, y=0, width=36, height=36, text="N1-12")
-                hk.AddButtonToPanel(button="ButtonBar13", panel=main_panel.name)
-
-                hk.CreateButton(name="ButtonA01", x=0, y=0, width=36, height=36, text="启动")
+            with hk.CreatePanel(name="MBControlPanel", x=0, y=60, width=120, height=960) as main_panel:
+                hk.CreatePictureButton(name="ButtonA01", x=0, y=0, file=Icons.wow, text="启动")
                 hk.AddButtonToPanel(button="ButtonA01", panel=main_panel.name)
                 hk.SetButtonCommand(button="ButtonA01", command=self.cmd_launch_and_rename_all_game_client)
 
@@ -2420,13 +2416,23 @@ class HknScript(AttrsClass):
                 hk.AddButtonToPanel(button="ButtonA02", panel=main_panel.name)
                 hk.SetButtonCommand(button="ButtonA02", command=self.cmd_batch_login)
 
-                hk.SetPanelLayout(
-                    panel=main_panel.name,
-                    row_length=3,
-                    margin=1,
-                    button_width=36,
-                    button_height=36,
-                )
+                hk.CreateButton(name="ButtonA03", x=0, y=0, width=36, height=36, text="窗口")
+                hk.AddButtonToPanel(button="ButtonA03", panel=main_panel.name)
+                hk.SetButtonCommand(button="ButtonA03", command=self.cmd_center_overlap_layout)
+
+                # ------------------------------------------------------------------------------
+                hk.CreateButton(name="ButtonBar11", x=0, y=0, width=36, height=36, text="Alt")
+                hk.AddButtonToPanel(button="ButtonBar11", panel=main_panel.name)
+                hk.CreateButton(name="ButtonBar12", x=0, y=0, width=36, height=36, text="+")
+                hk.AddButtonToPanel(button="ButtonBar12", panel=main_panel.name)
+                hk.CreateButton(name="ButtonBar13", x=0, y=0, width=36, height=36, text="N1-12")
+                hk.AddButtonToPanel(button="ButtonBar13", panel=main_panel.name)
+
+
+
+
+
+
 
 
                 """
@@ -2563,6 +2569,13 @@ class HknScript(AttrsClass):
                 <AlwaysOnTop on>
                 """
 
+                hk.SetPanelLayout(
+                    panel=main_panel.name,
+                    row_length=3,
+                    margin=1,
+                    button_width=36,
+                    button_height=36,
+                )
 
                 hk.TargetWin(window=main_panel.name)
                 hk.AlwaysOnTop()
