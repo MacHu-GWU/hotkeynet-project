@@ -2648,12 +2648,12 @@ class HknScript(AttrsClass):
                 create_picture_button(
                     name="CtrlNumpad8",
                     file=Icons.spell_nature_tranquility,
-                    hotkey=self.hk_ctrl_numpad_8,
+                    hotkey=self.hk_ctrl_numpad_7,
                 )
                 create_picture_button(
                     name="CtrlNumpad9",
                     file=Icons.spell_nature_tranquility,
-                    hotkey=self.hk_ctrl_numpad_9,
+                    hotkey=self.hk_ctrl_numpad_7,
                 )
                 create_picture_button(
                     name="CtrlNumpad10",
