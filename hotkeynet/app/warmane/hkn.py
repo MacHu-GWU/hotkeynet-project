@@ -38,7 +38,12 @@ class HknScript(AttrsClass):
         self.build_hk_group_03()
         self.build_hk_group_04()
         self.build_hk_group_05()
-        self.build_hk_group_12()
+        self.build_hk_group_06()
+        self.build_hk_group_07()
+        self.build_hk_group_08()
+        self.build_hk_group_09()
+        self.build_hk_group_10()
+        self.build_hk_group_11()
         self.build_control_panel()
 
     def build_labels(self):
