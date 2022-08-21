@@ -1186,6 +1186,937 @@ class HknScript(AttrsClass):
         self.build_hk_numpad_12()
 
     # -------------------------------------------------------------------------
+    # 实现功能性的按键
+    # -------------------------------------------------------------------------
+    __anchor_hk_06_utility_action = None
+
+    def build_hk_confirm(self):
+        with hk.Hotkey(
+            id="Confirm",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.Y)),
+        ) as self.hk_confirm:
+            with hk.SendLabel(
+                id="all",
+                to=self.mode.lbs_all,
+            ):
+                act.General.CONFIRM_MACRO_KEY_NUMPAD_5()
+
+    def build_hk_leave_party(self):
+        with hk.Hotkey(
+            id="LeaveParty",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.L)),
+        ) as self.hk_leave_party:
+            with hk.SendLabel(
+                name="all",
+                to=self.mode.lbs_all,
+            ):
+                act.General.LEAVE_PARTY_MACRO_KEY_ALT_END()
+
+    def build_hk_all_pass_item(self):
+        """
+        所有的角色放弃拾取物品.
+        """
+        with hk.Hotkey(
+            id="All Pass Item",
+            key=KN.SCROLOCK_ON(KN.CTRL_ALT_(KN.Q)),
+        ) as self.hk_all_pass_item:
+            with hk.SendLabel(
+                id="pass_item_button",
+                to=self.mode.lbs_all,
+            ):
+                hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
+                    x=self.mode.game_client.pass_item_button_x,
+                    y=self.mode.game_client.pass_item_button_1_y,
+                )
+                hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
+                    x=self.mode.game_client.pass_item_button_x,
+                    y=self.mode.game_client.pass_item_button_2_y,
+                )
+                hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
+                    x=self.mode.game_client.pass_item_button_x,
+                    y=self.mode.game_client.pass_item_button_3_y,
+                )
+                hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
+                    x=self.mode.game_client.pass_item_button_x,
+                    y=self.mode.game_client.pass_item_button_4_y,
+                )
+
+    def build_hk_volumn_down(self):
+        with hk.Hotkey(
+            id="Volume Down",
+            key=KN.SCROLOCK_ON(KN.CTRL_SHIFT_ALT(KN.M)),
+        ) as self.hk_volumn_down:
+            with hk.SendLabel(
+                id="all",
+                to=self.mode.lbs_all,
+            ):
+                act.System.MASTER_VOLUME_DOWN()
+
+    def build_hk_group_06(self):
+        self.build_hk_confirm()
+        self.build_hk_leave_party()
+        self.build_hk_all_pass_item()
+        self.build_hk_volumn_down()
+
+    # -------------------------------------------------------------------------
+    # 实现每个游戏内所绑定的动作条快捷键, 会触发哪些职业的哪些功能.
+    # -------------------------------------------------------------------------
+    def build_hk_group_07(self):
+        self.build_hk_skills()
+
+    def build_hk_skills(self):
+        # with hk.Hotkey(
+        #     id="Alt F1",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.F1)),
+        # ) as self.hk_alt_f1:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        # 
+        # with hk.Hotkey(
+        #     id="Alt F2",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.F2)),
+        # ) as self.hk_alt_f2:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        # 
+        # with hk.Hotkey(
+        #     id="Shift F1",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.F1)),
+        # ) as self.hk_shift_f1:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        # 
+        # with hk.Hotkey(
+        #     id="Shift F1",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.F1)),
+        # ) as self.hk_shift_f1:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        # 
+        # with hk.Hotkey(
+        #     id="Shift F2",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.F2)),
+        # ) as self.hk_shift_f2:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        # 
+        # with hk.Hotkey(
+        #     id="Shift C",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.C)),
+        # ) as self.hk_shift_c:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        # 
+        # with hk.Hotkey(
+        #     id="Shift R",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.R)),
+        # ) as self.hk_shift_r:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        # 
+        # with hk.Hotkey(
+        #     id="Shift F",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.F)),
+        # ) as self.hk_shift_f:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        # 
+        # with hk.Hotkey(
+        #     id="Shift G",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.G)),
+        # ) as self.hk_shift_g:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+
+        with hk.Hotkey(
+            id="Shift Tab",
+            key=KN.SCROLOCK_ON(KN.SHIFT_(KN.TAB)),
+        ) as self.hk_shift_tab:
+            with hk.SendLabel(
+                to=self.mode.lbs_by_tc(TC.shaman),
+            ):
+                hk.Key.trigger()
+
+        # with hk.Hotkey(
+        #     id="Ctrl E",
+        #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.E)),
+        # ) as self.hk_ctrl_e:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Ctrl R",
+        #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.R)),
+        # ) as self.hk_ctrl_r:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Ctrl F",
+        #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.F)),
+        # ) as self.hk_ctrl_f:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="MButton",
+        #     key=KN.SCROLOCK_ON(KN.MOUSE_MButton),
+        # ) as self.hk_middle_click:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Shift MButton",
+        #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.MOUSE_MButton)),
+        # ) as self.hk_shift_middle_click:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+        #
+        # with hk.Hotkey(
+        #     id="Alt MButton",
+        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.MOUSE_MButton)),
+        # ) as self.hk_alt_middle_click:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+
+        with hk.Hotkey(
+            id="Ctrl + `",
+            key=KN.SCROLOCK_ON(KN.CTRL_(KN.OEM3_WAVE_OR_BACK_QUOTE)),
+        ) as self.hk_ctrl_oem3_wave:
+            with hk.SendLabel(
+                to=self.mode.lbs_all,
+            ):
+                act.General.MOUNT_DOWN_MACRO_CTRL_OEM3_WAVE()
+
+        with hk.Hotkey(
+            id="Shift + `",
+            key=KN.SCROLOCK_ON(KN.SHIFT_(KN.OEM3_WAVE_OR_BACK_QUOTE)),
+        ) as self.hk_shift_oem3_wave:
+            with hk.SendLabel(
+                to=self.mode.lbs_all,
+            ):
+                hk.Key.trigger()
+
+        with hk.Hotkey(
+            id="Alt + `",
+            key=KN.SCROLOCK_ON(KN.ALT_(KN.OEM3_WAVE_OR_BACK_QUOTE)),
+        ) as self.hk_alt_oem3_wave:
+            with hk.SendLabel(
+                to=self.mode.lbs_all,
+            ):
+                hk.Key.trigger()
+
+    # hk_alt_a = Hotkey(
+    #     name="Alt A",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.A)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_s = Hotkey(
+    #     name="Alt S",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.S)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_d = Hotkey(
+    #     name="Alt D",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.D)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_e = Hotkey(
+    #     name="Alt E",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.E)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_r = Hotkey(
+    #     name="Alt R",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.R)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_f = Hotkey(
+    #     name="Alt F",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.F)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # _ACTION_BAR_3_________________________________ = ""
+    #
+    # hk_shift_z = Hotkey(
+    #     name="Shift Z",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.Z)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_shift_t = Hotkey(
+    #     name="Shift T",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.T)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_shift_x = Hotkey(
+    #     name="Shift X",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.X)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_ctrl_z_land = Hotkey(
+    #     name="Ctrl Z",
+    #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.Z)),
+    #     actions=[
+    #         SendLabel(
+    #             name="",
+    #             to=config.lbs_all(),
+    #             actions=[
+    #                 act.General.LAND_MOUNT_SPELL_KEY_CTRL_Z
+    #             ]
+    #         )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_ctrl_t = Hotkey(
+    #     name="Ctrl T",
+    #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.T)),
+    #     actions=[
+    #         SendLabel(
+    #             name="all",
+    #             to=config.lbs_all(),
+    #             actions=[
+    #                 act.General.EAT_FOOD_KEY_CTRL_T
+    #             ]
+    #         )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_ctrl_g = Hotkey(
+    #     name="Ctrl G",
+    #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.G)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_ctrl_x = Hotkey(
+    #     name="Ctrl X",
+    #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.X)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_z = Hotkey(
+    #     name="Alt Z",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.Z)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_t = Hotkey(
+    #     name="Alt T",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.T)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_g = Hotkey(
+    #     name="Alt G",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.G)),
+    #     actions=[
+    #         SendLabel(
+    #             name="",
+    #             to=config.lbs_by_tc(TC.druid_balance),
+    #             actions=[
+    #                 act.Druid.BALANCE_SPEC_TYPHOON_KEY_G,
+    #             ]
+    #         )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_x_aoe = Hotkey(
+    #     name="Alt X",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.X)),
+    #     actions=[
+    #         SendLabel(
+    #             name=TC.dk.name,
+    #             to=config.lbs_by_tc(TC.dk),
+    #             actions=[
+    #                 # act.General.ESC,
+    #                 act.DK.ALL_SPEC_DEATH_AND_DECAY_KEY_ALT_X,
+    #             ]
+    #         ),
+    #         SendLabel(
+    #             name=TC.hunter.name,
+    #             to=config.lbs_by_tc(TC.hunter),
+    #             actions=[
+    #                 # act.General.ESC,
+    #                 act.Hunter.ALL_SPEC_VOLLEY_ALT_X,
+    #             ]
+    #         ),
+    #         SendLabel(
+    #             name=TC.druid_balance.name,
+    #             to=config.lbs_by_tc(TC.druid_balance),
+    #             actions=[
+    #                 # act.General.ESC,
+    #                 act.Druid.ALL_SPEC_HURRICANE,
+    #             ]
+    #         ),
+    #         SendLabel(
+    #             name=TC.warlock.name,
+    #             to=config.lbs_by_tc(TC.warlock),
+    #             actions=[
+    #                 # act.General.ESC,
+    #                 act.Warlock.ALL_SPEC_RAIN_OF_FIRE,
+    #             ]
+    #         ),
+    #         SendLabel(
+    #             name=TC.mage.name,
+    #             to=config.lbs_by_tc(TC.mage),
+    #             actions=[
+    #                 # act.General.ESC,
+    #                 act.Mage.ALL_SPEC_BLIZZARD,
+    #             ]
+    #         ),
+    #     ],
+    #     script=script,
+    # )
+    #
+    # _ACTION_BAR_2_________________________________ = ""
+    #
+    # _hk_r_actions = [
+    #     # paladin
+    #     SendLabel(
+    #         name=TC.paladin_protect.name,
+    #         to=config.lbs_by_tc(TC.paladin_protect),
+    #         actions=[
+    #             Key(name=KN.R),
+    #         ]
+    #     ),
+    #     SendLabel(
+    #         name=TC.paladin_holy.name,
+    #         to=config.lbs_by_tc(TC.paladin_holy),
+    #         actions=[
+    #             act.Paladin.HOLY_SPEC_KEY_R_FOCUS_JUDGEMENT,
+    #         ]
+    #     ),
+    #     # death knight
+    #     SendLabel(
+    #         name=TC.dk_tank.name,
+    #         to=config.lbs_by_tc(TC.dk_tank),
+    #         actions=[
+    #             act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
+    #         ]
+    #     ),
+    #     SendLabel(
+    #         name=TC.dk_dps.name,
+    #         to=config.lbs_by_tc(TC.dk_dps),
+    #         actions=[
+    #             act.Target.TARGET_FOCUS_TARGET,
+    #             act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
+    #         ]
+    #     ),
+    #     # hunter
+    #     SendLabel(
+    #         name=TC.hunter_marksman.name,
+    #         to=config.lbs_by_tc(TC.hunter_marksman),
+    #         actions=[
+    #             act.Target.TARGET_FOCUS_TARGET,
+    #             act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
+    #         ]
+    #     ),
+    #     # shaman
+    #     SendLabel(
+    #         name=TC.shaman.name,
+    #         to=config.lbs_by_tc(TC.shaman),
+    #         actions=[
+    #             act.Target.TARGET_FOCUS_TARGET,
+    #             act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
+    #         ]
+    #     ),
+    #
+    #     # mage
+    #     SendLabel(
+    #         name=TC.mage.name,
+    #         to=config.lbs_by_tc(TC.mage),
+    #         actions=[
+    #             act.Target.TARGET_FOCUS_TARGET,
+    #             act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
+    #         ]
+    #     ),
+    # ]
+    #
+    # special_labels = union_list(*[
+    #     sl.to
+    #     for sl in _hk_r_actions
+    # ])
+    #
+    # regular_tank_labels = difference_list(
+    #     config.lbs_by_tc(TC.tank),
+    #     special_labels,
+    # )
+    #
+    # regular_dps_labels = difference_list(
+    #     config.lbs_by_tc(TC.dps),
+    #     special_labels,
+    # )
+    #
+    # regular_healer_labels = difference_list(
+    #     config.lbs_by_tc(TC.healer),
+    #     special_labels,
+    # )
+    #
+    # _hk_r_actions.extend([
+    #     SendLabel(
+    #         name="other_tank",
+    #         to=regular_tank_labels,
+    #         actions=[
+    #             Key(name=KN.KEY_2),
+    #         ]
+    #     ),
+    #     SendLabel(
+    #         name="other_dps",
+    #         to=regular_dps_labels,
+    #         actions=[
+    #             act.Target.TARGET_FOCUS_TARGET,
+    #             Key(name=KN.KEY_3),
+    #         ]
+    #     ),
+    #     SendLabel(
+    #         name="other_healer",
+    #         to=regular_healer_labels,
+    #         actions=[
+    #             act.Target.TARGET_FOCUS,
+    #             Key(name=KN.KEY_3),
+    #         ]
+    #     ),
+    # ])
+    #
+    # hk_r = Hotkey(
+    #     name="R Interrupt Spell",
+    #     key=KN.SCROLOCK_ON(KN.R),
+    #     actions=_hk_r_actions,
+    #     script=script,
+    # )
+    #
+    # hk_z = Hotkey(
+    #     name="Z",
+    #     key=KN.SCROLOCK_ON(KN.Z),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # # pala put cleansing on T
+    # # shaman put curse toxin on T
+    # # druid put remove curse on T
+    # # mage put remove curse on T
+    # # priest put dispel magic on T
+    # hk_t = Hotkey(
+    #     name="T Random Dispel Raid",
+    #     key=KN.SCROLOCK_ON(KN.T),
+    #     actions=[
+    #         SendLabel(
+    #             name=TC.dispeler.name,
+    #             to=config.lbs_by_tc(TC.dispeler),
+    #             actions=[
+    #                 act.Target.TARGET_RAID,
+    #                 Key.trigger()
+    #             ]
+    #         )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_g = Hotkey(
+    #     name="G",
+    #     key=KN.SCROLOCK_ON(KN.G),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_x = Hotkey(
+    #     name="X",
+    #     key=KN.SCROLOCK_ON(KN.X),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # _ACTION_BAR_7_8_9_10_____________________________ = ""
+
+    # =========== 暂时不要
+    # hk_shift_insert = Hotkey(
+    #     name="Shift Insert",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.INSERT)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_shift_home = Hotkey(
+    #     name="Shift Home",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.HOME)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_shift_page_up = Hotkey(
+    #     name="Shift PageUp",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.PAGE_UP)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_shift_delete = Hotkey(
+    #     name="Shift Delete",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.DELETE)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_shift_end = Hotkey(
+    #     name="Shift End",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.END)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_shift_page_down = Hotkey(
+    #     name="Shift PageDown",
+    #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.PAGE_DOWN)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_insert = Hotkey(
+    #     name="Alt Insert",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.INSERT)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_home = Hotkey(
+    #     name="Alt Home",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.HOME)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_page_up = Hotkey(
+    #     name="Alt PageUp",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.PAGE_UP)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_delete = Hotkey(
+    #     name="Alt Delete",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.DELETE)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_end = Hotkey(
+    #     name="Alt End",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.END)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+    #
+    # hk_alt_page_down = Hotkey(
+    #     name="Alt PageDown",
+    #     key=KN.SCROLOCK_ON(KN.ALT_(KN.PAGE_DOWN)),
+    #     actions=[
+    #         # SendLabel(
+    #         #     name="",
+    #         #     to=self.mode.lbs_all,
+    #         #     actions=[
+    #         #         Key.trigger()
+    #         #     ]
+    #         # )
+    #     ],
+    #     script=script,
+    # )
+
+    # _ACTION_BAR_UNDEFINED = ""
+    #
+    # hk_alt_shift_f_all_boomkin_star_fall = Hotkey(
+    #     name="Alt Shift F",
+    #     key=KN.SCROLOCK_ON(KN.ALT_SHIFT_(KN.F)),
+    #     actions=[
+    #         SendLabel(
+    #             name=TC.druid_balance.name,
+    #             to=config.lbs_by_tc(TC.druid_balance),
+    #             actions=[
+    #                 act.Druid.BALANCE_SPEC_STAR_FALL_ALT_F
+    #             ]
+    #         ),
+    #         SendLabel(
+    #             name=TC.dk.name,
+    #             to=config.lbs_by_tc(TC.dk),
+    #             actions=[
+    #                 act.DK.UNHOLY_SPEC_CORPSE_EXPLOSION_ALF_F,
+    #             ]
+    #         ),
+    #     ],
+    #     script=script,
+    # )
+
+    # -------------------------------------------------------------------------
     # 实现由在主控角色界面下, 用鼠标在团队框架上进行单机来实现治疗的快捷键.
     # 需要配合团队框架 Healbot 插件使用.
     # -------------------------------------------------------------------------
