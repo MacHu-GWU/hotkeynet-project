@@ -20,7 +20,6 @@ from . import act
 from .character import CharacterHelper
 from .icons import Icons
 
-
 if T.TYPE_CHECKING:
     from .mode import Mode
 
@@ -2406,34 +2405,128 @@ class HknScript(AttrsClass):
     __anchor_control_panel = None
 
     def build_control_panel(self):
+        WIDTH = 36
+        HEIGHT = 36
+
         with hk.Command(name="AutoExec") as self.cmd_auto_exec:
             with hk.CreatePanel(name="MBControlPanel", x=0, y=60, width=120, height=960) as main_panel:
-                hk.CreatePictureButton(name="ButtonA01", x=0, y=0, file=Icons.wow, text="启动")
-                hk.AddButtonToPanel(button="ButtonA01", panel=main_panel.name)
-                hk.SetButtonCommand(button="ButtonA01", command=self.cmd_launch_and_rename_all_game_client)
+                def set_hotkey_or_command(
+                    button,
+                    hotkey: T.Optional[hk.Hotkey] = None,
+                    command: T.Optional[hk.Command] = None,
+                    command_args: T.Optional[tuple] = None,
+                ):
+                    if hotkey is not None:
+                        hk.SetButtonHotkey(
+                            button=button.name,
+                            hotkey=hotkey,
+                        )
+                    if command is not None:
+                        hk.SetButtonCommand(
+                            button=button.name,
+                            command=command,
+                            args=command_args,
+                        )
 
-                hk.CreateButton(name="ButtonA02", x=0, y=0, width=36, height=36, text="登录")
-                hk.AddButtonToPanel(button="ButtonA02", panel=main_panel.name)
-                hk.SetButtonCommand(button="ButtonA02", command=self.cmd_batch_login)
+                def create_button(
+                    name: str,
+                    text: str,
+                    hotkey: T.Optional[hk.Hotkey] = None,
+                    command: T.Optional[hk.Command] = None,
+                    command_args: T.Optional[tuple] = None,
+                ):
+                    button = hk.CreateButton(
+                        name=name,
+                        x=0,
+                        y=0,
+                        width=WIDTH,
+                        height=HEIGHT,
+                        text=text,
+                    )
+                    hk.AddButtonToPanel(
+                        button=button.name,
+                        panel=main_panel.name,
+                    )
+                    set_hotkey_or_command(button, hotkey, command, command_args)
 
-                hk.CreateButton(name="ButtonA03", x=0, y=0, width=36, height=36, text="窗口")
-                hk.AddButtonToPanel(button="ButtonA03", panel=main_panel.name)
-                hk.SetButtonCommand(button="ButtonA03", command=self.cmd_center_overlap_layout)
+                def create_picture_button(
+                    name: str,
+                    file: str,
+                    hotkey: T.Optional[hk.Hotkey] = None,
+                    command: T.Optional[hk.Command] = None,
+                    command_args: T.Optional[tuple] = None,
+                ):
+                    button = hk.CreatePictureButton(
+                        name=name,
+                        x=0,
+                        y=0,
+                        file=file,
+                    )
+                    hk.AddButtonToPanel(
+                        button=button.name,
+                        panel=main_panel.name,
+                    )
+                    set_hotkey_or_command(button, hotkey, command, command_args)
+
+                def create_colored_button(
+                    name: str,
+                    bkcolor: str,
+                    textcolor: str = "000000",
+                    text: T.Optional[str] = None,
+                    hotkey: T.Optional[hk.Hotkey] = None,
+                    command: T.Optional[hk.Command] = None,
+                    command_args: T.Optional[tuple] = None,
+                ):
+                    button = hk.CreateColoredButton(
+                        name=name,
+                        x=0,
+                        y=0,
+                        width=WIDTH,
+                        height=HEIGHT,
+                        bkcolor=f"0x{bkcolor}",
+                        textcolor=f"0x{textcolor}",
+                        text=text,
+                    )
+                    hk.AddButtonToPanel(
+                        button=button.name,
+                        panel=main_panel.name,
+                    )
+                    set_hotkey_or_command(button, hotkey, command, command_args)
+
+                create_picture_button(
+                    name="ButtonA01",
+                    file=Icons.wow,
+                    command=self.cmd_launch_and_rename_game_client,
+                )
+
+                create_picture_button(
+                    name="ButtonA02",
+                    file=Icons.log_in,
+                    command=self.cmd_batch_login,
+                )
+
+                create_picture_button(
+                    name="ButtonA03",
+                    file=Icons.resize_window,
+                    command=self.cmd_center_overlap_layout,
+                )
 
                 # ------------------------------------------------------------------------------
-                hk.CreateButton(name="ButtonBar11", x=0, y=0, width=36, height=36, text="Alt")
-                hk.AddButtonToPanel(button="ButtonBar11", panel=main_panel.name)
-                hk.CreateButton(name="ButtonBar12", x=0, y=0, width=36, height=36, text="+")
-                hk.AddButtonToPanel(button="ButtonBar12", panel=main_panel.name)
-                hk.CreateButton(name="ButtonBar13", x=0, y=0, width=36, height=36, text="N1-12")
-                hk.AddButtonToPanel(button="ButtonBar13", panel=main_panel.name)
-
-
-
-
-
-
-
+                create_colored_button(
+                    name="ButtonBarAlt1To12a",
+                    bkcolor="E75638",
+                    text="Alt"
+                )
+                create_colored_button(
+                    name="ButtonBarAlt1To12b",
+                    bkcolor="E75638",
+                    text="+Num"
+                )
+                create_colored_button(
+                    name="ButtonBarAlt1To12c",
+                    bkcolor="E75638",
+                    text="1-12"
+                )
 
                 """
                 <CreatePanel MBControlPanel 0 120 120 1000>
