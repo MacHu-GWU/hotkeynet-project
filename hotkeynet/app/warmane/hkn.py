@@ -251,15 +251,15 @@ class HknScript(AttrsClass):
         """
         # 10 + 8 + 6 = 24
         ctrl_f1_to_10 = [
-            KN.CTRL_(key)
+            KN.SCROLOCK_ON(KN.CTRL_(key))
             for key in KN.F1_to_F12[:10]
         ]
         shift_f5_to_f12 = [
-            KN.SHIFT_(key)
+            KN.SCROLOCK_ON(KN.SHIFT_(key))
             for key in KN.F1_to_F12[4:]
         ]
         shift_insert_to_pgdn = [
-            KN.SHIFT_(key)
+            KN.SCROLOCK_ON(KN.SHIFT_(key))
             for key in KN.INSERT_TO_PGDN
         ]
         HOTKEY_LIST_TOGGLE_SPECIFIC_WINDOW_1_TO_25 = ctrl_f1_to_10 + shift_f5_to_f12 + shift_insert_to_pgdn
@@ -298,15 +298,15 @@ class HknScript(AttrsClass):
         """
         # 10 + 8 + 6 = 24
         ctrl_alt_f1_to_10 = [
-            KN.CTRL_ALT_(key)
+            KN.SCROLOCK_ON(KN.CTRL_ALT_(key))
             for key in KN.F1_to_F12[:10]
         ]
         shift_alt_f5_to_f12 = [
-            KN.ALT_SHIFT_(key)
+            KN.SCROLOCK_ON(KN.ALT_SHIFT_(key))
             for key in KN.F1_to_F12[4:]
         ]
         shift_alt_insert_to_pgdn = [
-            KN.ALT_SHIFT_(key)
+            KN.SCROLOCK_ON(KN.ALT_SHIFT_(key))
             for key in KN.INSERT_TO_PGDN
         ]
         HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + shift_alt_insert_to_pgdn
