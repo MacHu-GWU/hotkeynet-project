@@ -2680,12 +2680,12 @@ class HknScript(AttrsClass):
                     text="Shift"
                 )
                 create_colored_button(
-                    name="ButtonBarShift1To9a",
+                    name="ButtonBarShift1To9b",
                     bkcolor="E75638",
                     text="+Num"
                 )
                 create_colored_button(
-                    name="ButtonBarShift1To9a",
+                    name="ButtonBarShift1To9c",
                     bkcolor="E75638",
                     text="1-9"
                 )
