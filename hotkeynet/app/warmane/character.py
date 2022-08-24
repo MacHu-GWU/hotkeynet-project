@@ -665,6 +665,49 @@ class _CharacterFactory:
             window=Window.make(22),
         )
 
+    # --------------------------------------------------------------------------
+    # Lordaeron
+    # --------------------------------------------------------------------------
+    def make_char_fatmulti1_lgqsa_pve_protect_pala(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fatmulti1.value,
+            name="lgqsa",
+            talent=TL.paladin_pve_protect,
+            window=Window.make(1),
+        )
+
+    def make_char_fatmulti2_lgqsb_pve_retri_pala(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fatmulti2.value,
+            name="lgqsb",
+            talent=TL.paladin_pve_retri,
+            window=Window.make(2),
+        )
+
+    def make_char_fatmulti3_lgqsc_pve_retri_pala(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fatmulti3.value,
+            name="lgqsc",
+            talent=TL.paladin_pve_retri,
+            window=Window.make(3),
+        )
+
+    def make_char_fatmulti4_lgqsd_pve_retri_pala(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fatmulti4.value,
+            name="lgqsd",
+            talent=TL.paladin_pve_retri,
+            window=Window.make(4),
+        )
+
+    def make_char_fatmulti5_lgqse_pve_holy_pala(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fatmulti5.value,
+            name="lgqse",
+            talent=TL.paladin_pve_holy,
+            window=Window.make(5),
+        )
+
 
 CharacterFactory = _CharacterFactory()
 
@@ -1070,6 +1113,24 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti8_bunnysisters_pve_resto_druid(),
             CharacterFactory.make_char_fatmulti9_glowyy_pve_holy_pala().set_dr_pala_2(),
             CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_unholy_tank_dk().set_is_leader_2().set_tank_2(),
+        ])
+
+    # --------------------------------------------------------------------------
+    # Lordaeron
+    # --------------------------------------------------------------------------
+    __anchore_lordaeron = None
+
+    def make_team_solo_dungeon_lgqs_abcde(self) -> T.List[Character]:
+        return self._set_team_leader_and_tank(chars=[
+            (
+                CharacterFactory.make_char_fatmulti1_lgqsa_pve_protect_pala()
+                    .set_is_leader_1().set_tank_1().set_dr_pala_1()
+                    .set_is_leader_2().set_tank_2().set_dr_pala_2()
+            ),
+            CharacterFactory.make_char_fatmulti2_lgqsb_pve_retri_pala(),
+            CharacterFactory.make_char_fatmulti3_lgqsc_pve_retri_pala(),
+            CharacterFactory.make_char_fatmulti4_lgqsd_pve_retri_pala(),
+            CharacterFactory.make_char_fatmulti5_lgqse_pve_holy_pala(),
         ])
 
 

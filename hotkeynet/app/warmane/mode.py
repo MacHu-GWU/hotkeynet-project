@@ -200,3 +200,13 @@ class Mode(AttrsClass):
             login_chars=LoginCharactersFactory.make_chars_10p(),
             active_chars=ActiveCharactersFactory.make_team_solo_raid_10p_batlefury_luxiaofeng_core_team(),
         )
+
+    @classmethod
+    def use_solo_dungeon_5p_lgqs_abcde(cls):
+        return cls(
+            game_client=GameClient().use_1920_1080_resolution(),
+            # game_client=GameClient().use_1600_900_resolution(),
+            # game_client=GameClient().use_1176_664_resolution(),
+            login_chars=[],
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_lgqs_abcde(),
+        )
