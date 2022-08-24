@@ -2496,7 +2496,7 @@ class HknScript(AttrsClass):
                 create_picture_button(
                     name="ButtonA01",
                     file=Icons.wow,
-                    command=self.cmd_launch_and_rename_game_client,
+                    command=self.cmd_launch_and_rename_all_game_client,
                 )
 
                 create_picture_button(
