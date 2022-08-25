@@ -31,7 +31,7 @@ class AccountEnum(Enum):
     """
     account_fatmulti1 = load_account("fatmulti1")
     account_fatmulti2 = load_account("fatmulti2")
-    account_fatmulti3 = load_account("fatmulti3")
+    account_fatmulti3 = load_account("famulti3")
     account_fatmulti4 = load_account("fatmulti4")
     account_fatmulti5 = load_account("fatmulti5")
 
