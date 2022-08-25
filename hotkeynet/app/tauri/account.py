@@ -13,12 +13,12 @@ from superjson import json
 from hotkeynet.enumerate import EnumHelper
 from hotkeynet.game.wow.model import Account
 
-from .paths import path_warmane_accounts_json, path_warmane_test_accounts_json
+from .paths import path_tauri_accounts_json, path_tauri_test_accounts_json
 
 if "CI" in os.environ:
-    accounts_data = json.load(path_warmane_test_accounts_json.abspath, verbose=False)
+    accounts_data = json.load(path_tauri_test_accounts_json.abspath, verbose=False)
 else:
-    accounts_data = json.load(path_warmane_accounts_json.abspath, verbose=False)
+    accounts_data = json.load(path_tauri_accounts_json.abspath, verbose=False)
 
 
 def load_account(username: str) -> Account:
@@ -34,33 +34,6 @@ class AccountEnum(Enum):
     account_fatmulti3 = load_account("fatmulti3")
     account_fatmulti4 = load_account("fatmulti4")
     account_fatmulti5 = load_account("fatmulti5")
-    account_fitsheep = load_account("fitsheep")
-    account_fatmulti6 = load_account("fatmulti6")
-    account_fatmulti8 = load_account("fatmulti8")
-    account_fatmulti9 = load_account("fatmulti9")
-    account_fatmulti10 = load_account("fatmulti10")
-    account_makun7551 = load_account("makun7551")
-    account_monkey130 = load_account("monkey130")
-    account_freiliheng = load_account("freiliheng")
-    account_fatmulti11 = load_account("fatmulti11")
-    account_fatmulti12 = load_account("fatmulti12")
-    account_fatmulti13 = load_account("fatmulti13")
-    account_fatmulti14 = load_account("fatmulti14")
-    account_fatmulti15 = load_account("fatmulti15")
-    account_fatmulti16 = load_account("fatmulti16")
-    account_fatmulti17 = load_account("fatmulti17")
-    account_fatmulti18 = load_account("fatmulti18")
-    account_fatmulti19 = load_account("fatmulti19")
-    account_fatmulti20 = load_account("fatmulti20")
-    account_fatmulti21 = load_account("fatmulti21")
-    account_fatmulti22 = load_account("fatmulti22")
-    account_fatmulti23 = load_account("fatmulti23")
-    account_fatmulti24 = load_account("fatmulti24")
-    account_fatmulti25 = load_account("fatmulti25")
-    account_fatmulti26 = load_account("fatmulti26")
-    account_fatmulti27 = load_account("fatmulti27")
-    account_fatmulti28 = load_account("fatmulti28")
-    account_fatmulti29 = load_account("fatmulti29")
 
 
 class AccountHelper(EnumHelper[AccountEnum, Account]):
