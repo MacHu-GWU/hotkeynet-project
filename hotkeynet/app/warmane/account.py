@@ -13,12 +13,12 @@ from superjson import json
 from hotkeynet.enumerate import EnumHelper
 from hotkeynet.game.wow.model import Account
 
-from .paths import path_accounts_json, path_test_accounts_json
+from .paths import path_warmane_accounts_json, path_warmane_test_accounts_json
 
 if "CI" in os.environ:
-    accounts_data = json.load(path_test_accounts_json.abspath, verbose=False)
+    accounts_data = json.load(path_warmane_test_accounts_json.abspath, verbose=False)
 else:
-    accounts_data = json.load(path_accounts_json.abspath, verbose=False)
+    accounts_data = json.load(path_warmane_accounts_json.abspath, verbose=False)
 
 
 def load_account(username: str) -> Account:
