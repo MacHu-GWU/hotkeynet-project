@@ -240,7 +240,11 @@ class _ActiveCharactersFactory:
         主力 5 人组
         """
         return self._set_team_leader_and_tank(chars=[
-            CharacterFactory.make_char_fatmulti1_carrotflower_pve_protect_pala().set_is_leader_1().set_tank_1().set_dr_pala_1(),
+            (
+                CharacterFactory.make_char_fatmulti1_carrotflower_pve_protect_pala()
+                    .set_is_leader_1().set_tank_1().set_dr_pala_1()
+                    .set_is_leader_2().set_tank_2().set_dr_pala_2()
+            ),
             CharacterFactory.make_char_fatmulti2_carrotroot_pve_elemental_shaman(),
             CharacterFactory.make_char_fatmulti3_carrotstem_pve_balance_druid(),
             CharacterFactory.make_char_fatmulti4_carrotleaf_pve_frost_mage(),

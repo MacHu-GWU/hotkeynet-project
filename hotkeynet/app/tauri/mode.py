@@ -24,7 +24,7 @@ from .character import (
 )
 from .game_client import GameClient
 from .hkn import HknScript
-from .paths import path_warmane_hkn
+from .paths import path_tauri_hkn
 
 
 @attr.s
@@ -68,7 +68,7 @@ class Mode(AttrsClass):
         self.hkn_script = HknScript(mode=self)
 
     def dump(self, verbose: bool = False):
-        path_warmane_hkn.write_text(
+        path_tauri_hkn.write_text(
             self.hkn_script.script.render(verbose=verbose),
         )
 
@@ -182,31 +182,11 @@ class Mode(AttrsClass):
     __anchore_mode_definition = None
 
     @classmethod
-    def use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(cls):
+    def use_solo_dungeon_carrot_flower_team(cls):
         return cls(
             game_client=GameClient().use_1920_1080_resolution(),
             # game_client=GameClient().use_1600_900_resolution(),
             # game_client=GameClient().use_1176_664_resolution(),
-            login_chars=LoginCharactersFactory.make_chars_10p(),
-            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(),
-        )
-
-    @classmethod
-    def use_solo_raid_10p_batlefury_luxiaofeng_core_team(cls):
-        return cls(
-            game_client=GameClient().use_1920_1080_resolution(),
-            # game_client=GameClient().use_1600_900_resolution(),
-            # game_client=GameClient().use_1176_664_resolution(),
-            login_chars=LoginCharactersFactory.make_chars_10p(),
-            active_chars=ActiveCharactersFactory.make_team_solo_raid_10p_batlefury_luxiaofeng_core_team(),
-        )
-
-    @classmethod
-    def use_solo_dungeon_5p_lgqs_abcde(cls):
-        return cls(
-            game_client=GameClient().use_1920_1080_resolution(),
-            # game_client=GameClient().use_1600_900_resolution(),
-            # game_client=GameClient().use_1176_664_resolution(),
-            login_chars=[],
-            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_lgqs_abcde(),
+            # login_chars=LoginCharactersFactory.make_chars_10p(),
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_carrot_flower_team(),
         )
