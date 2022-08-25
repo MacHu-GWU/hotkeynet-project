@@ -919,7 +919,7 @@ class HknScript(AttrsClass):
                 id="all",
                 to=self.mode.lbs_all,
             ):
-                hk.Key(key=KN.KEY_8)
+                hk.Key(key=KN.KEY_9)
 
     def build_hk_0_short_term_buff(self):
         """
