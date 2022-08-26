@@ -1,15 +1,16 @@
 # -*- coding: utf-8 -*-
 
 import os
-from hotkeynet.app.warmane.window import WindowEnum
+from rich import print
+import hotkeynet as hk
+from hotkeynet.app.tauri.mode import Mode
 
 
-class TestWindowEnum:
-    def test_val(self):
-        assert WindowEnum.wow01.val.label == "w01"
-
-    def test_get_window(self):
-        assert WindowEnum.get_window(1).label == "w01"
+class TestMode:
+    def test_launched_windows(self):
+        hk.context.reset()
+        mode = Mode.use_solo_dungeon_carrot_flower_team()
+        mode.hkn_script.script.render(verbose=False),
 
 
 if __name__ == "__main__":
@@ -32,7 +33,7 @@ if __name__ == "__main__":
         bin_pytest,
         "-s", "--tb=native",
         f"--rootdir={dir_project_root}",
-        "--cov=hotkeynet.app.warmane.window",
+        "--cov=hotkeynet.app.tauri.mode",
         "--cov-report", "term-missing",
         "--cov-report", f"html:{dir_htmlcov}",
         abspath,
