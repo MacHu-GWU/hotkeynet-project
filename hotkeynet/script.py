@@ -1,21 +1,60 @@
 # -*- coding: utf-8 -*-
 
+"""
+该模块是对 HotkeyNet 脚本中的代码块 (我们这里叫 Block) 的抽象. 从而提供了
+"在 Python 中写 HotkeyNet" 脚本的能力.
+"""
+
 import typing as T
 import enum
-# from functools import cached_property
 
 import attr
 from attrs_mate import AttrsClass
-from jinja2 import Template
 
 from . import keyname as KN
 from . import tpl
 
-# from .enumerate import EnumHelper
 from .utils import remove_empty_line
 
 
 class Context:
+    """
+    上下文对象. 自动管理 HotkeyNet 代码块的从属关系.
+
+    在该项目的早期版本中, 我们是用 类属性 来定义从属关系的. 如果代码块 SendLabel 属于
+    代码块 Hotkey, 那么我们就要用下面这样的语法来写, 非常的繁琐::
+
+        Hotkey(
+            blocks = [
+                SendLabel(
+                    to=["w1", "w2"],
+                    blocks = [
+                        Key("1"),
+                    ]
+                ),
+                SendLabel(
+                    to=["w3", "w4"],
+                    blocks = [
+                        Key("2"),
+                    ]
+                ),
+            ]
+        )
+
+    有了上下文机制, 我们可以用 Python 中的上下文管理器 ``with`` 语法来表达同样的逻辑,
+    减少了缩进, 对人类读代码更加友好, 并且整体代码量也大幅减少::
+
+        with Hotkey(...):
+            with SendLabel(to=["w1", "w2"]):
+                Key("1")
+            with SendLabel(to=["w3", "w4"]):
+                Key("2")
+
+    具体实现的原理如下
+
+    所有的 HotkeyNet 的代码块都是 :class:`Block` 的子类, 它们都有一个 ``blocks`` 属性.
+    每当我们用
+    """
     def __init__(self):
         self.stack: list = list()
         self.auto_id_index: T.Dict[str, int] = dict()
