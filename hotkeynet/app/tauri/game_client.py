@@ -3,7 +3,7 @@
 import attr
 from attrs_mate import AttrsClass
 
-from hotkeynet.game.wow.wlk import coordinator
+from hotkeynet.game.wow.mop import coordinator
 
 from .config import config
 

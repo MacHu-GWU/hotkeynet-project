@@ -10,7 +10,7 @@ import attr
 from attrs_mate import AttrsClass
 
 import hotkeynet as hk
-from hotkeynet.game.wow.wlk import (
+from hotkeynet.game.wow.mop import (
     Window,
     Talent as TL,
     TalentCategory as TC,

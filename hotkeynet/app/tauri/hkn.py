@@ -8,7 +8,7 @@ from attrs_mate import AttrsClass
 import hotkeynet as hk
 from hotkeynet import KN
 from hotkeynet import utils
-from hotkeynet.game.wow.wlk import (
+from hotkeynet.game.wow.mop import (
     Character,
     Window,
     Talent as TL,

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-该模块定义了在 Warmane 服务器上所拥有的角色. 并且提供了一系列函数方便于我们对角色进行排列组合.
+该模块定义了在 Tauri 服务器上所拥有的角色. 并且提供了一系列函数方便于我们对角色进行排列组合.
 
 这个模块里的所有类都是一个 namespace, 仅仅是为了方便引用而提供的类. 这些类下面的方法其实
 都可以是 ``staticmethod``. 但是为了免去为每个方法写 ``@staticmethod`` 的麻烦, 我们就
@@ -64,6 +64,14 @@ class _CharacterFactory:
             account=AccountEnum.account_fatmulti5.value,
             name="carrotseed",
             talent=TL.priest_pve_holy,
+            window=Window.make(5),
+        )
+
+    def make_char_fatmulti5_carrotseed_pve_shadow_priest(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fatmulti5.value,
+            name="carrotseed",
+            talent=TL.priest_pve_shadow,
             window=Window.make(5),
         )
 
@@ -248,7 +256,8 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti2_carrotroot_pve_elemental_shaman(),
             CharacterFactory.make_char_fatmulti3_carrotstem_pve_balance_druid(),
             CharacterFactory.make_char_fatmulti4_carrotleaf_pve_frost_mage(),
-            CharacterFactory.make_char_fatmulti5_carrotseed_pve_holy_priest(),
+            # CharacterFactory.make_char_fatmulti5_carrotseed_pve_holy_priest(),
+            CharacterFactory.make_char_fatmulti5_carrotseed_pve_shadow_priest(),
         ])
 
 
