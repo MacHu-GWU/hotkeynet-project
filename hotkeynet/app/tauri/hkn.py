@@ -1275,7 +1275,7 @@ class HknScript(AttrsClass):
         with hk.Hotkey(
             id="Volume Down",
             key=KN.SCROLOCK_ON(KN.CTRL_SHIFT_ALT(KN.M)),
-        ) as self.hk_volumn_down:
+        ) as self.hk_volume_down:
             with hk.SendLabel(
                 id="all",
                 to=self.mode.lbs_all,
@@ -1387,12 +1387,12 @@ class HknScript(AttrsClass):
         # with hk.Hotkey(
         #     id="Ctrl E",
         #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.E)),
-        # ) as self.hk_ctrl_e:
+        # ) as self.hk_ctrl_e_cc_control:
         #     with hk.SendLabel(
         #         to=self.mode.lbs_all,
         #     ):
         #         hk.Key.trigger()
-        #
+
         # with hk.Hotkey(
         #     id="Ctrl R",
         #     key=KN.SCROLOCK_ON(KN.CTRL_(KN.R)),
@@ -2341,7 +2341,7 @@ class HknScript(AttrsClass):
                 act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
             ]),
             self._build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_HOLY_SPEC_FLASH_HEAL,
+                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
             ]),
             self._build_send_label_tank(),
             self._build_send_label_dps(),

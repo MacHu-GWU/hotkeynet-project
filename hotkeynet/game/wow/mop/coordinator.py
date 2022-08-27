@@ -67,11 +67,11 @@ return_to_game_button_x_at_1176_664 = 585
 return_to_game_button_y_at_1176_664 = 385
 
 # 用户点击放弃 roll 物品的红叉按钮的坐标, 需要和 domino 动作条插件的设置配合使用
-pass_item_button_x_at_1920_1080 = 1525
-pass_item_button_1_y_at_1920_1080 = 924
+pass_item_button_x_at_1920_1080 = 1488
+pass_item_button_1_y_at_1920_1080 = 646
 pass_item_button_2_y_at_1920_1080 = 857
-pass_item_button_3_y_at_1920_1080 = 790
-pass_item_button_4_y_at_1920_1080 = 724
+pass_item_button_3_y_at_1920_1080 = 721
+pass_item_button_4_y_at_1920_1080 = 619
 
 pass_item_button_x_at_1600_900 = 1365
 pass_item_button_1_y_at_1600_900 = 852

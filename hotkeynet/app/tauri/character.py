@@ -256,8 +256,8 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti2_carrotroot_pve_elemental_shaman(),
             CharacterFactory.make_char_fatmulti3_carrotstem_pve_balance_druid(),
             CharacterFactory.make_char_fatmulti4_carrotleaf_pve_frost_mage(),
-            # CharacterFactory.make_char_fatmulti5_carrotseed_pve_holy_priest(),
-            CharacterFactory.make_char_fatmulti5_carrotseed_pve_shadow_priest(),
+            CharacterFactory.make_char_fatmulti5_carrotseed_pve_holy_priest(),
+            # CharacterFactory.make_char_fatmulti5_carrotseed_pve_shadow_priest(),
         ])
 
 
