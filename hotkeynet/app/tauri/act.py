@@ -388,6 +388,7 @@ class Paladin:
     ALL_SPEC_HAMMER_OF_JUSTICE = CTRL_(E)  # 制裁之锤
     ALL_SPEC_HOLY_WRATH = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 神圣愤怒 (对亡灵群体昏迷) Shift + ~
     ALL_SPEC_TURN_EVIL = CTRL_(F)  # 恐惧亡灵
+    ALL_SPEC_REBUKE = R # 打断施法
 
     # --- 治疗类技能 ---
     ALL_SPEC_FLASH_OF_LIGHT = X  # 圣光闪现

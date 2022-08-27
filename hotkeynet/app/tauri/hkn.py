@@ -162,25 +162,25 @@ class HknScript(AttrsClass):
                     # Click OK on Wrong Pass Word Pop Out; 清除可能的密码错误窗口, 移除遮挡
                     (
                         hk.ClickMouse(button=hk.MouseButtonEnum.LButton.value)
-                        .set_stroke_as_both()
-                        .set_target_as_window()
-                        .set_mode_as_x_y(
+                            .set_stroke_as_both()
+                            .set_target_as_window()
+                            .set_mode_as_x_y(
                             x=self.mode.game_client.wrong_password_pop_up_x,
                             y=self.mode.game_client.wrong_password_pop_up_y,
                         )
-                        .set_restore_as_no()
+                            .set_restore_as_no()
                     )
                     hk.Wait.make(300)
                     # Click on username Input Box; 在用户名输入框点击左键
                     (
                         hk.ClickMouse(button=hk.MouseButtonEnum.LButton.value)
-                        .set_stroke_as_both()
-                        .set_target_as_window()
-                        .set_mode_as_x_y(
+                            .set_stroke_as_both()
+                            .set_target_as_window()
+                            .set_mode_as_x_y(
                             x=self.mode.game_client.username_input_box_x,
                             y=self.mode.game_client.username_input_box_y,
                         )
-                        .set_restore_as_no()
+                            .set_restore_as_no()
                     )
                     hk.Wait.make(300)
                     # Clear off password Input Box; 用 tab 切换到密码输入框然后清空
@@ -1654,131 +1654,6 @@ class HknScript(AttrsClass):
                 act.Mage.ALL_SPEC_BLIZZARD()
 
         # _ACTION_BAR_2_________________________________ = ""
-        # with hk.Hotkey(
-        #     id="R - 能打断的职业打断",
-        #     key=KN.SCROLOCK_ON(KN.ALT_(KN.G)),
-        # ) as self.hk_alt_g_druid_typhoon:
-        #     with hk.SendLabel(
-        #         id=TC.paladin_protect.name,
-        #         to=self.mode.lbs_by_tc(TC.paladin_protect),
-        #     ):
-        #         hk.Key(key=KN.R)
-        #
-        #
-        # _hk_r_actions = [
-        #     # paladin
-        #     SendLabel(
-        #         name=TC.paladin_protect.name,
-        #         to=self.mode.lbs_by_tc(TC.paladin_protect),
-        #         actions=[
-        #             Key(name=KN.R),
-        #         ]
-        #     ),
-        #     SendLabel(
-        #         name=TC.paladin_holy.name,
-        #         to=self.mode.lbs_by_tc(TC.paladin_holy),
-        #         actions=[
-        #             act.Paladin.HOLY_SPEC_KEY_R_FOCUS_JUDGEMENT,
-        #         ]
-        #     ),
-        #     # death knight
-        #     SendLabel(
-        #         name=TC.dk_tank.name,
-        #         to=self.mode.lbs_by_tc(TC.dk_tank),
-        #         actions=[
-        #             act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
-        #         ]
-        #     ),
-        #     SendLabel(
-        #         name=TC.dk_dps.name,
-        #         to=self.mode.lbs_by_tc(TC.dk_dps),
-        #         actions=[
-        #             act.Target.TARGET_FOCUS_TARGET,
-        #             act.DK.ALL_SPEC_MIND_FREEZE_KEY_R,
-        #         ]
-        #     ),
-        #     # hunter
-        #     SendLabel(
-        #         name=TC.hunter_marksman.name,
-        #         to=self.mode.lbs_by_tc(TC.hunter_marksman),
-        #         actions=[
-        #             act.Target.TARGET_FOCUS_TARGET,
-        #             act.Hunter.MARKSMAN_SPEC_DPS_ROTATE_MACRO,
-        #         ]
-        #     ),
-        #     # shaman
-        #     SendLabel(
-        #         name=TC.shaman.name,
-        #         to=self.mode.lbs_by_tc(TC.shaman),
-        #         actions=[
-        #             act.Target.TARGET_FOCUS_TARGET,
-        #             act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
-        #         ]
-        #     ),
-        #
-        #     # mage
-        #     SendLabel(
-        #         name=TC.mage.name,
-        #         to=self.mode.lbs_by_tc(TC.mage),
-        #         actions=[
-        #             act.Target.TARGET_FOCUS_TARGET,
-        #             act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
-        #         ]
-        #     ),
-        # ]
-        #
-        # special_labels = union_list(*[
-        #     sl.to
-        #     for sl in _hk_r_actions
-        # ])
-        #
-        # regular_tank_labels = difference_list(
-        #     self.mode.lbs_by_tc(TC.tank),
-        #     special_labels,
-        # )
-        #
-        # regular_dps_labels = difference_list(
-        #     self.mode.lbs_by_tc(TC.dps),
-        #     special_labels,
-        # )
-        #
-        # regular_healer_labels = difference_list(
-        #     self.mode.lbs_by_tc(TC.healer),
-        #     special_labels,
-        # )
-        #
-        # _hk_r_actions.extend([
-        #     SendLabel(
-        #         name="other_tank",
-        #         to=regular_tank_labels,
-        #         actions=[
-        #             Key(name=KN.KEY_2),
-        #         ]
-        #     ),
-        #     SendLabel(
-        #         name="other_dps",
-        #         to=regular_dps_labels,
-        #         actions=[
-        #             act.Target.TARGET_FOCUS_TARGET,
-        #             Key(name=KN.KEY_3),
-        #         ]
-        #     ),
-        #     SendLabel(
-        #         name="other_healer",
-        #         to=regular_healer_labels,
-        #         actions=[
-        #             act.Target.TARGET_FOCUS,
-        #             Key(name=KN.KEY_3),
-        #         ]
-        #     ),
-        # ])
-        #
-        # hk_r = Hotkey(
-        #     name="R Interrupt Spell",
-        #     key=KN.SCROLOCK_ON(KN.R),
-        #     actions=_hk_r_actions,
-        #     script=script,
-        # )
 
         # ABOVE IS TODO
 
@@ -1846,8 +1721,39 @@ class HknScript(AttrsClass):
             ):
                 act.DK.UNHOLY_SPEC_CORPSE_EXPLOSION_ALF_F()
 
+    def build_hk_r_interrupt(self):
+        talent_category_and_skill_pairs = [
+            # (
+            #     TC.paladin_non_holy,
+            #     act.Paladin.ALL_SPEC_REBUKE,
+            # ),
+            (
+                TC.shaman,
+                act.Shaman.ALL_SPEC_WIND_SHEAR_MACRO,
+            ),
+            (
+                TC.mage,
+                act.Mage.ALL_SPEC_COUNTER_SPELL_MACRO,
+            ),
+        ]
+
+        label_and_key_pairs = list()
+        for tc, key in talent_category_and_skill_pairs:
+            for label in self.mode.lbs_by_tc(tc):
+                label_and_key_pairs.append((label, key))
+
+        with hk.Hotkey(
+            id="R - 能打断的职业打断",
+            key=KN.SCROLOCK_ON(KN.R),
+        ) as self.hk_r_interrupt:
+            for label, key in label_and_key_pairs:
+                with hk.Toggle():
+                    with hk.SendLabel(to=[label, ]):
+                        key()
+
     def build_hk_group_07(self):
         self.build_hk_skills()
+        self.build_hk_r_interrupt()
 
     # -------------------------------------------------------------------------
     # 实现 Alt + 小键盘 1-12 的快捷键功能. 通常是一些不常用, 但是关键时刻必备的技能.
