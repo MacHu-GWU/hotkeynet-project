@@ -50,8 +50,8 @@ class HknScript(AttrsClass):
 
     def build_labels(self):
         self.labels = [
-            hk.Label.make(name=char.window.label, window=char.window.title)
-            for char in self.mode.login_label_and_account_pairs
+            hk.Label.make(name=window.label, window=window.title)
+            for window, _ in self.mode.login_window_and_account_pairs
         ]
         self.n_labels = len(self.labels)
 
@@ -139,8 +139,8 @@ class HknScript(AttrsClass):
         with hk.Command(
             name="CenterOverlapLayout",
         ) as self.cmd_center_overlap_layout:
-            for char in self.mode.managed_chars:
-                self.cmd_resize_and_relocate_window.call(args=[char.window.title, ])
+            for window, _ in self.mode.login_window_and_account_pairs:
+                self.cmd_resize_and_relocate_window.call(args=[window.title, ])
 
     def build_cmd_enter_username_and_password(self):
         """
@@ -323,17 +323,17 @@ class HknScript(AttrsClass):
 
         self.hk_list_toggle_specific_window: T.List[hk.Hotkey] = list()
 
-        for char in self.mode.managed_chars:
+        for window, account in self.mode.login_window_and_account_pairs:
             with hk.Hotkey(
-                id=f"SingleLogin{char.account.username.title()}",
+                id=f"SingleLogin{account.username.title()}",
                 key=KN.SCROLOCK_ON(
-                    HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[int(char.window.label.replace("w", "")) - 1]
+                    HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[int(window.label.replace("w", "")) - 1]
                 ),
             ) as hotkey:
                 self.cmd_enter_username_and_password.call(args=[
-                    char.window.title,
-                    char.account.username,
-                    char.account.password,
+                    window.title,
+                    account.username,
+                    account.password,
                 ])
                 self.hk_list_toggle_specific_window.append(hotkey)
 
