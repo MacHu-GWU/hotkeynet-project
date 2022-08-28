@@ -2809,6 +2809,41 @@ class HknScript(AttrsClass):
                     command=self.cmd_center_overlap_layout,
                 )
 
+                create_picture_button(
+                    name="ButtonA04",
+                    file=Icons.resize_window,
+                    command=self.cmd_center_overlap_layout,
+                )
+
+                create_picture_button(
+                    name="ButtonA05",
+                    file=Icons.resize_window,
+                    command=self.cmd_center_overlap_layout,
+                )
+
+                counter = 0
+                index_mapper = dict()
+                for window, account in self.mode.login_window_and_account_pairs:
+                    index_mapper[window.index] = (window, account)
+                for i in range(1, 1 + 25):
+                    if i in index_mapper:
+                        window, account = index_mapper[i]
+                        create_button(
+                            name=f"ButtonLogin{str(i).zfill(2)}",
+                            text=window.label,
+                            command=self.cmd_enter_username_and_password,
+                            command_args=(
+                                window.title,
+                                account.username,
+                                account.password,
+                            )
+                        )
+                    else:
+                        create_button(
+                            name=f"ButtonLogin{str(i).zfill(2)}",
+                            text="NA",
+                        )
+
                 # -------------------------------------------------------------
                 # Login
                 # -------------------------------------------------------------
