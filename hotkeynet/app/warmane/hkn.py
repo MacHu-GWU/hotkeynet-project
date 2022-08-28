@@ -50,9 +50,10 @@ class HknScript(AttrsClass):
 
     def build_labels(self):
         self.labels = [
-            hk.Label.make(name=char.window.label, window=char.window.title)
-            for char in self.mode.managed_chars
+            hk.Label.make(name=window.label, window=window.title)
+            for window, _ in self.mode.login_window_and_account_pairs
         ]
+
         self.n_labels = len(self.labels)
 
     # -------------------------------------------------------------------------
@@ -88,8 +89,8 @@ class HknScript(AttrsClass):
         with hk.Command(
             name="LaunchAndRenameAllGameClient",
         ) as self.cmd_launch_and_rename_all_game_client:
-            for char in self.mode.managed_chars:
-                self.cmd_launch_and_rename_game_client.call(args=[char.window.title, ])
+            for window, _ in self.mode.login_window_and_account_pairs:
+                self.cmd_launch_and_rename_game_client.call(args=[window.title, ])
 
     def build_cmd_bring_window_to_foreground(self):
         """
@@ -139,8 +140,8 @@ class HknScript(AttrsClass):
         with hk.Command(
             name="CenterOverlapLayout",
         ) as self.cmd_center_overlap_layout:
-            for char in self.mode.managed_chars:
-                self.cmd_resize_and_relocate_window.call(args=[char.window.title, ])
+            for window, _ in self.mode.login_window_and_account_pairs:
+                self.cmd_resize_and_relocate_window.call(args=[window.title, ])
 
     def build_cmd_enter_username_and_password(self):
         """
@@ -162,25 +163,25 @@ class HknScript(AttrsClass):
                     # Click OK on Wrong Pass Word Pop Out; 清除可能的密码错误窗口, 移除遮挡
                     (
                         hk.ClickMouse(button=hk.MouseButtonEnum.LButton.value)
-                        .set_stroke_as_both()
-                        .set_target_as_window()
-                        .set_mode_as_x_y(
+                            .set_stroke_as_both()
+                            .set_target_as_window()
+                            .set_mode_as_x_y(
                             x=self.mode.game_client.wrong_password_pop_up_x,
                             y=self.mode.game_client.wrong_password_pop_up_y,
                         )
-                        .set_restore_as_no()
+                            .set_restore_as_no()
                     )
                     hk.Wait.make(300)
                     # Click on username Input Box; 在用户名输入框点击左键
                     (
                         hk.ClickMouse(button=hk.MouseButtonEnum.LButton.value)
-                        .set_stroke_as_both()
-                        .set_target_as_window()
-                        .set_mode_as_x_y(
+                            .set_stroke_as_both()
+                            .set_target_as_window()
+                            .set_mode_as_x_y(
                             x=self.mode.game_client.username_input_box_x,
                             y=self.mode.game_client.username_input_box_y,
                         )
-                        .set_restore_as_no()
+                            .set_restore_as_no()
                     )
                     hk.Wait.make(300)
                     # Clear off password Input Box; 用 tab 切换到密码输入框然后清空
@@ -323,17 +324,17 @@ class HknScript(AttrsClass):
 
         self.hk_list_toggle_specific_window: T.List[hk.Hotkey] = list()
 
-        for char in self.mode.managed_chars:
+        for window, account in self.mode.login_window_and_account_pairs:
             with hk.Hotkey(
-                id=f"SingleLogin{char.account.username.title()}",
+                id=f"SingleLogin{account.username.title()}",
                 key=KN.SCROLOCK_ON(
-                    HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[int(char.window.label.replace("w", "")) - 1]
+                    HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[int(window.label.replace("w", "")) - 1]
                 ),
             ) as hotkey:
                 self.cmd_enter_username_and_password.call(args=[
-                    char.window.title,
-                    char.account.username,
-                    char.account.password,
+                    window.title,
+                    account.username,
+                    account.password,
                 ])
                 self.hk_list_toggle_specific_window.append(hotkey)
 
@@ -2404,9 +2405,306 @@ class HknScript(AttrsClass):
     # -------------------------------------------------------------------------
     __anchor_control_panel = None
 
+    # def build_control_panel(self):
+    #     WIDTH = 36
+    #     HEIGHT = 36
+    #
+    #     with hk.Command(name="AutoExec") as self.cmd_auto_exec:
+    #         with hk.CreatePanel(name="MBControlPanel", x=0, y=60, width=120, height=960) as main_panel:
+    #             def set_hotkey_or_command(
+    #                 button,
+    #                 hotkey: T.Optional[hk.Hotkey] = None,
+    #                 command: T.Optional[hk.Command] = None,
+    #                 command_args: T.Optional[tuple] = None,
+    #             ):
+    #                 if hotkey is not None:
+    #                     hk.SetButtonHotkey(
+    #                         button=button.name,
+    #                         hotkey=hotkey,
+    #                     )
+    #                 if command is not None:
+    #                     hk.SetButtonCommand(
+    #                         button=button.name,
+    #                         command=command,
+    #                         args=command_args,
+    #                     )
+    #
+    #             def create_button(
+    #                 name: str,
+    #                 text: str,
+    #                 hotkey: T.Optional[hk.Hotkey] = None,
+    #                 command: T.Optional[hk.Command] = None,
+    #                 command_args: T.Optional[tuple] = None,
+    #             ):
+    #                 button = hk.CreateButton(
+    #                     name=name,
+    #                     x=0,
+    #                     y=0,
+    #                     width=WIDTH,
+    #                     height=HEIGHT,
+    #                     text=text,
+    #                 )
+    #                 hk.AddButtonToPanel(
+    #                     button=button.name,
+    #                     panel=main_panel.name,
+    #                 )
+    #                 set_hotkey_or_command(button, hotkey, command, command_args)
+    #
+    #             def create_picture_button(
+    #                 name: str,
+    #                 file: str,
+    #                 hotkey: T.Optional[hk.Hotkey] = None,
+    #                 command: T.Optional[hk.Command] = None,
+    #                 command_args: T.Optional[tuple] = None,
+    #             ):
+    #                 button = hk.CreatePictureButton(
+    #                     name=name,
+    #                     x=0,
+    #                     y=0,
+    #                     file=file,
+    #                 )
+    #                 hk.AddButtonToPanel(
+    #                     button=button.name,
+    #                     panel=main_panel.name,
+    #                 )
+    #                 set_hotkey_or_command(button, hotkey, command, command_args)
+    #
+    #             def create_colored_button(
+    #                 name: str,
+    #                 bkcolor: str,
+    #                 textcolor: str = "000000",
+    #                 text: T.Optional[str] = None,
+    #                 hotkey: T.Optional[hk.Hotkey] = None,
+    #                 command: T.Optional[hk.Command] = None,
+    #                 command_args: T.Optional[tuple] = None,
+    #             ):
+    #                 button = hk.CreateColoredButton(
+    #                     name=name,
+    #                     x=0,
+    #                     y=0,
+    #                     width=WIDTH,
+    #                     height=HEIGHT,
+    #                     bkcolor=f"0x{bkcolor}",
+    #                     textcolor=f"0x{textcolor}",
+    #                     text=text,
+    #                 )
+    #                 hk.AddButtonToPanel(
+    #                     button=button.name,
+    #                     panel=main_panel.name,
+    #                 )
+    #                 set_hotkey_or_command(button, hotkey, command, command_args)
+    #
+    #             create_picture_button(
+    #                 name="ButtonA01",
+    #                 file=Icons.wow,
+    #                 command=self.cmd_launch_and_rename_all_game_client,
+    #             )
+    #
+    #             create_picture_button(
+    #                 name="ButtonA02",
+    #                 file=Icons.log_in,
+    #                 command=self.cmd_batch_login,
+    #             )
+    #
+    #             create_picture_button(
+    #                 name="ButtonA03",
+    #                 file=Icons.resize_window,
+    #                 command=self.cmd_center_overlap_layout,
+    #             )
+    #
+    #             # -------------------------------------------------------------
+    #             # Alt + Numpad 1 - 12
+    #             # -------------------------------------------------------------
+    #             create_colored_button(
+    #                 name="ButtonBarAlt1To12a",
+    #                 bkcolor="E75638",
+    #                 text="Alt"
+    #             )
+    #             create_colored_button(
+    #                 name="ButtonBarAlt1To12b",
+    #                 bkcolor="E75638",
+    #                 text="+Num"
+    #             )
+    #             create_colored_button(
+    #                 name="ButtonBarAlt1To12c",
+    #                 bkcolor="E75638",
+    #                 text="1-12"
+    #             )
+    #
+    #             create_picture_button(
+    #                 name="Alt1",
+    #                 file=Icons.ability_hunter_misdirection,
+    #                 hotkey=self.hk_alt_numpad_1,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt2",
+    #                 file=Icons.ability_mount_whitetiger,
+    #                 hotkey=self.hk_alt_numpad_2,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt3",
+    #                 file=Icons.ability_hunter_aspectoftheviper,
+    #                 hotkey=self.hk_alt_numpad_3,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt4",
+    #                 file=Icons.ability_druid_starfall,
+    #                 hotkey=self.hk_alt_numpad_4,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt5",
+    #                 file=Icons.spell_nature_wispheal,
+    #                 hotkey=self.hk_alt_numpad_5,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt6",
+    #                 file=Icons.spell_nature_bloodlust,
+    #                 hotkey=self.hk_alt_numpad_6,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt7",
+    #                 file=Icons.spell_holy_powerwordbarrier,
+    #                 hotkey=self.hk_alt_numpad_7,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt8",
+    #                 file=Icons.spell_holy_powerwordbarrier,
+    #                 hotkey=self.hk_alt_numpad_8,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt9",
+    #                 file=Icons.spell_holy_auramastery,
+    #                 hotkey=self.hk_alt_numpad_9,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt10",
+    #                 file=Icons.spell_nature_diseasecleansingtotem,
+    #                 hotkey=self.hk_alt_numpad_10,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt11",
+    #                 file=Icons.spell_nature_tremortotem,
+    #                 hotkey=self.hk_alt_numpad_11,
+    #             )
+    #             create_picture_button(
+    #                 name="Alt12",
+    #                 file=Icons.spell_nature_strengthofearthtotem02,
+    #                 hotkey=self.hk_alt_numpad_12,
+    #             )
+    #
+    #             # -------------------------------------------------------------
+    #             # Ctrl + Numpad 1 - 12
+    #             # -------------------------------------------------------------
+    #             create_colored_button(
+    #                 name="ButtonBarCtrl1To12a",
+    #                 bkcolor="E75638",
+    #                 text="Ctrl"
+    #             )
+    #             create_colored_button(
+    #                 name="ButtonBarCtrl1To12b",
+    #                 bkcolor="E75638",
+    #                 text="+Num"
+    #             )
+    #             create_colored_button(
+    #                 name="ButtonBarCtrl1To12c",
+    #                 bkcolor="E75638",
+    #                 text="1-12"
+    #             )
+    #
+    #             create_picture_button(
+    #                 name="CtrlNumpad1",
+    #                 file=Icons.ability_theblackarrow,
+    #                 hotkey=self.hk_ctrl_numpad_1,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad2",
+    #                 file=Icons.spell_frost_iceshock,
+    #                 hotkey=self.hk_ctrl_numpad_2,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad3",
+    #                 file=Icons.spell_holy_dispelmagic,
+    #                 hotkey=self.hk_ctrl_numpad_3,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad4",
+    #                 file=Icons.spell_shadow_psychicscream,
+    #                 hotkey=self.hk_ctrl_numpad_4,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad5",
+    #                 file=Icons.ability_druid_typhoon,
+    #                 hotkey=self.hk_ctrl_numpad_5,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad6",
+    #                 file=Icons.spell_shaman_thunderstorm,
+    #                 hotkey=self.hk_ctrl_numpad_6,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad7",
+    #                 file=Icons.spell_holy_divinehymn,
+    #                 hotkey=self.hk_ctrl_numpad_7,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad8",
+    #                 file=Icons.spell_nature_tranquility,
+    #                 hotkey=self.hk_ctrl_numpad_7,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad9",
+    #                 file=Icons.spell_nature_tranquility,
+    #                 hotkey=self.hk_ctrl_numpad_7,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad10",
+    #                 file=Icons.spell_holy_symbolofhope,
+    #                 hotkey=self.hk_ctrl_numpad_10,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad11",
+    #                 file=Icons.spell_holy_unyieldingfaith,
+    #                 hotkey=self.hk_ctrl_numpad_11,
+    #             )
+    #             create_picture_button(
+    #                 name="CtrlNumpad12",
+    #                 file=Icons.spell_nature_shamanrage,
+    #                 hotkey=self.hk_ctrl_numpad_12,
+    #             )
+    #
+    #             # -------------------------------------------------------------
+    #             # Shift + Numpad 1 - 9
+    #             # -------------------------------------------------------------
+    #             create_colored_button(
+    #                 name="ButtonBarShift1To9a",
+    #                 bkcolor="E75638",
+    #                 text="Shift"
+    #             )
+    #             create_colored_button(
+    #                 name="ButtonBarShift1To9b",
+    #                 bkcolor="E75638",
+    #                 text="+Num"
+    #             )
+    #             create_colored_button(
+    #                 name="ButtonBarShift1To9c",
+    #                 bkcolor="E75638",
+    #                 text="1-9"
+    #             )
+    #
+    #             hk.SetPanelLayout(
+    #                 panel=main_panel.name,
+    #                 row_length=3,
+    #                 margin=1,
+    #                 button_width=36,
+    #                 button_height=36,
+    #             )
+    #
+    #             hk.TargetWin(window=main_panel.name)
+    #             hk.AlwaysOnTop()
+
     def build_control_panel(self):
-        WIDTH = 36
-        HEIGHT = 36
+        WIDTH = 24
+        HEIGHT = 24
 
         with hk.Command(name="AutoExec") as self.cmd_auto_exec:
             with hk.CreatePanel(name="MBControlPanel", x=0, y=60, width=120, height=960) as main_panel:
@@ -2512,190 +2810,195 @@ class HknScript(AttrsClass):
                 )
 
                 # -------------------------------------------------------------
+                # Login
+                # -------------------------------------------------------------
+                # for self.mode.
+
+                # -------------------------------------------------------------
                 # Alt + Numpad 1 - 12
                 # -------------------------------------------------------------
-                create_colored_button(
-                    name="ButtonBarAlt1To12a",
-                    bkcolor="E75638",
-                    text="Alt"
-                )
-                create_colored_button(
-                    name="ButtonBarAlt1To12b",
-                    bkcolor="E75638",
-                    text="+Num"
-                )
-                create_colored_button(
-                    name="ButtonBarAlt1To12c",
-                    bkcolor="E75638",
-                    text="1-12"
-                )
-
-                create_picture_button(
-                    name="Alt1",
-                    file=Icons.ability_hunter_misdirection,
-                    hotkey=self.hk_alt_numpad_1,
-                )
-                create_picture_button(
-                    name="Alt2",
-                    file=Icons.ability_mount_whitetiger,
-                    hotkey=self.hk_alt_numpad_2,
-                )
-                create_picture_button(
-                    name="Alt3",
-                    file=Icons.ability_hunter_aspectoftheviper,
-                    hotkey=self.hk_alt_numpad_3,
-                )
-                create_picture_button(
-                    name="Alt4",
-                    file=Icons.ability_druid_starfall,
-                    hotkey=self.hk_alt_numpad_4,
-                )
-                create_picture_button(
-                    name="Alt5",
-                    file=Icons.spell_nature_wispheal,
-                    hotkey=self.hk_alt_numpad_5,
-                )
-                create_picture_button(
-                    name="Alt6",
-                    file=Icons.spell_nature_bloodlust,
-                    hotkey=self.hk_alt_numpad_6,
-                )
-                create_picture_button(
-                    name="Alt7",
-                    file=Icons.spell_holy_powerwordbarrier,
-                    hotkey=self.hk_alt_numpad_7,
-                )
-                create_picture_button(
-                    name="Alt8",
-                    file=Icons.spell_holy_powerwordbarrier,
-                    hotkey=self.hk_alt_numpad_8,
-                )
-                create_picture_button(
-                    name="Alt9",
-                    file=Icons.spell_holy_auramastery,
-                    hotkey=self.hk_alt_numpad_9,
-                )
-                create_picture_button(
-                    name="Alt10",
-                    file=Icons.spell_nature_diseasecleansingtotem,
-                    hotkey=self.hk_alt_numpad_10,
-                )
-                create_picture_button(
-                    name="Alt11",
-                    file=Icons.spell_nature_tremortotem,
-                    hotkey=self.hk_alt_numpad_11,
-                )
-                create_picture_button(
-                    name="Alt12",
-                    file=Icons.spell_nature_strengthofearthtotem02,
-                    hotkey=self.hk_alt_numpad_12,
-                )
-
-                # -------------------------------------------------------------
-                # Ctrl + Numpad 1 - 12
-                # -------------------------------------------------------------
-                create_colored_button(
-                    name="ButtonBarCtrl1To12a",
-                    bkcolor="E75638",
-                    text="Ctrl"
-                )
-                create_colored_button(
-                    name="ButtonBarCtrl1To12b",
-                    bkcolor="E75638",
-                    text="+Num"
-                )
-                create_colored_button(
-                    name="ButtonBarCtrl1To12c",
-                    bkcolor="E75638",
-                    text="1-12"
-                )
-
-                create_picture_button(
-                    name="CtrlNumpad1",
-                    file=Icons.ability_theblackarrow,
-                    hotkey=self.hk_ctrl_numpad_1,
-                )
-                create_picture_button(
-                    name="CtrlNumpad2",
-                    file=Icons.spell_frost_iceshock,
-                    hotkey=self.hk_ctrl_numpad_2,
-                )
-                create_picture_button(
-                    name="CtrlNumpad3",
-                    file=Icons.spell_holy_dispelmagic,
-                    hotkey=self.hk_ctrl_numpad_3,
-                )
-                create_picture_button(
-                    name="CtrlNumpad4",
-                    file=Icons.spell_shadow_psychicscream,
-                    hotkey=self.hk_ctrl_numpad_4,
-                )
-                create_picture_button(
-                    name="CtrlNumpad5",
-                    file=Icons.ability_druid_typhoon,
-                    hotkey=self.hk_ctrl_numpad_5,
-                )
-                create_picture_button(
-                    name="CtrlNumpad6",
-                    file=Icons.spell_shaman_thunderstorm,
-                    hotkey=self.hk_ctrl_numpad_6,
-                )
-                create_picture_button(
-                    name="CtrlNumpad7",
-                    file=Icons.spell_holy_divinehymn,
-                    hotkey=self.hk_ctrl_numpad_7,
-                )
-                create_picture_button(
-                    name="CtrlNumpad8",
-                    file=Icons.spell_nature_tranquility,
-                    hotkey=self.hk_ctrl_numpad_7,
-                )
-                create_picture_button(
-                    name="CtrlNumpad9",
-                    file=Icons.spell_nature_tranquility,
-                    hotkey=self.hk_ctrl_numpad_7,
-                )
-                create_picture_button(
-                    name="CtrlNumpad10",
-                    file=Icons.spell_holy_symbolofhope,
-                    hotkey=self.hk_ctrl_numpad_10,
-                )
-                create_picture_button(
-                    name="CtrlNumpad11",
-                    file=Icons.spell_holy_unyieldingfaith,
-                    hotkey=self.hk_ctrl_numpad_11,
-                )
-                create_picture_button(
-                    name="CtrlNumpad12",
-                    file=Icons.spell_nature_shamanrage,
-                    hotkey=self.hk_ctrl_numpad_12,
-                )
-
-                # -------------------------------------------------------------
-                # Shift + Numpad 1 - 9
-                # -------------------------------------------------------------
-                create_colored_button(
-                    name="ButtonBarShift1To9a",
-                    bkcolor="E75638",
-                    text="Shift"
-                )
-                create_colored_button(
-                    name="ButtonBarShift1To9b",
-                    bkcolor="E75638",
-                    text="+Num"
-                )
-                create_colored_button(
-                    name="ButtonBarShift1To9c",
-                    bkcolor="E75638",
-                    text="1-9"
-                )
+                # create_colored_button(
+                #     name="ButtonBarAlt1To12a",
+                #     bkcolor="E75638",
+                #     text="Alt"
+                # )
+                # create_colored_button(
+                #     name="ButtonBarAlt1To12b",
+                #     bkcolor="E75638",
+                #     text="+Num"
+                # )
+                # create_colored_button(
+                #     name="ButtonBarAlt1To12c",
+                #     bkcolor="E75638",
+                #     text="1-12"
+                # )
+                #
+                # create_picture_button(
+                #     name="Alt1",
+                #     file=Icons.ability_hunter_misdirection,
+                #     hotkey=self.hk_alt_numpad_1,
+                # )
+                # create_picture_button(
+                #     name="Alt2",
+                #     file=Icons.ability_mount_whitetiger,
+                #     hotkey=self.hk_alt_numpad_2,
+                # )
+                # create_picture_button(
+                #     name="Alt3",
+                #     file=Icons.ability_hunter_aspectoftheviper,
+                #     hotkey=self.hk_alt_numpad_3,
+                # )
+                # create_picture_button(
+                #     name="Alt4",
+                #     file=Icons.ability_druid_starfall,
+                #     hotkey=self.hk_alt_numpad_4,
+                # )
+                # create_picture_button(
+                #     name="Alt5",
+                #     file=Icons.spell_nature_wispheal,
+                #     hotkey=self.hk_alt_numpad_5,
+                # )
+                # create_picture_button(
+                #     name="Alt6",
+                #     file=Icons.spell_nature_bloodlust,
+                #     hotkey=self.hk_alt_numpad_6,
+                # )
+                # create_picture_button(
+                #     name="Alt7",
+                #     file=Icons.spell_holy_powerwordbarrier,
+                #     hotkey=self.hk_alt_numpad_7,
+                # )
+                # create_picture_button(
+                #     name="Alt8",
+                #     file=Icons.spell_holy_powerwordbarrier,
+                #     hotkey=self.hk_alt_numpad_8,
+                # )
+                # create_picture_button(
+                #     name="Alt9",
+                #     file=Icons.spell_holy_auramastery,
+                #     hotkey=self.hk_alt_numpad_9,
+                # )
+                # create_picture_button(
+                #     name="Alt10",
+                #     file=Icons.spell_nature_diseasecleansingtotem,
+                #     hotkey=self.hk_alt_numpad_10,
+                # )
+                # create_picture_button(
+                #     name="Alt11",
+                #     file=Icons.spell_nature_tremortotem,
+                #     hotkey=self.hk_alt_numpad_11,
+                # )
+                # create_picture_button(
+                #     name="Alt12",
+                #     file=Icons.spell_nature_strengthofearthtotem02,
+                #     hotkey=self.hk_alt_numpad_12,
+                # )
+                #
+                # # -------------------------------------------------------------
+                # # Ctrl + Numpad 1 - 12
+                # # -------------------------------------------------------------
+                # create_colored_button(
+                #     name="ButtonBarCtrl1To12a",
+                #     bkcolor="E75638",
+                #     text="Ctrl"
+                # )
+                # create_colored_button(
+                #     name="ButtonBarCtrl1To12b",
+                #     bkcolor="E75638",
+                #     text="+Num"
+                # )
+                # create_colored_button(
+                #     name="ButtonBarCtrl1To12c",
+                #     bkcolor="E75638",
+                #     text="1-12"
+                # )
+                #
+                # create_picture_button(
+                #     name="CtrlNumpad1",
+                #     file=Icons.ability_theblackarrow,
+                #     hotkey=self.hk_ctrl_numpad_1,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad2",
+                #     file=Icons.spell_frost_iceshock,
+                #     hotkey=self.hk_ctrl_numpad_2,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad3",
+                #     file=Icons.spell_holy_dispelmagic,
+                #     hotkey=self.hk_ctrl_numpad_3,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad4",
+                #     file=Icons.spell_shadow_psychicscream,
+                #     hotkey=self.hk_ctrl_numpad_4,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad5",
+                #     file=Icons.ability_druid_typhoon,
+                #     hotkey=self.hk_ctrl_numpad_5,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad6",
+                #     file=Icons.spell_shaman_thunderstorm,
+                #     hotkey=self.hk_ctrl_numpad_6,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad7",
+                #     file=Icons.spell_holy_divinehymn,
+                #     hotkey=self.hk_ctrl_numpad_7,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad8",
+                #     file=Icons.spell_nature_tranquility,
+                #     hotkey=self.hk_ctrl_numpad_7,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad9",
+                #     file=Icons.spell_nature_tranquility,
+                #     hotkey=self.hk_ctrl_numpad_7,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad10",
+                #     file=Icons.spell_holy_symbolofhope,
+                #     hotkey=self.hk_ctrl_numpad_10,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad11",
+                #     file=Icons.spell_holy_unyieldingfaith,
+                #     hotkey=self.hk_ctrl_numpad_11,
+                # )
+                # create_picture_button(
+                #     name="CtrlNumpad12",
+                #     file=Icons.spell_nature_shamanrage,
+                #     hotkey=self.hk_ctrl_numpad_12,
+                # )
+                #
+                # # -------------------------------------------------------------
+                # # Shift + Numpad 1 - 9
+                # # -------------------------------------------------------------
+                # create_colored_button(
+                #     name="ButtonBarShift1To9a",
+                #     bkcolor="E75638",
+                #     text="Shift"
+                # )
+                # create_colored_button(
+                #     name="ButtonBarShift1To9b",
+                #     bkcolor="E75638",
+                #     text="+Num"
+                # )
+                # create_colored_button(
+                #     name="ButtonBarShift1To9c",
+                #     bkcolor="E75638",
+                #     text="1-9"
+                # )
 
                 hk.SetPanelLayout(
                     panel=main_panel.name,
                     row_length=3,
                     margin=1,
-                    button_width=36,
-                    button_height=36,
+                    button_width=24,
+                    button_height=24,
                 )
 
                 hk.TargetWin(window=main_panel.name)

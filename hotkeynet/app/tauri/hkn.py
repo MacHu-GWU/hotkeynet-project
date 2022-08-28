@@ -51,7 +51,7 @@ class HknScript(AttrsClass):
     def build_labels(self):
         self.labels = [
             hk.Label.make(name=char.window.label, window=char.window.title)
-            for char in self.mode.managed_chars
+            for char in self.mode.login_label_and_account_pairs
         ]
         self.n_labels = len(self.labels)
 
@@ -88,8 +88,8 @@ class HknScript(AttrsClass):
         with hk.Command(
             name="LaunchAndRenameAllGameClient",
         ) as self.cmd_launch_and_rename_all_game_client:
-            for char in self.mode.managed_chars:
-                self.cmd_launch_and_rename_game_client.call(args=[char.window.title, ])
+            for window, _ in self.mode.login_window_and_account_pairs:
+                self.cmd_launch_and_rename_game_client.call(args=[window.title, ])
 
     def build_cmd_bring_window_to_foreground(self):
         """

@@ -63,5 +63,5 @@ class AccountEnum(Enum):
     account_fatmulti29 = load_account("fatmulti29")
 
 
-class AccountHelper(EnumHelper[AccountEnum, Account]):
+class AccountEnumHelper(EnumHelper[AccountEnum, Account]):
     enum_class = AccountEnum

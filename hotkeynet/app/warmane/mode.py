@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 """
-第一步先定义游戏用什么窗口, 什么分辨率, 上哪些角色
+第一步先定义游戏用什么窗口, 什么分辨率, 上哪些角色.
 """
 
 import typing as T
@@ -10,6 +10,7 @@ import attr
 from attrs_mate import AttrsClass
 
 import hotkeynet as hk
+from hotkeynet.game.wow.model import Account
 from hotkeynet.game.wow.wlk import (
     Window,
     Talent as TL,
@@ -30,17 +31,25 @@ from .paths import path_warmane_hkn
 @attr.s
 class Mode(AttrsClass):
     """
-    代表你使用多开脚本进行游戏的设置, 包含了以下内容:
+    代表你使用多开脚本进行游戏的设置, 设置包含了以下内容:
 
     1. 游戏窗口的位置, 分辨率
     2. 上哪些角色的哪个天赋
     3. 每个角色在哪个窗口中
-    4. 各个角色分别扮演团队中的什么位置
-    5. 等等
+    4. 各个角色分别扮演团队中的什么角色
+
+    :param game_client: 与客户端有关的设置
+    :param active_chars: 指定要使用哪些角色进行游戏
+    :param login_chars: 指定要登录哪些角色. 要进行游戏的角色自动会被视为需要登录.
+        如果 login_chars 和 active_chars 的设置有冲突, 则以 active_chars 为准.
+    :param hkn_script: HotkeyNet 脚本的按键定义.
 
     **注**
 
-    1. 所有的设置游戏模式的方法都必须要以 use_ 开头! 内部实现依赖于这个来做一些工作.
+    1. 这个类有很多 @classmethod 的 工厂函数, 可以用来创建 Mode 的实例.
+    2. 所有的工厂函数都必须要以 use_ 开头! 内部实现依赖于这个来做一些工作.
+
+    **设计思想**
     """
     game_client: GameClient = attr.ib(factory=GameClient)
     active_chars: T.List[Character] = attr.ib(factory=list)
@@ -62,9 +71,9 @@ class Mode(AttrsClass):
         self._ensure_no_duplicate_window(value)
 
     def __attrs_post_init__(self):
+        # 所有关于 characters 列表的定义
         self.active_chars = CharacterHelper.sort_chars_by_window_label(self.active_chars)
         self.login_chars = CharacterHelper.sort_chars_by_window_label(self.login_chars)
-        self._resolve_login()
         self.hkn_script = HknScript(mode=self)
 
     def dump(self, verbose: bool = False):
@@ -72,18 +81,26 @@ class Mode(AttrsClass):
             self.hkn_script.script.render(verbose=verbose),
         )
 
-    def _resolve_login(self):
-        self.occupied_labels: T.Set[str] = set()
-        self.managed_chars: T.List[Character] = list()
+    @property
+    def login_window_and_account_pairs(self) -> T.List[T.Tuple[Window, Account]]:
+        """
+
+        """
+        label_set: T.Set[str] = set()
+        window_and_account_pairs: T.List[T.Tuple[Window, Account]] = list()
         for char in self.active_chars:
-            if char.window.label not in self.occupied_labels:
-                self.managed_chars.append(char)
-                self.occupied_labels.add(char.window.label)
+            if char.window.label not in label_set:
+                window_and_account_pairs.append((char.window, char.account))
+                label_set.add(char.window.label)
         for char in self.login_chars:
-            if char.window.label not in self.occupied_labels:
-                self.managed_chars.append(char)
-                self.occupied_labels.add(char.window.label)
-        self.managed_chars = CharacterHelper.sort_chars_by_window_label(self.managed_chars)
+            if char.window.label not in label_set:
+                window_and_account_pairs.append((char.window, char.account))
+                label_set.add(char.window.label)
+        window_and_account_pairs = list(sorted(
+            window_and_account_pairs,
+            key=lambda x: x[0]
+        ))
+        return window_and_account_pairs
 
     @property
     def lbs_all(self) -> T.List[str]:
