@@ -3030,7 +3030,7 @@ class HknScript(AttrsClass):
 
                 hk.SetPanelLayout(
                     panel=main_panel.name,
-                    row_length=3,
+                    row_length=5,
                     margin=1,
                     button_width=24,
                     button_height=24,

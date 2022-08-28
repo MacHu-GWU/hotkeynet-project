@@ -7,11 +7,11 @@ from hotkeynet.app.warmane.mode import Mode
 # -----------------------------------------------------------------------------
 
 # mode = Mode.use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu()
-# mode = Mode.use_solo_raid_10p_batlefury_luxiaofeng_core_team()
+# mode = Mode.use_solo_raid_10p_batlefury_luxiao feng_core_team()
 
 # --- Montly Login ---
-mode = Mode.use_22p_monthly_login_1()
-# mode = Mode.use_22p_monthly_login_2()
+# mode = Mode.use_22p_monthly_login_1()
+mode = Mode.use_22p_monthly_login_2()
 
 # -----------------------------------------------------------------------------
 # Lordaeron
