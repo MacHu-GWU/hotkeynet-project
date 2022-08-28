@@ -210,3 +210,27 @@ class Mode(AttrsClass):
             login_chars=[],
             active_chars=ActiveCharactersFactory.make_team_solo_dungeon_lgqs_abcde(),
         )
+
+    # @classmethod
+    # def use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(cls):
+    #     return cls(
+    #         game_client=GameClient().use_1920_1080_resolution(),
+    #         # game_client=GameClient().use_1600_900_resolution(),
+    #         # game_client=GameClient().use_1176_664_resolution(),
+    #         login_chars=LoginCharactersFactory.make_chars_10p(),
+    #         active_chars=ActiveCharactersFactory.make_team_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(),
+    #     )
+
+    @classmethod
+    def use_22p_monthly_login_1(cls):
+        return cls(
+            game_client=GameClient().use_1600_900_resolution(),
+            active_chars=ActiveCharactersFactory.make_team_22p_monthly_login_1(),
+        )
+
+    @classmethod
+    def use_22p_monthly_login_2(cls):
+        return cls(
+            game_client=GameClient().use_1600_900_resolution(),
+            active_chars=ActiveCharactersFactory.make_team_22p_monthly_login_2(),
+        )

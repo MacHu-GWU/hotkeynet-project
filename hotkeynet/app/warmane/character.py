@@ -912,7 +912,7 @@ class _ActiveCharactersFactory:
 
         return chars
 
-    __anchore_active_chars_solo_dungeon = None
+    __anchor_make_team_warmane_solo_dungeon = None
 
     def make_team_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu(self) -> T.List[Character]:
         """
@@ -1012,7 +1012,7 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti26_lgsmp_pve_resto_shaman(),
         ])
 
-    __anchore_active_chars_daily_quest = None
+    __anchore_make_team_warmane_daily_quest = None
 
     # === 灰熊丘陵日常刷金 ===
     def make_team_daily_gold_farm_team_1_druid(self) -> T.List[Character]:
@@ -1099,7 +1099,7 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti5_kangliu_pve_shadow_priest(),
         ])
 
-    __anchore_active_chars_raid_10 = None
+    __anchor_make_team_warmane_raid_10 = None
 
     def make_team_solo_raid_10p_batlefury_luxiaofeng_core_team(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
@@ -1115,10 +1115,65 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_unholy_tank_dk().set_is_leader_2().set_tank_2(),
         ])
 
+    __anchor_make_team_warmane_monthly_login = None
+
+    def make_team_22p_monthly_login_1(self) -> T.List[Character]:
+        """
+        由于 Warmane 角色很久不登录的话, 名字就要被收回. 所以隔 1 - 2 个月就要登录一次.
+
+        这事第一批次.
+        """
+        return self._set_team_leader_and_tank(chars=[
+            (
+                CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala()
+                    .set_is_leader_1().set_tank_1().set_dr_pala_1()
+                    .set_is_leader_2().set_tank_2().set_dr_pala_2()
+            ),
+            CharacterFactory.make_char_fatmulti2_quentin_pve_elemental_shaman(),
+            CharacterFactory.make_char_fatmulti3_opiitou_pve_balance_druid(),
+            CharacterFactory.make_char_fatmulti4_swagsonic_pve_arcane_mage(),
+            CharacterFactory.make_char_fatmulti5_kangliu_pve_shadow_priest(),
+            CharacterFactory.make_char_fitsheep_kindhearted_pve_demonology_warlock(),
+            CharacterFactory.make_char_fatmulti6_kapacuk_pve_marksman_hunter(),
+            CharacterFactory.make_char_fatmulti8_bunnysisters_pve_resto_druid(),
+            CharacterFactory.make_char_fatmulti9_glowyy_pve_holy_pala().set_dr_pala_2(),
+            CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_unholy_tank_dk(),
+            CharacterFactory.make_char_fatmulti11_litgugua_pve_balance_druid(),
+            CharacterFactory.make_char_fatmulti16_litguguf_pvp_balance_druid(),
+            CharacterFactory.make_char_fatmulti13_litguguc_pve_balance_druid(),
+            CharacterFactory.make_char_fatmulti14_litgugud_pve_balance_druid(),
+            CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest(),
+            CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest(),
+            CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest(),
+            CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest(),
+            CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman(),
+            CharacterFactory.make_char_fatmulti24_lgsmn_pve_elemental_shaman(),
+            CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman(),
+            CharacterFactory.make_char_fatmulti26_lgsmp_pve_elemental_shaman(),
+        ])
+
+    def make_team_22p_monthly_login_2(self) -> T.List[Character]:
+        """
+        由于 Warmane 角色很久不登录的话, 名字就要被收回. 所以隔 1 - 2 个月就要登录一次.
+
+        这事第二批次.
+        """
+        return self._set_team_leader_and_tank(chars=[
+            (
+                CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk()
+                    .set_is_leader_1().set_tank_1().set_dr_pala_1()
+                    .set_is_leader_2().set_tank_2().set_dr_pala_2()
+            ),
+            CharacterFactory.make_char_fatmulti15_litgugue_pvp_balance_druid(),
+            CharacterFactory.make_char_fatmulti16_litguguf_pvp_balance_druid(),
+            CharacterFactory.make_char_fatmulti17_litgugug_pvp_balance_druid(),
+            CharacterFactory.make_char_fatmulti18_litguguh_pvp_balance_druid(),
+        ])
+
     # --------------------------------------------------------------------------
     # Lordaeron
     # --------------------------------------------------------------------------
-    __anchore_lordaeron = None
+    __anchor_make_team_lordaeron_server = None
 
     def make_team_solo_dungeon_lgqs_abcde(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
