@@ -33,6 +33,10 @@ class Window(AttrsClass):
             label=f"w{str(index).zfill(2)}",
         )
 
+    @property
+    def index(self) -> int:
+        return int(self.label[1:])
+
 
 @attr.s
 class Account(AttrsClass):

@@ -287,7 +287,7 @@ class General:
 
     MOUNT_UP_MACRO_KEY_NUMPAD_11_DIVIDE = NUMPAD_11_DIVIDE
     """
-    The ``MountUp`` Macro. 简单来说逻辑是如果已经在 坐骑上, 或是进入了飞行模式, 则 
+    The ``Mount-Up`` Macro. 简单来说逻辑是如果已经在 坐骑上, 或是进入了飞行模式, 则 
     stopmacro; 其他情况根据当地是否可以飞行, 使用不同的坐骑和进入德鲁伊飞行形态::
 
         #showtooltip
@@ -299,7 +299,7 @@ class General:
 
     MOUNT_DOWN_MACRO_CTRL_OEM3_WAVE = CTRL_(OEM3_WAVE_OR_BACK_QUOTE)
     """
-    The ``MountDown`` Macro. 简单来说就是尝试清除掉坐骑和飞行形态的光环::
+    The ``Mount-Down`` Macro. 简单来说就是尝试清除掉坐骑和飞行形态的光环::
     
         #showtooltip
         /cancelaura ${YourLandMountSpellName}
@@ -309,14 +309,17 @@ class General:
 
     LAND_MOUNT_SPELL_KEY_CTRL_Z = CTRL_(Z)  # 陆地坐骑, 不是宏
     """
-    陆地专用坐骑.
+    陆地专用坐骑. 适合在战场中使用. 战场中 Mount-Up 宏可能不起作用. 因为战场区域可能是
+    flyable 的, 例如冬拥湖, 但是一旦开战, 就不能飞了, 但是宏却还以为可以飞. 所以这个时候
+    就应该直接用陆地坐骑来控制.
     """
 
     EAT_FOOD_KEY_CTRL_T = CTRL_(T)  # 吃喝食物
 
     BUFF_SELF_MACRO_KEY_8 = KEY_8  # 给自己刷 Buff 的宏
     """
-    用于给自己刷 Buff 的宏或技能, 这个因职业而异
+    用于给自己刷 Buff 的宏或技能, 这个因职业而异. 这里的关键是有的技能是开关光环类, 你可以
+    在前面加 ! 号, 表示如果已经开了这个光环就不要再开了, 否则开启这个光环.
     
     例如防惩骑士的是::
     

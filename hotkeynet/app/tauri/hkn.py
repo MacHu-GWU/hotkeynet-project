@@ -1322,9 +1322,9 @@ class HknScript(AttrsClass):
         #         hk.Key.trigger()
         # 
         # with hk.Hotkey(
-        #     id="Shift F1",
+        #     id="Shift F2",
         #     key=KN.SCROLOCK_ON(KN.SHIFT_(KN.F1)),
-        # ) as self.hk_shift_f1:
+        # ) as self.hk_shift_f2:
         #     with hk.SendLabel(
         #         to=self.mode.lbs_all,
         #     ):
@@ -1666,22 +1666,6 @@ class HknScript(AttrsClass):
         #     ):
         #         hk.Key.trigger()
 
-        # pala put cleansing skill on Action Bar Key T
-        # shaman put curse toxin skill on Action Bar Key on T
-        # druid put remove curse skill on Action Bar Key on T
-        # mage put remove curse skill on Action Bar Key on T
-        # priest put dispel magic skill on Action Bar Key on T
-        with hk.Hotkey(
-            id="T - 所有驱散职业随机选择团队成员驱散",
-            key=KN.SCROLOCK_ON(KN.T),
-        ) as self.hk_t_dispel_raid:
-            with hk.SendLabel(
-                id=TC.dispeler.name,
-                to=self.mode.lbs_by_tc(TC.dispeler),
-            ):
-                act.Target.TARGET_RAID()
-                hk.Key.trigger()
-
         # with hk.Hotkey(
         #     id="G",
         #     key=KN.SCROLOCK_ON(KN.G),
@@ -1721,6 +1705,25 @@ class HknScript(AttrsClass):
             ):
                 act.DK.UNHOLY_SPEC_CORPSE_EXPLOSION_ALF_F()
 
+    def build_hk_t_dispel(self):
+        """
+        pala put cleansing skill on Action Bar Key T
+        shaman put curse toxin skill on Action Bar Key on T
+        druid put remove curse skill on Action Bar Key on T
+        mage put remove curse skill on Action Bar Key on T
+        priest put dispel magic skill on Action Bar Key on T
+        """
+        with hk.Hotkey(
+            id="T - 所有驱散职业随机选择团队成员驱散",
+            key=KN.SCROLOCK_ON(KN.T),
+        ) as self.hk_t_dispel_raid:
+            with hk.SendLabel(
+                id=TC.dispeler.name,
+                to=self.mode.lbs_by_tc(TC.dispeler),
+            ):
+                act.Target.TARGET_RAID()
+                hk.Key.trigger()
+
     def build_hk_r_interrupt(self):
         talent_category_and_skill_pairs = [
             # (
@@ -1754,6 +1757,7 @@ class HknScript(AttrsClass):
     def build_hk_group_07(self):
         self.build_hk_skills()
         self.build_hk_r_interrupt()
+        self.build_hk_t_dispel()
 
     # -------------------------------------------------------------------------
     # 实现 Alt + 小键盘 1-12 的快捷键功能. 通常是一些不常用, 但是关键时刻必备的技能.

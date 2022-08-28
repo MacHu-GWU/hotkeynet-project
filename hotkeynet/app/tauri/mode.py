@@ -18,6 +18,7 @@ from hotkeynet.game.wow.mop import (
 
 from .character import (
     Character,
+    CharacterFactory,
     LoginCharactersFactory,
     ActiveCharactersFactory,
     CharacterHelper,
@@ -183,10 +184,26 @@ class Mode(AttrsClass):
 
     @classmethod
     def use_solo_dungeon_carrot_flower_team(cls):
-        return cls(
+        mode = cls(
             game_client=GameClient().use_1920_1080_resolution(),
             # game_client=GameClient().use_1600_900_resolution(),
             # game_client=GameClient().use_1176_664_resolution(),
             # login_chars=LoginCharactersFactory.make_chars_10p(),
             active_chars=ActiveCharactersFactory.make_team_solo_dungeon_carrot_flower_team(),
         )
+        mode.hkn_script.hk_spread_matrix_1.blocks = []
+        with mode.hkn_script.hk_spread_matrix_1():
+            mode.hkn_script._go_left([
+                CharacterFactory.make_char_fatmulti2_carrotroot_pve_elemental_shaman().window.index,
+            ])
+            mode.hkn_script._go_right([
+                CharacterFactory.make_char_fatmulti3_carrotstem_pve_balance_druid().window.index,
+            ])
+            mode.hkn_script._go_left_down([
+                CharacterFactory.make_char_fatmulti4_carrotleaf_pve_frost_mage().window.index,
+            ])
+            mode.hkn_script._go_right_down([
+                CharacterFactory.make_char_fatmulti5_carrotseed_pve_holy_priest().window.index,
+            ])
+
+        return mode
