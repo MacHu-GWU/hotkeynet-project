@@ -11,7 +11,6 @@ class TestMode:
         hk.context.reset()
         mode = Mode.use_solo_dungeon_qs_abcde()
         mode.hkn_script.script.render(verbose=False),
-        print(mode.launched_windows)
 
 
 if __name__ == "__main__":
