@@ -75,7 +75,7 @@ class HknScript(AttrsClass):
         ) as self.cmd_launch_and_rename_game_client:
             with hk.SendPC():
                 hk.Run.make(self.mode.game_client.wow_exe_path)
-                hk.RenameWin(old="World of Warcraft", new=hk.CommandArgEnum.Arg1)
+                hk.RenameWin(old="魔", new=hk.CommandArgEnum.Arg1)
 
     def build_cmd_launch_and_rename_all_game_client(self):
         """
