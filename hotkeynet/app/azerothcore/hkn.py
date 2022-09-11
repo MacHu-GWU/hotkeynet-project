@@ -886,7 +886,7 @@ class HknScript(AttrsClass):
         ) as self.hk_6:
             send_label_list = self.build_actions_default(
                 key=KN.KEY_6,
-                healer_target_focus=True,  # 选择 焦点
+                healer_target_focus_target=True,  # 选择 焦点
             )
 
     def build_hk_7(self):
@@ -896,7 +896,7 @@ class HknScript(AttrsClass):
         ) as self.hk_7:
             send_label_list = self.build_actions_default(
                 key=KN.KEY_7,
-                healer_target_focus=True,  # 选择 焦点
+                healer_target_focus_target=True,  # 选择 焦点
             )
 
     def build_hk_8_buff_self(self):
