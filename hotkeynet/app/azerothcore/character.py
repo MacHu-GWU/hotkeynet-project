@@ -33,44 +33,84 @@ class _CharacterFactory:
     这样我们可以通过调用这些 可以被搜索定位, 名字人类可理解 的函数方便的创建游戏角色的实例.
     """
 
-    def make_char_qsa_pve_protect_pala(self) -> Character:
+    def make_char_ra_pve_protect_pala(self) -> Character:
         return Character(
             account=AccountEnum.account_fat01.value,
-            name="qsa",
+            name="ra",
             talent=TL.paladin_pve_protect,
             window=Window.make(1),
         )
 
-    def make_char_qsb_pve_retri_pala(self) -> Character:
+    def make_char_rb_pve_elemental_shaman(self) -> Character:
         return Character(
             account=AccountEnum.account_fat02.value,
-            name="qsb",
-            talent=TL.paladin_pve_retri,
+            name="rb",
+            talent=TL.shaman_pve_elemental,
             window=Window.make(2),
         )
 
-    def make_char_qsc_pve_retri_pala(self) -> Character:
+    def make_char_rc_pve_balance_druid(self) -> Character:
         return Character(
             account=AccountEnum.account_fat03.value,
-            name="qsc",
-            talent=TL.paladin_pve_retri,
+            name="rc",
+            talent=TL.druid_pve_balance,
             window=Window.make(3),
         )
 
-    def make_char_qsd_pve_retri_pala(self) -> Character:
+    def make_char_rd_pve_arcane_mage(self) -> Character:
         return Character(
             account=AccountEnum.account_fat04.value,
-            name="qsd",
-            talent=TL.paladin_pve_retri,
+            name="rd",
+            talent=TL.mage_pve_arcane,
             window=Window.make(4),
         )
 
-    def make_char_qse_pve_retri_pala(self) -> Character:
+    def make_char_re_pve_shadow_priest(self) -> Character:
         return Character(
             account=AccountEnum.account_fat05.value,
-            name="qse",
-            talent=TL.paladin_pve_holy,
+            name="re",
+            talent=TL.priest_pve_shadow,
             window=Window.make(5),
+        )
+
+    def make_char_rf_pve_demon_warlock(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fat06.value,
+            name="rf",
+            talent=TL.warlock_pve_demonology,
+            window=Window.make(6),
+        )
+
+    def make_char_rg_pve_marksman_hunter(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fat07.value,
+            name="rg",
+            talent=TL.hunter_pve_marksman,
+            window=Window.make(7),
+        )
+
+    def make_char_rh_pve_resto_druid(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fat08.value,
+            name="rh",
+            talent=TL.druid_pve_resto,
+            window=Window.make(8),
+        )
+
+    def make_char_ri_pve_holy_paladin(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fat09.value,
+            name="ri",
+            talent=TL.paladin_pve_holy,
+            window=Window.make(9),
+        )
+
+    def make_char_rj_pve_blood_tank_dk(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fat10.value,
+            name="rj",
+            talent=TL.dk_pve_blood_tank,
+            window=Window.make(10),
         )
 
 
@@ -78,13 +118,18 @@ CharacterFactory = _CharacterFactory()
 
 
 class _LoginCharactersFactory:
-    def _make_chars_1_to_5(self) -> T.List[Character]:
+    def make_chars_1_to_10(self) -> T.List[Character]:
         return [
-            CharacterFactory.make_char_qsa_pve_protect_pala().set_inactive(),
-            CharacterFactory.make_char_qsb_pve_retri_pala().set_inactive(),
-            CharacterFactory.make_char_qsc_pve_retri_pala().set_inactive(),
-            CharacterFactory.make_char_qsd_pve_retri_pala().set_inactive(),
-            CharacterFactory.make_char_qse_pve_retri_pala().set_inactive(),
+            CharacterFactory.make_char_ra_pve_protect_pala().set_inactive(),
+            CharacterFactory.make_char_rb_pve_elemental_shaman().set_inactive(),
+            CharacterFactory.make_char_rc_pve_balance_druid().set_inactive(),
+            CharacterFactory.make_char_rd_pve_arcane_mage().set_inactive(),
+            CharacterFactory.make_char_re_pve_shadow_priest().set_inactive(),
+            CharacterFactory.make_char_rf_pve_demon_warlock().set_inactive(),
+            CharacterFactory.make_char_rg_pve_marksman_hunter().set_inactive(),
+            CharacterFactory.make_char_rh_pve_resto_druid().set_inactive(),
+            CharacterFactory.make_char_ri_pve_holy_paladin().set_inactive(),
+            CharacterFactory.make_char_rj_pve_blood_tank_dk().set_inactive(),
         ]
 
 
@@ -194,22 +239,47 @@ class _ActiveCharactersFactory:
 
         return chars
 
-    __anchor_make_team_warmane_solo_dungeon = None
+    __anchor_make_team_acore_solo_dungeon = None
 
-    def make_team_solo_dungeon_qs_abcde(self) -> T.List[Character]:
+    # def make_team_solo_dungeon_qs_abcde(self) -> T.List[Character]:
+    #     """
+    #     主力 5 人组
+    #     """
+    #     return self._set_team_leader_and_tank(chars=[
+    #         (
+    #             CharacterFactory.make_char_ra_pve_protect_pala()
+    #                 .set_is_leader_1().set_tank_1().set_dr_pala_1()
+    #                 .set_is_leader_2().set_tank_2().set_dr_pala_2()
+    #         ),
+    #         CharacterFactory.make_char_qsb_pve_retri_pala(),
+    #         CharacterFactory.make_char_qsc_pve_retri_pala(),
+    #         CharacterFactory.make_char_qsd_pve_retri_pala(),
+    #         CharacterFactory.make_char_qse_pve_retri_pala(),
+    #     ])
+
+    __anchore_make_raid_acore_solo_raid = None
+
+    def make_team_solo_raid_10_core_team(self) -> T.List[Character]:
         """
         主力 5 人组
         """
         return self._set_team_leader_and_tank(chars=[
             (
-                CharacterFactory.make_char_qsa_pve_protect_pala()
+                CharacterFactory.make_char_ra_pve_protect_pala()
                     .set_is_leader_1().set_tank_1().set_dr_pala_1()
-                    .set_is_leader_2().set_tank_2().set_dr_pala_2()
             ),
-            CharacterFactory.make_char_qsb_pve_retri_pala(),
-            CharacterFactory.make_char_qsc_pve_retri_pala(),
-            CharacterFactory.make_char_qsd_pve_retri_pala(),
-            CharacterFactory.make_char_qse_pve_retri_pala(),
+            CharacterFactory.make_char_rb_pve_elemental_shaman(),
+            CharacterFactory.make_char_rc_pve_balance_druid(),
+            CharacterFactory.make_char_rd_pve_arcane_mage(),
+            CharacterFactory.make_char_re_pve_shadow_priest(),
+            CharacterFactory.make_char_rf_pve_demon_warlock(),
+            CharacterFactory.make_char_rg_pve_marksman_hunter(),
+            CharacterFactory.make_char_rh_pve_resto_druid(),
+            CharacterFactory.make_char_ri_pve_holy_paladin().set_dr_pala_2(),
+            (
+                CharacterFactory.make_char_rj_pve_blood_tank_dk()
+                    .set_is_leader_2().set_tank_2()
+            ),
         ])
 
 
