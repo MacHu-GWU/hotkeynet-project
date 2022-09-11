@@ -34,6 +34,11 @@ class AccountEnum(Enum):
     account_fat03 = load_account("fat03")
     account_fat04 = load_account("fat04")
     account_fat05 = load_account("fat05")
+    account_fat06 = load_account("fat06")
+    account_fat07 = load_account("fat07")
+    account_fat08 = load_account("fat08")
+    account_fat09 = load_account("fat09")
+    account_fat10 = load_account("fat10")
 
 
 class AccountEnumHelper(EnumHelper[AccountEnum, Account]):
