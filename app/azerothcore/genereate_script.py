@@ -5,7 +5,8 @@ from hotkeynet.app.azerothcore.mode import Mode
 # -----------------------------------------------------------------------------
 # Azerothcore
 # -----------------------------------------------------------------------------
-mode = Mode.use_solo_raid_10_core_team()
+# mode = Mode.use_solo_raid_10_core_team()
+mode = Mode.use_solo_dungeon_r_abcde_core_team()
 
 # -----------------------------------------------------------------------------
 # Don't Touch

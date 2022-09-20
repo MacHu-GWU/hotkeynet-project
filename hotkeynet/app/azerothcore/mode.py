@@ -217,3 +217,13 @@ class Mode(AttrsClass):
             login_chars=LoginCharactersFactory.make_chars_1_to_10(),
             active_chars=ActiveCharactersFactory.make_team_solo_raid_10_core_team(),
         )
+
+    @classmethod
+    def use_solo_dungeon_r_abcde_core_team(cls):
+        return cls(
+            game_client=GameClient().use_1920_1080_resolution(),
+            # game_client=GameClient().use_1600_900_resolution(),
+            # game_client=GameClient().use_1176_664_resolution(),
+            login_chars=LoginCharactersFactory.make_chars_1_to_5(),
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_5_core_team(),
+        )

@@ -1089,7 +1089,6 @@ class Priest:
     HEAL_BOT_TARGET_RAID_FRAME = lambda: ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
     HEAL_BOT_HOLY_SPEC_FLASH_HEAL = lambda: ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
     HEAL_BOT_POWER_WORD_SHIELD = lambda: ClickMouse(button=MOUSE_RButton)  # 真言术盾
-    HEAL_BOT_RENEW = lambda: ClickMouse(button=MOUSE_MButton)  # 恢复
 
     # Shift | Alt | Ctrl + Left
     HEAL_BOT_FLASH_HEAL = lambda: ModifiedClickMouse.shift_left_click()  # 快速治疗
@@ -1098,8 +1097,10 @@ class Priest:
 
     # Shift | Alt | Ctrl + Right
     HEAL_BOT_PENANCE = lambda: ModifiedClickMouse.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
-    HEAL_BOT_CIRCLE_OF_HEALING = lambda: ModifiedClickMouse.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
+    HEAL_BOT_RENEW = lambda: ModifiedClickMouse.shift_right_click() # 恢复
     HEAL_BOT_DISPEL_MAGIC = lambda: ModifiedClickMouse.ctrl_right_click()  # 驱散魔法
+
+    HEAL_BOT_HOLY_SPEC_CIRCLE_OF_HEAL = lambda: ModifiedClickMouse.ctrl_middle_click() # 治疗之环 (神圣系天赋, AOE 治疗)
 
 
 convert_to_key_maker(Priest)

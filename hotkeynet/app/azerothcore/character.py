@@ -73,6 +73,14 @@ class _CharacterFactory:
             window=Window.make(5),
         )
 
+    def make_char_re_pve_holy_priest(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fat05.value,
+            name="re",
+            talent=TL.priest_pve_holy,
+            window=Window.make(5),
+        )
+
     def make_char_rf_pve_demon_warlock(self) -> Character:
         return Character(
             account=AccountEnum.account_fat06.value,
@@ -118,6 +126,15 @@ CharacterFactory = _CharacterFactory()
 
 
 class _LoginCharactersFactory:
+    def make_chars_1_to_5(self) -> T.List[Character]:
+        return [
+            CharacterFactory.make_char_ra_pve_protect_pala().set_inactive(),
+            CharacterFactory.make_char_rb_pve_elemental_shaman().set_inactive(),
+            CharacterFactory.make_char_rc_pve_balance_druid().set_inactive(),
+            CharacterFactory.make_char_rd_pve_arcane_mage().set_inactive(),
+            CharacterFactory.make_char_re_pve_shadow_priest().set_inactive(),
+        ]
+
     def make_chars_1_to_10(self) -> T.List[Character]:
         return [
             CharacterFactory.make_char_ra_pve_protect_pala().set_inactive(),
@@ -261,12 +278,12 @@ class _ActiveCharactersFactory:
 
     def make_team_solo_raid_10_core_team(self) -> T.List[Character]:
         """
-        主力 5 人组
+        主力 10 人组
         """
         return self._set_team_leader_and_tank(chars=[
             (
                 CharacterFactory.make_char_ra_pve_protect_pala()
-                    .set_is_leader_1().set_tank_1().set_dr_pala_1()
+                .set_is_leader_1().set_tank_1().set_dr_pala_1()
             ),
             CharacterFactory.make_char_rb_pve_elemental_shaman(),
             CharacterFactory.make_char_rc_pve_balance_druid(),
@@ -278,8 +295,24 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_ri_pve_holy_paladin().set_dr_pala_2(),
             (
                 CharacterFactory.make_char_rj_pve_blood_tank_dk()
-                    .set_is_leader_2().set_tank_2()
+                .set_is_leader_2().set_tank_2()
             ),
+        ])
+
+    def make_team_solo_dungeon_5_core_team(self) -> T.List[Character]:
+        """
+        主力 5 人组
+        """
+        return self._set_team_leader_and_tank(chars=[
+            (
+                CharacterFactory.make_char_ra_pve_protect_pala()
+                    .set_is_leader_1().set_tank_1().set_dr_pala_1()
+                    .set_is_leader_2().set_tank_2().set_dr_pala_2()
+            ),
+            CharacterFactory.make_char_rb_pve_elemental_shaman(),
+            CharacterFactory.make_char_rc_pve_balance_druid(),
+            CharacterFactory.make_char_rd_pve_arcane_mage(),
+            CharacterFactory.make_char_re_pve_holy_priest(),
         ])
 
 

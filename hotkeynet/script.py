@@ -621,7 +621,7 @@ class ModifiedClickMouse:
 
     @classmethod
     def shift_right_click(cls):
-        return cls._make(modifier=KN.SHIFT, button=KN.MOUSE_LButton)
+        return cls._make(modifier=KN.SHIFT, button=KN.MOUSE_RButton)
 
     @classmethod
     def shift_middle_click(cls):
@@ -633,7 +633,7 @@ class ModifiedClickMouse:
 
     @classmethod
     def alt_right_click(cls):
-        return cls._make(modifier=KN.ALT, button=KN.MOUSE_LButton)
+        return cls._make(modifier=KN.ALT, button=KN.MOUSE_RButton)
 
     @classmethod
     def alt_middle_click(cls):
@@ -645,7 +645,7 @@ class ModifiedClickMouse:
 
     @classmethod
     def ctrl_right_click(cls):
-        return cls._make(modifier=KN.CTRL, button=KN.MOUSE_LButton)
+        return cls._make(modifier=KN.CTRL, button=KN.MOUSE_RButton)
 
     @classmethod
     def ctrl_middle_click(cls):

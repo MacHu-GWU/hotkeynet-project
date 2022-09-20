@@ -951,6 +951,11 @@ class HknScript(AttrsClass):
                 to=self.mode.lbs_by_tc(TC.warlock),
             ):
                 act.Warlock.ALL_SPEC_FEL_ARMOR()
+            with hk.SendLabel(
+                id=TC.priest.name,
+                to=self.mode.lbs_by_tc(TC.priest),
+            ):
+                act.Priest.ALL_SPEC_INNER_FIRE()
 
     def build_hk_11_focus_mode_1(self):
         """
@@ -2319,7 +2324,7 @@ class HknScript(AttrsClass):
                 act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
             ])
             self._build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_HOLY_SPEC_FLASH_HEAL,
+                act.Priest.HEAL_BOT_FLASH_HEAL,
             ])
             self._build_send_label_tank()
             self._build_send_label_dps()
@@ -2342,7 +2347,7 @@ class HknScript(AttrsClass):
                 act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
             ]),
             self._build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_HOLY_SPEC_FLASH_HEAL,
+                act.Priest.HEAL_BOT_FLASH_HEAL,
             ]),
             self._build_send_label_tank(),
             self._build_send_label_dps(),
@@ -2365,7 +2370,7 @@ class HknScript(AttrsClass):
                 act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
             ]),
             self._build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_CIRCLE_OF_HEALING,
+                act.Priest.HEAL_BOT_HOLY_SPEC_CIRCLE_OF_HEAL,
             ]),
             self._build_send_label_tank(),
             self._build_send_label_non_shaman_dps(),
