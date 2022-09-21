@@ -293,5 +293,6 @@ class Mode(AttrsClass):
     def use_5p_team_solo_festival_team_6_litgugu_efgh(cls):
         return cls(
             game_client=GameClient().use_1600_900_resolution(),
-            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_6_litgugu_efgh()
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_6_litgugu_efgh(),
+            login_chars=LoginCharactersFactory.make_chars_22p_litgugu_efgh(),
         )
