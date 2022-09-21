@@ -14,8 +14,8 @@ from hotkeynet.app.warmane.mode import Mode
 # mode = Mode.use_22p_monthly_login_2()
 
 # --- Montly Login ---
-mode = Mode.use_5p_team_solo_festival_team_4_ms_sm()
-# mode = Mode.use_5p_team_solo_festival_team_5_ms_sm()
+# mode = Mode.use_5p_team_solo_festival_team_4_ms_sm()
+mode = Mode.use_5p_team_solo_festival_team_5_ms_sm()
 
 # -----------------------------------------------------------------------------
 # Lordaeron
