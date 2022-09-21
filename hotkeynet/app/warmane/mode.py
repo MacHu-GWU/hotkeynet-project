@@ -253,6 +253,27 @@ class Mode(AttrsClass):
         )
 
     @classmethod
+    def use_5p_team_solo_dungeon_festival_team_1_dk(cls):
+        return cls(
+            game_client=GameClient().use_1600_900_resolution(),
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_1_dk(),
+        )
+
+    @classmethod
+    def use_5p_team_solo_dungeon_festival_team_2_ss(cls):
+        return cls(
+            game_client=GameClient().use_1600_900_resolution(),
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_2_ss(),
+        )
+
+    @classmethod
+    def use_5p_team_solo_dungeon_festival_team_3_mix(cls):
+        return cls(
+            game_client=GameClient().use_1600_900_resolution(),
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_3_mix(),
+        )
+
+    @classmethod
     def use_5p_team_solo_festival_team_4_ms_sm(cls):
         return cls(
             game_client=GameClient().use_1600_900_resolution(),
@@ -266,4 +287,11 @@ class Mode(AttrsClass):
             game_client=GameClient().use_1600_900_resolution(),
             active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_5_ms_sm(),
             login_chars=LoginCharactersFactory.make_chars_5p_ganjj_laoshou_lgms_and_lssm(),
+        )
+
+    @classmethod
+    def use_5p_team_solo_festival_team_6_litgugu_efgh(cls):
+        return cls(
+            game_client=GameClient().use_1600_900_resolution(),
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_6_litgugu_efgh()
         )

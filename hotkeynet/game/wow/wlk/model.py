@@ -52,3 +52,10 @@ class Character(model.Character):
     def set_dr_pala_2(self) -> 'Character':
         self.is_dr_pala_2 = True
         return self
+
+    def set_tank_12_and_leader_12(self) -> 'Character':
+        self.set_tank_1()
+        self.set_is_leader_1()
+        self.set_tank_2()
+        self.set_is_leader_2()
+        return self

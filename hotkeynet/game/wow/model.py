@@ -139,3 +139,4 @@ class Character(AttrsClass):
     def set_leader_2_window(self, window: Window) -> 'Character':
         self.leader_2_window = window
         return self
+
