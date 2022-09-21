@@ -251,3 +251,19 @@ class Mode(AttrsClass):
             game_client=GameClient().use_1600_900_resolution(),
             active_chars=ActiveCharactersFactory.make_team_22p_monthly_login_2(),
         )
+
+    @classmethod
+    def use_5p_team_solo_festival_team_4_ms_sm(cls):
+        return cls(
+            game_client=GameClient().use_1600_900_resolution(),
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_4_ms_sm(),
+            login_chars=LoginCharactersFactory.make_chars_5p_ganjj_laoshou_lgms_and_lssm(),
+        )
+
+    @classmethod
+    def use_5p_team_solo_festival_team_5_ms_sm(cls):
+        return cls(
+            game_client=GameClient().use_1600_900_resolution(),
+            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_festival_team_5_ms_sm(),
+            login_chars=LoginCharactersFactory.make_chars_5p_ganjj_laoshou_lgms_and_lssm(),
+        )

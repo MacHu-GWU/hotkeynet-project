@@ -805,6 +805,11 @@ class _LoginCharactersFactory:
             + self._make_chars_15_to_22()
         )
 
+    def make_chars_5p_ganjj_laoshou_lgms_and_lssm(self) -> T.List[Character]:
+        return (
+            self._make_chars_10_ganjj()
+            + self._make_chars_15_to_22()
+        )
 
 LoginCharactersFactory = _LoginCharactersFactory()
 
@@ -996,7 +1001,11 @@ class _ActiveCharactersFactory:
     # 把 牧师 4 人组 和 萨满 4 人组 加上 Ganjj 和 Laoshou 分成 2 队分别刷节日任务
     def make_team_solo_dungeon_festival_team_4_ms_sm(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
-            CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_is_leader_1().set_tank_1(),
+            (
+                CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk()
+                    .set_is_leader_1().set_tank_1()
+                    .set_is_leader_2().set_tank_2()
+            ),
             CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest(),
             CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest(),
             CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman(),
@@ -1005,7 +1014,11 @@ class _ActiveCharactersFactory:
 
     def make_team_solo_dungeon_festival_team_5_ms_sm(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
-            CharacterFactory.make_char_makun7551_laoshou_protect_paladin().set_is_leader_1().set_tank_1().set_dr_pala_1(),
+            (
+                CharacterFactory.make_char_makun7551_laoshou_protect_paladin()
+                    .set_is_leader_1().set_tank_1().set_dr_pala_1()
+                    .set_is_leader_2().set_tank_2().set_dr_pala_2()
+            ),
             CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest(),
             CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest(),
             CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman(),
@@ -1191,8 +1204,13 @@ class _ActiveCharactersFactory:
 
 ActiveCharactersFactory = _ActiveCharactersFactory()
 
+class MyClass(_ActiveCharactersFactory):
+    pass
 
 class _CharacterHelper:
+    """
+    这个类有很多
+    """
     def sort_chars_by_window_label(
         self,
         chars: T.Iterable[Character],
