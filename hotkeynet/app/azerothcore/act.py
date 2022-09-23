@@ -1042,22 +1042,25 @@ class Priest:
         /castsequence [spec:2] reset=6, 治疗之环,真言术盾,真言术盾,真言术盾,真言术盾 
     """
 
-    # Left | Right | Middle
-    HEAL_BOT_TARGET_RAID_FRAME = lambda: ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
-    HEAL_BOT_HOLY_SPEC_FLASH_HEAL = lambda: ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
-    HEAL_BOT_POWER_WORD_SHIELD = lambda: ClickMouse(button=MOUSE_RButton)  # 真言术盾
+    # ALL Spec
+    HEAL_BOT_ALL_SPEC_TARGET_RAID_FRAME = lambda: ClickMouse(button=MOUSE_LButton)  # 选择团队框架成员
+    HEAL_BOT_ALL_SPEC_ABOLISH_DISEASE = lambda: ModifiedClickMouse.ctrl_left_click()  # 驱除疾病
 
-    # Shift | Alt | Ctrl + Left
-    HEAL_BOT_FLASH_HEAL = lambda: ModifiedClickMouse.shift_left_click()  # 快速治疗
-    HEAL_BOT_PRAYER_OF_MENDING = lambda: ModifiedClickMouse.alt_left_click()  # 愈合祷言
-    HEAL_BOT_ABOLISH_DISEASE = lambda: ModifiedClickMouse.ctrl_left_click()  # 驱除疾病
+    HEAL_BOT_ALL_SPEC_POWER_WORD_SHIELD = lambda: ClickMouse(button=MOUSE_RButton)  # 真言术盾
+    HEAL_BOT_ALL_SPEC_DISPEL_MAGIC = lambda: ModifiedClickMouse.ctrl_right_click()  # 驱散魔法
 
-    # Shift | Alt | Ctrl + Right
-    HEAL_BOT_PENANCE = lambda: ModifiedClickMouse.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
-    HEAL_BOT_RENEW = lambda: ModifiedClickMouse.shift_right_click() # 恢复
-    HEAL_BOT_DISPEL_MAGIC = lambda: ModifiedClickMouse.ctrl_right_click()  # 驱散魔法
+    HEAL_BOT_ALL_SPEC_FEAR_WARD = lambda: ModifiedClickMouse.ctrl_middle_click()  # 反恐结界
 
-    HEAL_BOT_HOLY_SPEC_CIRCLE_OF_HEAL = lambda: ModifiedClickMouse.ctrl_middle_click() # 治疗之环 (神圣系天赋, AOE 治疗)
+    # --- 戒律
+    # Left | Shift/Ctrl/Alt+Left
+    HEAL_BOT_DISCO_AND_HOLY_SPEC_FLASH_HEAL = lambda: ModifiedClickMouse.shift_left_click()  # 快速治疗
+    HEAL_BOT_DISCO_AND_HOLY_SPEC_PRAYER_OF_MENDING = lambda: ModifiedClickMouse.alt_left_click()  # 愈合祷言
 
+    # Right | Shift/Ctrl/Alt+Right
+    HEAL_BOT_RENEW = lambda: ModifiedClickMouse.shift_right_click()  # 恢复
+
+    HEAL_BOT_DISCO_SPEC_PENANCE = lambda: ModifiedClickMouse.alt_right_click()  # 苦修 (戒律系 51点天赋, 大量治疗或伤害)
+    HEAL_BOT_HOLY_SPEC_CIRCLE_OF_HEAL = lambda: ModifiedClickMouse.alt_right_click()  # 治疗之环 (神圣系 41 点天赋, AOE 治疗)
+    
 
 convert_to_key_maker(Priest)

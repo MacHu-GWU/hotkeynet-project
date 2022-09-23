@@ -2320,10 +2320,10 @@ class HknScript(AttrsClass):
                 act.Druid.HEAL_BOT_LEFT_CLICK_REJUVENATION,
             ])
             self._build_send_label_disco_priest([
-                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+                act.Priest.HEAL_BOT_ALL_SPEC_POWER_WORD_SHIELD,
             ])
             self._build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_FLASH_HEAL,
+                act.Priest.HEAL_BOT_DISCO_AND_HOLY_SPEC_FLASH_HEAL,
             ])
             self._build_send_label_tank()
             self._build_send_label_dps()
@@ -2343,10 +2343,10 @@ class HknScript(AttrsClass):
                 act.Druid.HEAL_BOT_RIGHT_CLICK_NOURISH,
             ]),
             self._build_send_label_disco_priest([
-                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+                act.Priest.HEAL_BOT_ALL_SPEC_POWER_WORD_SHIELD,
             ]),
             self._build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_FLASH_HEAL,
+                act.Priest.HEAL_BOT_DISCO_AND_HOLY_SPEC_FLASH_HEAL,
             ]),
             self._build_send_label_tank(),
             self._build_send_label_dps(),
@@ -2366,7 +2366,7 @@ class HknScript(AttrsClass):
                 act.Druid.HEAL_BOT_SHIFT_LEFT_WILD_GROWTH,
             ]),
             self._build_send_label_disco_priest([
-                act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
+                act.Priest.HEAL_BOT_ALL_SPEC_POWER_WORD_SHIELD,
             ]),
             self._build_send_label_holy_priest([
                 act.Priest.HEAL_BOT_HOLY_SPEC_CIRCLE_OF_HEAL,
@@ -2389,10 +2389,10 @@ class HknScript(AttrsClass):
                 act.Druid.HEAL_BOT_CTRL_LEFT_REMOVE_CURSE,
             ]),
             self._build_send_label_disco_priest([
-                act.Priest.HEAL_BOT_DISPEL_MAGIC,
+                act.Priest.HEAL_BOT_ALL_SPEC_DISPEL_MAGIC,
             ]),
             self._build_send_label_holy_priest([
-                act.Priest.HEAL_BOT_DISPEL_MAGIC,
+                act.Priest.HEAL_BOT_ALL_SPEC_DISPEL_MAGIC,
             ]),
             self._build_send_label_tank(),
             self._build_send_label_non_shaman_dps(),
