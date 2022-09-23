@@ -39,6 +39,8 @@ class ModeFactory:
             active_chars=raid_active_char_fact.x10p_r_abcde_fghij_core_team,
         )
 
+        mode.hkn_script.script.blocks.remove(mode.hkn_script.hk_12_focus_mode_2)
+
         with hk.Hotkey(
             id="SetFocusMode2",
             key=KN.SCROLOCK_ON(KN.KEY_12_PLUS),
@@ -59,7 +61,7 @@ class ModeFactory:
             ):
                 act.target_leader_key_mapper[leader_1_label]()
                 act.General.SET_FOCUS_KEY_NUMPAD_6()
-             
+
         return mode
 
 
