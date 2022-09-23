@@ -468,15 +468,18 @@ class Paladin:
     HOLY_SPEC_KEY_0_BEACON_OF_LIGHT = KEY_0  # 圣光道标 (神圣 51 点天赋)
 
     # --- Healbot 团队框架快捷键 ---
-    # Left | Right | Middle Click
+    # Left | Shift / Ctrl / Alt + Left
     HEAL_BOT_LEFT_CLICK_HOLY_LIGHT = lambda: ClickMouse(button=MOUSE_LButton)  # 圣光术
+    HEAL_BOT_BEACON_OF_LIGHT = lambda: ModifiedClickMouse.shift_left_click()  # 圣光道标
+    HEAL_BOT_SACRED_SHIELD = lambda: ModifiedClickMouse.alt_left_click()  # 圣洁护盾
+    HEAL_BOT_CLEANSE = lambda: ModifiedClickMouse.ctrl_left_click()  # 清洁术
+
     HEAL_BOT_RIGHT_CLICK_FLASH_OF_LIGHT = lambda: ClickMouse(button=MOUSE_RButton)  # 圣光闪现
     HEAL_BOT_MIDDLE_CLICK_BEACON_OF_LIGHT = lambda: ClickMouse(button=MOUSE_MButton)  # 圣光道标
 
     # Shift | Alt | Ctrl + Left Click
-    HEAL_BOT_BEACON_OF_LIGHT = lambda: ModifiedClickMouse.shift_left_click()  # 圣光道标
-    HEAL_BOT_SACRED_SHIELD = lambda: ModifiedClickMouse.alt_left_click()  # 圣洁护盾
-    HEAL_BOT_CLEANSE = lambda: ModifiedClickMouse.ctrl_left_click()  # 清洁术
+
+
 
     # Shift | Alt | Ctrl + Right Click
     HEAL_BOT_HOLY_SHOCK = lambda: ModifiedClickMouse.shift_right_click()  # 神圣震击
