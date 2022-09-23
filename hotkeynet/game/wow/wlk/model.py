@@ -16,17 +16,13 @@ from .talent import Talent as TL, TalentCategory as TC
 class Character(model.Character):
     """
     :param talent: 角色天赋
+    :param is_tank_1: 自己是否是 1 号坦克
+    :param is_tank_2: 自己是否是 2 号坦克
+    :param tank_1_window: 从自己的视角看 1 号坦克的窗口是哪个
+    :param tank_2_window: 从自己的视角看 2 号坦克的窗口是哪个
+    :param is_dr_pala_1: 自己是否是 1 号减伤圣骑士
+    :param is_dr_pala_2: 自己是否是 2 号减伤圣骑士
     """
-    # talent: Talent = attr.ib(default=None)
-    #
-    # is_tank_1: bool = attr.ib(default=False)
-    # is_tank_2: bool = attr.ib(default=False)
-    # tank_1_window: model.Window = attr.ib(default=None)
-    # tank_2_window: model.Window = attr.ib(default=None)
-    #
-    # is_dr_pala_1: bool = attr.ib(default=False)
-    # is_dr_pala_2: bool = attr.ib(default=False)
-
     talent: TL = dataclasses.field(default=None)
     is_tank_1: bool = dataclasses.field(default=False)
     is_tank_2: bool = dataclasses.field(default=False)

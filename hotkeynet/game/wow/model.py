@@ -98,16 +98,6 @@ class Character:
     act 中定义我们设定好的, 有限的几个宏命令. 你设定的 leader 的窗口必须要属于那几个宏命令
     之一才能工作.
     """
-    # account: Account = attr.ib(default=None)
-    # name: str = attr.ib(default=None)
-    # window: Window = attr.ib(default=None)
-    # active: bool = attr.ib(default=True)
-    #
-    # is_leader_1: bool = attr.ib(default=False)
-    # is_leader_2: bool = attr.ib(default=False)
-    # leader_1_window: Window = attr.ib(default=None)
-    # leader_2_window: Window = attr.ib(default=None)
-
     account: Account = dataclasses.field(default=None)
     name: str = dataclasses.field(default=None)
     window: Window = dataclasses.field(default=None)
