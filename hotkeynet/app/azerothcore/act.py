@@ -155,60 +155,18 @@ class Target:
     """
 
     # --- Target specific person
-    # w1
-    TARGET_W1_BATLEFURY = SHIFT_(INSERT)
-    TARGET_W1_LITGOATSSA = SHIFT_(INSERT)
-    TARGET_W1_LITGOATDKA = SHIFT_(INSERT)
-
-    # w3
-    TARGET_W3_OPIITOU = SHIFT_(HOME)
-
-    # w6
-    TARGET_W6_KINDHEARTED = SHIFT_(PAGE_UP)
-    TARGET_W6_SWEETMONK = SHIFT_(PAGE_UP)
-
-    # w7
-    TARGET_w7_KAPACUK = SHIFT_(DELETE)
-
-    # w9
-    TARGET_w9_GLOWYY = SHIFT_(END)
+    # w01
+    TARGET_W01_RA = SHIFT_(INSERT)
 
     # w10
-    TARGET_W10_LUXIAOFENG = SHIFT_(PAGE_DOWN)
-    TARGET_W10_GANJJ = SHIFT_(PAGE_DOWN)
-    TARGET_W10_LAOSHOU = SHIFT_(PAGE_DOWN)
-    TARGET_W10_FLYDPS = SHIFT_(PAGE_DOWN)
-    TARGET_W10_STOPHEALING = SHIFT_(PAGE_DOWN)
-
-    # w11
-    TARGET_W11_LITGUGUA = ALT_(INSERT)
-    TARGET_W11_LITGUGUE = ALT_(INSERT)
-
-    # w15
-    TARGET_W15_LGMSI = ALT_(HOME)
-
-    # w19
-    TARGET_W19_LGSMM = ALT_(PAGE_UP)
-
-    #
-    TARGET_LEADER_1 = UNKNOWN
-
-    #
-    TARGET_LEADER_2 = UNKNOWN
+    TARGET_W10_RJ = SHIFT_(HOME)
 
 
 convert_to_key_maker(Target)
 
 target_leader_key_mapper = {
-    Window.make(1).label: Target.TARGET_W1_BATLEFURY,
-    Window.make(3).label: Target.TARGET_W3_OPIITOU,
-    Window.make(6).label: Target.TARGET_W6_KINDHEARTED,
-    Window.make(7).label: Target.TARGET_w7_KAPACUK,
-    Window.make(9).label: Target.TARGET_w9_GLOWYY,
-    Window.make(10).label: Target.TARGET_W10_LUXIAOFENG,
-    Window.make(11).label: Target.TARGET_W11_LITGUGUA,
-    Window.make(15).label: Target.TARGET_W15_LGMSI,
-    Window.make(19).label: Target.TARGET_W19_LGSMM,
+    Window.make(1).label: Target.TARGET_W01_RA,
+    Window.make(10).label: Target.TARGET_W10_RJ,
 }
 
 
