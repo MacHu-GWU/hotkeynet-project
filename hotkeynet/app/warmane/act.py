@@ -474,7 +474,11 @@ class Paladin:
     HEAL_BOT_SACRED_SHIELD = lambda: ModifiedClickMouse.alt_left_click()  # 圣洁护盾
     HEAL_BOT_CLEANSE = lambda: ModifiedClickMouse.ctrl_left_click()  # 清洁术
 
+    # Left | Shift / Ctrl / Alt + Left
     HEAL_BOT_RIGHT_CLICK_FLASH_OF_LIGHT = lambda: ClickMouse(button=MOUSE_RButton)  # 圣光闪现
+    HEAL_BOT_HOLY_SHOCK = lambda: ModifiedClickMouse.shift_right_click()  # 神圣震击
+    HEAL_BOT_HAND_OF_FREEDOM = lambda: ModifiedClickMouse.alt_right_click()  # 自由祝福
+
     HEAL_BOT_MIDDLE_CLICK_BEACON_OF_LIGHT = lambda: ClickMouse(button=MOUSE_MButton)  # 圣光道标
 
     # Shift | Alt | Ctrl + Left Click
@@ -482,8 +486,6 @@ class Paladin:
 
 
     # Shift | Alt | Ctrl + Right Click
-    HEAL_BOT_HOLY_SHOCK = lambda: ModifiedClickMouse.shift_right_click()  # 神圣震击
-    HEAL_BOT_HAND_OF_FREEDOM = lambda: ModifiedClickMouse.alt_right_click()  # 自由祝福
     # HEAL_BOT_UNKNOWN = ModifiedMouseClick.ctrl_left_click()  #
 
     # Shift | Alt | Ctrl + Middle Click
