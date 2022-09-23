@@ -468,10 +468,19 @@ class Paladin:
     HOLY_SPEC_KEY_0_BEACON_OF_LIGHT = KEY_0  # 圣光道标 (神圣 51 点天赋)
 
     # --- Healbot 团队框架快捷键 ---
+    """
+    由于奶骑按照职业顺序 (板甲 -> 布甲, 单一职业 -> 混合职业) 是第一个治疗职业, 而 Healbot
+    的快捷键我们是按照一定的逻辑来的. 这里我们就来解说一下这个逻辑.
+    
+    - 左键 / 右键 是最高频的治疗技能
+    - Shift / Alt + 左键 / 右键 是次高频的治疗技能
+    - Ctrl + 左键 / 右键 是驱散类技能, 其中 Ctrl + 左键为更主要的驱散技能
+    - 中键 是临时性的技能, 例如骑士给保护祝福, 德鲁伊给激活等 
+    """
     # Left | Shift / Ctrl / Alt + Left
     HEAL_BOT_LEFT_CLICK_HOLY_LIGHT = lambda: ClickMouse(button=MOUSE_LButton)  # 圣光术
-    HEAL_BOT_BEACON_OF_LIGHT = lambda: ModifiedClickMouse.shift_left_click()  # 圣光道标
-    HEAL_BOT_SACRED_SHIELD = lambda: ModifiedClickMouse.alt_left_click()  # 圣洁护盾
+    HEAL_BOT_SHIFT_LEFT_BEACON_OF_LIGHT = lambda: ModifiedClickMouse.shift_left_click()  # 圣光道标
+    HEAL_BOT_ALT_LEFT_SACRED_SHIELD = lambda: ModifiedClickMouse.alt_left_click()  # 圣洁护盾
     HEAL_BOT_CLEANSE = lambda: ModifiedClickMouse.ctrl_left_click()  # 清洁术
 
     # Left | Shift / Ctrl / Alt + Left
@@ -482,8 +491,6 @@ class Paladin:
     HEAL_BOT_MIDDLE_CLICK_BEACON_OF_LIGHT = lambda: ClickMouse(button=MOUSE_MButton)  # 圣光道标
 
     # Shift | Alt | Ctrl + Left Click
-
-
 
     # Shift | Alt | Ctrl + Right Click
     # HEAL_BOT_UNKNOWN = ModifiedMouseClick.ctrl_left_click()  #
