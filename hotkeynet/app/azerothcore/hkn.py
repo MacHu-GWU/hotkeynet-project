@@ -2363,7 +2363,7 @@ class HknScript(AttrsClass):
                 act.Shaman.HEAL_BOT_CHAIN_HEAL_MIDDLE_CLICK,
             ]),
             self._build_send_label_resto_druid([
-                act.Druid.HEAL_BOT_WILD_GROWTH,
+                act.Druid.HEAL_BOT_SHIFT_LEFT_WILD_GROWTH,
             ]),
             self._build_send_label_disco_priest([
                 act.Priest.HEAL_BOT_POWER_WORD_SHIELD,
@@ -2386,7 +2386,7 @@ class HknScript(AttrsClass):
                 act.Shaman.HEAL_BOT_CLEANSE_CTRL_LEFT_CLICK,
             ]),
             self._build_send_label_resto_druid([
-                act.Druid.HEAL_BOT_REMOVE_CURSE,
+                act.Druid.HEAL_BOT_CTRL_LEFT_REMOVE_CURSE,
             ]),
             self._build_send_label_disco_priest([
                 act.Priest.HEAL_BOT_DISPEL_MAGIC,

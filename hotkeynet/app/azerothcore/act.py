@@ -829,20 +829,19 @@ class Druid:
 
     FERAL_SPEC_SURVIVAL_INSTINCT = SHIFT_(F2)  # 生存本能 (类似于战士的破釜沉舟)
 
-    # Left | Right | Middle
+    # Left | Shift/Ctrl/Alt+Left
     HEAL_BOT_LEFT_CLICK_REJUVENATION = lambda: ClickMouse(button=MOUSE_LButton)  # 回春术
+    HEAL_BOT_SHIFT_LEFT_WILD_GROWTH = lambda: ModifiedClickMouse.shift_left_click()
+    HEAL_BOT_CTRL_LEFT_REMOVE_CURSE = lambda: ModifiedClickMouse.ctrl_left_click()
+    HEAL_BOT_ALT_LEFT_REGROWTH = lambda: ModifiedClickMouse.alt_left_click()
+
+    # Right | Shift/Ctrl/Alt+Right
     HEAL_BOT_RIGHT_CLICK_NOURISH = lambda: ClickMouse(button=MOUSE_RButton)  # 滋养
+    HEAL_BOT_SHIFT_RIGHT_HEALING_TOUCH = lambda: ModifiedClickMouse.shift_right_click()
+    HEAL_BOT_CTRL_RIGHT_ABOLISH_POISON = lambda: ModifiedClickMouse.ctrl_right_click()
+    HEAL_BOT_ALT_RIGHT_SWIFT_MEND = lambda: ModifiedClickMouse.alt_right_click()
+
     HEAL_BOT_MIDDLE_CLICK_INNERVATE = lambda: ClickMouse(button=MOUSE_MButton)  # 激活
-
-    # Shift | Alt | Ctrl + Left
-    HEAL_BOT_WILD_GROWTH = lambda: ModifiedClickMouse.shift_left_click()
-    HEAL_BOT_REGROWTH = lambda: ModifiedClickMouse.alt_left_click()
-    HEAL_BOT_REMOVE_CURSE = lambda: ModifiedClickMouse.ctrl_left_click()
-
-    # Shift | Alt | Ctrl + Right
-    HEAL_BOT_HEALING_TOUCH = lambda: ModifiedClickMouse.shift_right_click()
-    HEAL_BOT_SWIFT_MEND = lambda: ModifiedClickMouse.alt_right_click()
-    HEAL_BOT_ABOLISH_POISON = lambda: ModifiedClickMouse.ctrl_right_click()
 
 
 convert_to_key_maker(Druid)
