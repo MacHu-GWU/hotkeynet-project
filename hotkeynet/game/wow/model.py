@@ -2,6 +2,7 @@
 
 import typing as T
 import enum
+import dataclasses
 
 import attr
 from attrs_mate import AttrsClass
@@ -47,8 +48,10 @@ class Account(AttrsClass):
     password: str = attr.ib()
 
 
-@attr.s
-class Character(AttrsClass):
+# @attr.s
+# class Character(AttrsClass):
+@dataclasses.dataclass
+class Character:
     """
     代表着一个正在进行的游戏角色. 有着具体的天赋. 比如一个圣骑士角色有两套天赋.
     在天赋 1 下就算是一个 Character, 在天赋 2 下算是另一个 Character.
@@ -68,6 +71,7 @@ class Character(AttrsClass):
         6. 用 Round robin 切换窗口时, 只在 3 个人物之间切换
 
         这样适合于专注于玩几个人物, 但保留快速登录其他人物的能力. 比如登录小号聊天, 倒东西等.
+        如果你将一个角色设置为 inactive, 那么这个角色只能被登录, 但无法用 Hotkeynet 操作打怪
     :param is_leader_1: 该角色是否为 1 号司机
     :param is_leader_2: 该角色是否为 2 号司机
     :param leader_1_window: 该角色的 1 号司机的游戏窗口
@@ -94,15 +98,25 @@ class Character(AttrsClass):
     act 中定义我们设定好的, 有限的几个宏命令. 你设定的 leader 的窗口必须要属于那几个宏命令
     之一才能工作.
     """
-    account: Account = attr.ib(default=None)
-    name: str = attr.ib(default=None)
-    window: Window = attr.ib(default=None)
-    active: bool = attr.ib(default=True)
+    # account: Account = attr.ib(default=None)
+    # name: str = attr.ib(default=None)
+    # window: Window = attr.ib(default=None)
+    # active: bool = attr.ib(default=True)
+    #
+    # is_leader_1: bool = attr.ib(default=False)
+    # is_leader_2: bool = attr.ib(default=False)
+    # leader_1_window: Window = attr.ib(default=None)
+    # leader_2_window: Window = attr.ib(default=None)
 
-    is_leader_1: bool = attr.ib(default=False)
-    is_leader_2: bool = attr.ib(default=False)
-    leader_1_window: Window = attr.ib(default=None)
-    leader_2_window: Window = attr.ib(default=None)
+    account: Account = dataclasses.field(default=None)
+    name: str = dataclasses.field(default=None)
+    window: Window = dataclasses.field(default=None)
+    active: bool = dataclasses.field(default=True)
+
+    is_leader_1: bool = dataclasses.field(default=False)
+    is_leader_2: bool = dataclasses.field(default=False)
+    leader_1_window: Window = dataclasses.field(default=None)
+    leader_2_window: Window = dataclasses.field(default=None)
 
     def set_window(self, window: Window) -> 'Character':
         self.window = window
@@ -133,10 +147,16 @@ class Character(AttrsClass):
         return self
 
     def set_leader_1_window(self, window: Window) -> 'Character':
-        self.leader_1_window = window
+        self.leader_1_window: Window = window
         return self
 
     def set_leader_2_window(self, window: Window) -> 'Character':
-        self.leader_2_window = window
+        self.leader_2_window: Window = window
         return self
 
+    @property
+    def id(self) -> str:
+        return f"{self.account.username}-{self.name}"
+
+    def __hash__(self):
+        return hash(self.id)

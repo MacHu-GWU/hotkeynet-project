@@ -13,11 +13,10 @@ from hotkeynet.game.wow.wlk import (
     Window,
     Talent as TL,
     TalentCategory as TC,
-
+    char_oset_helper,
 )
 
 from . import act
-from .character import CharacterHelper
 from .icons import Icons
 
 if T.TYPE_CHECKING:
@@ -35,17 +34,17 @@ class HknScript(AttrsClass):
         hk.context.push(self.script)
         self.build_labels()
         self.build_cmd()
-        self.build_hk_group_01()
-        self.build_hk_group_02()
-        self.build_hk_group_03()
-        self.build_hk_group_04()
-        self.build_hk_group_05()
-        self.build_hk_group_06()
+        self.build_hk_group_01_window_and_login()
+        self.build_hk_group_02_movement()
+        self.build_hk_group_03_act_1_to_12()
+        self.build_hk_group_04_pet_control()
+        self.build_hk_group_05_numpad_1_to_12()
+        self.build_hk_group_06_party_and_system()
         self.build_hk_group_07()
-        self.build_hk_group_08()
-        self.build_hk_group_09()
+        self.build_hk_group_08_alt_numpad_1_to_12()
+        self.build_hk_group_09_ctrl_numpad_1_to_12()
         self.build_hk_group_10()
-        self.build_hk_group_11()
+        self.build_hk_group_11_healbot()
         self.build_control_panel()
 
     def build_labels(self):
@@ -407,7 +406,7 @@ class HknScript(AttrsClass):
                 hk.Wait.make(50)
                 hk.ClickMouse.make_left_click_on_window()
 
-    def build_hk_group_01(self):
+    def build_hk_group_01_window_and_login(self):
         self.build_hk_round_robin_toggle_window()
         self.build_hk_toggle_specific_window()
         self.build_hk_center_overlap_layout()
@@ -632,7 +631,7 @@ class HknScript(AttrsClass):
                 self.mode.remove_tank_labels(send_label.to)
                 self.mode.remove_inactive_labels(send_label.to)
 
-    def build_hk_group_02(self):
+    def build_hk_group_02_movement(self):
         self.build_hk_all_move_up_down_turn_left_right()
         self.build_hk_non_tank_move_up_down_turn_left_right()
         self.build_hk_non_tank_move_left_right()
@@ -1026,7 +1025,7 @@ class HknScript(AttrsClass):
                 act.Target.TARGET_FOCUS_TARGET()
                 act.Shaman.ALL_SPEC_CHAIN_HEAL()
 
-    def build_hk_group_03(self):
+    def build_hk_group_03_act_1_to_12(self):
         self.build_hk_1_heal_tank()
         self.build_hk_2_heal_nothing()
         self.build_hk_3_heal_tank()
@@ -1060,7 +1059,7 @@ class HknScript(AttrsClass):
                     act.Target.TARGET_FOCUS_TARGET()
                     act.General.TRIGGER()
 
-    def build_hk_group_04(self):
+    def build_hk_group_04_pet_control(self):
         self.build_hk_ctrl_1_to_6()
 
     # -------------------------------------------------------------------------
@@ -1210,7 +1209,7 @@ class HknScript(AttrsClass):
                 act.Target.TARGET_FOCUS_TARGET()
                 act.Target.INTERACT_WITH_TARGET()
 
-    def build_hk_group_05(self):
+    def build_hk_group_05_numpad_1_to_12(self):
         self.build_hk_numpad_4()
         self.build_hk_numpad_5()
         self.build_hk_numpad_6()
@@ -1288,7 +1287,7 @@ class HknScript(AttrsClass):
             ):
                 act.System.MASTER_VOLUME_DOWN()
 
-    def build_hk_group_06(self):
+    def build_hk_group_06_party_and_system(self):
         self.build_hk_confirm()
         self.build_hk_leave_party()
         self.build_hk_all_pass_item()
@@ -2014,7 +2013,7 @@ class HknScript(AttrsClass):
                 act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
                 act.Shaman.ALL_SPEC_EARTHBIND_TOTEM()
 
-    def build_hk_group_08(self):
+    def build_hk_group_08_alt_numpad_1_to_12(self):
         self.build_hk_alt_numpad_1_misdirect_and_tot_focus()
         self.build_hk_alt_numpad_2_aspect_of_pact_or_hawk()
         self.build_hk_alt_numpad_3_aspect_of_viper_or_hawk()
@@ -2160,7 +2159,7 @@ class HknScript(AttrsClass):
                 act.General.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
                 act.DK.ALL_SPEC_DARK_COMMAND_KEY_Z()
 
-    def build_hk_group_09(self):
+    def build_hk_group_09_ctrl_numpad_1_to_12(self):
         self.build_hk_ctrl_numpad_1_silence_shot_focus_target()
         self.build_hk_ctrl_numpad_2_counter_spell_focus_target()
         self.build_hk_ctrl_numpad_3_aggressive_dispel()
@@ -2398,7 +2397,7 @@ class HknScript(AttrsClass):
             self._build_send_label_tank(),
             self._build_send_label_non_shaman_dps(),
 
-    def build_hk_group_11(self):
+    def build_hk_group_11_healbot(self):
         self.build_hk_healbot_small_heal()
         self.build_hk_healbot_big_heal()
         self.build_hk_healbot_aoe_heal()
@@ -2713,6 +2712,7 @@ class HknScript(AttrsClass):
 
         with hk.Command(name="AutoExec") as self.cmd_auto_exec:
             with hk.CreatePanel(name="MBControlPanel", x=0, y=60, width=120, height=960) as main_panel:
+                # Define three temp utility function
                 def set_hotkey_or_command(
                     button,
                     hotkey: T.Optional[hk.Hotkey] = None,

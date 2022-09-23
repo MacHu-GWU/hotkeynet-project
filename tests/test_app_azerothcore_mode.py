@@ -3,13 +3,13 @@
 import os
 from rich import print
 import hotkeynet as hk
-from hotkeynet.app.azerothcore.mode import Mode
+from hotkeynet.app.azerothcore.mode import mode_fact
 
 
 class TestMode:
     def test_launched_windows(self):
         hk.context.reset()
-        mode = Mode.use_solo_dungeon_qs_abcde()
+        mode = mode_fact.solo_raid_10p_core_team()
         mode.hkn_script.script.render(verbose=False),
 
 

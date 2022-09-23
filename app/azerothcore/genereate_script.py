@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from hotkeynet.app.azerothcore.mode import Mode
+from hotkeynet.app.azerothcore.mode import mode_fact
 
 # -----------------------------------------------------------------------------
 # Azerothcore
 # -----------------------------------------------------------------------------
-# mode = Mode.use_solo_raid_10_core_team()
-mode = Mode.use_solo_dungeon_r_abcde_core_team()
+mode = mode_fact.solo_raid_10p_core_team()
 
 # -----------------------------------------------------------------------------
 # Don't Touch

@@ -10,3 +10,4 @@ varname==0.8.3
 pathlib-mate==1.0.3
 ordered-set==4.1.0
 superjson==1.0.2
+ordered-set==4.1.0

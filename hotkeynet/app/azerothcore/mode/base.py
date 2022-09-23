@@ -5,27 +5,23 @@
 """
 
 import typing as T
+from ordered_set import OrderedSet
 
 import attr
 from attrs_mate import AttrsClass
 
-import hotkeynet as hk
 from hotkeynet.game.wow.model import Account
 from hotkeynet.game.wow.wlk import (
     Window,
+    Character,
     Talent as TL,
     TalentCategory as TC,
+    char_oset_helper,
 )
 
-from .character import (
-    Character,
-    LoginCharactersFactory,
-    ActiveCharactersFactory,
-    CharacterHelper,
-)
-from .game_client import GameClient
-from .hkn import HknScript
-from .paths import path_azerothcore_hkn
+from ..game_client import GameClient
+from ..hkn import HknScript
+from ..paths import path_azerothcore_hkn
 
 
 @attr.s
@@ -52,8 +48,8 @@ class Mode(AttrsClass):
     **设计思想**
     """
     game_client: GameClient = attr.ib(factory=GameClient)
-    active_chars: T.List[Character] = attr.ib(factory=list)
-    login_chars: T.List[Character] = attr.ib(factory=list)
+    login_chars: OrderedSet[Character] = attr.ib(factory=OrderedSet)
+    active_chars: OrderedSet[Character] = attr.ib(factory=OrderedSet)
     hkn_script: HknScript = attr.ib(default=None)
 
     def _ensure_no_duplicate_window(self, chars: T.List[Character]):
@@ -72,8 +68,8 @@ class Mode(AttrsClass):
 
     def __attrs_post_init__(self):
         # 所有关于 characters 列表的定义
-        self.active_chars = CharacterHelper.sort_chars_by_window_label(self.active_chars)
-        self.login_chars = CharacterHelper.sort_chars_by_window_label(self.login_chars)
+        self.active_chars = char_oset_helper.sort_chars_by_window_label(self.active_chars)
+        self.login_chars = char_oset_helper.sort_chars_by_window_label(self.login_chars)
         self.hkn_script = HknScript(mode=self)
 
     def dump(self, verbose: bool = False):
@@ -119,7 +115,9 @@ class Mode(AttrsClass):
         """
         return [
             char.window.label
-            for char in CharacterHelper.filter_by_talent(self.active_chars, tl)
+            for char in char_oset_helper.filter_by_talent(
+                self.active_chars, tl,
+            )
         ]
 
     def lbs_by_tc(self, tc: TC) -> T.List[str]:
@@ -130,7 +128,7 @@ class Mode(AttrsClass):
         """
         return [
             char.window.label
-            for char in CharacterHelper.filter_by_talent_category(
+            for char in char_oset_helper.filter_by_talent_category(
                 self.active_chars, tc,
             )
         ]
@@ -192,38 +190,3 @@ class Mode(AttrsClass):
         for label in list(label_list):
             if label in all_tank_labels:
                 label_list.remove(label)
-
-    # --------------------------------------------------------------------------
-    # Mode definition
-    # --------------------------------------------------------------------------
-    __anchore_mode_definition = None
-
-    # @classmethod
-    # def use_solo_dungeon_qs_abcde(cls):
-    #     return cls(
-    #         game_client=GameClient().use_1920_1080_resolution(),
-    #         # game_client=GameClient().use_1600_900_resolution(),
-    #         # game_client=GameClient().use_1176_664_resolution(),
-    #         login_chars=LoginCharactersFactory._make_chars_1_to_5(),
-    #         active_chars=ActiveCharactersFactory.make_team_solo_dungeon_qs_abcde(),
-    #     )
-
-    @classmethod
-    def use_solo_raid_10_core_team(cls):
-        return cls(
-            game_client=GameClient().use_1920_1080_resolution(),
-            # game_client=GameClient().use_1600_900_resolution(),
-            # game_client=GameClient().use_1176_664_resolution(),
-            login_chars=LoginCharactersFactory.make_chars_1_to_10(),
-            active_chars=ActiveCharactersFactory.make_team_solo_raid_10_core_team(),
-        )
-
-    @classmethod
-    def use_solo_dungeon_r_abcde_core_team(cls):
-        return cls(
-            game_client=GameClient().use_1920_1080_resolution(),
-            # game_client=GameClient().use_1600_900_resolution(),
-            # game_client=GameClient().use_1176_664_resolution(),
-            login_chars=LoginCharactersFactory.make_chars_1_to_5(),
-            active_chars=ActiveCharactersFactory.make_team_solo_dungeon_5_core_team(),
-        )
