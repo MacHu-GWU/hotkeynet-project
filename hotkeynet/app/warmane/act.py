@@ -369,7 +369,7 @@ class Paladin:
     """
     圣骑士职业的按键绑定.
     """
-    ALL_SPEC_DIVINE_PLEA = lambda: ClickMouse(button=MOUSE_MButton)  # 神圣恩求 (回蓝技能)
+    ALL_SPEC_DIVINE_PLEA = ALT_(E)  # 神圣恩求 (回蓝技能)
     ALL_SPEC_AVENGING_WRATH = SHIFT_(F)  # 复仇之怒 (爆发技能)
 
     # --- Defensive CD 防御性CD技能 ---
@@ -477,28 +477,22 @@ class Paladin:
     - Ctrl + 左键 / 右键 是驱散类技能, 其中 Ctrl + 左键为更主要的驱散技能
     - 中键 是临时性的技能, 例如骑士给保护祝福, 德鲁伊给激活等 
     """
-    # Left | Shift / Ctrl / Alt + Left
+    # Left | Shift/Ctrl/Alt+Left
     HEAL_BOT_LEFT_CLICK_HOLY_LIGHT = lambda: ClickMouse(button=MOUSE_LButton)  # 圣光术
     HEAL_BOT_SHIFT_LEFT_BEACON_OF_LIGHT = lambda: ModifiedClickMouse.shift_left_click()  # 圣光道标
     HEAL_BOT_ALT_LEFT_SACRED_SHIELD = lambda: ModifiedClickMouse.alt_left_click()  # 圣洁护盾
-    HEAL_BOT_CLEANSE = lambda: ModifiedClickMouse.ctrl_left_click()  # 清洁术
+    HEAL_BOT_CTRL_LEFT_CLEANSE = lambda: ModifiedClickMouse.ctrl_left_click()  # 清洁术
 
-    # Left | Shift / Ctrl / Alt + Left
+    # Right | Shift/Ctrl/Alt+Right
     HEAL_BOT_RIGHT_CLICK_FLASH_OF_LIGHT = lambda: ClickMouse(button=MOUSE_RButton)  # 圣光闪现
-    HEAL_BOT_HOLY_SHOCK = lambda: ModifiedClickMouse.shift_right_click()  # 神圣震击
-    HEAL_BOT_HAND_OF_FREEDOM = lambda: ModifiedClickMouse.alt_right_click()  # 自由祝福
+    HEAL_BOT_SHIFT_RIGHT_HOLY_SHOCK = lambda: ModifiedClickMouse.shift_right_click()  # 神圣震击
+    HEAL_BOT_ALT_RIGHT_HAND_OF_FREEDOM = lambda: ModifiedClickMouse.alt_right_click()  # 自由祝福
 
+    # Middle | Shift/Ctrl/Alt+Middle
     HEAL_BOT_MIDDLE_CLICK_BEACON_OF_LIGHT = lambda: ClickMouse(button=MOUSE_MButton)  # 圣光道标
-
-    # Shift | Alt | Ctrl + Left Click
-
-    # Shift | Alt | Ctrl + Right Click
-    # HEAL_BOT_UNKNOWN = ModifiedMouseClick.ctrl_left_click()  #
-
-    # Shift | Alt | Ctrl + Middle Click
-    HEAL_BOT_HAND_OF_SACRIFICE = lambda: ModifiedClickMouse.shift_middle_click()  # 牺牲祝福
-    HEAL_BOT_HAND_OF_SALVATION = lambda: ModifiedClickMouse.alt_middle_click()  # 拯救祝福
-    HEAL_BOT_HAND_OF_PROTECTION = lambda: ModifiedClickMouse.ctrl_middle_click()  # 保护祝福
+    HEAL_BOT_SHIFT_MIDDLE_HAND_OF_SACRIFICE = lambda: ModifiedClickMouse.shift_middle_click()  # 牺牲祝福
+    HEAL_BOT_ALT_MIDDLE_HAND_OF_SALVATION = lambda: ModifiedClickMouse.alt_middle_click()  # 拯救祝福
+    HEAL_BOT_CTRL_MIDDLE_HAND_OF_PROTECTION = lambda: ModifiedClickMouse.ctrl_middle_click()  # 保护祝福
 
 
 convert_to_key_maker(Paladin)

@@ -2376,7 +2376,7 @@ class HknScript(AttrsClass):
             key=KN.SCROLOCK_ON(KN.MOUSE_MButton),
         ) as self.hk_healbot_dispel:
             self._build_send_label_holy_paladin([
-                act.Paladin.HEAL_BOT_CLEANSE,
+                act.Paladin.HEAL_BOT_CTRL_LEFT_CLEANSE,
             ]),
             self._build_send_label_resto_shaman([
                 act.Shaman.HEAL_BOT_CLEANSE_CTRL_LEFT_CLICK,
