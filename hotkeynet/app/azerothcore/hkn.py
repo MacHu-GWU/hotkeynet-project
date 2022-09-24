@@ -2977,7 +2977,7 @@ class HknScript(AttrsClass):
                     "1-12",
                 ], start=1):
                     create_colored_button(
-                        name=f"ButtonBarAlt1To12B{id}",
+                        name=f"ButtonBarCtrl1To12B{id}",
                         bkcolor="E75638",
                         text=text
                     )
