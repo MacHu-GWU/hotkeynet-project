@@ -973,7 +973,7 @@ class _ActiveCharactersFactory:
     # 把 DK 5 人组 和 术士 5 人组 加上 Ganjj 和 Laoshou 分成 3 队 分别刷节日任务
     def make_team_solo_dungeon_festival_team_1_dk(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
-            CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().set_tank_12_and_leader_12(),
+            CharacterFactory.make_char_fatmulti1_litgoatdka_pve_blood_dk().set_leader_12_and_tank_12(),
             CharacterFactory.make_char_fatmulti2_litgoatdkb_pve_unholy_dk(),
             CharacterFactory.make_char_fatmulti3_litgoatdkc_pve_unholy_dk(),
             CharacterFactory.make_char_fatmulti4_litgoatdkd_pve_unholy_dk(),
@@ -985,7 +985,7 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti3_litgoatssc_pve_demo_warlock(),
             CharacterFactory.make_char_fatmulti4_litgoatssd_pve_demo_warlock(),
             CharacterFactory.make_char_fatmulti5_litgoatsse_pve_demo_warlock(),
-            CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_tank_12_and_leader_12(),
+            CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_leader_12_and_tank_12(),
             CharacterFactory.make_char_fatmulti13_litguguc_pvp_resto_druid(),
         ])
 
@@ -994,18 +994,14 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti1_litgoatssa_pve_demo_warlock(),
             CharacterFactory.make_char_fatmulti2_litgoatssb_pve_demo_warlock(),
             CharacterFactory.make_char_fatmulti5_litgoatdke_pve_unholy_dk(),
-            CharacterFactory.make_char_makun7551_laoshou_protect_paladin().set_tank_12_and_leader_12(),
+            CharacterFactory.make_char_makun7551_laoshou_protect_paladin().set_leader_12_and_tank_12(),
             CharacterFactory.make_char_fatmulti14_litgugud_pvp_resto_druid(),
         ])
 
     # 把 牧师 4 人组 和 萨满 4 人组 加上 Ganjj 和 Laoshou 分成 2 队分别刷节日任务
     def make_team_solo_dungeon_festival_team_4_ms_sm(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
-            (
-                CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk()
-                    .set_is_leader_1().set_tank_1()
-                    .set_is_leader_2().set_tank_2()
-            ),
+            CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_leader_12_and_tank_12(),
             CharacterFactory.make_char_fatmulti19_lgmsi_pve_shadow_priest(),
             CharacterFactory.make_char_fatmulti20_lgmsj_pve_shadow_priest(),
             CharacterFactory.make_char_fatmulti23_lgsmm_pve_elemental_shaman(),
@@ -1014,11 +1010,7 @@ class _ActiveCharactersFactory:
 
     def make_team_solo_dungeon_festival_team_5_ms_sm(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
-            (
-                CharacterFactory.make_char_makun7551_laoshou_protect_paladin()
-                    .set_is_leader_1().set_tank_1().set_dr_pala_1()
-                    .set_is_leader_2().set_tank_2().set_dr_pala_2()
-            ),
+            CharacterFactory.make_char_makun7551_laoshou_protect_paladin().set_leader_12_and_tank_12(),
             CharacterFactory.make_char_fatmulti21_lgmsk_pve_shadow_priest(),
             CharacterFactory.make_char_fatmulti22_lgmsl_pve_shadow_priest(),
             CharacterFactory.make_char_fatmulti25_lgsmo_pve_elemental_shaman(),
@@ -1027,7 +1019,7 @@ class _ActiveCharactersFactory:
 
     def make_team_solo_dungeon_festival_team_6_litgugu_efgh(self) -> T.List[Character]:
         return self._set_team_leader_and_tank(chars=[
-            CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().set_tank_12_and_leader_12(),
+            CharacterFactory.make_char_fatmulti10_luxiaofeng_pve_blood_tank_dk().set_leader_12_and_tank_12(),
             CharacterFactory.make_char_fatmulti15_litgugue_pvp_balance_druid(),
             CharacterFactory.make_char_fatmulti16_litguguf_pvp_balance_druid(),
             CharacterFactory.make_char_fatmulti17_litgugug_pvp_balance_druid(),

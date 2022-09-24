@@ -16,11 +16,11 @@ from hotkeynet.app.warmane.mode import Mode
 # --- Montly Login ---
 # mode = Mode.use_5p_team_solo_dungeon_festival_team_1_dk()
 # mode = Mode.use_5p_team_solo_dungeon_festival_team_2_ss()
-# mode = Mode.use_5p_team_solo_dungeon_festival_team_3_mix()
+mode = Mode.use_5p_team_solo_dungeon_festival_team_3_mix()
 
 # mode = Mode.use_5p_team_solo_festival_team_4_ms_sm()
 # mode = Mode.use_5p_team_solo_festival_team_5_ms_sm()
-mode = Mode.use_5p_team_solo_festival_team_6_litgugu_efgh()
+# mode = Mode.use_5p_team_solo_festival_team_6_litgugu_efgh()
 
 # -----------------------------------------------------------------------------
 # Lordaeron
