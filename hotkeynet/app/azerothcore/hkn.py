@@ -2966,86 +2966,118 @@ class HknScript(AttrsClass):
                     text="NA",
                 )
 
-                # # -------------------------------------------------------------
-                # # Ctrl + Numpad 1 - 12
-                # # -------------------------------------------------------------
-                # create_colored_button(
-                #     name="ButtonBarCtrl1To12a",
-                #     bkcolor="E75638",
-                #     text="Ctrl"
-                # )
-                # create_colored_button(
-                #     name="ButtonBarCtrl1To12b",
-                #     bkcolor="E75638",
-                #     text="+Num"
-                # )
-                # create_colored_button(
-                #     name="ButtonBarCtrl1To12c",
-                #     bkcolor="E75638",
-                #     text="1-12"
-                # )
-                #
-                # create_picture_button(
-                #     name="CtrlNumpad1",
-                #     file=Icons.ability_theblackarrow,
-                #     hotkey=self.hk_ctrl_numpad_1,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad2",
-                #     file=Icons.spell_frost_iceshock,
-                #     hotkey=self.hk_ctrl_numpad_2,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad3",
-                #     file=Icons.spell_holy_dispelmagic,
-                #     hotkey=self.hk_ctrl_numpad_3,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad4",
-                #     file=Icons.spell_shadow_psychicscream,
-                #     hotkey=self.hk_ctrl_numpad_4,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad5",
-                #     file=Icons.ability_druid_typhoon,
-                #     hotkey=self.hk_ctrl_numpad_5,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad6",
-                #     file=Icons.spell_shaman_thunderstorm,
-                #     hotkey=self.hk_ctrl_numpad_6,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad7",
-                #     file=Icons.spell_holy_divinehymn,
-                #     hotkey=self.hk_ctrl_numpad_7,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad8",
-                #     file=Icons.spell_nature_tranquility,
-                #     hotkey=self.hk_ctrl_numpad_7,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad9",
-                #     file=Icons.spell_nature_tranquility,
-                #     hotkey=self.hk_ctrl_numpad_7,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad10",
-                #     file=Icons.spell_holy_symbolofhope,
-                #     hotkey=self.hk_ctrl_numpad_10,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad11",
-                #     file=Icons.spell_holy_unyieldingfaith,
-                #     hotkey=self.hk_ctrl_numpad_11,
-                # )
-                # create_picture_button(
-                #     name="CtrlNumpad12",
-                #     file=Icons.spell_nature_shamanrage,
-                #     hotkey=self.hk_ctrl_numpad_12,
-                # )
-                #
+                # -------------------------------------------------------------
+                # Ctrl + Numpad 1 - 12
+                # -------------------------------------------------------------
+                for id, text in enumerate([
+                    "Ctrl",
+                    "+",
+                    "Num",
+                    "Pad",
+                    "1-12",
+                ], start=1):
+                    create_colored_button(
+                        name=f"ButtonBarAlt1To12B{id}",
+                        bkcolor="E75638",
+                        text=text
+                    )
+
+                create_picture_button(
+                    name="CtrlNumpad1",
+                    file=Icons.ability_theblackarrow,
+                    hotkey=self.hk_ctrl_numpad_1,
+                )
+                create_picture_button(
+                    name="CtrlNumpad2",
+                    file=Icons.spell_frost_iceshock,
+                    hotkey=self.hk_ctrl_numpad_2,
+                )
+                create_picture_button(
+                    name="CtrlNumpad3",
+                    file=Icons.spell_holy_dispelmagic,
+                    hotkey=self.hk_ctrl_numpad_3,
+                )
+                create_button(
+                    name=f"Ctrl3B1",
+                    text="NA",
+                )
+                create_button(
+                    name=f"Ctrl3B2",
+                    text="NA",
+                )
+
+                create_picture_button(
+                    name="CtrlNumpad4",
+                    file=Icons.spell_shadow_psychicscream,
+                    hotkey=self.hk_ctrl_numpad_4,
+                )
+                create_picture_button(
+                    name="CtrlNumpad5",
+                    file=Icons.ability_druid_typhoon,
+                    hotkey=self.hk_ctrl_numpad_5,
+                )
+                create_picture_button(
+                    name="CtrlNumpad6",
+                    file=Icons.spell_shaman_thunderstorm,
+                    hotkey=self.hk_ctrl_numpad_6,
+                )
+                create_button(
+                    name=f"Ctrl6B1",
+                    text="NA",
+                )
+                create_button(
+                    name=f"Ctrl6B2",
+                    text="NA",
+                )
+
+                create_picture_button(
+                    name="CtrlNumpad7",
+                    file=Icons.spell_holy_divinehymn,
+                    hotkey=self.hk_ctrl_numpad_7,
+                )
+                create_picture_button(
+                    name="CtrlNumpad8",
+                    file=Icons.spell_nature_tranquility,
+                    hotkey=self.hk_ctrl_numpad_7,
+                )
+                create_picture_button(
+                    name="CtrlNumpad9",
+                    file=Icons.spell_nature_tranquility,
+                    hotkey=self.hk_ctrl_numpad_7,
+                )
+                create_button(
+                    name=f"Ctrl9B1",
+                    text="NA",
+                )
+                create_button(
+                    name=f"Ctrl9B2",
+                    text="NA",
+                )
+
+                create_picture_button(
+                    name="CtrlNumpad10",
+                    file=Icons.spell_holy_symbolofhope,
+                    hotkey=self.hk_ctrl_numpad_10,
+                )
+                create_picture_button(
+                    name="CtrlNumpad11",
+                    file=Icons.spell_holy_unyieldingfaith,
+                    hotkey=self.hk_ctrl_numpad_11,
+                )
+                create_picture_button(
+                    name="CtrlNumpad12",
+                    file=Icons.spell_nature_shamanrage,
+                    hotkey=self.hk_ctrl_numpad_12,
+                )
+                create_button(
+                    name=f"Ctrl12B1",
+                    text="NA",
+                )
+                create_button(
+                    name=f"Ctrl12B2",
+                    text="NA",
+                )
+
                 # # -------------------------------------------------------------
                 # # Shift + Numpad 1 - 9
                 # # -------------------------------------------------------------
