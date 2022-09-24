@@ -2857,83 +2857,115 @@ class HknScript(AttrsClass):
                 # -------------------------------------------------------------
                 # Alt + Numpad 1 - 12
                 # -------------------------------------------------------------
-                # create_colored_button(
-                #     name="ButtonBarAlt1To12a",
-                #     bkcolor="E75638",
-                #     text="Alt"
-                # )
-                # create_colored_button(
-                #     name="ButtonBarAlt1To12b",
-                #     bkcolor="E75638",
-                #     text="+Num"
-                # )
-                # create_colored_button(
-                #     name="ButtonBarAlt1To12c",
-                #     bkcolor="E75638",
-                #     text="1-12"
-                # )
-                #
-                # create_picture_button(
-                #     name="Alt1",
-                #     file=Icons.ability_hunter_misdirection,
-                #     hotkey=self.hk_alt_numpad_1,
-                # )
-                # create_picture_button(
-                #     name="Alt2",
-                #     file=Icons.ability_mount_whitetiger,
-                #     hotkey=self.hk_alt_numpad_2,
-                # )
-                # create_picture_button(
-                #     name="Alt3",
-                #     file=Icons.ability_hunter_aspectoftheviper,
-                #     hotkey=self.hk_alt_numpad_3,
-                # )
-                # create_picture_button(
-                #     name="Alt4",
-                #     file=Icons.ability_druid_starfall,
-                #     hotkey=self.hk_alt_numpad_4,
-                # )
-                # create_picture_button(
-                #     name="Alt5",
-                #     file=Icons.spell_nature_wispheal,
-                #     hotkey=self.hk_alt_numpad_5,
-                # )
-                # create_picture_button(
-                #     name="Alt6",
-                #     file=Icons.spell_nature_bloodlust,
-                #     hotkey=self.hk_alt_numpad_6,
-                # )
-                # create_picture_button(
-                #     name="Alt7",
-                #     file=Icons.spell_holy_powerwordbarrier,
-                #     hotkey=self.hk_alt_numpad_7,
-                # )
-                # create_picture_button(
-                #     name="Alt8",
-                #     file=Icons.spell_holy_powerwordbarrier,
-                #     hotkey=self.hk_alt_numpad_8,
-                # )
-                # create_picture_button(
-                #     name="Alt9",
-                #     file=Icons.spell_holy_auramastery,
-                #     hotkey=self.hk_alt_numpad_9,
-                # )
-                # create_picture_button(
-                #     name="Alt10",
-                #     file=Icons.spell_nature_diseasecleansingtotem,
-                #     hotkey=self.hk_alt_numpad_10,
-                # )
-                # create_picture_button(
-                #     name="Alt11",
-                #     file=Icons.spell_nature_tremortotem,
-                #     hotkey=self.hk_alt_numpad_11,
-                # )
-                # create_picture_button(
-                #     name="Alt12",
-                #     file=Icons.spell_nature_strengthofearthtotem02,
-                #     hotkey=self.hk_alt_numpad_12,
-                # )
-                #
+                for id, text in enumerate([
+                    "Alt",
+                    "+",
+                    "Num",
+                    "Pad",
+                    "1-12",
+                ], start=1):
+                    create_colored_button(
+                        name=f"ButtonBarAlt1To12B{id}",
+                        bkcolor="E75638",
+                        text=text
+                    )
+
+                create_picture_button(
+                    name="Alt1",
+                    file=Icons.ability_hunter_misdirection,
+                    hotkey=self.hk_alt_numpad_1,
+                )
+                create_picture_button(
+                    name="Alt2",
+                    file=Icons.ability_mount_whitetiger,
+                    hotkey=self.hk_alt_numpad_2,
+                )
+                create_picture_button(
+                    name="Alt3",
+                    file=Icons.ability_hunter_aspectoftheviper,
+                    hotkey=self.hk_alt_numpad_3,
+                )
+                create_button(
+                    name=f"Alt3B1",
+                    text="NA",
+                )
+                create_button(
+                    name=f"Alt3B2",
+                    text="NA",
+                )
+
+                create_picture_button(
+                    name="Alt4",
+                    file=Icons.ability_druid_starfall,
+                    hotkey=self.hk_alt_numpad_4,
+                )
+                create_picture_button(
+                    name="Alt5",
+                    file=Icons.spell_nature_wispheal,
+                    hotkey=self.hk_alt_numpad_5,
+                )
+                create_picture_button(
+                    name="Alt6",
+                    file=Icons.spell_nature_bloodlust,
+                    hotkey=self.hk_alt_numpad_6,
+                )
+                create_button(
+                    name=f"Alt6B1",
+                    text="NA",
+                )
+                create_button(
+                    name=f"Alt6B2",
+                    text="NA",
+                )
+
+                create_picture_button(
+                    name="Alt7",
+                    file=Icons.spell_holy_powerwordbarrier,
+                    hotkey=self.hk_alt_numpad_7,
+                )
+                create_picture_button(
+                    name="Alt8",
+                    file=Icons.spell_holy_powerwordbarrier,
+                    hotkey=self.hk_alt_numpad_8,
+                )
+                create_picture_button(
+                    name="Alt9",
+                    file=Icons.spell_holy_auramastery,
+                    hotkey=self.hk_alt_numpad_9,
+                )
+                create_button(
+                    name=f"Alt9B1",
+                    text="NA",
+                )
+                create_button(
+                    name=f"Alt9B2",
+                    text="NA",
+                )
+
+                create_picture_button(
+                    name="Alt10",
+                    file=Icons.spell_nature_diseasecleansingtotem,
+                    hotkey=self.hk_alt_numpad_10,
+                )
+                create_picture_button(
+                    name="Alt11",
+                    file=Icons.spell_nature_tremortotem,
+                    hotkey=self.hk_alt_numpad_11,
+                )
+                create_picture_button(
+                    name="Alt12",
+                    file=Icons.spell_nature_strengthofearthtotem02,
+                    hotkey=self.hk_alt_numpad_12,
+                )
+                create_button(
+                    name=f"Alt12B1",
+                    text="NA",
+                )
+                create_button(
+                    name=f"Alt12B2",
+                    text="NA",
+                )
+
                 # # -------------------------------------------------------------
                 # # Ctrl + Numpad 1 - 12
                 # # -------------------------------------------------------------
