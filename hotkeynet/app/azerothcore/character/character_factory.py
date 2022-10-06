@@ -116,6 +116,51 @@ class CharacterFactory:
             window=Window.make(10),
         )
 
+    @property
+    def sa_pve_protect_paladin(self) -> Character:
+        return Character(
+            account=AccountEnum.account_rab01.value,
+            name="sa",
+            talent=TL.paladin_pve_protect,
+            window=Window.make(1),
+        )
+
+    @property
+    def sb_pve_elemental_shaman(self) -> Character:
+        return Character(
+            account=AccountEnum.account_rab02.value,
+            name="sb",
+            talent=TL.shaman_pve_elemental,
+            window=Window.make(2),
+        )
+
+    @property
+    def sc_pve_elemental_shaman(self) -> Character:
+        return Character(
+            account=AccountEnum.account_rab03.value,
+            name="sc",
+            talent=TL.shaman_pve_elemental,
+            window=Window.make(3),
+        )
+
+    @property
+    def sd_pve_elemental_shaman(self) -> Character:
+        return Character(
+            account=AccountEnum.account_rab04.value,
+            name="sd",
+            talent=TL.shaman_pve_elemental,
+            window=Window.make(4),
+        )
+
+    @property
+    def se_pve_resto_shaman(self) -> Character:
+        return Character(
+            account=AccountEnum.account_rab05.value,
+            name="se",
+            talent=TL.shaman_pve_resto,
+            window=Window.make(5),
+        )
+
 
 char_fact = CharacterFactory()
 
@@ -134,6 +179,16 @@ class CharacterGroup:
             char_fact.rh_pve_resto_druid,
             char_fact.ri_pve_holy_paladin,
             char_fact.rj_pve_blood_tank_dk,
+        ])
+
+    @property
+    def s_abcde(self) -> OrderedSet[Character]:
+        return OrderedSet([
+            char_fact.sa_pve_protect_paladin,
+            char_fact.sb_pve_elemental_shaman,
+            char_fact.sc_pve_elemental_shaman,
+            char_fact.sd_pve_elemental_shaman,
+            char_fact.se_pve_resto_shaman,
         ])
 
 

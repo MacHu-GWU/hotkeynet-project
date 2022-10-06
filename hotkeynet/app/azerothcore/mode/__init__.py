@@ -64,5 +64,14 @@ class ModeFactory:
 
         return mode
 
+    def solo_dungeon_5p_horde_s_abcde(self) -> Mode:
+        return Mode(
+            game_client=GameClient().use_1920_1080_resolution(),
+            # game_client=GameClient().use_1600_900_resolution(),
+            # game_client=GameClient().use_1176_664_resolution(),
+            login_chars=login_char_fact.s_abcde,
+            active_chars=dungeon_active_char_fact.x5p_s_abcde,
+        )
+
 
 mode_fact = ModeFactory()

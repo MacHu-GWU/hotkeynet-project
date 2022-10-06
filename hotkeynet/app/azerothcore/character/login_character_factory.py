@@ -35,5 +35,15 @@ class LoginCharactersFactory:
             char_fact.rj_pve_blood_tank_dk.set_inactive(),
         ])
 
+    @property
+    def s_abcde(self) -> OrderedSet[Character]:
+        return OrderedSet([
+            char_fact.sa_pve_protect_paladin.set_inactive(),
+            char_fact.sb_pve_elemental_shaman.set_inactive(),
+            char_fact.sc_pve_elemental_shaman.set_inactive(),
+            char_fact.sd_pve_elemental_shaman.set_inactive(),
+            char_fact.se_pve_resto_shaman.set_inactive(),
+        ])
+
 
 login_char_fact = LoginCharactersFactory()

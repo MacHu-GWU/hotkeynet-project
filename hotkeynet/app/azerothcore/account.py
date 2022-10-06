@@ -39,6 +39,27 @@ class AccountEnum(Enum):
     account_fat08 = load_account("fat08")
     account_fat09 = load_account("fat09")
     account_fat10 = load_account("fat10")
+    account_fat11 = load_account("fat11")
+    account_fat12 = load_account("fat12")
+    account_fat13 = load_account("fat13")
+    account_fat14 = load_account("fat14")
+    account_fat15 = load_account("fat15")
+    account_fat16 = load_account("fat16")
+    account_fat17 = load_account("fat17")
+    account_fat18 = load_account("fat18")
+    account_fat19 = load_account("fat19")
+    account_fat20 = load_account("fat20")
+    account_fat21 = load_account("fat21")
+    account_fat22 = load_account("fat22")
+    account_fat23 = load_account("fat23")
+    account_fat24 = load_account("fat24")
+    account_fat25 = load_account("fat25")
+
+    account_rab01 = load_account("rab01")
+    account_rab02 = load_account("rab02")
+    account_rab03 = load_account("rab03")
+    account_rab04 = load_account("rab04")
+    account_rab05 = load_account("rab05")
 
 
 class AccountEnumHelper(EnumHelper[AccountEnum, Account]):
