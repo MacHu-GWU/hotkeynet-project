@@ -2844,6 +2844,12 @@ class HknScript(AttrsClass):
                             text="NA",
                         )
 
+                create_colored_button(
+                    name="CtrlNumpad3",
+                    bkcolor="F98B39",
+                    text="V-",
+                    hotkey=self.hk_volumn_down,
+                )
                 # -------------------------------------------------------------
                 # Login
                 # -------------------------------------------------------------
