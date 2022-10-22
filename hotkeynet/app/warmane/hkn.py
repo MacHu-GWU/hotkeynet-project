@@ -1307,6 +1307,7 @@ class HknScript(AttrsClass):
         self.build_hk_leave_party()
         self.build_hk_all_pass_item()
         self.build_hk_volumn_down()
+        self.build_hk_rdf_confirm_role_and_enter_dungeon()
 
     # -------------------------------------------------------------------------
     # 实现每个游戏内所绑定的动作条快捷键, 会触发哪些职业的哪些功能.
