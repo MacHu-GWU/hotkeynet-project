@@ -1272,7 +1272,7 @@ class HknScript(AttrsClass):
                     y=self.mode.game_client.pass_item_button_4_y,
                 )
 
-    def build_hk_volumn_down(self):
+    def build_hk_volume_down(self):
         with hk.Hotkey(
             id="Volume Down",
             key=KN.SCROLOCK_ON(KN.CTRL_SHIFT_ALT(KN.M)),
@@ -1306,7 +1306,7 @@ class HknScript(AttrsClass):
         self.build_hk_confirm()
         self.build_hk_leave_party()
         self.build_hk_all_pass_item()
-        self.build_hk_volumn_down()
+        self.build_hk_volume_down()
         self.build_hk_rdf_confirm_role_and_enter_dungeon()
 
     # -------------------------------------------------------------------------

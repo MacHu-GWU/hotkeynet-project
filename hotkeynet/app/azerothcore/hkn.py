@@ -1276,7 +1276,7 @@ class HknScript(AttrsClass):
                     y=self.mode.game_client.pass_item_button_4_y,
                 )
 
-    def build_hk_volumn_down(self):
+    def build_hk_volume_down(self):
         with hk.Hotkey(
             id="Volume Down",
             key=KN.SCROLOCK_ON(KN.CTRL_SHIFT_ALT(KN.M)),
@@ -1287,11 +1287,31 @@ class HknScript(AttrsClass):
             ):
                 act.System.MASTER_VOLUME_DOWN()
 
+    def build_hk_rdf_confirm_role_and_enter_dungeon(self):
+        with hk.Hotkey(
+            id="RDFConfirmRoleAndEnterDungeon",
+            key=KN.SCROLOCK_ON(KN.CTRL_SHIFT_ALT(KN.Y)),
+        ) as self.hk_rdf_confirm_role_and_enter_dungeon:
+            with hk.SendLabel(
+                id="all",
+                to=self.mode.lbs_all,
+            ):
+                hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
+                    x=self.mode.game_client.rdf_confirm_role_accept_button_x,
+                    y=self.mode.game_client.rdf_confirm_role_accept_button_y,
+                )
+                hk.Wait.make(milli=2000)
+                hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
+                    x=self.mode.game_client.rdf_enter_dungeon_button_x,
+                    y=self.mode.game_client.rdf_enter_dungeon_button_y,
+                )
+
     def build_hk_group_06_party_and_system(self):
         self.build_hk_confirm()
         self.build_hk_leave_party()
         self.build_hk_all_pass_item()
-        self.build_hk_volumn_down()
+        self.build_hk_volume_down()
+        self.build_hk_rdf_confirm_role_and_enter_dungeon()
 
     # -------------------------------------------------------------------------
     # 实现每个游戏内所绑定的动作条快捷键, 会触发哪些职业的哪些功能.
@@ -2797,33 +2817,33 @@ class HknScript(AttrsClass):
                     set_hotkey_or_command(button, hotkey, command, command_args)
 
                 create_picture_button(
-                    name="ButtonA01",
+                    name="ButtonLaunchAndRenameAllGameClient",
                     file=Icons.wow,
                     command=self.cmd_launch_and_rename_all_game_client,
                 )
 
                 create_picture_button(
-                    name="ButtonA02",
+                    name="ButtonBatchLogin",
                     file=Icons.log_in,
                     command=self.cmd_batch_login,
                 )
 
                 create_picture_button(
-                    name="ButtonA03",
+                    name="ButtonResizeWindow",
                     file=Icons.resize_window,
                     command=self.cmd_center_overlap_layout,
                 )
 
                 create_picture_button(
-                    name="ButtonA04",
-                    file=Icons.resize_window,
-                    command=self.cmd_center_overlap_layout,
+                    name="ButtonLogOut",
+                    file=Icons.log_out,
+                    hotkey=self.hk_batch_logout,
                 )
 
                 create_picture_button(
-                    name="ButtonA05",
-                    file=Icons.resize_window,
-                    command=self.cmd_center_overlap_layout,
+                    name="ButtonVolumeDown",
+                    file=Icons.vol_down,
+                    hotkey=self.hk_volumn_down,
                 )
 
                 counter = 0
@@ -2849,6 +2869,12 @@ class HknScript(AttrsClass):
                             text="NA",
                         )
 
+                create_picture_button(
+                    name="RDFConfirmRoleAndEnterDungeon",
+                    file=Icons.spell_holy_summonchampion,
+                    hotkey=self.hk_rdf_confirm_role_and_enter_dungeon,
+                )
+                
                 # -------------------------------------------------------------
                 # Login
                 # -------------------------------------------------------------
