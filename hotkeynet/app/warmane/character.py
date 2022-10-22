@@ -985,7 +985,7 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti3_litgoatssc_pve_demo_warlock(),
             CharacterFactory.make_char_fatmulti4_litgoatssd_pve_demo_warlock(),
             CharacterFactory.make_char_fatmulti5_litgoatsse_pve_demo_warlock(),
-            CharacterFactory.make_char_makun7551_ganjj_pve_blood_tank_dk().set_leader_12_and_tank_12(),
+            CharacterFactory.make_char_fatmulti1_batlefury_pve_protect_pala().set_leader_12_and_tank_12(),
             CharacterFactory.make_char_fatmulti13_litguguc_pvp_resto_druid(),
         ])
 
@@ -994,7 +994,7 @@ class _ActiveCharactersFactory:
             CharacterFactory.make_char_fatmulti1_litgoatssa_pve_demo_warlock(),
             CharacterFactory.make_char_fatmulti2_litgoatssb_pve_demo_warlock(),
             CharacterFactory.make_char_fatmulti5_litgoatdke_pve_unholy_dk(),
-            CharacterFactory.make_char_makun7551_laoshou_protect_paladin().set_leader_12_and_tank_12(),
+            CharacterFactory.make_char_fatmulti9_glowyy_pve_protect_pala().set_leader_12_and_tank_12(),
             CharacterFactory.make_char_fatmulti14_litgugud_pvp_resto_druid(),
         ])
 
