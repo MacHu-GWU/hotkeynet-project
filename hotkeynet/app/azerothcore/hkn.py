@@ -1300,7 +1300,6 @@ class HknScript(AttrsClass):
                     x=self.mode.game_client.rdf_confirm_role_accept_button_x,
                     y=self.mode.game_client.rdf_confirm_role_accept_button_y,
                 )
-                hk.Wait.make(milli=2000)
                 hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
                     x=self.mode.game_client.rdf_enter_dungeon_button_x,
                     y=self.mode.game_client.rdf_enter_dungeon_button_y,
