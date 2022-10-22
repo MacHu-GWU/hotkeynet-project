@@ -100,7 +100,7 @@ rdf_enter_dungeon_button_x_at_1920_1080 = None
 rdf_enter_dungeon_button_y_at_1920_1080 = None
 
 rdf_enter_dungeon_button_x_at_1600_900 = 754
-rdf_enter_dungeon_button_y_at_1600_900 = 245
+rdf_enter_dungeon_button_y_at_1600_900 = 272
 
 rdf_enter_dungeon_button_x_at_1176_664 = None
 rdf_enter_dungeon_button_y_at_1176_664 = None
