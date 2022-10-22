@@ -2812,33 +2812,33 @@ class HknScript(AttrsClass):
                     set_hotkey_or_command(button, hotkey, command, command_args)
 
                 create_picture_button(
-                    name="ButtonA01",
+                    name="ButtonLaunchAndRenameAllGameClient",
                     file=Icons.wow,
                     command=self.cmd_launch_and_rename_all_game_client,
                 )
 
                 create_picture_button(
-                    name="ButtonA02",
+                    name="ButtonBatchLogin",
                     file=Icons.log_in,
                     command=self.cmd_batch_login,
                 )
 
                 create_picture_button(
-                    name="ButtonA03",
+                    name="ButtonResizeWindow",
                     file=Icons.resize_window,
                     command=self.cmd_center_overlap_layout,
                 )
 
                 create_picture_button(
-                    name="ButtonA04",
-                    file=Icons.resize_window,
-                    command=self.cmd_center_overlap_layout,
+                    name="ButtonLogOut",
+                    file=Icons.log_out,
+                    hotkey=self.hk_batch_logout,
                 )
 
                 create_picture_button(
-                    name="ButtonA05",
-                    file=Icons.resize_window,
-                    command=self.cmd_center_overlap_layout,
+                    name="ButtonVolumeDown",
+                    file=Icons.vol_down,
+                    hotkey=self.hk_volumn_down,
                 )
 
                 counter = 0
@@ -2864,16 +2864,6 @@ class HknScript(AttrsClass):
                             text="NA",
                         )
 
-                create_picture_button(
-                    name="VolumeDown",
-                    file=Icons.vol_down,
-                    hotkey=self.hk_volumn_down,
-                )
-                create_picture_button(
-                    name="LogOut",
-                    file=Icons.log_out,
-                    hotkey=self.hk_batch_logout,
-                )
                 create_picture_button(
                     name="RDFConfirmRoleAndEnterDungeon",
                     file=Icons.spell_holy_summonchampion,
