@@ -347,11 +347,11 @@ class HknScript(AttrsClass):
                 to=self.mode.lbs_all,
             ):
                 # 确保菜单界面是关闭的状态
-                hk.Wait.make(100),
+                hk.Wait.make(100)
                 act.General.TOGGLE_MAIN_GAME_MENU(),
-                hk.Wait.make(50),
+                hk.Wait.make(50)
                 act.General.TOGGLE_MAIN_GAME_MENU(),
-                hk.Wait.make(50),
+                hk.Wait.make(50)
                 # 点击关闭菜单按钮
                 hk.MoveMouse(
                     x=self.mode.game_client.return_to_game_button_x,
@@ -1292,6 +1292,7 @@ class HknScript(AttrsClass):
                 id="all",
                 to=self.mode.lbs_all,
             ):
+                hk.Wait.make(milli=1000)
                 hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
                     x=self.mode.game_client.rdf_confirm_role_accept_button_x,
                     y=self.mode.game_client.rdf_confirm_role_accept_button_y,

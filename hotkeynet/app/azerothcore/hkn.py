@@ -2874,7 +2874,7 @@ class HknScript(AttrsClass):
                     file=Icons.spell_holy_summonchampion,
                     hotkey=self.hk_rdf_confirm_role_and_enter_dungeon,
                 )
-                
+
                 # -------------------------------------------------------------
                 # Login
                 # -------------------------------------------------------------
