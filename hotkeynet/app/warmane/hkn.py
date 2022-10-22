@@ -1283,6 +1283,25 @@ class HknScript(AttrsClass):
             ):
                 act.System.MASTER_VOLUME_DOWN()
 
+    def build_hk_rdf_confirm_role_and_enter_dungeon(self):
+        with hk.Hotkey(
+            id="RDFConfirmRoleAndEnterDungeon",
+            key=KN.SCROLOCK_ON(KN.CTRL_SHIFT_ALT(KN.Y)),
+        ) as self.hk_rdf_confirm_role_and_enter_dungeon:
+            with hk.SendLabel(
+                id="all",
+                to=self.mode.lbs_all,
+            ):
+                hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
+                    x=self.mode.game_client.rdf_confirm_role_accept_button_x,
+                    y=self.mode.game_client.rdf_confirm_role_accept_button_y,
+                )
+                hk.Wait.make(milli=500)
+                hk.ClickMouse(button=KN.MOUSE_LButton).set_mode_as_x_y(
+                    x=self.mode.game_client.rdf_enter_dungeon_button_x,
+                    y=self.mode.game_client.rdf_enter_dungeon_button_y,
+                )
+
     def build_hk_group_06(self):
         self.build_hk_confirm()
         self.build_hk_leave_party()
@@ -2853,6 +2872,11 @@ class HknScript(AttrsClass):
                     name="LogOut",
                     file=Icons.log_out,
                     hotkey=self.hk_batch_logout,
+                )
+                create_picture_button(
+                    name="RDFConfirmRoleAndEnterDungeon",
+                    file=Icons.spell_holy_summonchampion,
+                    hotkey=self.hk_rdf_confirm_role_and_enter_dungeon,
                 )
                 # -------------------------------------------------------------
                 # Login

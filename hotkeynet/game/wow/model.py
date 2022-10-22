@@ -51,7 +51,7 @@ class Account(AttrsClass):
 # @attr.s
 # class Character(AttrsClass):
 @dataclasses.dataclass
-class Character:
+class Character: # 注: 因为需要 hash 和 sort, 所以使用 dataclass 库
     """
     代表着一个正在进行的游戏角色. 有着具体的天赋. 比如一个圣骑士角色有两套天赋.
     在天赋 1 下就算是一个 Character, 在天赋 2 下算是另一个 Character.

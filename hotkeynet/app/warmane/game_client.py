@@ -37,10 +37,10 @@ class GameClient(AttrsClass):
     :param pass_item_button_2_y: 游戏内按 roll 装备的 2 号弹出框的取消按钮的 y 坐标
     :param pass_item_button_3_y: 游戏内按 roll 装备的 3 号弹出框的取消按钮的 y 坐标
     :param pass_item_button_4_y: 游戏内按 roll 装备的 4 号弹出框的取消按钮的 y 坐标
-    :param rdf_confirm_role_accept_button_x: RDS 排本时选择自己的角色的确认按钮的 x 坐标
-    :param rdf_confirm_role_accept_button_y: RDS 排本时选择自己的角色的确认按钮的 y 坐标
-    :param rdf_enter_dungeon_button_x: RDS 确认进入副本按钮的 x 坐标
-    :param rdf_enter_dungeon_button_y: RDS 确认进入副本按钮的 y 坐标
+    :param rdf_confirm_role_accept_button_x: RDF 排本时选择自己的角色的确认按钮的 x 坐标
+    :param rdf_confirm_role_accept_button_y: RDF 排本时选择自己的角色的确认按钮的 y 坐标
+    :param rdf_enter_dungeon_button_x: RDF 确认进入副本按钮的 x 坐标
+    :param rdf_enter_dungeon_button_y: RDF 确认进入副本按钮的 y 坐标
     """
     wow_exe_path: str = attr.ib(default=config.wow_exe_path)
 

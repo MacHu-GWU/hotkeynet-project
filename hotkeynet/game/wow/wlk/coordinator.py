@@ -84,3 +84,23 @@ pass_item_button_1_y_at_1176_664 = 632
 pass_item_button_2_y_at_1176_664 = 589
 pass_item_button_3_y_at_1176_664 = 542
 pass_item_button_4_y_at_1176_664 = 497
+
+# RDF 排本时选择自己的角色的确认按钮
+rdf_confirm_role_accept_button_x_at_1920_1080 = None
+rdf_confirm_role_accept_button_y_at_1920_1080 = None
+
+rdf_confirm_role_accept_button_x_at_1600_900 = 748
+rdf_confirm_role_accept_button_y_at_1600_900 = 245
+
+rdf_confirm_role_accept_button_x_at_1176_664 = 748
+rdf_confirm_role_accept_button_y_at_1176_664 = 245
+
+# RDF 确认进入副本按钮
+rdf_enter_dungeon_button_x_at_1920_1080 = None
+rdf_enter_dungeon_button_y_at_1920_1080 = None
+
+rdf_enter_dungeon_button_x_at_1600_900 = 754
+rdf_enter_dungeon_button_y_at_1600_900 = 245
+
+rdf_enter_dungeon_button_x_at_1176_664 = None
+rdf_enter_dungeon_button_y_at_1176_664 = None

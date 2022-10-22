@@ -239,8 +239,8 @@ class System:
     客户端系统相关的按键绑定, 所有职业都需要按照这个设置. 以下设置如果没有特殊说明, 都是
     在游戏内的按键绑定实现的.
     """
-    MASTER_VOLUME_DOWN = CTRL_(KEY_11_MINUS)  # 音量调大
-    MASTER_VOLUME_UP = CTRL_(KEY_12_PLUS)  # 音量调小
+    MASTER_VOLUME_DOWN = CTRL_(KEY_11_MINUS)  # 音量调小
+    MASTER_VOLUME_UP = CTRL_(KEY_12_PLUS)  # 音量调大
     TOGGLE_USER_INTERFACE = CTRL_(F12)  # 开关用户界面
 
 
