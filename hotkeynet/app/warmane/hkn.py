@@ -2844,11 +2844,15 @@ class HknScript(AttrsClass):
                             text="NA",
                         )
 
-                create_colored_button(
-                    name="CtrlNumpad3",
-                    bkcolor="F98B39",
-                    text="V-",
+                create_picture_button(
+                    name="VolumeDown",
+                    file=Icons.vol_down,
                     hotkey=self.hk_volumn_down,
+                )
+                create_picture_button(
+                    name="LogOut",
+                    file=Icons.log_out,
+                    hotkey=self.hk_batch_logout,
                 )
                 # -------------------------------------------------------------
                 # Login
