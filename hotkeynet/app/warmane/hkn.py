@@ -243,7 +243,11 @@ class HknScript(AttrsClass):
                 ):
                     # 选择角色
                     x, y = self.mode.game_client.get_choose_char_x_y(nth=char.nth_char)
-                    hk.ClickMouse.make_left_click_on_window_at(x, y)
+                    # hk.ClickMouse.make_left_click_on_window_at(x, y)
+                    hk.MoveMouse(x, y)
+                    hk.Wait.make(50)
+                    hk.ClickMouse.make_left_click_on_window()
+                    hk.Wait.make(50)
                     # 点击确定
                     hk.Key(key=KN.ENTER)
 
