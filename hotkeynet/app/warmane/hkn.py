@@ -236,6 +236,7 @@ class HknScript(AttrsClass):
                     char.account.password,
                 ])
 
+            hk.Wait.make(3000)
             for char in self.mode.active_chars:
                 with hk.SendLabel(
                     to=[char.window.label, ],
