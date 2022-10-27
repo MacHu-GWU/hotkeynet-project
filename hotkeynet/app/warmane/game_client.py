@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import typing as T
 import attr
 from attrs_mate import AttrsClass
 
@@ -68,24 +69,24 @@ class GameClient(AttrsClass):
     rdf_enter_dungeon_button_x: int = attr.ib(default=None)
     rdf_enter_dungeon_button_y: int = attr.ib(default=None)
 
-    char_1_x = attr.ib(default=None)
-    char_1_y = attr.ib(default=None)
-    char_2_x = attr.ib(default=None)
-    char_2_y = attr.ib(default=None)
-    char_3_x = attr.ib(default=None)
-    char_3_y = attr.ib(default=None)
-    char_4_x = attr.ib(default=None)
-    char_4_y = attr.ib(default=None)
-    char_5_x = attr.ib(default=None)
-    char_5_y = attr.ib(default=None)
-    char_6_x = attr.ib(default=None)
-    char_6_y = attr.ib(default=None)
-    char_7_x = attr.ib(default=None)
-    char_7_y = attr.ib(default=None)
-    char_8_x = attr.ib(default=None)
-    char_8_y = attr.ib(default=None)
-    char_9_x = attr.ib(default=None)
-    char_9_y = attr.ib(default=None)
+    choose_char_1_x = attr.ib(default=None)
+    choose_char_1_y = attr.ib(default=None)
+    choose_char_2_x = attr.ib(default=None)
+    choose_char_2_y = attr.ib(default=None)
+    choose_char_3_x = attr.ib(default=None)
+    choose_char_3_y = attr.ib(default=None)
+    choose_char_4_x = attr.ib(default=None)
+    choose_char_4_y = attr.ib(default=None)
+    choose_char_5_x = attr.ib(default=None)
+    choose_char_5_y = attr.ib(default=None)
+    choose_char_6_x = attr.ib(default=None)
+    choose_char_6_y = attr.ib(default=None)
+    choose_char_7_x = attr.ib(default=None)
+    choose_char_7_y = attr.ib(default=None)
+    choose_char_8_x = attr.ib(default=None)
+    choose_char_8_y = attr.ib(default=None)
+    choose_char_9_x = attr.ib(default=None)
+    choose_char_9_y = attr.ib(default=None)
 
     def _use_resolution(self, resolution: str) -> 'GameClient':
         keyword = f"_at_{resolution}"
@@ -106,3 +107,9 @@ class GameClient(AttrsClass):
 
     def use_1176_664_resolution(self):
         return self._use_resolution("1176_664")
+
+    def get_choose_char_x_y(self, nth: int) -> T.Tuple:
+        return (
+            getattr(self, f"choose_char_{nth}_x"),
+            getattr(self, f"choose_char_{nth}_y"),
+        )

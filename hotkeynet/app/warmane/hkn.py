@@ -221,6 +221,31 @@ class HknScript(AttrsClass):
                     char.account.password,
                 ])
 
+    def build_cmd_batch_login_and_enter_game(self):
+        """
+        根据 Active Character 中定义的角色, 批量登录游戏账号, 并且选择角色并进入游戏.
+        """
+        with hk.Command(
+            name="BatchLoginAndEnterGame",
+        ) as self.cmd_batch_login_and_enter_game:
+            hk.Wait.make(3000)
+            for char in self.mode.active_chars:
+                self.cmd_enter_username_and_password.call(args=[
+                    char.window.title,
+                    char.account.username,
+                    char.account.password,
+                ])
+
+            for char in self.mode.active_chars:
+                with hk.SendLabel(
+                    to=[char.window.label, ],
+                ):
+                    # 选择角色
+                    x, y = self.mode.game_client.get_choose_char_x_y(nth=char.nth_char)
+                    hk.ClickMouse.make_left_click_on_window_at(x, y)
+                    # 点击确定
+                    hk.Key(key=KN.ENTER)
+
     def build_cmd(self):
         self.build_cmd_launch_and_rename_game_client()
         self.build_cmd_launch_and_rename_all_game_client()
@@ -229,6 +254,7 @@ class HknScript(AttrsClass):
         self.build_cmd_center_overlap_layout()
         self.build_cmd_enter_username_and_password()
         self.build_cmd_batch_login()
+        self.build_cmd_batch_login_and_enter_game()
 
     # -------------------------------------------------------------------------
     # 实现与 "切换游戏客户端" 以及 "账号登录" 有关的快捷键.
@@ -2816,10 +2842,16 @@ class HknScript(AttrsClass):
                     command=self.cmd_launch_and_rename_all_game_client,
                 )
 
+                # create_picture_button(
+                #     name="ButtonBatchLogin",
+                #     file=Icons.log_in,
+                #     command=self.cmd_batch_login,
+                # )
+
                 create_picture_button(
                     name="ButtonBatchLogin",
                     file=Icons.log_in,
-                    command=self.cmd_batch_login,
+                    command=self.cmd_batch_login_and_enter_game,
                 )
 
                 create_picture_button(
