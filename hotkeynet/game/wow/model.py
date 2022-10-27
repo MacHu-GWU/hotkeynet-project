@@ -101,6 +101,7 @@ class Character: # 注: 因为需要 hash 和 sort, 所以使用 dataclass 库
     account: Account = dataclasses.field(default=None)
     name: str = dataclasses.field(default=None)
     window: Window = dataclasses.field(default=None)
+    nth_char: int = dataclasses.field(default=1)
     active: bool = dataclasses.field(default=True)
 
     is_leader_1: bool = dataclasses.field(default=False)

@@ -37,6 +37,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti1.value,
             name="batlefury",
+            nth_char=1,
             talent=TL.paladin_pve_protect,
             window=Window.make(1),
         )
@@ -45,6 +46,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti1.value,
             name="batlefury",
+            nth_char=1,
             talent=TL.paladin_pve_retri,
             window=Window.make(1),
         )
@@ -53,6 +55,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti2.value,
             name="quentin",
+            nth_char=1,
             talent=TL.shaman_pve_elemental,
             window=Window.make(2),
         )
@@ -61,6 +64,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti2.value,
             name="quentin",
+            nth_char=1,
             talent=TL.shaman_pve_resto,
             window=Window.make(2),
         )
@@ -69,6 +73,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti3.value,
             name="opiitou",
+            nth_char=1,
             talent=TL.druid_pve_balance,
             window=Window.make(3),
         )
@@ -77,6 +82,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti3.value,
             name="opiitou",
+            nth_char=1,
             talent=TL.druid_pve_resto,
             window=Window.make(3),
         )
@@ -85,6 +91,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti4.value,
             name="swagsonic",
+            nth_char=1,
             talent=TL.mage_pve_arcane,
             window=Window.make(4),
         )
@@ -93,6 +100,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti4.value,
             name="swagsonic",
+            nth_char=1,
             talent=TL.mage_pve_fire,
             window=Window.make(4),
         )
@@ -101,6 +109,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti5.value,
             name="kangliu",
+            nth_char=1,
             talent=TL.priest_pve_shadow,
             window=Window.make(5),
         )
@@ -109,6 +118,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti5.value,
             name="kangliu",
+            nth_char=1,
             talent=TL.priest_pve_disco,
             window=Window.make(5),
         )
@@ -117,6 +127,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fitsheep.value,
             name="kindhearted",
+            nth_char=1,
             talent=TL.warlock_pve_demonology,
             window=Window.make(6),
         )
@@ -125,6 +136,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fitsheep.value,
             name="kindhearted",
+            nth_char=1,
             talent=TL.warlock_pvp_destruction,
             window=Window.make(6),
         )
@@ -133,6 +145,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fitsheep.value,
             name="bordercollie",
+            nth_char=2,
             talent=TL.priest_pve_shadow,
             window=Window.make(6),
         )
@@ -141,6 +154,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fitsheep.value,
             name="bordercollie",
+            nth_char=2,
             talent=TL.priest_pve_disco,
             window=Window.make(6),
         )
@@ -149,6 +163,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti6.value,
             name="kapacuk",
+            nth_char=1,
             talent=TL.hunter_pve_marksman,
             window=Window.make(7),
         )
@@ -157,6 +172,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti6.value,
             name="kapacuk",
+            nth_char=1,
             talent=TL.hunter_pve_beast,
             window=Window.make(7),
         )
@@ -165,6 +181,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti8.value,
             name="bunnysisters",
+            nth_char=1,
             talent=TL.druid_pve_resto,
             window=Window.make(8),
         )
@@ -173,6 +190,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti8.value,
             name="bunnysisters",
+            nth_char=1,
             talent=TL.druid_pve_balance,
             window=Window.make(8),
         )
@@ -181,6 +199,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti9.value,
             name="glowyy",
+            nth_char=1,
             talent=TL.paladin_pve_holy,
             window=Window.make(9),
         )
@@ -189,6 +208,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti9.value,
             name="glowyy",
+            nth_char=1,
             talent=TL.paladin_pve_protect,
             window=Window.make(9),
         )
@@ -197,6 +217,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti10.value,
             name="luxiaofeng",
+            nth_char=1,
             talent=TL.dk_pve_blood_tank,
             window=Window.make(10),
         )
@@ -205,6 +226,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti10.value,
             name="luxiaofeng",
+            nth_char=1,
             talent=TL.dk_pve_unholy_tank,
             window=Window.make(10),
         )
@@ -213,6 +235,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_monkey130.value,
             name="flydps",
+            nth_char=1,
             talent=TL.dk_pve_blood_tank,
             window=Window.make(10),
         )
@@ -221,6 +244,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_makun7551.value,
             name="ganjj",
+            nth_char=2,
             talent=TL.dk_pve_blood_tank,
             window=Window.make(10),
         )
@@ -229,6 +253,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_makun7551.value,
             name="ganjj",
+            nth_char=2,
             talent=TL.dk_pve_unholy_dps,
             window=Window.make(10),
         )
@@ -237,6 +262,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_makun7551.value,
             name="ganjj",
+            nth_char=2,
             talent=TL.dk_pve_unholy_dps,
             window=Window.make(22),
         )
@@ -245,6 +271,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_makun7551.value,
             name="laoshou",
+            nth_char=1,
             talent=TL.paladin_pve_protect,
             window=Window.make(10),
         )
@@ -253,6 +280,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_makun7551.value,
             name="laoshou",
+            nth_char=1,
             talent=TL.paladin_pve_retri,
             window=Window.make(10),
         )
@@ -261,6 +289,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_makun7551.value,
             name="laoshou",
+            nth_char=1,
             talent=TL.paladin_pve_protect,
             window=Window.make(9),
         )
@@ -269,6 +298,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_makun7551.value,
             name="laoshou",
+            nth_char=1,
             talent=TL.paladin_pve_retri,
             window=Window.make(19),
         )
@@ -277,6 +307,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_freiliheng.value,
             name="stophealing",
+            nth_char=1,
             talent=TL.dk_pve_blood_tank,
             window=Window.make(10),
         )
@@ -285,6 +316,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti1.value,
             name="litgoatssa",
+            nth_char=2,
             talent=TL.warlock_pve_demonology,
             window=Window.make(1),
         )
@@ -293,6 +325,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti2.value,
             name="litgoatssb",
+            nth_char=2,
             talent=TL.warlock_pve_demonology,
             window=Window.make(2),
         )
@@ -301,6 +334,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti3.value,
             name="litgoatssc",
+            nth_char=2,
             talent=TL.warlock_pve_demonology,
             window=Window.make(3),
         )
@@ -309,6 +343,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti4.value,
             name="litgoatssd",
+            nth_char=2,
             talent=TL.warlock_pve_demonology,
             window=Window.make(4),
         )
@@ -317,6 +352,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti5.value,
             name="litgoatsse",
+            nth_char=2,
             talent=TL.warlock_pve_demonology,
             window=Window.make(5),
         )
@@ -325,6 +361,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti1.value,
             name="litgoatdka",
+            nth_char=4,
             talent=TL.dk_pvp_frost,
             window=Window.make(1),
         )
@@ -333,6 +370,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti2.value,
             name="litgoatdkb",
+            nth_char=4,
             talent=TL.dk_pvp_frost,
             window=Window.make(2),
         )
@@ -341,6 +379,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti3.value,
             name="litgoatdkc",
+            nth_char=4,
             talent=TL.dk_pvp_frost,
             window=Window.make(3),
         )
@@ -349,6 +388,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti4.value,
             name="litgoatdkd",
+            nth_char=4,
             talent=TL.dk_pvp_frost,
             window=Window.make(4),
         )
@@ -357,6 +397,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti5.value,
             name="litgoatdke",
+            nth_char=4,
             talent=TL.dk_pvp_frost,
             window=Window.make(5),
         )
@@ -365,6 +406,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti1.value,
             name="litgoatdka",
+            nth_char=4,
             talent=TL.dk_pve_unholy_dps,
             window=Window.make(1),
         )
@@ -373,6 +415,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti2.value,
             name="litgoatdkb",
+            nth_char=4,
             talent=TL.dk_pve_unholy_dps,
             window=Window.make(2),
         )
@@ -381,6 +424,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti3.value,
             name="litgoatdkc",
+            nth_char=4,
             talent=TL.dk_pve_unholy_dps,
             window=Window.make(3),
         )
@@ -389,6 +433,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti4.value,
             name="litgoatdkd",
+            nth_char=4,
             talent=TL.dk_pve_unholy_dps,
             window=Window.make(4),
         )
@@ -397,6 +442,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti5.value,
             name="litgoatdke",
+            nth_char=4,
             talent=TL.dk_pve_unholy_dps,
             window=Window.make(5),
         )
@@ -405,6 +451,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti11.value,
             name="litgugua",
+            nth_char=1,
             talent=TL.druid_pvp_balance,
             window=Window.make(11),
         )
@@ -413,6 +460,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti11.value,
             name="litgugud",
+            nth_char=1,
             talent=TL.druid_pvp_resto,
             window=Window.make(11),
         )
@@ -421,6 +469,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti11.value,
             name="litgugua",
+            nth_char=1,
             talent=TL.druid_pve_balance,
             window=Window.make(11),
         )
@@ -429,6 +478,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti12.value,
             name="litgugub",
+            nth_char=1,
             talent=TL.druid_pvp_balance,
             window=Window.make(12),
         )
@@ -437,6 +487,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti12.value,
             name="litgugub",
+            nth_char=1,
             talent=TL.druid_pvp_resto,
             window=Window.make(12),
         )
@@ -445,6 +496,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti12.value,
             name="litgugub",
+            nth_char=1,
             talent=TL.druid_pve_balance,
             window=Window.make(12),
         )
@@ -453,6 +505,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti13.value,
             name="litguguc",
+            nth_char=1,
             talent=TL.druid_pvp_balance,
             window=Window.make(13),
         )
@@ -461,6 +514,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti13.value,
             name="litguguc",
+            nth_char=1,
             talent=TL.druid_pvp_resto,
             window=Window.make(13),
         )
@@ -469,6 +523,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti13.value,
             name="litguguc",
+            nth_char=1,
             talent=TL.druid_pve_balance,
             window=Window.make(13),
         )
@@ -477,6 +532,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti14.value,
             name="litgugud",
+            nth_char=1,
             talent=TL.druid_pvp_balance,
             window=Window.make(14),
         )
@@ -485,6 +541,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti14.value,
             name="litgugud",
+            nth_char=1,
             talent=TL.druid_pvp_resto,
             window=Window.make(14),
         )
@@ -493,6 +550,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti14.value,
             name="litgugud",
+            nth_char=1,
             talent=TL.druid_pve_balance,
             window=Window.make(14),
         )
@@ -501,6 +559,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti15.value,
             name="litgugue",
+            nth_char=1,
             talent=TL.druid_pvp_balance,
             window=Window.make(11),
         )
@@ -509,6 +568,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti16.value,
             name="litguguf",
+            nth_char=1,
             talent=TL.druid_pvp_balance,
             window=Window.make(12),
         )
@@ -517,6 +577,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti17.value,
             name="litgugug",
+            nth_char=1,
             talent=TL.druid_pvp_balance,
             window=Window.make(13),
         )
@@ -525,6 +586,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti18.value,
             name="litguguh",
+            nth_char=1,
             talent=TL.druid_pvp_balance,
             window=Window.make(14),
         )
@@ -533,6 +595,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti18.value,
             name="litguguh",
+            nth_char=1,
             talent=TL.druid_pvp_resto,
             window=Window.make(14),
         )
@@ -541,6 +604,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti19.value,
             name="lgmsi",
+            nth_char=1,
             talent=TL.priest_pve_shadow,
             window=Window.make(15),
         )
@@ -549,6 +613,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti19.value,
             name="lgmsi",
+            nth_char=1,
             talent=TL.priest_pve_disco,
             window=Window.make(15),
         )
@@ -557,6 +622,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti20.value,
             name="lgmsj",
+            nth_char=1,
             talent=TL.priest_pve_shadow,
             window=Window.make(16),
         )
@@ -565,6 +631,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti20.value,
             name="lgmsj",
+            nth_char=1,
             talent=TL.priest_pve_disco,
             window=Window.make(16),
         )
@@ -573,6 +640,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti21.value,
             name="lgmsk",
+            nth_char=1,
             talent=TL.priest_pve_shadow,
             window=Window.make(17),
         )
@@ -581,6 +649,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti21.value,
             name="lgmsk",
+            nth_char=1,
             talent=TL.priest_pve_holy,
             window=Window.make(17),
         )
@@ -589,6 +658,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti22.value,
             name="lgmsl",
+            nth_char=1,
             talent=TL.priest_pve_shadow,
             window=Window.make(18),
         )
@@ -597,6 +667,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti22.value,
             name="lgmsl",
+            nth_char=1,
             talent=TL.priest_pve_holy,
             window=Window.make(18),
         )
@@ -605,6 +676,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti23.value,
             name="lgsmm",
+            nth_char=1,
             talent=TL.shaman_pve_elemental,
             window=Window.make(19),
         )
@@ -613,6 +685,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti23.value,
             name="lgsmm",
+            nth_char=1,
             talent=TL.shaman_pve_resto,
             window=Window.make(19),
         )
@@ -621,6 +694,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti24.value,
             name="lgsmn",
+            nth_char=1,
             talent=TL.shaman_pve_elemental,
             window=Window.make(20),
         )
@@ -629,6 +703,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti24.value,
             name="lgsmn",
+            nth_char=1,
             talent=TL.shaman_pve_resto,
             window=Window.make(20),
         )
@@ -637,6 +712,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti25.value,
             name="lgsmo",
+            nth_char=1,
             talent=TL.shaman_pve_elemental,
             window=Window.make(21),
         )
@@ -645,6 +721,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti25.value,
             name="lgsmo",
+            nth_char=1,
             talent=TL.shaman_pve_resto,
             window=Window.make(21),
         )
@@ -653,6 +730,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti26.value,
             name="lgsmp",
+            nth_char=1,
             talent=TL.shaman_pve_elemental,
             window=Window.make(22),
         )
@@ -661,6 +739,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti26.value,
             name="lgsmp",
+            nth_char=1,
             talent=TL.shaman_pve_resto,
             window=Window.make(22),
         )
@@ -672,6 +751,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti1.value,
             name="lgqsa",
+            nth_char=1,
             talent=TL.paladin_pve_protect,
             window=Window.make(1),
         )
@@ -680,6 +760,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti2.value,
             name="lgqsb",
+            nth_char=1,
             talent=TL.paladin_pve_retri,
             window=Window.make(2),
         )
@@ -688,6 +769,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti3.value,
             name="lgqsc",
+            nth_char=1,
             talent=TL.paladin_pve_retri,
             window=Window.make(3),
         )
@@ -696,6 +778,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti4.value,
             name="lgqsd",
+            nth_char=1,
             talent=TL.paladin_pve_retri,
             window=Window.make(4),
         )
@@ -704,6 +787,7 @@ class _CharacterFactory:
         return Character(
             account=AccountEnum.account_fatmulti5.value,
             name="lgqse",
+            nth_char=1,
             talent=TL.paladin_pve_holy,
             window=Window.make(5),
         )

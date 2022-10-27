@@ -68,6 +68,25 @@ class GameClient(AttrsClass):
     rdf_enter_dungeon_button_x: int = attr.ib(default=None)
     rdf_enter_dungeon_button_y: int = attr.ib(default=None)
 
+    char_1_x = attr.ib(default=None)
+    char_1_y = attr.ib(default=None)
+    char_2_x = attr.ib(default=None)
+    char_2_y = attr.ib(default=None)
+    char_3_x = attr.ib(default=None)
+    char_3_y = attr.ib(default=None)
+    char_4_x = attr.ib(default=None)
+    char_4_y = attr.ib(default=None)
+    char_5_x = attr.ib(default=None)
+    char_5_y = attr.ib(default=None)
+    char_6_x = attr.ib(default=None)
+    char_6_y = attr.ib(default=None)
+    char_7_x = attr.ib(default=None)
+    char_7_y = attr.ib(default=None)
+    char_8_x = attr.ib(default=None)
+    char_8_y = attr.ib(default=None)
+    char_9_x = attr.ib(default=None)
+    char_9_y = attr.ib(default=None)
+
     def _use_resolution(self, resolution: str) -> 'GameClient':
         keyword = f"_at_{resolution}"
         for attr in coordinator.__dict__:
