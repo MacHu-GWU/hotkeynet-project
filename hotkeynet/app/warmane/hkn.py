@@ -236,9 +236,6 @@ class HknScript(AttrsClass):
                     char.account.password,
                 ])
 
-            # hk.Wait.make(3000)
-
-
             for char in self.mode.active_chars:
                 with hk.SendPC():
                     with hk.SendWin(window=char.window.title):
@@ -251,29 +248,15 @@ class HknScript(AttrsClass):
                                 .set_stroke_as_both()
                                 .set_target_as_window()
                                 .set_mode_as_x_y(
-                                    x=x,
-                                    y=y,
-                                )
+                                x=x,
+                                y=y,
+                            )
                                 .set_restore_as_no()
                         )
 
                         # 点击确定
-                        hk.Wait.make(100)
+                        hk.Wait.make(300)
                         hk.Key(key=KN.ENTER)
-
-            # for char in self.mode.active_chars:
-            #     with hk.SendLabel(
-            #         to=[char.window.label, ],
-            #     ):
-            #         # 选择角色
-            #         x, y = self.mode.game_client.get_choose_char_x_y(nth=char.nth_char)
-            #         # hk.ClickMouse.make_left_click_on_window_at(x, y)
-            #         hk.MoveMouse(x, y)
-            #         hk.Wait.make(50)
-            #         hk.ClickMouse.make_left_click_on_window()
-            #         hk.Wait.make(50)
-            #         # 点击确定
-            #         hk.Key(key=KN.ENTER)
 
     def build_cmd(self):
         self.build_cmd_launch_and_rename_game_client()
