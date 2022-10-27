@@ -353,9 +353,7 @@ class HknScript(AttrsClass):
         for window, account in self.mode.login_window_and_account_pairs:
             with hk.Hotkey(
                 id=f"SingleLogin{account.username.title()}",
-                key=KN.SCROLOCK_ON(
-                    HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[int(window.label.replace("w", "")) - 1]
-                ),
+                key=HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[int(window.label.replace("w", "")) - 1],
             ) as hotkey:
                 self.cmd_enter_username_and_password.call(args=[
                     window.title,
