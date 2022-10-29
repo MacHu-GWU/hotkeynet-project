@@ -197,10 +197,12 @@ class CharacterOrderedSetHelper:
     def set_active(self, chars: OrderedSet[Character]):  # pragma: no cover
         for char in chars:
             char.active = True
+        return chars
 
     def set_inactive(self, chars: OrderedSet[Character]):  # pragma: no cover
         for char in chars:
             char.active = False
+        return chars
 
     def sort_chars_by_window_label(
         self,
