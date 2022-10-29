@@ -1,31 +1,38 @@
 # -*- coding: utf-8 -*-
 
-from hotkeynet.app.warmane.mode import Mode
+from hotkeynet.app.warmane.mode import (
+    trade_mode_fact,
+    dungeon_mode_fact,
+    raid_mode_fact,
+)
 
 # -----------------------------------------------------------------------------
 # Warmane
 # -----------------------------------------------------------------------------
 
-# mode = Mode.use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu()
-# mode = Mode.use_solo_raid_10p_batlefury_luxiao feng_core_team()
+# --- Dungeon
+# mode = dungeon_mode_fact.use_solo_dungeon_batlefury_quentin_opiitou_swagsonic_kangliu()
+
+# --- Raid
+# mode = raid_mode_fact.use_solo_raid_10p_batlefury_luxiaofeng_core_team()
 
 # --- Montly Login ---
-# mode = Mode.use_22p_monthly_login_1()
-# mode = Mode.use_22p_monthly_login_2()
+# mode = trade_mode_fact.use_22p_monthly_login_1()
+# mode = trade_mode_fact.use_22p_monthly_login_2()
 
-# --- Montly Login ---
-# mode = Mode.use_5p_team_solo_dungeon_festival_team_1_dk()
-# mode = Mode.use_5p_team_solo_dungeon_festival_team_2_ss()
-mode = Mode.use_5p_team_solo_dungeon_festival_team_3_mix()
+# --- Festival daily ---
+mode = dungeon_mode_fact.use_5p_team_solo_dungeon_festival_team_1_dk()
+# mode = dungeon_mode_fact.use_5p_team_solo_dungeon_festival_team_2_ss()
+# mode = dungeon_mode_fact.use_5p_team_solo_dungeon_festival_team_3_mix()
 
-# mode = Mode.use_5p_team_solo_festival_team_4_ms_sm()
-# mode = Mode.use_5p_team_solo_festival_team_5_ms_sm()
-# mode = Mode.use_5p_team_solo_festival_team_6_litgugu_efgh()
+# mode = dungeon_mode_fact.use_5p_team_solo_festival_team_4_ms_sm()
+# mode = dungeon_mode_fact.use_5p_team_solo_festival_team_5_ms_sm()
+# mode = dungeon_mode_fact.use_5p_team_solo_festival_team_6_litgugu_efgh()
 
 # -----------------------------------------------------------------------------
 # Lordaeron
 # -----------------------------------------------------------------------------
-# mode = Mode.use_solo_dungeon_5p_lgqs_abcde()
+# mode = dungeon_mode_fact.use_5p_lgqs_abcde_leveling()
 
 # -----------------------------------------------------------------------------
 # Don't Touch
