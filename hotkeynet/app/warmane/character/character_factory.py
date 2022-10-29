@@ -165,6 +165,16 @@ class CharacterFactory:
         )
 
     @property
+    def fitsheep_angorarabbit_pve_blood_tank(self) -> Character:
+        return Character(
+            account=AccountEnum.account_fitsheep.value,
+            name="angorarabbit",
+            nth_char=5,
+            talent=TL.dk_pve_blood_tank,
+            window=Window.make(6),
+        )
+
+    @property
     def fatmulti6_kapacuk_pve_marksman_hunter(self) -> Character:
         return Character(
             account=AccountEnum.account_fatmulti6.value,
@@ -872,6 +882,22 @@ char_fact = CharacterFactory()
 
 
 class CharacterGroup:
+    @property
+    def window_1_to_5_batlefury_to_kangliu(self) -> OrderedSet[Character]:
+        return OrderedSet([
+            char_fact.fatmulti1_batlefury_pve_protect_pala,
+            char_fact.fatmulti2_quentin_pve_elemental_shaman,
+            char_fact.fatmulti3_opiitou_pve_balance_druid,
+            char_fact.fatmulti4_swagsonic_pve_arcane_mage,
+            char_fact.fatmulti5_kangliu_pve_shadow_priest,
+        ])
+
+    @property
+    def window_6_angorarabbit(self) -> OrderedSet[Character]:
+        return OrderedSet([
+            char_fact.fitsheep_angorarabbit_pve_blood_tank,
+        ])
+
     @property
     def window_1_to_9_batlefury_to_glowyy(self) -> OrderedSet[Character]:
         return OrderedSet([

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from ..character import (
+    login_char_fact,
     trade_active_char_fact,
 )
 from ..game_client import GameClient
@@ -29,6 +30,7 @@ class ModeFactory:
             # game_client=GameClient().use_1920_1080_resolution(),
             game_client=GameClient().use_1600_900_resolution(),
             # game_client=GameClient().use_1176_664_resolution(),
+            login_chars=login_char_fact.group_core_6p_alchemy_transmute,
             active_chars=trade_active_char_fact.x5p_alchemy_transmute,
         )
 

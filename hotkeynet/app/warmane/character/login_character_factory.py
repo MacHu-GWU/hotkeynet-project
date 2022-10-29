@@ -21,6 +21,15 @@ class LoginCharactersFactory:
         )
 
     @property
+    def group_core_6p_alchemy_transmute(self) -> OrderedSet[Character]:
+        return char_oset_helper.set_inactive(
+            OrderedSet.union(
+                char_group.window_1_to_5_batlefury_to_kangliu,
+                char_group.window_6_angorarabbit,
+            )
+        )
+
+    @property
     def group_14p_litgugu_abcd(self) -> OrderedSet[Character]:
         return char_oset_helper.set_inactive(
             OrderedSet.union(

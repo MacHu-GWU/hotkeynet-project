@@ -75,7 +75,6 @@ class ActiveCharactersFactory:
             char_fact.fatmulti3_litgoatdkc_pve_unholy_dk,
             char_fact.fatmulti4_litgoatdkd_pve_unholy_dk,
             char_fact.fatmulti5_litgoatdke_pve_unholy_dk,
-            char_fact.fitsheep_bordercollie_pve_disco_priest,
         ]))
 
 
