@@ -11,6 +11,7 @@ from .paths import path_azerothcore_config_json
 @attr.s
 class Config(AttrsClass):
     wow_exe_path: str = attr.ib(default=None)
+    locale: str = attr.ib(default=None)
 
 
 config_data = json.load(path_azerothcore_config_json.abspath, verbose=False)

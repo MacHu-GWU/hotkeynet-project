@@ -2,7 +2,10 @@
 
 import hotkeynet as hk
 from hotkeynet import KN
-from hotkeynet.game.wow.wlk import Talent as TL, TalentCategory as TC
+from hotkeynet.game.wow.wlk import (
+    Talent as TL,
+    TalentCategory as TC,
+)
 
 from .. import act
 from ..character import (
@@ -10,7 +13,7 @@ from ..character import (
     raid_active_char_fact,
     dungeon_active_char_fact,
 )
-from ..game_client import GameClient
+from ..game_client import game_client_fact
 from ..hkn import HknScript
 from .base import Mode
 
@@ -18,9 +21,9 @@ from .base import Mode
 class ModeFactory:
     def solo_raid_10p_core_team(self) -> Mode:
         return Mode(
-            game_client=GameClient().use_1920_1080_resolution(),
-            # game_client=GameClient().use_1600_900_resolution(),
-            # game_client=GameClient().use_1176_664_resolution(),
+            game_client=game_client_fact.resolution_1920_1080,
+            # game_client=game_client_fact.resolution_1600_900,
+            # game_client=game_client_fact.resolution_1176_664,
             login_chars=login_char_fact.r_abcde_fghij,
             active_chars=raid_active_char_fact.x10p_r_abcde_fghij_core_team,
         )
@@ -31,9 +34,9 @@ class ModeFactory:
         然后再按 + 号使用第二套焦点模式对焦点进行修改
         """
         mode = Mode(
-            game_client=GameClient().use_1920_1080_resolution(),
-            # game_client=GameClient().use_1600_900_resolution(),
-            # game_client=GameClient().use_1176_664_resolution(),
+            game_client=game_client_fact.resolution_1920_1080,
+            # game_client=game_client_fact.resolution_1600_900,
+            # game_client=game_client_fact.resolution_1176_664,
             login_chars=login_char_fact.r_abcde_fghij,
             active_chars=raid_active_char_fact.x10p_r_abcde_fghij_core_team,
         )
@@ -65,9 +68,9 @@ class ModeFactory:
 
     def solo_dungeon_5p_horde_s_abcde(self) -> Mode:
         return Mode(
-            game_client=GameClient().use_1920_1080_resolution(),
-            # game_client=GameClient().use_1600_900_resolution(),
-            # game_client=GameClient().use_1176_664_resolution(),
+            game_client=game_client_fact.resolution_1920_1080,
+            # game_client=game_client_fact.resolution_1600_900,
+            # game_client=game_client_fact.resolution_1176_664,
             login_chars=login_char_fact.s_abcde,
             active_chars=dungeon_active_char_fact.x5p_s_abcde,
         )

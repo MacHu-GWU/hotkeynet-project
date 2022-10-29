@@ -7,7 +7,7 @@
 相对于游戏窗口内部的相对坐标.
 """
 
-# 我们有三个分辨率模式, 分别对应高, 中, 低
+# 我们有三个分辨率模式, 1920, 1600, 1176, 分别对应高, 中, 低分辨率
 window_left_top_x_at_1920_1080 = 120
 window_left_top_y_at_1920_1080 = 0
 
@@ -105,8 +105,9 @@ rdf_enter_dungeon_button_y_at_1600_900 = 272
 rdf_enter_dungeon_button_x_at_1176_664 = None
 rdf_enter_dungeon_button_y_at_1176_664 = None
 
-choose_char_1_x_at_1920_1080 = None
-choose_char_1_y_at_1920_1080 = None
+# 人物选择界面选择特定人物的坐标
+choose_char_1_x_at_1920_1080 = 1530
+choose_char_1_y_at_1920_1080 = 135
 choose_char_2_x_at_1920_1080 = None
 choose_char_2_y_at_1920_1080 = None
 choose_char_3_x_at_1920_1080 = None
