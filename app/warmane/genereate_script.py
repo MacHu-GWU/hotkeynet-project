@@ -19,9 +19,10 @@ from hotkeynet.app.warmane.mode import (
 # --- Montly Login ---
 # mode = trade_mode_fact.use_22p_monthly_login_1()
 # mode = trade_mode_fact.use_22p_monthly_login_2()
+mode = trade_mode_fact.use_5p_daily_alchemy_transmute()
 
 # --- Festival daily ---
-mode = dungeon_mode_fact.use_5p_team_solo_dungeon_festival_team_1_dk()
+# mode = dungeon_mode_fact.use_5p_team_solo_dungeon_festival_team_1_dk()
 # mode = dungeon_mode_fact.use_5p_team_solo_dungeon_festival_team_2_ss()
 # mode = dungeon_mode_fact.use_5p_team_solo_dungeon_festival_team_3_mix()
 

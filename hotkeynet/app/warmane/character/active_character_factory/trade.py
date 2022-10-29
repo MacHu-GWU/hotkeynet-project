@@ -61,5 +61,22 @@ class ActiveCharactersFactory:
             char_fact.fatmulti18_litguguh_pvp_balance_druid,
         ]))
 
+    @property
+    def x5p_alchemy_transmute(self) -> OrderedSet[Character]:
+        """
+        """
+        return char_oset_helper.set_team_leader_and_tank(chars=OrderedSet([
+            (
+                char_fact.fatmulti1_litgoatdka_pve_blood_dk
+                    .set_is_leader_1().set_tank_1()
+                    .set_is_leader_2().set_tank_2()
+            ),
+            char_fact.fatmulti2_litgoatdkb_pve_unholy_dk,
+            char_fact.fatmulti3_litgoatdkc_pve_unholy_dk,
+            char_fact.fatmulti4_litgoatdkd_pve_unholy_dk,
+            char_fact.fatmulti5_litgoatdke_pve_unholy_dk,
+            char_fact.fitsheep_bordercollie_pve_disco_priest,
+        ]))
+
 
 trade_active_char_fact = ActiveCharactersFactory()
