@@ -12,7 +12,6 @@ from ..character import (
 )
 from ..game_client import GameClient
 from ..hkn import HknScript
-from ..paths import path_azerothcore_hkn
 from .base import Mode
 
 
