@@ -24,6 +24,7 @@ class CharacterFactory:
             name="ra",
             talent=TL.paladin_pve_protect,
             window=Window.make(1),
+            nth_char=1,
         )
 
     @property
@@ -33,6 +34,7 @@ class CharacterFactory:
             name="rb",
             talent=TL.shaman_pve_elemental,
             window=Window.make(2),
+            nth_char=1,
         )
 
     @property
@@ -42,6 +44,7 @@ class CharacterFactory:
             name="rc",
             talent=TL.druid_pve_balance,
             window=Window.make(3),
+            nth_char=1,
         )
 
     @property
@@ -51,6 +54,7 @@ class CharacterFactory:
             name="rd",
             talent=TL.mage_pve_arcane,
             window=Window.make(4),
+            nth_char=1,
         )
 
     @property
@@ -60,6 +64,7 @@ class CharacterFactory:
             name="re",
             talent=TL.priest_pve_shadow,
             window=Window.make(5),
+            nth_char=1,
         )
 
     @property
@@ -69,6 +74,7 @@ class CharacterFactory:
             name="re",
             talent=TL.priest_pve_holy,
             window=Window.make(5),
+            nth_char=1,
         )
 
     @property
@@ -78,6 +84,7 @@ class CharacterFactory:
             name="rf",
             talent=TL.warlock_pve_demonology,
             window=Window.make(6),
+            nth_char=1,
         )
 
     @property
@@ -87,6 +94,7 @@ class CharacterFactory:
             name="rg",
             talent=TL.hunter_pve_marksman,
             window=Window.make(7),
+            nth_char=1,
         )
 
     @property
@@ -96,6 +104,7 @@ class CharacterFactory:
             name="rh",
             talent=TL.druid_pve_resto,
             window=Window.make(8),
+            nth_char=1,
         )
 
     @property
@@ -105,6 +114,7 @@ class CharacterFactory:
             name="ri",
             talent=TL.paladin_pve_holy,
             window=Window.make(9),
+            nth_char=1,
         )
 
     @property
@@ -114,6 +124,7 @@ class CharacterFactory:
             name="rj",
             talent=TL.dk_pve_blood_tank,
             window=Window.make(10),
+            nth_char=1,
         )
 
     @property
@@ -123,6 +134,7 @@ class CharacterFactory:
             name="sa",
             talent=TL.paladin_pve_protect,
             window=Window.make(1),
+            nth_char=1,
         )
 
     @property
@@ -132,6 +144,7 @@ class CharacterFactory:
             name="sb",
             talent=TL.shaman_pve_elemental,
             window=Window.make(2),
+            nth_char=1,
         )
 
     @property
@@ -141,6 +154,7 @@ class CharacterFactory:
             name="sc",
             talent=TL.shaman_pve_elemental,
             window=Window.make(3),
+            nth_char=1,
         )
 
     @property
@@ -150,6 +164,7 @@ class CharacterFactory:
             name="sd",
             talent=TL.shaman_pve_elemental,
             window=Window.make(4),
+            nth_char=1,
         )
 
     @property
@@ -159,6 +174,7 @@ class CharacterFactory:
             name="se",
             talent=TL.shaman_pve_resto,
             window=Window.make(5),
+            nth_char=1,
         )
 
 

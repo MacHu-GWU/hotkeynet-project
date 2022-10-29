@@ -2850,12 +2850,6 @@ class HknScript(AttrsClass):
                     command=self.cmd_launch_and_rename_all_game_client,
                 )
 
-                # create_picture_button(
-                #     name="ButtonBatchLogin",
-                #     file=Icons.log_in,
-                #     command=self.cmd_batch_login,
-                # )
-
                 create_picture_button(
                     name="ButtonBatchLogin",
                     file=Icons.log_in,

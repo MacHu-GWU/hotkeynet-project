@@ -2860,7 +2860,7 @@ class HknScript(AttrsClass):
                 create_picture_button(
                     name="ButtonBatchLogin",
                     file=Icons.log_in,
-                    command=self.cmd_batch_login,
+                    command=self.cmd_batch_login_and_enter_game,
                 )
 
                 create_picture_button(
