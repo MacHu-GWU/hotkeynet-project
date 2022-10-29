@@ -13,4 +13,6 @@ from .login_character_factory import login_char_fact
 from .active_character_factory import (
     raid_active_char_fact,
     dungeon_active_char_fact,
+    trade_active_char_fact,
+    gold_farm_active_char_fact,
 )

@@ -9,6 +9,7 @@ class ActiveCharactersFactory:
     # --------------------------------------------------------------------------
     # Icecrown
     # --------------------------------------------------------------------------
+    @property
     def x5p_batlefury_quentin_opiitou_swagsonic_kangliu(self) -> OrderedSet[Character]:
         """
         主力 5 人组
@@ -21,6 +22,7 @@ class ActiveCharactersFactory:
             char_fact.fatmulti5_kangliu_pve_shadow_priest,
         ]))
 
+    @property
     def x5p_flexible(self) -> OrderedSet[Character]:
         """
         该模式用于 1 个坦克 带着 3 个 DPS, 1 个治疗 打 5 人小副本.

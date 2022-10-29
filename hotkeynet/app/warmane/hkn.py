@@ -9,7 +9,6 @@ import hotkeynet as hk
 from hotkeynet import KN
 from hotkeynet import utils
 from hotkeynet.game.wow.wlk import (
-    Character,
     Window,
     Talent as TL,
     TalentCategory as TC,
@@ -17,7 +16,6 @@ from hotkeynet.game.wow.wlk import (
 )
 
 from . import act
-from .character import CharacterHelper
 from .icons import Icons
 
 if T.TYPE_CHECKING:
