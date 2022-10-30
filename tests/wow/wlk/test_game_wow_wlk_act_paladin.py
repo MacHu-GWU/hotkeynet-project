@@ -4,10 +4,8 @@ import os
 from hotkeynet.game.wow.wlk.act.paladin.retribution import Paladin
 
 
-
-
 def test():
-    print(Paladin.Holy_Light)
+    assert Paladin.Holy_Light() is None
 
 
 if __name__ == "__main__":

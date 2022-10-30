@@ -65,7 +65,7 @@ class Protection(ActFactory):
     Seal_of_Justice = None  # 公正圣印 (有几率打晕敌人)
 
 
-class Holy:
+class Holy(ActFactory):
     # 神圣系主打技能
     Beacon_of_Light = None  # 圣光道标
     Holy_Light = None  # 圣光术
