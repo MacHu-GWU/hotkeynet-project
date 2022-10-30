@@ -69,7 +69,9 @@ try:
         WaitForWinEnabled,
     )
 
-    from .act_factory import ActFactory
+    from .act_factory import ActFactory, click_name
+
+    CN = click_name
 
 except ImportError as e:
     pass

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 import pytest
-from pytest import raises, approx
 
 
 def test():
     import hotkeynet
-    pass
+
+    _ = hotkeynet.KN
+    _ = hotkeynet.CN
+    _ = hotkeynet.ActFactory
 
 
 if __name__ == "__main__":
