@@ -3,8 +3,7 @@
 from hotkeynet.keyname import *
 from hotkeynet import (
     ActFactory,
-    ClickMouse,
-    ModifiedClickMouse,
+    CN,
 )
 
 
@@ -144,7 +143,7 @@ class Healbot(ActFactory):
     Alt_Middle = None
     Ctrl_Middle = None
 
-    HB_Holy_Light = lambda: ClickMouse(button=MOUSE_LButton)
+    HB_Holy_Light = CN.left
     HB_Flash_of_Light = None
     HB_Sacred_Shield = None
     HB_Hand_of_Protection = None

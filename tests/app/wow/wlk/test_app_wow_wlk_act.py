@@ -6,12 +6,14 @@ from hotkeynet.app.wow.wlk.act.paladin import Paladin
 
 class TestPaladin:
     def test(self):
-        print("")
-        print(type(Paladin().Holy_Light))
-        print(Paladin().Holy_Light)
-        # print(act.paladin.Holy_Light)
-        # print(act.paladin_protection.Hammer_of_the_Righteous)
-        # print(act.paladin_holy.HB_Holy_Light)
+        # print("")
+        # print(type(Paladin().Holy_Light))
+        # print(Paladin().Holy_Light)
+        print(act.paladin.Holy_Light())
+        print(act.paladin_protection.Hammer_of_the_Righteous())
+        print(act.paladin_holy.HB_Holy_Light())
+
+        print(act.paladin_holy.Blessing_of_Sanctuary())
         pass
 
 

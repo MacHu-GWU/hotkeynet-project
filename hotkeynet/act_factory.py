@@ -77,6 +77,24 @@ class ClickMaker(BaseKeyMaker):
         return self.click()
 
 
+class ErrorMaker(BaseKeyMaker):
+    def __init__(
+        self,
+        klass,
+        attribute,
+        value: T.Any,
+    ):
+        self.klass = klass
+        self.attribute = attribute
+        self.value = value
+
+    def __call__(self):
+        raise ValueError(
+            f"the definition of {self.klass}.{self.attribute} is wrong! "
+            f"the value is {self.value!r}"
+        )
+
+
 class ActFactoryMeta(type):
     """
     meta class of ActFactory
@@ -90,7 +108,11 @@ class ActFactoryMeta(type):
                 elif callable(v):
                     attrs[k] = ClickMaker(v)
                 else:
-                    raise TypeError
+                    attrs[k] = ErrorMaker(
+                        klass=name,
+                        attribute=k,
+                        value=v,
+                    )
 
         klass = super(ActFactoryMeta, cls).__new__(cls, name, bases, attrs)
         return klass
