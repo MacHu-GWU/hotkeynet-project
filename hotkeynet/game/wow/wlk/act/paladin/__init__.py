@@ -1,9 +1,30 @@
 # -*- coding: utf-8 -*-
 
+"""
+This is a sample script to configure your spell key binding for multiboxing.
+
+You should copy and paste this script as your foundation and fill in your own
+spell key binding.
+
+这个文件有
+
+- class $Talent1: 属于该系的职业技能, 这些技能的键位设定应该是无论你当前使用的什么天赋, 都应该是用这个键位
+- class $Talent2: 同上
+- class $Talent3: 同上
+- class Healbot: 使用 Healbot 团队框架施放的技能, 这些技能的键位设定应该是无论你当前使用的什么天赋, 都应该是用这个键位
+- class $ClassName: 汇总所有无论你当前使用的什么天赋都适用的键位. 该类继承了 $Talent1, $Talent2, $Talent3, Healbot 四个类
+- class $ClassName$Talent1: 设定使用特定天赋时特定的键位, 该类继承了 $ClassName, 特定键位只要覆盖父类的属性即可
+- class $ClassName$Talent2: 同上
+- class $ClassName$Talent3: 同上
+"""
+
 from ......act_factory import ActFactory
 
 
 class Retribution(ActFactory):
+    """
+
+    """
     # 惩戒系主打技能
     Judgement_of_Light = None  # 光明审判
     Judgement_of_Wisdom = None  # 智慧审判
@@ -19,7 +40,7 @@ class Retribution(ActFactory):
     Blessing_of_Might = None  # 力量祝福
     Greater_Blessing_of_Might = None  # 强效力量祝福
 
-    Avenging_Wrath = None  # 正义之怒
+    Avenging_Wrath = None  # 复仇之怒
     Hammer_of_Wrath = None  # 愤怒之锤
     Repentance = None  # 忏悔
     Seal_of_Command = None  # 命令圣印
@@ -127,3 +148,15 @@ class Healbot(ActFactory):
 
 class Paladin(Retribution, Protection, Holy, Healbot):
     pass
+
+
+class PaladinRetribution(Paladin):
+    Divine_Storm = None
+
+
+class PaladinProtection(Paladin):
+    Hammer_of_the_Righteous = None
+
+
+class PaladinHoly(Paladin):
+    Beacon_of_Light = None

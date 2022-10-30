@@ -4,7 +4,6 @@
 Package Description.
 """
 
-
 from ._version import __version__
 
 __short_description__ = "Package short description."
@@ -15,6 +14,7 @@ __github_username__ = "MacHu-GWU"
 
 try:
     from . import keyname
+
     KN = keyname
 
     from .script import (
@@ -68,6 +68,8 @@ try:
         WaitForWin,
         WaitForWinEnabled,
     )
+
+    from .act_factory import ActFactory
 
 except ImportError as e:
     pass
