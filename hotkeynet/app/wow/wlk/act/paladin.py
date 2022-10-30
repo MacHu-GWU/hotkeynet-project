@@ -131,7 +131,7 @@ class Healbot(ActFactory):
     # HEAL_BOT_ALT_MIDDLE_HAND_OF_SALVATION = lambda: ModifiedClickMouse.alt_middle_click()  # 拯救祝福
     # HEAL_BOT_CTRL_MIDDLE_HAND_OF_PROTECTION = lambda: ModifiedClickMouse.ctrl_middle_click()  # 保护祝福
 
-    Left = lambda: ClickMouse(button=MOUSE_LButton)
+    Left = None
     Shift_Left = None
     Alt_Left = None
     Ctrl_Left = None
@@ -144,7 +144,7 @@ class Healbot(ActFactory):
     Alt_Middle = None
     Ctrl_Middle = None
 
-    HB_Holy_Light = None
+    HB_Holy_Light = lambda: ClickMouse(button=MOUSE_LButton)
     HB_Flash_of_Light = None
     HB_Sacred_Shield = None
     HB_Hand_of_Protection = None
@@ -237,3 +237,8 @@ class PaladinHoly(Paladin):
     #showtooltip
     /cast [target=focustarget,harm][target=focus,harm][] Judgement of Light;
     """
+
+paladin = Paladin()
+paladin_retribution = PaladinRetribution()
+paladin_protection = PaladinProtection()
+paladin_holy = PaladinHoly()
