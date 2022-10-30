@@ -103,57 +103,21 @@ class Holy(ActFactory):
 
 
 class Healbot(ActFactory):
-    """
-        由于奶骑按照职业顺序 (板甲 -> 布甲, 单一职业 -> 混合职业) 是第一个治疗职业, 而 Healbot
-        的快捷键我们是按照一定的逻辑来的. 这里我们就来解说一下这个逻辑.
-
-        - 左键 / 右键 是最高频的治疗技能
-        - Shift / Alt + 左键 / 右键 是次高频的治疗技能
-        - Ctrl + 左键 / 右键 是驱散类技能, 其中 Ctrl + 左键为更主要的驱散技能
-        - 中键 是临时性的技能, 例如骑士给保护祝福, 德鲁伊给激活等
-        """
-
-    # # Left | Shift/Ctrl/Alt+Left
-    # HEAL_BOT_LEFT_CLICK_HOLY_LIGHT = lambda: ClickMouse(button=MOUSE_LButton)  # 圣光术
-    # HEAL_BOT_SHIFT_LEFT_BEACON_OF_LIGHT = lambda: ModifiedClickMouse.shift_left_click()  # 圣光道标
-    # HEAL_BOT_ALT_LEFT_SACRED_SHIELD = lambda: ModifiedClickMouse.alt_left_click()  # 圣洁护盾
-    # HEAL_BOT_CTRL_LEFT_CLEANSE = lambda: ModifiedClickMouse.ctrl_left_click()  # 清洁术
-    #
-    # # Right | Shift/Ctrl/Alt+Right
-    # HEAL_BOT_RIGHT_CLICK_FLASH_OF_LIGHT = lambda: ClickMouse(button=MOUSE_RButton)  # 圣光闪现
-    # HEAL_BOT_SHIFT_RIGHT_HOLY_SHOCK = lambda: ModifiedClickMouse.shift_right_click()  # 神圣震击
-    # HEAL_BOT_ALT_RIGHT_HAND_OF_FREEDOM = lambda: ModifiedClickMouse.alt_right_click()  # 自由祝福
-    #
-    # # Middle | Shift/Ctrl/Alt+Middle
-    # HEAL_BOT_MIDDLE_CLICK_BEACON_OF_LIGHT = lambda: ClickMouse(button=MOUSE_MButton)  # 圣光道标
-    # HEAL_BOT_SHIFT_MIDDLE_HAND_OF_SACRIFICE = lambda: ModifiedClickMouse.shift_middle_click()  # 牺牲祝福
-    # HEAL_BOT_ALT_MIDDLE_HAND_OF_SALVATION = lambda: ModifiedClickMouse.alt_middle_click()  # 拯救祝福
-    # HEAL_BOT_CTRL_MIDDLE_HAND_OF_PROTECTION = lambda: ModifiedClickMouse.ctrl_middle_click()  # 保护祝福
-
-    Left = None
-    Shift_Left = None
-    Alt_Left = None
-    Ctrl_Left = None
-    Right = None
-    Shift_Right = None
-    Alt_Right = None
-    Ctrl_Right = None
-    Middle = None
-    Shift_Middle = None
-    Alt_Middle = None
-    Ctrl_Middle = None
-
     HB_Holy_Light = CN.left
-    HB_Flash_of_Light = None
-    HB_Sacred_Shield = None
-    HB_Hand_of_Protection = None
-    HB_Hand_of_Salvation = None
-    HB_Hand_of_Sacrifice = None
-    HB_Hand_of_Freedom = None
+    HB_Sacred_Shield = CN.alt_left_click
+    HB_Cleanse = CN.ctrl_left_click
+
+    HB_Flash_of_Light = CN.right
+    HB_Hand_of_Freedom = CN.alt_right_click
+
+    HB_Hand_of_Sacrifice = CN.shift_middle_click
+    HB_Hand_of_Salvation = CN.alt_middle_click
+    HB_Hand_of_Protection = CN.ctrl_middle_click
     HB_Righteous_Defense = None
-    HB_Cleanse = None
     HB_Divine_Intervention = None
     HB_Lay_on_Hands = None
+    HB_Beacon_of_Light = None
+    HB_Holy_Shock = None
 
 
 class Paladin(Retribution, Protection, Holy, Healbot):
@@ -187,6 +151,15 @@ class PaladinRetribution(Paladin):
 
 
 class PaladinHoly(Paladin):
+    """
+    由于奶骑按照职业顺序 (板甲 -> 布甲, 单一职业 -> 混合职业) 是第一个治疗职业, 而 Healbot
+    的快捷键我们是按照一定的逻辑来的. 这里我们就来解说一下这个逻辑.
+
+    - 左键 / 右键 是最高频的治疗技能
+    - Shift / Alt + 左键 / 右键 是次高频的治疗技能
+    - Ctrl + 左键 / 右键 是驱散类技能, 其中 Ctrl + 左键为更主要的驱散技能
+    - 中键 是临时性的技能, 例如骑士给保护祝福, 德鲁伊给激活等
+    """
     Beacon_of_Light = KEY_0
 
     # --- 神圣天赋下专属键位 ---
@@ -228,6 +201,7 @@ class PaladinHoly(Paladin):
     /castsequence Judgement of Light,Judgement of Light,Sacred Shield
     """
 
+    Holy_Shock = Z
     Focus_Judgement = R
     """
     如果焦点是敌人, 则对焦点打审判. 如果焦点是友方, 则对焦点目标打审判.
@@ -236,6 +210,10 @@ class PaladinHoly(Paladin):
     #showtooltip
     /cast [target=focustarget,harm][target=focus,harm][] Judgement of Light;
     """
+
+    HB_Beacon_of_Light = CN.middle
+    HB_Holy_Shock = CN.shift_right_click
+
 
 paladin = Paladin()
 paladin_retribution = PaladinRetribution()

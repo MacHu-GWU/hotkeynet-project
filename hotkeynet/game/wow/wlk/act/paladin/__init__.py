@@ -144,6 +144,8 @@ class Healbot(ActFactory):
     HB_Cleanse = None
     HB_Divine_Intervention = None
     HB_Lay_on_Hands = None
+    HB_Beacon_of_Light = None
+    HB_Holy_Shock = None
 
 
 class Paladin(Retribution, Protection, Holy, Healbot):

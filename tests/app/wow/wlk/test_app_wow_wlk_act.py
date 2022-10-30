@@ -1,21 +1,18 @@
 # -*- coding: utf-8 -*-
 
 import os
+import pytest
 from hotkeynet.app.wow.wlk import act
-from hotkeynet.app.wow.wlk.act.paladin import Paladin
+
 
 class TestPaladin:
     def test(self):
-        # print("")
-        # print(type(Paladin().Holy_Light))
-        # print(Paladin().Holy_Light)
-        print(act.paladin.Holy_Light())
-        print(act.paladin_protection.Hammer_of_the_Righteous())
-        print(act.paladin_holy.HB_Holy_Light())
+        _ = act.paladin_protection.Hammer_of_the_Righteous()
+        _ = act.paladin_retribution.Divine_Storm()
+        _ = act.paladin_holy.Holy_Shock()
 
-        print(act.paladin_holy.Blessing_of_Sanctuary())
-        pass
-
+        with pytest.raises(ValueError):
+            act.paladin_holy.Blessing_of_Sanctuary()
 
 
 if __name__ == "__main__":
