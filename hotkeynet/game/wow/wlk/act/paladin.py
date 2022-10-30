@@ -18,7 +18,7 @@ spell key binding.
 - class $ClassName$Talent3: 同上
 """
 
-from ......act_factory import ActFactory
+from .....act_factory import ActFactory
 
 
 class Retribution(ActFactory):
