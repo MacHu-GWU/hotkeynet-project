@@ -54,6 +54,10 @@ class Context:
 
     所有的 HotkeyNet 的代码块都是 :class:`Block` 的子类, 它们都有一个 ``blocks`` 属性.
     每当我们用
+
+    :param stack: 储存当前的堆栈, 是一个后进先出的数据结构
+    :param auto_id_index: 用于自动给每个 Block 加 ID 的数据结构. 每一类 Block 例如
+        Command, Hotkey, SendLabel 都是从 1, 2, 3, ... 开始自动加序号.
     """
     def __init__(self):
         self.stack: list = list()
@@ -70,6 +74,9 @@ class Context:
 
     @property
     def current(self) -> 'Block':
+        """
+        获取当前上下文中的最外层的 Block.
+        """
         return self.stack[-1]
 
     def make_id(self, block_type: str = "Block") -> str:

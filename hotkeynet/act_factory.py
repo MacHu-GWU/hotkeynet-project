@@ -13,8 +13,8 @@ class ActFactoryMeta(type):
     def __new__(cls, name, bases, attrs):
         for k, v in attrs.items():
             if not k.startswith("_"):
-                @classmethod
-                def func(cls) -> str:
+                @property
+                def func(self) -> str:
                     return v
 
                 attrs[k] = func
