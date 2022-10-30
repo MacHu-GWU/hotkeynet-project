@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from ......act_factory import ActFactory
+from .....act_factory import ActFactory
 
 
 class Retribution(ActFactory):
