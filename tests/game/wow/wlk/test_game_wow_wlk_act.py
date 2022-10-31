@@ -6,7 +6,7 @@ from hotkeynet.game.wow.wlk import act
 
 def test():
     _ = act.paladin_holy.Beacon_of_Light()
-    
+
 
 if __name__ == "__main__":
     import sys
