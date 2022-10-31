@@ -83,20 +83,20 @@ class Shadow(ActFactory):
 
 
 class Healbot(ActFactory):
-    Power_Word_Shield = None  # 真言术盾
-    Penance = None  # 苦修, 通道型治疗技能, 戒律系天赋技能
-    Pain_Suppression = None  # 痛苦压制, 减伤技能, 戒律系天赋技能
-    Dispel_Magic = None  # 驱散魔法
-    Abolish_Disease = None  # 驱除疾病
-    Renew = None  # 恢复
-    Prayer_of_Healing = None  # 愈合祷言
-    Binding_Heal = None  # 联结治疗, 治疗目标与你自己
-    Flash_Heal = None  # 快速治疗
-    Greater_Heal = None  # 超级治疗术
-    Holy_Nova = None  # 神圣新星
-    Circle_of_Healing = None  # 治疗之环, 群体治疗技能, 神圣系天赋技能
-    Guardian_Spirit = None  # 守护天使, 保护目标不被一击必杀一次, 神圣系天赋技能
-    Fear_Ward = None  # 防护恐惧结界
+    HB_Power_Word_Shield = None  # 真言术盾
+    HB_Penance = None  # 苦修, 通道型治疗技能, 戒律系天赋技能
+    HB_Pain_Suppression = None  # 痛苦压制, 减伤技能, 戒律系天赋技能
+    HB_Dispel_Magic = None  # 驱散魔法
+    HB_Abolish_Disease = None  # 驱除疾病
+    HB_Renew = None  # 恢复
+    HB_Prayer_of_Healing = None  # 愈合祷言
+    HB_Binding_Heal = None  # 联结治疗, 治疗目标与你自己
+    HB_Flash_Heal = None  # 快速治疗
+    HB_Greater_Heal = None  # 超级治疗术
+    HB_Holy_Nova = None  # 神圣新星
+    HB_Circle_of_Healing = None  # 治疗之环, 群体治疗技能, 神圣系天赋技能
+    HB_Guardian_Spirit = None  # 守护天使, 保护目标不被一击必杀一次, 神圣系天赋技能
+    HB_Fear_Ward = None  # 防护恐惧结界
 
 
 class Priest(Discipline, Holy, Shadow, Healbot):

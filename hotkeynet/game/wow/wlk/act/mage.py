@@ -117,10 +117,10 @@ class Frost(ActFactory):
 
 
 class Healbot:
-    Amplify_Magic = None  # 法力增效
-    Dampen_Magic = None  # 魔法抑制
-    Remove_Curse = None  # 移除诅咒
-    Focus_Magic = None  # 专注魔法, 奥系天赋技能
+    HB_Amplify_Magic = None  # 法力增效
+    HB_Dampen_Magic = None  # 魔法抑制
+    HB_Remove_Curse = None  # 移除诅咒
+    HB_Focus_Magic = None  # 专注魔法, 奥系天赋技能
 
 
 class Mage(Arcane, Fire, Frost, Healbot):

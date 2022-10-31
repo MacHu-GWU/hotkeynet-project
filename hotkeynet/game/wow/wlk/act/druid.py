@@ -120,16 +120,15 @@ class Feral(ActFactory):
 
 
 class Healbot(ActFactory):
-    Rejuvenation = None  # 回春术
-    Regrowth = None  # 愈合
-    Nourish = None  # 滋养
-    Lifebloom = None  # 生命之花, hot, 周期结束后会返回部分蓝耗
-    Wild_Growth = None  # 野性生长, 群体治疗, 恢复系天赋技能
-    Swiftmend = None  # 迅捷治愈, 恢复系天赋技能
-
-    Abolish_Poison = None  # 驱毒术
-    Remove_Curse = None  # 驱散诅咒
-    Innervate = None  # 激活, 为目标回复大量法力
+    HB_Rejuvenation = None  # 回春术
+    HB_Regrowth = None  # 愈合
+    HB_Nourish = None  # 滋养
+    HB_Lifebloom = None  # 生命之花, hot, 周期结束后会返回部分蓝耗
+    HB_Wild_Growth = None  # 野性生长, 群体治疗, 恢复系天赋技能
+    HB_Swiftmend = None  # 迅捷治愈, 恢复系天赋技能
+    HB_Abolish_Poison = None  # 驱毒术
+    HB_Remove_Curse = None  # 驱散诅咒
+    HB_Innervate = None  # 激活, 为目标回复大量法力
 
 
 class Druid(Balance, Restoration, Feral, Healbot):

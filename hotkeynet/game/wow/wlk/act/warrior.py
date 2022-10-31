@@ -91,7 +91,7 @@ class Healbot(ActFactory):
 
 
 class Warrior(Arm, Fury, Protection, Healbot):
-    pass
+    HB_Vigilance = None  # 警戒
 
 
 class WarriorArm(Warrior):

@@ -8,12 +8,14 @@ This is a sample script to configure your spell key binding for multiboxing.
 You should copy and paste this script as your foundation and fill in your own
 spell key binding.
 
+该文件是一个用来定义你游戏中的技能键位绑定的配置文件模版. 请不要直接在本文件上修改. 而是将其拷贝一份到 app 文件夹下进行修改. 该文件是基于圣骑士的, 其他职业也是同理.
+
 这个文件有这么几个类:
 
-- class $Talent1: 属于该系的职业技能, 这些技能的键位设定应该是无论你当前使用的什么天赋, 都应该是用这个键位
+- class $Talent1: 属于该系的职业技能, 这些技能的键位设定应该是无论你当前使用的什么天赋, 都应该是用这个键位. 我们以 ``class Retribution`` 距离. 例如 惩戒天赋中如果有 神圣风暴 技能. 该技只会在 惩戒天赋下 才会用到. 所以你在这个类中请让他保持 None, 而是转而到 ``class PaladinRetribution`` 中定义它的快捷键
 - class $Talent2: 同上
 - class $Talent3: 同上
-- class Healbot: 使用 Healbot 团队框架施放的技能, 这些技能的键位设定应该是无论你当前使用的什么天赋, 都应该是用这个键位
+- class Healbot: 使用 Healbot 团队框架施放的技能, 这些技能的键位设定应该是无论你当前使用的什么天赋, 都应该是用这个键位.
 - class $ClassName: 汇总所有无论你当前使用的什么天赋都适用的键位. 该类继承了 $Talent1, $Talent2, $Talent3, Healbot 四个类
 - class $ClassName$Talent1: 设定使用特定天赋时特定的键位, 该类继承了 $ClassName, 特定键位只要覆盖父类的属性即可
 - class $ClassName$Talent2: 同上
@@ -31,9 +33,6 @@ from hotkeynet import (
 
 
 class Retribution(ActFactory):
-    """
-
-    """
     # 惩戒系主打技能
     Judgement_of_Light = None  # 光明审判
     Judgement_of_Wisdom = None  # 智慧审判
@@ -129,19 +128,6 @@ class Holy(ActFactory):
 
 
 class Healbot(ActFactory):
-    Left = None
-    Shift_Left = None
-    Alt_Left = None
-    Ctrl_Left = None
-    Right = None
-    Shift_Right = None
-    Alt_Right = None
-    Ctrl_Right = None
-    Middle = None
-    Shift_Middle = None
-    Alt_Middle = None
-    Ctrl_Middle = None
-
     HB_Holy_Light = None
     HB_Flash_of_Light = None
     HB_Sacred_Shield = None

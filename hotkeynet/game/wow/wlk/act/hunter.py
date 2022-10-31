@@ -106,7 +106,7 @@ class Survival(ActFactory):
 
 
 class Healbot(ActFactory):
-    Misdirection = None  # 误导, 使你下几次攻击造成的仇恨转移到指定目标身上
+    HB_Misdirection = None  # 误导, 使你下几次攻击造成的仇恨转移到指定目标身上
 
 
 class Hunter(BeastMastery, Marksmanship, Survival, Healbot):
