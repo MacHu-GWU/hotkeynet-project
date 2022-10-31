@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from hotkeynet import ActFactory
+from hotkeynet.keyname import *
+from hotkeynet import (
+    ActFactory,
+    CN,
+)
 
 
 class Arm(ActFactory):

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
+说明
+------------------------------------------------------------------------------
 This is a sample script to configure your spell key binding for multiboxing.
 
 You should copy and paste this script as your foundation and fill in your own
 spell key binding.
 
-这个文件有
+这个文件有这么几个类:
 
 - class $Talent1: 属于该系的职业技能, 这些技能的键位设定应该是无论你当前使用的什么天赋, 都应该是用这个键位
 - class $Talent2: 同上
@@ -16,9 +18,16 @@ spell key binding.
 - class $ClassName$Talent1: 设定使用特定天赋时特定的键位, 该类继承了 $ClassName, 特定键位只要覆盖父类的属性即可
 - class $ClassName$Talent2: 同上
 - class $ClassName$Talent3: 同上
+
+如何编辑该配置文件
+------------------------------------------------------------------------------
 """
 
-from .....act_factory import ActFactory
+from hotkeynet.keyname import *
+from hotkeynet import (
+    ActFactory,
+    CN,
+)
 
 
 class Retribution(ActFactory):

@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from hotkeynet import ActFactory
+from hotkeynet.keyname import *
+from hotkeynet import (
+    ActFactory,
+    CN,
+)
 
 
 class Balance(ActFactory):
@@ -150,7 +154,7 @@ class DruidFeral(Druid):
     Feral_Charge_Bear = None  # 野性冲锋 熊形态, 野性系天赋技能
     Feral_Charge_Cat = None  # 野性冲锋 猫形态, 野性系天赋技能
     Berserk = None  # 狂暴, 熊猫通用爆发技能, 野性系天赋技能
-    
+
 
 druid = Druid()
 druid_balance = DruidBalance()
