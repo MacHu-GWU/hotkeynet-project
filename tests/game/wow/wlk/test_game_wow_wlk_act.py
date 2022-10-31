@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
 
 import os
-from hotkeynet.game.wow.wlk.act.paladin import Paladin
-
-paladin = Paladin()
+from hotkeynet.game.wow.wlk import act
 
 
 def test():
-    assert paladin.Holy_Light is None
-
+    _ = act.paladin_holy.Beacon_of_Light()
+    
 
 if __name__ == "__main__":
     import sys
@@ -30,7 +28,7 @@ if __name__ == "__main__":
         bin_pytest,
         "-s", "--tb=native", "-vv",
         f"--rootdir={dir_project_root}",
-        "--cov=hotkeynet.game.wow.wlk.act.paladin",
+        "--cov=hotkeynet.game.wow.wlk.act",
         "--cov-report", "term-missing",
         "--cov-report", f"html:{dir_htmlcov}",
         abspath,

@@ -153,12 +153,22 @@ class Paladin(Retribution, Protection, Holy, Healbot):
 
 
 class PaladinRetribution(Paladin):
-    Divine_Storm = None
+    Crusader_Strike = None  # 十字军打击
+    Divine_Storm = None  # 神圣风暴
 
 
 class PaladinProtection(Paladin):
-    Hammer_of_the_Righteous = None
+    Hammer_of_the_Righteous = None  # # 公正之锤
+    Avenger_s_Shield = None  # 复仇者之盾
+    Holy_Shield = None  # 神圣之盾
 
 
 class PaladinHoly(Paladin):
-    Beacon_of_Light = None
+    Holy_Shock = None  # 神圣冲击
+    Beacon_of_Light = None  # 圣光道标
+
+
+paladin = Paladin()
+paladin_retribution = PaladinRetribution()
+paladin_protection = PaladinProtection()
+paladin_holy = PaladinHoly()
