@@ -86,8 +86,8 @@ class Healbot(ActFactory):
     HB_Power_Word_Shield = CN.right  # 真言术盾
     HB_Penance = None  # 苦修, 通道型治疗技能, 戒律系天赋技能
     HB_Pain_Suppression = None  # 痛苦压制, 减伤技能, 戒律系天赋技能
-    HB_Dispel_Magic = CN.ctrl_right  # 驱散魔法
-    HB_Abolish_Disease = CN.ctrl_left  # 驱除疾病
+    HB_Dispel_Magic = CN.ctrl_right_click  # 驱散魔法
+    HB_Abolish_Disease = CN.ctrl_left_click  # 驱除疾病
     HB_Renew = None  # 恢复
     HB_Prayer_of_Healing = CN.alt_left_click  # 愈合祷言
     HB_Binding_Heal = None  # 联结治疗, 治疗目标与你自己
