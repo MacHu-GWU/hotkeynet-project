@@ -3,14 +3,25 @@
 import os
 from rich import print
 import hotkeynet as hk
-from hotkeynet.app.azerothcore.mode import mode_fact
+from hotkeynet.app.azerothcore.mode import (
+    dungeon_mode_fact,
+    raid_mode_fact,
+)
 
 
 class TestMode:
     def test_launched_windows(self):
+        # hk.context.reset()
+        # dungeon_mode_fact.x5p_horde_s_abcde.render(verbose=False)
+        #
+        # hk.context.reset()
+        # raid_mode_fact.x10p_core_team.render(verbose=False)
+
+        # hk.context.reset()
+        # raid_mode_fact.x10p_naxx_abomination_4th_boss.render(verbose=False)
+        #
         hk.context.reset()
-        mode = mode_fact.solo_raid_10p_core_team()
-        mode.hkn_script.script.render(verbose=False),
+        raid_mode_fact.x25p_core_team.render(verbose=False)
 
 
 if __name__ == "__main__":

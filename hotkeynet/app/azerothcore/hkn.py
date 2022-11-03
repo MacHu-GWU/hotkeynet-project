@@ -356,8 +356,18 @@ class HknScript(AttrsClass):
             KN.SCROLOCK_ON(KN.ALT_SHIFT_(key))
             for key in KN.INSERT_TO_PGDN
         ]
-        HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = ctrl_alt_f1_to_10 + shift_alt_f5_to_f12 + shift_alt_insert_to_pgdn
-        assert len(HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25) == 24
+        ctrl_alt_f12 = [
+            KN.SCROLOCK_ON(KN.CTRL_ALT_(KN.F12)),
+        ]
+
+        HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25 = (
+            ctrl_alt_f1_to_10
+            + shift_alt_f5_to_f12
+            + shift_alt_insert_to_pgdn
+            + ctrl_alt_f12
+        )
+        
+        assert len(HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25) == 25
 
         self.hk_list_toggle_specific_window: T.List[hk.Hotkey] = list()
 

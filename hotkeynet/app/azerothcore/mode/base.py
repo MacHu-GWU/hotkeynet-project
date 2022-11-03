@@ -72,10 +72,11 @@ class Mode(AttrsClass):
         self.login_chars = char_oset_helper.sort_chars_by_window_label(self.login_chars)
         self.hkn_script = HknScript(mode=self)
 
+    def render(self, verbose: bool = False) -> str:
+        return self.hkn_script.script.render(verbose=verbose)
+
     def dump(self, verbose: bool = False):
-        path_azerothcore_hkn.write_text(
-            self.hkn_script.script.render(verbose=verbose),
-        )
+        path_azerothcore_hkn.write_text(self.render(verbose=verbose))
 
     @property
     def login_window_and_account_pairs(self) -> T.List[T.Tuple[Window, Account]]:
