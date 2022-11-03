@@ -20,7 +20,7 @@ from . import act
 from .icons import Icons
 
 if T.TYPE_CHECKING:
-    from .mode import Mode
+    from .mode.base import Mode
 
 
 @attr.s
