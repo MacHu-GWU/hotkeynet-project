@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 """
-此模块用于枚举所有的在 www.warmane.com 的账号密码, 避免将敏感信息写入代码,
-并安全地在 HotkeyNet 脚本中引用这些信息.
+此模块用于枚举所有的在 azerothcore 的账号密码, 并安全地在 HotkeyNet 脚本中引用这些信息.
+避免将敏感信息写入代码. 实现数据和运算分离的效果.
 """
 
 import os

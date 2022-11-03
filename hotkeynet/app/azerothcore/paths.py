@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+枚举与
+"""
+
 from ...paths import dir_app
 
 dir_app_azerothcore = dir_app / "azerothcore"

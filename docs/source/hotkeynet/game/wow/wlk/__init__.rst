@@ -10,8 +10,9 @@ sub packages and modules
 .. toctree::
     :maxdepth: 1
 
+    act <act/__init__>
     coordinator <coordinator>
+    game_client <game_client>
+    model <model>
     talent <talent>
-    talent_category <talent_category>
-    talent_category_association <talent_category_association>
     

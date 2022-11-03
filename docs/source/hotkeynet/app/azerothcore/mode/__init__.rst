@@ -1,7 +1,7 @@
-lbd
-===
+mode
+====
 
-.. automodule:: hotkeynet.lbd
+.. automodule:: hotkeynet.app.azerothcore.mode
     :members:
 
 sub packages and modules
@@ -10,5 +10,5 @@ sub packages and modules
 .. toctree::
     :maxdepth: 1
 
-    hello <hello>
+    base <base>
     

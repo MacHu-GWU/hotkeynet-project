@@ -1,12 +1,23 @@
 # -*- coding: utf-8 -*-
 
+"""
+该模块枚举了我们可能会用到的魔兽世界客户端程序的配置.
+"""
+
 from hotkeynet.game.wow.wlk import coordinator
 from hotkeynet.game.wow.wlk.game_client import GameClient
 from .config import config
 
 
 class GameClientFactory:
+    """
+
+    """
+
     def _use_resolution(self, resolution: str) -> 'GameClient':
+        """
+        一个工厂函数.
+        """
         game_client = GameClient(
             wow_exe_path=config.wow_exe_path,
             locale=config.locale,

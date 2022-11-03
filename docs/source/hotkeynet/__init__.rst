@@ -12,12 +12,11 @@ sub packages and modules
 
     app <app/__init__>
     game <game/__init__>
-    lbd <lbd/__init__>
     tpl <tpl/__init__>
+    act_factory <act_factory>
     enumerate <enumerate>
     keyname <keyname>
     paths <paths>
     script <script>
-    script_backup <script_backup>
     utils <utils>
     
