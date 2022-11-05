@@ -1089,16 +1089,16 @@ class HknScript(AttrsClass):
                 act.DK.ALL_SPEC_HORN_OF_WINTER_KEY_SHIFT_TAB()
 
             label_list = self.mode.lbs_by_tc(TC.paladin_healer)
-            if label_list == 0:
+            if len(label_list) == 0:
                 pass
-            elif label_list == 1:
+            elif len(label_list) == 1:
                 with hk.SendLabel(
                     id=TC.paladin_healer.name,
                     to=self.mode.lbs_by_tc(TC.paladin_healer),
                 ):
                     act.Target.TARGET_FOCUS()
                     act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT()
-            elif label_list == 2:
+            elif len(label_list) == 2:
                 with hk.SendLabel(
                     id="HolyPaladin1",
                     to=[label_list[0], ],
@@ -1129,7 +1129,7 @@ class HknScript(AttrsClass):
                 to=self.mode.lbs_by_tc(TC.warlock),
             ):
                 act.Warlock.ALL_SPEC_FEL_ARMOR()
-                
+
             with hk.SendLabel(
                 id=TC.priest.name,
                 to=self.mode.lbs_by_tc(TC.priest),
