@@ -712,6 +712,7 @@ class HknScript(AttrsClass):
     def build_actions_default(
         self,
         key: str,
+        healer_target_nothing: bool = False,
         healer_target_focus: bool = False,
         healer_target_focus_target: bool = False,
         healer_target_self: bool = False,
@@ -727,6 +728,7 @@ class HknScript(AttrsClass):
         2. DPS 对焦点的目标释放技能
         3. 治疗 对某个目标释放技能, 这里的 "某个" 取决于哪个模式. 请参考下面的参数定义:
 
+        :param healer_target_nothing: 在施放治疗技能前不选择目标
         :param healer_target_focus: 治疗前 (下同), 先选定焦点, 通常是坦克司机
         :param healer_target_focus_target: 先选择焦点的目标, 通常是坦克选择队友然后治疗该队友
         :param healer_target_self: 先选择自己
@@ -743,6 +745,7 @@ class HknScript(AttrsClass):
         每个特定的天赋在特殊场景下指定不同的行为的能力. 所以我们才用的这种不符合直觉的写法.
         """
         if sum([
+            healer_target_nothing,
             healer_target_focus,
             healer_target_focus_target,
             healer_target_self,
@@ -778,7 +781,9 @@ class HknScript(AttrsClass):
                 id=talent.name,
                 to=self.mode.lbs_by_tl(talent),
             ) as send_label:
-                if healer_target_focus:
+                if healer_target_nothing:
+                    hk.Key.make(key)
+                elif healer_target_focus:
                     act.Target.TARGET_FOCUS()
                     hk.Key.make(key)
                 elif healer_target_focus_target:
@@ -827,11 +832,23 @@ class HknScript(AttrsClass):
         ) as self.hk_2:
             send_label_list = self.build_actions_default(
                 key=KN.KEY_2,
-                healer_target_focus_target=True,  # 治疗选择 焦点的目标
+                healer_target_nothing=True,  # 治疗不选择目标
             )
             # 特殊职业的特殊设定
+            # 奶骑随机奶团
             send_label = self._get_send_label_by_id(
                 id_=TL.paladin_pve_holy.name,
+                blocks=send_label_list,
+            )
+            with send_label():
+                send_label.blocks = [
+                    act.Target.TARGET_RAID(),
+                    act.General.TRIGGER(),
+                ]
+
+            # 奶萨随机奶团
+            send_label = self._get_send_label_by_id(
+                id_=TL.shaman_pve_resto.name,
                 blocks=send_label_list,
             )
             with send_label():

@@ -21,4 +21,5 @@ mode = raid_mode_fact.x25p_core_team
 # -----------------------------------------------------------------------------
 # Don't Touch
 # -----------------------------------------------------------------------------
-mode.dump(verbose=True)
+# mode.dump(verbose=True)
+mode.dump(verbose=False)
