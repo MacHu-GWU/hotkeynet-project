@@ -858,7 +858,7 @@ class HknScript(AttrsClass):
             self._build_default_tank_action(key=KN.KEY_1)
             self._build_default_dps_action(key=KN.KEY_1)
 
-            # 奶德, 奶萨 用慢速治疗奶坦克
+            # 奶德, 奶萨 用小治疗奶坦克
             label_list_druid_resto = self.mode.lbs_by_tc(TC.druid_resto)
             label_list_shaman_resto = self.mode.lbs_by_tc(TC.shaman_resto)
             label_list = label_list_druid_resto + label_list_shaman_resto
@@ -879,7 +879,7 @@ class HknScript(AttrsClass):
                     self.mode.target_leader_1()
                     hk.Key.make(KN.KEY_1)
                 with hk.SendLabel(
-                    id="SlowTankHealerOther",
+                    id="SlowTankHealer2",
                     to=[label_list[1], ],
                 ):
                     self.mode.target_leader_2()
@@ -931,29 +931,124 @@ class HknScript(AttrsClass):
             id="Key3",
             key=KN.SCROLOCK_ON(KN.KEY_3),
         ) as self.hk_3:
-            send_label_list = self.build_actions_default(
+            self._build_default_tank_action(key=KN.KEY_3)
+            self._build_default_dps_action(key=KN.KEY_3)
+
+            # 奶德, 奶萨 用大治疗奶坦克
+            label_list_druid_resto = self.mode.lbs_by_tc(TC.druid_resto)
+            label_list_shaman_resto = self.mode.lbs_by_tc(TC.shaman_resto)
+            label_list = label_list_druid_resto + label_list_shaman_resto
+            if len(label_list) == 0:
+                pass
+            elif len(label_list) == 1:
+                with hk.SendLabel(
+                    id="BigTankHealer",
+                    to=label_list,
+                ):
+                    act.Target.TARGET_FOCUS()
+                    hk.Key.make(KN.KEY_3)
+            else:
+                with hk.SendLabel(
+                    id="BigTankHealer1",
+                    to=[label_list[0], ],
+                ):
+                    self.mode.target_leader_1()
+                    hk.Key.make(KN.KEY_3)
+                with hk.SendLabel(
+                    id="BigTankHealer2",
+                    to=[label_list[1], ],
+                ):
+                    self.mode.target_leader_2()
+                    hk.Key.make(KN.KEY_3)
+                with hk.SendLabel(
+                    id="BigTankHealerOther",
+                    to=label_list[2:],
+                ):
+                    act.Target.TARGET_FOCUS()
+                    hk.Key.make(KN.KEY_3)
+
+            # 戒律牧
+            self._build_send_label_by_talent(
+                talent=list(TC.priest_disco.talents),
+                target=None,
                 key=KN.KEY_3,
-                healer_target_focus=True,  # 治疗选择 焦点
             )
-            # 特殊职业的特殊设定
-            send_label = self._get_send_label_by_id(
-                id_=TL.paladin_pve_holy.name,
-                blocks=send_label_list,
-            )
-            with send_label():
-                send_label.blocks = [
-                    act.General.TRIGGER(),
-                ]
+
+            # 奶骑, 按概率为 Leader 补 圣光道标
+            label_list = self.mode.lbs_by_tc(TC.paladin_healer)
+            if len(label_list) == 0:
+                pass
+            # 如果只有 1 个奶骑, 则给焦点加圣光道标
+            elif len(label_list) == 1:
+                with hk.SendLabel(
+                    id=TC.paladin_healer.name,
+                    to=self.mode.lbs_by_tc(TC.paladin_healer),
+                ):
+                    act.Target.TARGET_FOCUS()
+                    hk.Key.make(KN.KEY_3)
+            # 如果有 2 或 2 个以上的奶骑, 两个奶骑分别给两个 leader 加圣光道标
+            # 其他的奶骑给焦点加圣光道标
+            elif len(label_list) == 2:
+                with hk.SendLabel(
+                    id="HolyPaladin1",
+                    to=[label_list[0], ],
+                ):
+                    self.mode.target_leader_1()
+                    hk.Key.make(KN.KEY_3)
+                with hk.SendLabel(
+                    id="HolyPaladin2",
+                    to=[label_list[1], ],
+                ):
+                    self.mode.target_leader_2()
+                    hk.Key.make(KN.KEY_3)
+                with hk.SendLabel(
+                    id="HolyPaladin3andAbove",
+                    to=label_list[2:],
+                ):
+                    act.Target.TARGET_FOCUS()
+                    hk.Key.make(KN.KEY_3)
 
     def build_hk_4_heal_nothing(self):
         with hk.Hotkey(
             id="Key4",
             key=KN.SCROLOCK_ON(KN.KEY_4),
         ) as self.hk_4:
-            send_label_list = self.build_actions_default(
-                key=KN.KEY_4,
-                healer_target_focus_target=True,  # 选择 焦点的目标
-            )
+            self._build_default_tank_action(key=KN.KEY_4)
+            self._build_default_dps_action(key=KN.KEY_4)
+
+            label_list = self.mode.lbs_by_tc(TC.paladin_healer)
+            if len(label_list) == 0:
+                pass
+            # 如果只有 1 个奶骑, 则给焦点的目标补圣光审判
+            elif len(label_list) == 1:
+                with hk.SendLabel(
+                    id=TC.paladin_healer.name,
+                    to=self.mode.lbs_by_tc(TC.paladin_healer),
+                ):
+                    act.Target.TARGET_FOCUS_TARGET()
+                    hk.Key.make(KN.KEY_4)
+            # 如果有 2 或 2 个以上的奶骑, 两个奶骑分别给两个 leader 的目标补圣光审判
+            elif len(label_list) == 2:
+                with hk.SendLabel(
+                    id="HolyPaladin1",
+                    to=[label_list[0], ],
+                ):
+                    self.mode.target_leader_1()
+                    act.Target.ASSIST_TARGET()
+                    hk.Key.make(KN.KEY_4)
+                with hk.SendLabel(
+                    id="HolyPaladin2",
+                    to=[label_list[1], ],
+                ):
+                    self.mode.target_leader_2()
+                    act.Target.ASSIST_TARGET()
+                    hk.Key.make(KN.KEY_4)
+                with hk.SendLabel(
+                    id="HolyPaladin3andAbove",
+                    to=label_list[2:],
+                ):
+                    act.Target.TARGET_FOCUS_TARGET()
+                    hk.Key.make(KN.KEY_4)
 
     def build_hk_5_aoe_heal_self(self):
         with hk.Hotkey(
