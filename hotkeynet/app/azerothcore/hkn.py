@@ -886,6 +886,7 @@ class HknScript(AttrsClass):
             #         to=[label_list[0],],
             #     ) as send_label:
             #         hk.Key.make(KN.KEY_2)
+
     def build_hk_2_heal_nothing(self):
         with hk.Hotkey(
             id="Key2",
@@ -1086,22 +1087,49 @@ class HknScript(AttrsClass):
                 to=self.mode.lbs_by_tc(TC.dk),
             ):
                 act.DK.ALL_SPEC_HORN_OF_WINTER_KEY_SHIFT_TAB()
-            with hk.SendLabel(
-                id=TC.paladin_healer.name,
-                to=self.mode.lbs_by_tc(TC.paladin_healer),
-            ):
-                act.Target.TARGET_FOCUS()
-                act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT()
+
+            label_list = self.mode.lbs_by_tc(TC.paladin_healer)
+            if label_list == 0:
+                pass
+            elif label_list == 1:
+                with hk.SendLabel(
+                    id=TC.paladin_healer.name,
+                    to=self.mode.lbs_by_tc(TC.paladin_healer),
+                ):
+                    act.Target.TARGET_FOCUS()
+                    act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT()
+            elif label_list == 2:
+                with hk.SendLabel(
+                    id="HolyPaladin1",
+                    to=[label_list[0], ],
+                ):
+                    self.mode.target_leader_1()
+                    act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT()
+                with hk.SendLabel(
+                    id="HolyPaladin2",
+                    to=[label_list[1], ],
+                ):
+                    self.mode.target_leader_2()
+                    act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT()
+                with hk.SendLabel(
+                    id="HolyPaladin3andAbove",
+                    to=label_list[2:],
+                ):
+                    act.Target.TARGET_FOCUS()
+                    act.Paladin.HOLY_SPEC_KEY_0_BEACON_OF_LIGHT()
+
             with hk.SendLabel(
                 id=TC.shaman.name,
                 to=self.mode.lbs_by_tc(TC.shaman),
             ):
                 act.Shaman.ALL_SPEC_KEY_0_WATER_OR_LIGHTNING_SHIELD()
+
             with hk.SendLabel(
                 id=TC.warlock.name,
                 to=self.mode.lbs_by_tc(TC.warlock),
             ):
                 act.Warlock.ALL_SPEC_FEL_ARMOR()
+                
             with hk.SendLabel(
                 id=TC.priest.name,
                 to=self.mode.lbs_by_tc(TC.priest),

@@ -22,6 +22,7 @@ from hotkeynet.game.wow.wlk import (
 from ..game_client import GameClient
 from ..hkn import HknScript
 from ..paths import path_azerothcore_hkn
+from ..act import target_leader_key_mapper
 
 
 @attr.s
@@ -51,6 +52,8 @@ class Mode(AttrsClass):
     login_chars: OrderedSet[Character] = attr.ib(factory=OrderedSet)
     active_chars: OrderedSet[Character] = attr.ib(factory=OrderedSet)
     hkn_script: HknScript = attr.ib(default=None)
+
+    #
     target_tank1: T.Callable = attr.ib(default=None)
     target_tank2: T.Callable = attr.ib(default=None)
 
@@ -150,6 +153,18 @@ class Mode(AttrsClass):
             char.window.label
             for char in self.active_chars
             if char.is_tank_2
+        ]
+
+    @property
+    def target_leader_1(self) -> T.Callable:
+        return target_leader_key_mapper[
+            char_oset_helper._find_leader_1(self.active_chars).label
+        ]
+
+    @property
+    def target_leader_2(self) -> T.Callable:
+        return target_leader_key_mapper[
+            char_oset_helper._find_leader_2(self.active_chars).label
         ]
 
     @property
