@@ -805,6 +805,51 @@ class HknScript(AttrsClass):
 
         return send_label_list
 
+    def _build_send_label_by_talent(
+        self,
+        talent: T.Union[TL, T.List[TL]],
+        target: T.Optional[T.Union[T.Callable, T.List[T.Callable]]],
+        key: str,
+    ) -> T.List[hk.SendLabel]:
+        send_label_list: T.List[hk.SendLabel] = list()
+        if isinstance(talent, TL):
+            talent_list: T.List[TL] = [talent, ]
+        else:
+            talent_list: T.List[TL] = talent
+
+        if target is None:
+            target_list: T.List[T.Callable] = []
+        elif isinstance(target, list):
+            target_list: T.List[T.Callable] = target
+        else:
+            target_list: T.List[T.Callable] = [target, ]
+
+        for talent in talent_list:
+            with hk.SendLabel(
+                id=talent.name,
+                to=self.mode.lbs_by_tl(talent),
+            ) as send_label:
+                for target in target_list:
+                    target()
+                hk.Key.make(key)
+                send_label_list.append(send_label)
+
+        return send_label_list
+
+    def _build_default_tank_action(self, key: str) -> T.List[hk.SendLabel]:
+        return self._build_send_label_by_talent(
+            talent=list(TC.tank.talents),
+            target=list(),
+            key=key,
+        )
+
+    def _build_default_dps_action(self, key: str) -> T.List[hk.SendLabel]:
+        return self._build_send_label_by_talent(
+            talent=list(TC.dps.talents),
+            target=act.Target.TARGET_FOCUS_TARGET,
+            key=key,
+        )
+
     def build_hk_1_heal_tank(self):
         with hk.Hotkey(
             id="Key1",
@@ -814,6 +859,7 @@ class HknScript(AttrsClass):
                 key=KN.KEY_1,
                 healer_target_focus=True,  # 治疗选择 焦点
             )
+
             # 特殊职业的特殊设定
             send_label = self._get_send_label_by_id(
                 id_=TL.paladin_pve_holy.name,
@@ -825,37 +871,72 @@ class HknScript(AttrsClass):
                     act.General.TRIGGER(),
                 ]
 
+            # label_list: T.List[str] = self.mode.lbs_by_tc(TC.druid_resto)
+            # if len(label_list) == 0:
+            #     pass
+            # elif len(label_list) == 1:
+            #     self._build_send_label_by_talent(
+            #         talent=list(TC.druid_resto.talents),
+            #         target=None,
+            #         key=KN.KEY_2,
+            #     )
+            # elif len(label_list):
+            #     with hk.SendLabel(
+            #         id="RestoDruid1",
+            #         to=[label_list[0],],
+            #     ) as send_label:
+            #         hk.Key.make(KN.KEY_2)
     def build_hk_2_heal_nothing(self):
         with hk.Hotkey(
             id="Key2",
             key=KN.SCROLOCK_ON(KN.KEY_2),
         ) as self.hk_2:
-            send_label_list = self.build_actions_default(
-                key=KN.KEY_2,
-                healer_target_nothing=True,  # 治疗不选择目标
-            )
-            # 特殊职业的特殊设定
-            # 奶骑随机奶团
-            send_label = self._get_send_label_by_id(
-                id_=TL.paladin_pve_holy.name,
-                blocks=send_label_list,
-            )
-            with send_label():
-                send_label.blocks = [
-                    act.Target.TARGET_RAID(),
-                    act.General.TRIGGER(),
-                ]
+            self._build_default_tank_action(key=KN.KEY_2)
+            self._build_default_dps_action(key=KN.KEY_2)
 
-            # 奶萨随机奶团
-            send_label = self._get_send_label_by_id(
-                id_=TL.shaman_pve_resto.name,
-                blocks=send_label_list,
+            # 德鲁伊, 萨满, 戒律牧, 用位于 2 号键位上的一键治疗宏
+            self._build_send_label_by_talent(
+                talent=list(TC.druid_resto.talents | TC.shaman_resto.talents | TC.priest_disco.talents),
+                target=None,
+                key=KN.KEY_2,
             )
-            with send_label():
-                send_label.blocks = [
-                    act.Target.TARGET_RAID(),
-                    act.General.TRIGGER(),
-                ]
+            # 奶骑
+            self._build_send_label_by_talent(
+                talent=list(TC.paladin_holy.talents),
+                target=act.Target.TARGET_RAID,
+                key=KN.KEY_2,
+            )
+
+        # with hk.Hotkey(
+        #     id="Key2",
+        #     key=KN.SCROLOCK_ON(KN.KEY_2),
+        # ) as self.hk_2:
+        #     send_label_list = self.build_actions_default(
+        #         key=KN.KEY_2,
+        #         healer_target_nothing=True,  # 治疗不选择目标
+        #     )
+        #     # 特殊职业的特殊设定
+        #     # 奶骑随机奶团
+        #     send_label = self._get_send_label_by_id(
+        #         id_=TL.paladin_pve_holy.name,
+        #         blocks=send_label_list,
+        #     )
+        #     with send_label():
+        #         send_label.blocks = [
+        #             act.Target.TARGET_RAID(),
+        #             act.General.TRIGGER(),
+        #         ]
+        #
+        #     # 奶萨随机奶团
+        #     send_label = self._get_send_label_by_id(
+        #         id_=TL.shaman_pve_resto.name,
+        #         blocks=send_label_list,
+        #     )
+        #     with send_label():
+        #         send_label.blocks = [
+        #             act.Target.TARGET_RAID(),
+        #             act.General.TRIGGER(),
+        #         ]
 
     def build_hk_3_heal_tank(self):
         with hk.Hotkey(

@@ -75,6 +75,8 @@ class ModeFactory:
             # game_client=game_client_fact.resolution_1176_664,
             login_chars=login_char_fact.r_a_to_y,
             active_chars=raid_active_char_fact.x25p_r_a_to_y_core_team,
+            target_tank1=act.Target.TARGET_W01_RA,
+            target_tank2=act.Target.TARGET_W10_RJ,
         )
 
 

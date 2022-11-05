@@ -51,6 +51,8 @@ class Mode(AttrsClass):
     login_chars: OrderedSet[Character] = attr.ib(factory=OrderedSet)
     active_chars: OrderedSet[Character] = attr.ib(factory=OrderedSet)
     hkn_script: HknScript = attr.ib(default=None)
+    target_tank1: T.Callable = attr.ib(default=None)
+    target_tank2: T.Callable = attr.ib(default=None)
 
     def _ensure_no_duplicate_window(self, chars: T.List[Character]):
         if len({char.window.label for char in chars}) != len(chars):
