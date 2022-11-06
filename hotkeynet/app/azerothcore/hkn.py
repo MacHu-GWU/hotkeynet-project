@@ -1007,7 +1007,7 @@ class HknScript(AttrsClass):
                 target=None,
                 key=KN.KEY_3,
             )
-            
+
     def build_hk_4_heal_nothing(self):
         with hk.Hotkey(
             id="Key4",

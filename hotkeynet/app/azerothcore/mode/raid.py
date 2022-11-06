@@ -79,5 +79,51 @@ class ModeFactory:
             target_tank2=act.Target.TARGET_W10_RJ,
         )
 
+    @property
+    def x25p_core_team_ICC_1(self) -> Mode:
+        mode = self.x25p_core_team
+
+        with hk.Hotkey(
+            id="KillAdds",
+            key=KN.SCROLOCK_ON(KN.C),
+        ) as mode.hkn_script.hk_c_kill_adds:
+            # Nuke Adds
+            mode.hkn_script._build_send_label_by_talent(
+                talent=list(TC.druid_balance.talents),
+                target=None,
+                key=KN.SHIFT_(KN.Z),
+            )
+            mode.hkn_script._build_send_label_by_talent(
+                talent=list(TC.priest_shadow.talents),
+                target=None,
+                key=KN.SHIFT_(KN.Z),
+            )
+            # Tank
+            mode.hkn_script._build_send_label_by_talent(
+                talent=list(TC.tank.talents),
+                target=None,
+                key=KN.KEY_2,
+            )
+            # DPS
+            mode.hkn_script._build_send_label_by_talent(
+                talent=list(TC.dps.talents - TC.druid_balance.talents - TC.priest_shadow.talents),
+                target=act.Target.TARGET_FOCUS_TARGET,
+                key=KN.KEY_2,
+            )
+            # Healer
+            # 德鲁伊, 萨满, 戒律牧, 用位于 2 号键位上的一键治疗宏
+            mode.hkn_script._build_send_label_by_talent(
+                talent=list(TC.druid_resto.talents | TC.shaman_resto.talents | TC.priest_disco.talents),
+                target=None,
+                key=KN.KEY_2,
+            )
+            # 奶骑, 随机奶团
+            mode.hkn_script._build_send_label_by_talent(
+                talent=list(TC.paladin_holy.talents),
+                target=act.Target.TARGET_RAID,
+                key=KN.KEY_2,
+            )
+
+        return mode
 
 raid_mode_fact = ModeFactory()

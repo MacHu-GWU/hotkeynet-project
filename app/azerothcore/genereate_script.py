@@ -10,7 +10,8 @@ from hotkeynet.app.azerothcore.mode import (
 # -----------------------------------------------------------------------------
 # mode = raid_mode_fact.x10p_core_team
 # mode = raid_mode_fact.x10p_naxx_abomination_4th_boss
-mode = raid_mode_fact.x25p_core_team
+# mode = raid_mode_fact.x25p_core_team
+mode = raid_mode_fact.x25p_core_team_ICC_1
 
 
 # -----------------------------------------------------------------------------
