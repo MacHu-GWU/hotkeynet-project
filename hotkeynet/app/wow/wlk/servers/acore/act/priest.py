@@ -91,10 +91,10 @@ class Healbot(ActFactory):
     HB_Renew = None  # 恢复
     HB_Prayer_of_Healing = CN.alt_left_click  # 愈合祷言
     HB_Binding_Heal = None  # 联结治疗, 治疗目标与你自己
-    HB_Flash_Heal = CN.shift_left_click  # 快速治疗
+    HB_Flash_Heal = CN.left  # 快速治疗
     HB_Greater_Heal = None  # 超级治疗术
     HB_Holy_Nova = None  # 神圣新星
-    HB_Circle_of_Healing = None  # 治疗之环, 群体治疗技能, 神圣系天赋技能
+    HB_Circle_of_Healing = CN.shift_left_click  # 治疗之环, 群体治疗技能, 神圣系天赋技能
     HB_Guardian_Spirit = None  # 守护天使, 保护目标不被一击必杀一次, 神圣系天赋技能
     HB_Fear_Ward = None  # 防护恐惧结界
 

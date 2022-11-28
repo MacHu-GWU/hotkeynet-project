@@ -10,6 +10,7 @@ from ordered_set import OrderedSet
 import attr
 from attrs_mate import AttrsClass
 
+import hotkeynet as hk
 from hotkeynet.game.wow.model import Account
 from hotkeynet.game.wow.wlk import (
     Window,
@@ -209,3 +210,20 @@ class Mode(AttrsClass):
         for label in list(label_list):
             if label in all_tank_labels:
                 label_list.remove(label)
+
+    def build_send_label_by_tc(
+        self,
+        tc: TC,
+        funcs: T.Iterable[T.Callable],
+    ):
+        """
+        A syntax supar method. It creates hotkeynet SendLabel object that
+         match certain talent category with certain actions.
+        """
+        with hk.SendLabel(
+            id=tc.name,
+            to=self.lbs_by_tc(tc),
+        ) as send_label:
+            for func in funcs:
+                func()
+            return send_label

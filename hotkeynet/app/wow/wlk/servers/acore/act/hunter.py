@@ -145,7 +145,7 @@ class HunterBeastMastery(Hunter):
 
 class HunterMarksmanship(Hunter):
     Chimera_Shot = None  # 奇美拉设计, 射击系天赋技能
-    Silencing_Shot = None  # 沉默射击, 射击系天赋技能
+    Silencing_Shot = R  # 沉默射击, 射击系天赋技能
     Trueshot_Aura = KEY_9  # 强击光环
     Readiness = None  # 预备, 重置你的技能 CD, 射击系天赋技能
 

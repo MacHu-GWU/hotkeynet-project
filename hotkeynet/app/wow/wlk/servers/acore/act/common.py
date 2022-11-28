@@ -9,6 +9,24 @@ from hotkeynet.keyname import *
 from hotkeynet.game.wow.model import Window
 
 
+class Key(ActFactory):
+    Key_1 = KEY_1
+    Key_2 = KEY_2
+    Key_3 = KEY_3
+    Key_4 = KEY_4
+    Key_5 = KEY_5
+    Key_6 = KEY_6
+    Key_7 = KEY_7
+    Key_8 = KEY_8
+    Key_9 = KEY_9
+    Key_10 = KEY_0
+    Key_11 = KEY_11_MINUS
+    Key_12 = KEY_12_PLUS
+
+
+key = Key()
+
+
 class Movement(ActFactory):
     """
     移动类的按键绑定. 所有职业都需要按照这个设置. 以下设置如果没有特殊说明, 都是

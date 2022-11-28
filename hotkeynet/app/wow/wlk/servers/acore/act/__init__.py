@@ -2,6 +2,7 @@
 
 # 通用
 from .common import (
+    key,
     movement,
     pet_action,
     target,
