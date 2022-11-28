@@ -8,7 +8,10 @@ import typing as T
 
 import hotkeynet as hk
 from hotkeynet import KN
-
+from hotkeynet.game.wow.wlk import (
+    Window,
+)
+from hotkeynet.app.wow.wlk.servers.acore import act
 
 if T.TYPE_CHECKING:
     from .script import HknScript
@@ -22,7 +25,11 @@ class HotkeyGroup01WindowAndLoginMixin:
         ) as self.hk_round_robin_toggle_window:
             for char in self.mode.active_chars:
                 with hk.Toggle():
-                    self.cmd_bring_window_to_foreground.call(args=[char.window.title, ])
+                    self.cmd_bring_window_to_foreground.call(
+                        args=[
+                            char.window.title,
+                        ]
+                    )
 
     def build_hk_toggle_specific_window(self: "HknScript"):
         """
@@ -40,36 +47,30 @@ class HotkeyGroup01WindowAndLoginMixin:
         具体这个窗口里的人物是谁我们不管.
         """
         # 10 + 8 + 6 = 24
-        ctrl_f1_to_10 = [
-            KN.SCROLOCK_ON(KN.CTRL_(key))
-            for key in KN.F1_to_F12[:10]
-        ]
-        shift_f5_to_f12 = [
-            KN.SCROLOCK_ON(KN.SHIFT_(key))
-            for key in KN.F1_to_F12[4:]
-        ]
+        ctrl_f1_to_10 = [KN.SCROLOCK_ON(KN.CTRL_(key)) for key in KN.F1_to_F12[:10]]
+        shift_f5_to_f12 = [KN.SCROLOCK_ON(KN.SHIFT_(key)) for key in KN.F1_to_F12[4:]]
         shift_insert_to_pgdn = [
-            KN.SCROLOCK_ON(KN.SHIFT_(key))
-            for key in KN.INSERT_TO_PGDN
+            KN.SCROLOCK_ON(KN.SHIFT_(key)) for key in KN.INSERT_TO_PGDN
         ]
-        ctrl_f12 = [
-            KN.SCROLOCK_ON(KN.CTRL_(KN.F12))
-        ]
+        ctrl_f12 = [KN.SCROLOCK_ON(KN.CTRL_(KN.F12))]
         HOTKEY_LIST_TOGGLE_SPECIFIC_WINDOW_1_TO_25 = (
-            ctrl_f1_to_10
-            + shift_f5_to_f12
-            + shift_insert_to_pgdn
-            + ctrl_f12
+            ctrl_f1_to_10 + shift_f5_to_f12 + shift_insert_to_pgdn + ctrl_f12
         )
         assert len(HOTKEY_LIST_TOGGLE_SPECIFIC_WINDOW_1_TO_25) == 25
 
         self.hk_list_toggle_specific_window: T.List[hk.Hotkey] = list()
-        for index, key in enumerate(HOTKEY_LIST_TOGGLE_SPECIFIC_WINDOW_1_TO_25, start=1):
+        for index, key in enumerate(
+            HOTKEY_LIST_TOGGLE_SPECIFIC_WINDOW_1_TO_25, start=1
+        ):
             with hk.Hotkey(
                 id=f"ToggleToSpecificWindow {key}",
                 key=key,
             ) as hotkey:
-                self.cmd_bring_window_to_foreground.call(args=[Window.make(index).title, ])
+                self.cmd_bring_window_to_foreground.call(
+                    args=[
+                        Window.make(index).title,
+                    ]
+                )
                 self.hk_list_toggle_specific_window.append(hotkey)
 
     def build_hk_center_overlap_layout(self: "HknScript"):
@@ -96,16 +97,13 @@ class HotkeyGroup01WindowAndLoginMixin:
         """
         # 10 + 8 + 6 = 24
         ctrl_alt_f1_to_10 = [
-            KN.SCROLOCK_ON(KN.CTRL_ALT_(key))
-            for key in KN.F1_to_F12[:10]
+            KN.SCROLOCK_ON(KN.CTRL_ALT_(key)) for key in KN.F1_to_F12[:10]
         ]
         shift_alt_f5_to_f12 = [
-            KN.SCROLOCK_ON(KN.ALT_SHIFT_(key))
-            for key in KN.F1_to_F12[4:]
+            KN.SCROLOCK_ON(KN.ALT_SHIFT_(key)) for key in KN.F1_to_F12[4:]
         ]
         shift_alt_insert_to_pgdn = [
-            KN.SCROLOCK_ON(KN.ALT_SHIFT_(key))
-            for key in KN.INSERT_TO_PGDN
+            KN.SCROLOCK_ON(KN.ALT_SHIFT_(key)) for key in KN.INSERT_TO_PGDN
         ]
         ctrl_alt_f12 = [
             KN.SCROLOCK_ON(KN.CTRL_ALT_(KN.F12)),
@@ -120,19 +118,23 @@ class HotkeyGroup01WindowAndLoginMixin:
 
         assert len(HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25) == 25
 
-        self.hk_list_toggle_specific_window: T.List[hk.Hotkey] = list()
+        self.hk_list_login_specific_account: T.List[hk.Hotkey] = list()
 
         for window, account in self.mode.login_window_and_account_pairs:
             with hk.Hotkey(
                 id=f"SingleLogin{account.username.title()}",
-                key=HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[int(window.label.replace("w", "")) - 1],
+                key=HOTKEY_LIST_LOGIN_SPECIFIC_ACCOUNT_1_TO_25[
+                    int(window.label.replace("w", "")) - 1
+                ],
             ) as hotkey:
-                self.cmd_enter_username_and_password.call(args=[
-                    window.title,
-                    account.username,
-                    account.password,
-                ])
-                self.hk_list_toggle_specific_window.append(hotkey)
+                self.cmd_enter_username_and_password.call(
+                    args=[
+                        window.title,
+                        account.username,
+                        account.password,
+                    ]
+                )
+                self.hk_list_login_specific_account.append(hotkey)
 
     def build_hk_batch_logout(self: "HknScript"):
         with hk.Hotkey(
@@ -144,9 +146,9 @@ class HotkeyGroup01WindowAndLoginMixin:
             ):
                 # 确保菜单界面是关闭的状态
                 hk.Wait.make(100),
-                act.General.TOGGLE_MAIN_GAME_MENU(),
+                act.general.TOGGLE_MAIN_GAME_MENU(),
                 hk.Wait.make(50),
-                act.General.TOGGLE_MAIN_GAME_MENU(),
+                act.general.TOGGLE_MAIN_GAME_MENU(),
                 hk.Wait.make(50),
                 # 点击关闭菜单按钮
                 hk.MoveMouse(
@@ -157,7 +159,7 @@ class HotkeyGroup01WindowAndLoginMixin:
                 hk.ClickMouse.make_left_click_on_window()
                 hk.Wait.make(50)
                 # 现在菜单按钮确保已经关上了, 然后可以打开菜单
-                act.General.TOGGLE_MAIN_GAME_MENU()
+                act.general.TOGGLE_MAIN_GAME_MENU()
                 hk.Wait.make(50)
                 # 点击登出按钮
                 hk.MoveMouse(
@@ -175,9 +177,9 @@ class HotkeyGroup01WindowAndLoginMixin:
             with hk.SendFocusWin():
                 # 确保菜单界面是关闭的状态
                 hk.Wait.make(100),
-                act.General.TOGGLE_MAIN_GAME_MENU(),
+                act.general.TOGGLE_MAIN_GAME_MENU(),
                 hk.Wait.make(50),
-                act.General.TOGGLE_MAIN_GAME_MENU(),
+                act.general.TOGGLE_MAIN_GAME_MENU(),
                 hk.Wait.make(50),
                 # 点击关闭菜单按钮
                 hk.MoveMouse(
@@ -193,7 +195,7 @@ class HotkeyGroup01WindowAndLoginMixin:
                 hk.ClickMouse.make_left_click_on_window()
                 hk.Wait.make(50)
                 # 现在菜单按钮确保已经关上了, 然后可以打开菜单
-                act.General.TOGGLE_MAIN_GAME_MENU()
+                act.general.TOGGLE_MAIN_GAME_MENU()
                 hk.Wait.make(50)
                 # 点击登出按钮
                 hk.MoveMouse(

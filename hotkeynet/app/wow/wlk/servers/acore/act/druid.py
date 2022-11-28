@@ -151,7 +151,7 @@ class DruidBalance(Druid):
 
 
 class DruidRestoration(Druid):
-    Wild_Growth = None  # 野性生长, 群体治疗, 恢复系天赋技能
+    Wild_Growth = KEY_5  # 野性生长, 群体治疗, 恢复系天赋技能
     Swiftmend = None  # 迅捷治愈, 恢复系天赋技能
     Tree_of_LifeShapeshift = SHIFT_(E)  # 治疗之树形态
     Nature_s_Swiftness = None  # 自然迅捷, 下一个技能瞬发, 恢复系天赋技能
