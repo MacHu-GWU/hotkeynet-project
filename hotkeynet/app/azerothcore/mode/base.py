@@ -86,7 +86,8 @@ class Mode(AttrsClass):
     @property
     def login_window_and_account_pairs(self) -> T.List[T.Tuple[Window, Account]]:
         """
-
+        根据 active_chars 和 login_chars 中的定义, 获得所有被定义的 character
+        背后所对应的 Window 和 Account pair 并返回. 这里是经过排重的.
         """
         label_set: T.Set[str] = set()
         window_and_account_pairs: T.List[T.Tuple[Window, Account]] = list()
