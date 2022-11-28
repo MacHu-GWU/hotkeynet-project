@@ -10,6 +10,7 @@ from hotkeynet.game.wow.wlk.model import TC
 
 from .label import LabelMixin
 from .cmd import CommandMixin
+from .control_panel import ControlPanelMixin
 
 from .hk_group_01_window_and_login import HotkeyGroup01WindowAndLoginMixin
 from .hk_group_02_movement import HotkeyGroup02MovementMixin
@@ -30,7 +31,6 @@ if T.TYPE_CHECKING:
 @attr.s
 class HknScript(
     AttrsClass,
-
     LabelMixin,
     CommandMixin,
     # Group 1 to 12
@@ -45,6 +45,8 @@ class HknScript(
     HotkeyGroup09CtrlNumpad1To12,
     HotkeyGroup10ShiftNumpad1To12,
     HotkeyGroup11Healbot,
+    # Control Panel
+    ControlPanelMixin,
 ):
     mode: "Mode" = attr.ib(default=None)
     script: hk.Script = attr.ib(factory=hk.Script)
@@ -67,3 +69,5 @@ class HknScript(
         self.build_hk_group_09_ctrl_numpad_1_to_12_mixin()
         self.build_hk_group_10_mixin()
         self.build_hk_group_11_healbot_mixin()
+
+        self.build_control_panel_mixin()

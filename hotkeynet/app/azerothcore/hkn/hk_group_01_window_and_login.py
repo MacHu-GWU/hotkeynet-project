@@ -9,7 +9,11 @@ import typing as T
 import hotkeynet as hk
 from hotkeynet import KN
 from hotkeynet.game.wow.wlk import (
+    Character,
     Window,
+    Talent as TL,
+    TalentCategory as TC,
+    char_oset_helper,
 )
 from hotkeynet.app.wow.wlk.servers.acore import act
 
