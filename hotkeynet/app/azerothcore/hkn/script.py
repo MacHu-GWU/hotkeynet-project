@@ -11,6 +11,10 @@ from .cmd import CommandMixin
 from .hk_group_01_window_and_login import HotkeyGroup01WindowAndLoginMixin
 from .hk_group_02_movement import HotkeyGroup02MovementMixin
 from .hk_group_03_act_1_to_12 import HotkeyGroup03Act1To12Mixin
+from .hk_group_04_pet_control import HotkeyGroup04PetControlMixin
+from .hk_group_05_numpad_1_to_12 import HotkeyGroup05Numpad1To12Mixin
+from .hk_group_06_party_and_system import HotkeyGroup06PartyAndSystemMixin
+from .hk_group_07_utility_spell import HotkeyGroup07UtilitySpellMixin
 
 if T.TYPE_CHECKING:
     from ..mode.base import Mode
@@ -24,6 +28,10 @@ class HknScript(
     HotkeyGroup01WindowAndLoginMixin,
     HotkeyGroup02MovementMixin,
     HotkeyGroup03Act1To12Mixin,
+    HotkeyGroup04PetControlMixin,
+    HotkeyGroup05Numpad1To12Mixin,
+    HotkeyGroup06PartyAndSystemMixin,
+    HotkeyGroup07UtilitySpellMixin,
 ):
     mode: "Mode" = attr.ib(default=None)
     script: hk.Script = attr.ib(factory=hk.Script)
@@ -32,8 +40,12 @@ class HknScript(
         # 此时 Script 已经不再 context 中, 我们也不希望没定义一个 Hotkey 就一直用
         # with script 的语法. 所以我们手动将 script 对象设置为 Context 的顶层
         hk.context.push(self.script)
+
         self.build_label_mixin()
         self.build_command_mixin()
         self.build_hk_group_01_window_and_login_mixin()
         self.build_hk_group_02_movement_mixin()
         self.build_hk_group_03_act_1_to_12_mixin()
+        self.build_hk_group_04_pet_control_mixin()
+        self.build_hk_group_06_party_and_system_mixin()
+        self.build_hk_group_07_mixin()

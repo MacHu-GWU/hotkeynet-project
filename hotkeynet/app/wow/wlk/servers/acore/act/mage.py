@@ -90,7 +90,7 @@ class Fire(ActFactory):
     Frostfire_Bolt = None  # 霜火箭
 
     # AOE
-    Flamestrike = None  # 烈焰风暴
+    Flamestrike = X  # 烈焰风暴
     Blast_Wave = None  # 冲击波, 火系天赋技能
     Dragon_s_Breath = None  # 龙息术, 火系天赋技能
 
@@ -107,7 +107,7 @@ class Frost(ActFactory):
 
     # AOE
     Cone_of_Cold = None  # 冰锥术
-    Blizzard = None  # 暴风雪
+    Blizzard = ALT_(X)  # 暴风雪
     Frost_Nova = None  # 冰霜新星
 
     # 爆发技能
