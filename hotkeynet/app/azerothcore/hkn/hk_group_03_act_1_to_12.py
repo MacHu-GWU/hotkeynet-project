@@ -228,7 +228,7 @@ class HotkeyGroup03Act1To12Mixin:
                     act.target.TARGET_FOCUS()
                     hk.Key.make(KN.KEY_1)
 
-            # 戒律牧
+            # 戒律牧, 随机给团上盾
             self._build_send_label_by_talent(
                 talent=list(TC.priest_disco.talents),
                 target=None,
@@ -238,7 +238,7 @@ class HotkeyGroup03Act1To12Mixin:
             # 奶骑, 随机奶团
             self._build_send_label_by_talent(
                 talent=list(TC.paladin_holy.talents),
-                target=act.target.TARGET_RAID(),
+                target=act.target.TARGET_RAID,
                 key=KN.KEY_1,
             )
 
@@ -350,7 +350,7 @@ class HotkeyGroup03Act1To12Mixin:
                     act.target.TARGET_FOCUS()
                     hk.Key.make(KN.KEY_3)
 
-            # 戒律牧
+            # 戒律牧, 随机给团上盾
             self._build_send_label_by_talent(
                 talent=list(TC.priest_disco.talents),
                 target=None,
