@@ -5,6 +5,7 @@
 """
 
 import typing as T
+import itertools
 
 import hotkeynet as hk
 from hotkeynet import KN
@@ -251,6 +252,17 @@ class HotkeyGroup07UtilitySpellMixin:
         #     ):
         #         hk.Key.trigger()
 
+        with hk.Hotkey(
+            id="Alt Shift F - 鸟德轮流放星落",
+            key=KN.SCROLOCK_ON(KN.ALT_SHIFT_(KN.F)),
+        ) as self.hk_alt_shift_f_take_turn_star_fall:
+            for label in self.mode.lbs_by_tc(TC.druid_balance):
+                with hk.Toggle():
+                    with hk.SendLabel(to=[label, ]):
+                        act.general.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                        act.druid_balance.Starfall()
+
+
     def build_hk_domino_action_bar_3(self: "HknScript"):
         # with hk.Hotkey(
         #     id="Shift + Z",
@@ -336,13 +348,15 @@ class HotkeyGroup07UtilitySpellMixin:
         #         hk.Key.trigger()
 
         with hk.Hotkey(
-            id="Alt + G - 所有鸟德放台风, 推波击退",
+            id="Alt + G - 所有鸟德轮流放台风, 推波击退",
             key=KN.SCROLOCK_ON(KN.ALT_(KN.G)),
         ) as self.hk_alt_g_druid_typhoon:
-            with hk.SendLabel(
-                to=self.mode.lbs_by_tc(TC.druid_balance),
-            ):
-                act.druid_balance.Typhoon()
+            for label in self.mode.lbs_by_tc(TC.druid_balance):
+                with hk.Toggle():
+                    with hk.SendLabel(
+                        to=[label,],
+                    ):
+                        act.druid_balance.Typhoon()
 
         with hk.Hotkey(
             id="Alt + X - 所有 AOE 职业放区域选定 AOE 技能, 例如法师暴风雪, DK死亡凋零",
@@ -502,25 +516,110 @@ class HotkeyGroup07UtilitySpellMixin:
         #         ]
         #     ),
         # ])
-        #
-        # hk_r = Hotkey(
-        #     name="R Interrupt Spell",
-        #     key=KN.SCROLOCK_ON(KN.R),
-        #     actions=_hk_r_actions,
-        #     script=script,
-        # )
 
-        # ABOVE IS TODO for toggle round robin
+        """
+        创建轮流打断快捷键.
 
-        # with hk.Hotkey(
-        #     id="Z",
-        #     key=KN.SCROLOCK_ON(KN.Z),
-        # ) as self.hk_z:
-        #     with hk.SendLabel(
-        #         to=self.mode.lbs_all,
-        #     ):
-        #         hk.Key.trigger()
+        由于萨满的打断技能为远程, 并且 CD 最短只有 6 秒, 所以我们主要围绕萨满进行.
+        核心思想是将 1 个近战和 1 个远程分为一组, 没有近战远程就可以了. 然后以
+        萨满 -> 其他 -> 萨满 -> 其他 这样的顺序打断. 例如其他可以是打断技能 CD 较长的法师
+        或猎人.
+        """
+        with hk.Hotkey(
+            id="R - 能打断的职业打断",
+            key=KN.SCROLOCK_ON(KN.R),
+        ) as self.hk_r_interrupt:
+            # 近战打断, CD 都是 10 秒
+            # warrior_lbs = self.mode.lbs_by_tc(TC.warrior)
+            # rogue_lbs = self.mode.lbs_by_tc(TC.rogue)
+            dk_lbs = self.mode.lbs_by_tc(TC.dk)
 
+            # 远程打断
+            shaman_non_resto_lbs = self.mode.lbs_by_tc(TC.shaman_non_resto)  # 萨满打断技能 CD 很短, 只有 6 秒
+            shaman_resto_lbs = self.mode.lbs_by_tc(TC.shaman_resto)  # 萨满打断技能 CD 很短, 只有 6 秒
+            shaman_lbs = shaman_non_resto_lbs + shaman_resto_lbs
+            mage_lbs = self.mode.lbs_by_tc(TC.mage)  # 法师反制 CD 24 秒
+            marksman_hunter_lbs = self.mode.lbs_by_tc(TC.hunter_marksman)  # 猎人 沉默射击 CD 24 秒
+            # shadow_priest_lbs = self.mode.lbs_by_tc(TC.priest_shadow) # 不是每一个牧师都会点出沉默
+
+            n_melee = len(dk_lbs)
+            n_shaman = len(shaman_lbs)
+            n_range = len(mage_lbs) + len(marksman_hunter_lbs)
+
+            melee_pairs = [
+                (label, act.dk.Mind_Freeze) for label in dk_lbs
+            ]
+            shaman_pairs = [
+                (label, act.shaman.Wind_Shear) for label in shaman_lbs
+            ]
+            range_pairs = (
+                [(label, act.mage.Counterspell) for label in mage_lbs]
+                + [(label, act.hunter_marksmanship.Silencing_Shot) for label in marksman_hunter_lbs]
+            )
+
+            loop_melee = itertools.cycle(melee_pairs)
+            loop_range = itertools.cycle(range_pairs)
+
+            # 没有萨满的情况:
+            if len(shaman_lbs) == 0:
+                pass
+            # 有一个 萨满的情况
+            elif len(shaman_lbs) == 1:
+                shaman_label, shaman_key = shaman_lbs[0], act.shaman.Wind_Shear
+                # 如果没有其他远程打断角色, 那么每次都是这个萨满来打断
+                if n_range == 0:
+                    with hk.SendLabel(to=[shaman_label, ]):
+                        shaman_key()
+                # 如果有少于 2 个其他远程打断角色, 那么打断循环就是:
+                # 角色 1 -> 萨满 -> 角色 2 -> 萨满 -> 角色 1 -> 萨满 -> ...
+                elif len(range_pairs) <= 2:
+                    for label, key in range_pairs:
+                        with hk.Toggle():
+                            with hk.SendLabel(to=[label, ]):
+                                key()
+                        with hk.Toggle():
+                            with hk.SendLabel(to=[shaman_label, ]):
+                                shaman_key()
+                # 如果有多于 2 个 (3 个或 3 个以上) 其他远程打断角色, 那么打断循环就是:
+                # 角色 1 和 萨满 -> 角色 2 和 萨满 -> 角色 3 和 萨满 -> 角色 1 和 萨满 -> ...
+                else:
+                    for label, key in range_pairs:
+                        with hk.Toggle():
+                            with hk.SendLabel(to=[label, ]):
+                                key()
+                            with hk.SendLabel(to=[shaman_label, ]):
+                                shaman_key()
+            # 有两个 萨满的情况, 两个萨满配合其他人轮流来
+            elif len(shaman_lbs) >= 2:
+                # 如果有其他远程打断角色, 那么这两个萨满还是轮流来
+                # 但是穿插其他远程打断角色 以及 近战打断角色
+                for label, key in shaman_pairs:
+                    with hk.Toggle():
+                        with hk.SendLabel(to=[label, ]):
+                            key()
+                        if n_melee:
+                            label_melee, key_melee = next(loop_melee)
+                            with hk.SendLabel(to=[label_melee, ]):
+                                key_melee()
+                        if n_range:
+                            label_range, key_range = next(loop_range)
+                            with hk.SendLabel(to=[label_range, ]):
+                                key_range()
+                # 重复两次是因为我们有可能 近战 / 远程 打断的数量多于萨满
+                for label, key in shaman_pairs:
+                    with hk.Toggle():
+                        with hk.SendLabel(to=[label, ]):
+                            key()
+                        if n_melee:
+                            label_melee, key_melee = next(loop_melee)
+                            with hk.SendLabel(to=[label_melee, ]):
+                                key_melee()
+                        if n_range:
+                            label_range, key_range = next(loop_range)
+                            with hk.SendLabel(to=[label_range, ]):
+                                key_range()
+
+        # 创建团队随机驱散快捷键
         # paladin put cleansing skill on Action Bar Key T
         # shaman put curse toxin skill on Action Bar Key on T
         # druid put remove curse skill on Action Bar Key on T
@@ -538,6 +637,15 @@ class HotkeyGroup07UtilitySpellMixin:
                 hk.Key.trigger()
 
         # with hk.Hotkey(
+        #     id="Z",
+        #     key=KN.SCROLOCK_ON(KN.Z),
+        # ) as self.hk_z:
+        #     with hk.SendLabel(
+        #         to=self.mode.lbs_all,
+        #     ):
+        #         hk.Key.trigger()
+
+        # with hk.Hotkey(
         #     id="G",
         #     key=KN.SCROLOCK_ON(KN.G),
         # ) as self.hk_g:
@@ -545,6 +653,16 @@ class HotkeyGroup07UtilitySpellMixin:
         #         to=self.mode.lbs_all,
         #     ):
         #         hk.Key.trigger()
+
+        with hk.Hotkey(
+            id="Alt Shift G - 鸟德轮流放台风",
+            key=KN.SCROLOCK_ON(KN.ALT_SHIFT_(KN.G)),
+        ) as self.hk_alt_shift_g_take_turn_typhoon:
+            for label in self.mode.lbs_by_tc(TC.druid_balance):
+                with hk.Toggle():
+                    with hk.SendLabel(to=[label, ]):
+                        act.general.STOP_CASTING_KEY_OEM1_SEMICOLUMN()
+                        act.druid_balance.Typhoon()
 
         # with hk.Hotkey(
         #     id="X",

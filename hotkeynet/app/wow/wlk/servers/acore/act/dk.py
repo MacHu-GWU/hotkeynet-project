@@ -24,9 +24,9 @@ class Blood(ActFactory):
     Dark_Command = Z  # 黑暗命令, 嘲讽
     Pestilence = SHIFT_(OEM3_WAVE_OR_BACK_QUOTE)  # 传染
     Blood_Boil = None  # 血液沸腾, AOE 伤害
-    Death_Pact = None  # 血之契约
-    Blood_Tap = None  # 鲜血分流
-    Strangulate = None  # 绞袭
+    Death_Pact = ALT_(F1)  # 血之契约
+    Blood_Tap = SHIFT_(R)  # 鲜血分流
+    Strangulate = ALT_(R)  # 绞袭
 
 
 class Frost(ActFactory):
@@ -45,13 +45,13 @@ class Frost(ActFactory):
 
     # 其他
     Chains_of_Ice = ALT_(KEY_2)  # 寒冰锁链
-    Empower_Rune_Weapon = None  # 强化符文武器
+    Empower_Rune_Weapon = CTRL_(F)  # 强化符文武器
     Horn_of_Winter = SHIFT_(TAB)  # 寒冬号角, buff 技能
 
     Icebound_Fortitude = SHIFT_(F1)  # 冰固坚韧, 减伤技能
-    Mind_Freeze = None  # 心灵冰冻, 打断施法技能
+    Mind_Freeze = R  # 心灵冰冻, 打断施法技能
     Path_of_Frost = None  # 冰霜之径, 群体水上行走
-    Rune_Strike = None  # 符文打击, 高仇恨技能, 只能在躲闪招架之后使用
+    Rune_Strike = ALT_(E)  # 符文打击, 高仇恨技能, 只能在躲闪招架之后使用
 
 
 class Unholy(ActFactory):
@@ -67,17 +67,17 @@ class Unholy(ActFactory):
     Anti_Magic_Zone = None  # 反魔法领域
     Bone_Shield = None  # 骨盾
     Summon_Gargoyle = None  # 召唤石像鬼
+    Corpse_Explosion = None  # 尸体爆炸
 
     # 其他
     Anti_Magic_Shell = SHIFT_(F)  # 反魔法护盾
-    Army_of_the_Dead = None  # 亡者大军
-    Corpse_Explosion = None  # 尸体爆炸
+    Army_of_the_Dead = ALT_(Z)  # 亡者大军
     Death_and_Decay = ALT_(X)  # 死亡凋零
     Death_Gate = None  # 死亡之门
-    Death_Grip = None  # 死亡之握
+    Death_Grip = G  # 死亡之握
 
-    Raise_Ally = None  # 复活友军
-    Raise_Dead = None  # 复活死者
+    Raise_Ally = CTRL_(G)  # 复活友军
+    Raise_Dead = CTRL_(X)  # 复活死者
 
 
 class Healbot(ActFactory):
