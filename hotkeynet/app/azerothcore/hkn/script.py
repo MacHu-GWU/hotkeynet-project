@@ -63,6 +63,7 @@ class HknScript(
         self.build_hk_group_02_movement_mixin()
         self.build_hk_group_03_act_1_to_12_mixin()
         self.build_hk_group_04_pet_control_mixin()
+        self.build_hk_group_05_numpad_1_to_12_mixin()
         self.build_hk_group_06_party_and_system_mixin()
         self.build_hk_group_07_mixin()
         self.build_hk_group_08_alt_numpad_1_to_12_mixin()
