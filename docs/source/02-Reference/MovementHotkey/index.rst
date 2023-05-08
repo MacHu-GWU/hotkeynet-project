@@ -50,7 +50,7 @@ Creates one or more movement hotkeys that can be used for movement in games.
 **Related pages**
 
 - :ref:`MakeLabel`
-- :ref:`Movement Keys`
+- :ref:`7-Movement-Keys`
 - :ref:`PassThrough`
 - :ref:`SendLabel`
-- :ref:`%Trigger%, %TriggerMainKey%`
+- :ref:`Trigger`

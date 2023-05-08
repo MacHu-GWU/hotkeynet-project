@@ -1,7 +1,7 @@
-wlk
-===
+servers
+=======
 
-.. automodule:: hotkeynet.app.wow.wlk
+.. automodule:: hotkeynet.app.wow.wlk.servers
     :members:
 
 sub packages and modules
@@ -10,5 +10,5 @@ sub packages and modules
 .. toctree::
     :maxdepth: 1
 
-    servers <servers/__init__>
+    acore <acore/__init__>
     

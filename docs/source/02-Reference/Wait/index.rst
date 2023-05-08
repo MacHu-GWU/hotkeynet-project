@@ -6,7 +6,7 @@ Pauses for a specified number of milliseconds.
 
 **Syntax**::
 
-    <wait milliseconds>
+    <Wait milliseconds>
 
 **Parameters**
 
@@ -24,4 +24,4 @@ Pauses for a specified number of milliseconds.
 
     The following hotkey pauses for half a second::
 
-        <wait 500>
+        <Wait 500>

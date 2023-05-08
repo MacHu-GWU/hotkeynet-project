@@ -1,7 +1,7 @@
-wlk
-===
+vendor
+======
 
-.. automodule:: hotkeynet.app.wow.wlk
+.. automodule:: hotkeynet.vendor
     :members:
 
 sub packages and modules
@@ -10,5 +10,5 @@ sub packages and modules
 .. toctree::
     :maxdepth: 1
 
-    servers <servers/__init__>
+    better_enum <better_enum>
     

@@ -11,4 +11,6 @@ sub packages and modules
     :maxdepth: 1
 
     base <base>
+    dungeon <dungeon>
+    raid <raid>
     

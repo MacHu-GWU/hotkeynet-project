@@ -10,6 +10,7 @@ sub packages and modules
 .. toctree::
     :maxdepth: 1
 
+    common <common>
     dk <dk>
     druid <druid>
     hunter <hunter>

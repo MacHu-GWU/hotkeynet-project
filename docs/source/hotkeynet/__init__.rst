@@ -13,8 +13,8 @@ sub packages and modules
     app <app/__init__>
     game <game/__init__>
     tpl <tpl/__init__>
+    vendor <vendor/__init__>
     act_factory <act_factory>
-    enumerate <enumerate>
     keyname <keyname>
     paths <paths>
     script <script>
