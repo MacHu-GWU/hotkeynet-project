@@ -7,6 +7,9 @@ from rich import print
 from hotkeynet.script import (
     Script,
     Label,
+    Command,
+    Hotkey,
+    SendLabel,
 )
 
 
@@ -15,6 +18,8 @@ class TestScript:
         with Script() as script:
             Label(name="w1", window="WoW1")
             Label(name="w2", window="WoW2")
+
+        script.render()
 
         # print("=" * 80)
         # print(script.render())

@@ -832,61 +832,6 @@ class ClickMouse(Block["Mouse"]):
         return self.button is None
 
 
-class ModifiedClickMouse:
-    """
-    This is not a Block object, it is just a factory class.
-    """
-
-    @classmethod
-    def _make(
-        cls,
-        modifier: str,
-        button: str,
-    ) -> T.List[T.Union[KeyDown, KeyUp, ClickMouse]]:
-        return [
-            KeyDown(key=modifier),
-            ClickMouse(button=button, stroke="Down"),
-            ClickMouse(button=button, stroke="Up"),
-            KeyUp(key=modifier),
-        ]
-
-    @classmethod
-    def shift_left_click(cls):
-        return cls._make(modifier=KN.SHIFT, button=KN.MOUSE_LButton)
-
-    @classmethod
-    def shift_right_click(cls):
-        return cls._make(modifier=KN.SHIFT, button=KN.MOUSE_RButton)
-
-    @classmethod
-    def shift_middle_click(cls):
-        return cls._make(modifier=KN.SHIFT, button=KN.MOUSE_MButton)
-
-    @classmethod
-    def alt_left_click(cls):
-        return cls._make(modifier=KN.ALT, button=KN.MOUSE_LButton)
-
-    @classmethod
-    def alt_right_click(cls):
-        return cls._make(modifier=KN.ALT, button=KN.MOUSE_RButton)
-
-    @classmethod
-    def alt_middle_click(cls):
-        return cls._make(modifier=KN.ALT, button=KN.MOUSE_MButton)
-
-    @classmethod
-    def ctrl_left_click(cls):
-        return cls._make(modifier=KN.CTRL, button=KN.MOUSE_LButton)
-
-    @classmethod
-    def ctrl_right_click(cls):
-        return cls._make(modifier=KN.CTRL, button=KN.MOUSE_RButton)
-
-    @classmethod
-    def ctrl_middle_click(cls):
-        return cls._make(modifier=KN.CTRL, button=KN.MOUSE_MButton)
-
-
 @attr.s
 class MoveMouse(Block["MoveMouse"]):
     """
