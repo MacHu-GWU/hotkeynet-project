@@ -2,12 +2,11 @@
 # for more info: https://coverage.readthedocs.io/en/latest/config.html
 [run]
 omit =
-    hotkeynet/_version.py
-    hotkeynet/cli.py
-    hotkeynet/pkg/*
+    hotkeynet/app/*
+    hotkeynet/game/*
     hotkeynet/docs/*
     hotkeynet/tests/*
-    hotkeynet/handlers/*
+    hotkeynet/_version.py
 
 [report]
 # Regexes for lines to exclude from consideration
