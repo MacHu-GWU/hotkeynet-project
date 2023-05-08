@@ -1,9 +1,7 @@
+.. _Hotkeynet-脚本入门:
+
 Hotkeynet 脚本入门
 ==============================================================================
-.. contents::
-    :class: this-will-duplicate-information-and-it-is-still-useful-here
-    :depth: 1
-    :local:
 
 
 Hotkeynet 脚本的最小组成部分
@@ -15,5 +13,3 @@ Hotkeynet 脚本的最小组成部分
         <Key %Trigger%>
 
 在这段代码中 ``<Hotkey ScrollLockOn 1, 2, 3, 4, 5>`` 是 ``触发器``, 也就是 ``ScrollLockOn 1, 2, 3, 4, 5`` 都可以触发下面的 ``响应`` 而这个 ``响应`` 里 ``<Key %Trigger%>`` 定义了动作是跟触发器一样的按键, 触发器是由 1 触发的, 那么动作也是一样的 1. 而 ``<SendLabel w1, w2, w3, w4, w5>`` 则定义了 ``广播``, 指定将动作发送到五个窗口中.
-
-<>

@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 
+"""
+Stable API.
+"""
+
 from . import keyname as KN
 from . import canned as CAN
 

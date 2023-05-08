@@ -10,13 +10,11 @@ sub packages and modules
 .. toctree::
     :maxdepth: 1
 
-    app <app/__init__>
-    game <game/__init__>
     tpl <tpl/__init__>
-    vendor <vendor/__init__>
-    act_factory <act_factory>
+    api <api>
+    canned <canned>
     keyname <keyname>
-    paths <paths>
+    maker <maker>
     script <script>
     utils <utils>
     

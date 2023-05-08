@@ -42,7 +42,15 @@ class KeyMaker:
 
 
 class ClickMaker:
-    """ """
+    """
+    Example::
+
+        >>> from hotkeynet import keyname as KN
+        >>> from hotkeynet.maker import ClickMaker
+        >>> left_click = ClickMaker(KN.MOUSE_LButton)
+        >>> left_click()
+        ClickMouse(id='Block0001', blocks=[], button='LButton', stroke='', target='', mode='', restore='')
+    """
 
     def __init__(self, button: str):
         self.button = button
@@ -52,6 +60,20 @@ class ClickMaker:
 
 
 class ModifiedClickMaker:
+    """
+    Example::
+
+        >>> from hotkeynet import keyname as KN
+        >>> from hotkeynet.maker import ModifiedClickMaker
+        >>> ctrl_left_click = ModifiedClickMaker(KN.MOUSE_LButton, KN.CTRL)
+        >>> ctrl_left_click()
+        [
+            KeyDown(id='Block0001', blocks=[], key='Ctrl'),
+            ClickMouse(id='Block0002', blocks=[], button='LButton', stroke='Down', target='', mode='', restore=''),
+            ClickMouse(id='Block0003', blocks=[], button='LButton', stroke='Up', target='', mode='', restore=''),
+            KeyUp(id='Block0004', blocks=[], key='Ctrl')
+        ]
+    """
     def __init__(self, button: str, *keys: str):
         self.button = button
         self.keys = keys

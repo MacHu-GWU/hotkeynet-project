@@ -6,7 +6,6 @@
 """
 
 import typing as T
-import enum
 
 import attr
 from attrs_mate import AttrsClass
