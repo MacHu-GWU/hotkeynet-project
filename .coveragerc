@@ -4,7 +4,7 @@
 omit =
     hotkeynet/docs/*
     hotkeynet/tests/*
-    hotkeynet/vendorma/*
+    hotkeynet/vendor/*
     hotkeynet/_version.py
 
 [report]
