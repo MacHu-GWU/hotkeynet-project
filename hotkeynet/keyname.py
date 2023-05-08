@@ -1,11 +1,21 @@
 # -*- coding: utf-8 -*-
 
 """
-对所有的 鼠标, 键盘 按键的枚举.
+[EN]
+
+Enumerate all mouse and keyboard keys for reference in other places, to avoid
+hard coding string in the code.
+
+Virtual key table: https://www.cnblogs.com/del/archive/2007/12/07/987364.html
+Key Names table: http://www.hotkeynet.com/ref/keynames.html
+
+[CN]
+对所有的 鼠标, 键盘 按键的枚举. 以供在其他地方引用, 避免由于手动输入字符串所引发的错误.
 
 - 虚拟按键表: https://www.cnblogs.com/del/archive/2007/12/07/987364.html
 - Key Names表: http://www.hotkeynet.com/ref/keynames.html
 """
+
 
 ESC = "Esc"
 TRIGGER = "%Trigger%"

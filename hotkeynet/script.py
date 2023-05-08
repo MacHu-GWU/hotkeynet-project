@@ -1795,7 +1795,6 @@ class SetPanelLayout(Block["SetPanelLayout"]):
 def render(
     obj: T.Union[Block, str],
     verbose: bool = False,
-
 ) -> str:
     """
     A global function that take any object as argument and render it.
