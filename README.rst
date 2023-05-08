@@ -6,7 +6,7 @@
 .. image:: https://github.com/MacHu-GWU/hotkeynet-project/workflows/CI/badge.svg
     :target: https://github.com/MacHu-GWU/hotkeynet-project/actions?query=workflow:CI
 
-.. image:: https://codecov.io/gh/MacHu-GWU/hotkeynet-project/branch/master/graph/badge.svg
+.. image:: https://codecov.io/gh/MacHu-GWU/hotkeynet-project/branch/main/graph/badge.svg
     :target: https://codecov.io/gh/MacHu-GWU/hotkeynet-project
 
 .. image:: https://img.shields.io/pypi/v/hotkeynet.svg
@@ -54,7 +54,7 @@ Welcome to ``hotkeynet`` Documentation
 
 Overview
 ------------------------------------------------------------------------------
-HotkeyNet 是一个诞生于 2000 年左右, 并在 2009 年停止维护的键盘鼠标自动化软件, 只支持 Windows, 得益于 Windows 强大的兼容性, 它所依赖的底层 Windows API 都没有改动, 所以一直能稳定运行. 本项目是对 HotkeyNet 脚本用 Python 的二次封装. 使得你可以用更现代的 Python 编程语言来写 HotKeyNet 脚本, 大大提高了项目的可维护性和开发效率.
+HotkeyNet 是一个诞生于 2000 年左右, 并在 2009 年停止维护的键盘鼠标自动化软件, 只支持 Windows, 得益于 Windows 强大的兼容性, 它所依赖的底层 Windows API 都没有改动, 所以一直能稳定运行. 万一它真的不能用了, 我会考虑直接用 Windows API 自己实现一个基于 Python 的键盘鼠标自动化软件. 本项目是对 HotkeyNet 脚本用 Python 的二次封装. 使得你可以用更现代的 Python 编程语言来写 HotKeyNet 脚本, 大大提高了项目的可维护性和开发效率.
 
 HotkeyNet 脚本是一个类 XML 语法的 DSL (特定领域编程语言). 基于纯文本, 没有编辑器. 这使得代码复用和动态更改变得极其困难. 虽然它有 ``Template`` 语法允许你对文本进行替换, 但由于对 面向对象, If, Else 逻辑的缺失, 使得编程过程极为痛苦, 修改起来也非常麻烦. 不可能做到模块化. 早期我凭借着编程功底, 用 ``Template`` 做出来了一个相对可维护的脚本, 但是整个脚本还是极为臃肿. 由于 HotkeyNet 的设计原因, 它解析长脚本的速度极慢, 这使得原生脚本根本不可能适用于复杂多变的项目需求.
 
@@ -66,21 +66,7 @@ HotkeyNet 脚本是一个类 XML 语法的 DSL (特定领域编程语言). 基�
 - 运行 Python 生成最终脚本
 - 打开 HotkeyNet 软件并使用该脚本
 
-**代码库的组织结构**
-
-整个项目本身就是一个标准的 Python 项目, 其中核心是 ``hotkeynet`` 库. 它分三个部分:
-
-- ``hotkeynet/*.py``: 跟 HotkeyNet 软件相关, 跟游戏无关的部分, 实现了面向对象的封装.
-- ``hotkeynet/game/*.py``: 为各种游戏 (不止 WoW, 就算是 WoW 也不止 WLK 一个版本) 里的概念实现的面向对象的封装, 以及数据枚举.
-- ``hotkeynet/app/*.py``: 为一个具体的游戏体验, 例如某个人在某个游戏的某个版本的某个服务器上的多开脚本的具体实现.
-
-HotkeyNet 作者在 2012 年就停止了更新. 由于 HotkeyNet 本身是对 Windows API 的二次封装, 并且得益于 Windows 的强大兼容性, 在 Windows 11 上依然可以顺利使用. 万一它真的不能用了, 我会考虑直接用 Windows API 自己实现一个基于 Python 的多开脚本系统.
-
 由于 HotkeyNet 官方网站已经不在了, 本项目在 https://hotkeynet.readthedocs.io/index.html 维护了一个文档的镜像, 以供查阅.
-
-
-
-
 
 .. _install:
 
