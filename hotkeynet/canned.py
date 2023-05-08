@@ -1,5 +1,17 @@
 # -*- coding: utf-8 -*-
 
+"""
+Similar to :mod:`hotkeynet.keyname`. However, everything in this module is
+:mod:`hotkeynet.maker` factory object. Everything in this module should be called
+to use.
+
+Example:
+
+    >>> from hotkeynet import canned
+    >>> canned.KEY_1()
+    >>> canned.CTRL_(canned.KEY_1)()
+"""
+
 import typing as _T
 from . import keyname as _KN
 from .maker import (
@@ -8,8 +20,8 @@ from .maker import (
     ModifiedClickMaker as _ModifiedClickMaker,
 )
 
-ESC = _KeyMaker("Esc")
-# TRIGGER = "%Trigger%"
+ESC = _KeyMaker(_KN.ESC)
+TRIGGER = _KeyMaker(_KN.TRIGGER)
 
 # ------------------------------------------------------------------------------
 # F1 - F12
