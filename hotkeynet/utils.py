@@ -63,3 +63,10 @@ def set_to_list(st: set, reverse=False) -> list:
     l = list(st)
     l.sort(reverse=reverse)
     return l
+
+
+def has_duplicate(lst: list) -> bool:
+    """
+    Test if there is duplicate items in this list.
+    """
+    return len(lst) != len(set(lst))
