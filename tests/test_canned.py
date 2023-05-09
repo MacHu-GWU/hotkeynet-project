@@ -14,7 +14,7 @@ def test_resolve_key_liked_arg():
 def test_key_with_modifier():
     assert canned.CTRL_(canned.KEY_1, KN.KEY_2)().key == "Ctrl 1, 2"
     assert canned.CTRL_ALT_(canned.KEY_1, KN.KEY_2)().key == "Ctrl Alt 1, 2"
-    assert canned.CTRL_SHIFT_ALT(canned.KEY_1, KN.KEY_2)().key == "Ctrl Shift Alt 1, 2"
+    assert canned.CTRL_SHIFT_ALT_(canned.KEY_1, KN.KEY_2)().key == "Ctrl Shift Alt 1, 2"
     assert canned.LWIN_(canned.KEY_1)().key == "LWin 1"
     assert canned.RWIN_(KN.KEY_1)().key == "RWin 1"
 

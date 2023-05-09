@@ -6,6 +6,11 @@ Stable API.
 
 from . import keyname as KN
 from . import canned as CAN
+from .maker import (
+    KeyMaker,
+    ClickMaker,
+    ModifiedClickMaker,
+)
 
 from .script import (
     context,
