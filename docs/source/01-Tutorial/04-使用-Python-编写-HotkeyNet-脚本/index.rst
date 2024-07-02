@@ -48,12 +48,26 @@ Generated Hotkeynet Script::
 Important Public API
 ------------------------------------------------------------------------------
 - :mod:`hotkeynet.api.KN <hotkeynet.keyname>`: 对所有的 Hotkeynet 脚本中的 Key name 的枚举. 你可以用 ``KN.KEY_1`` 这样的形式来引用这些 Key name.
+
+.. dropdown:: 所有的 Key enum 列表
+
+    .. literalinclude:: ../../../../hotkeynet/keyname.py
+       :language: python
+       :linenos:
+
 - :class:`hotkeynet.api.Key <hotkeynet.script.Key>`: 用来创建一个 Key 对象, 最终会在脚本中生成一个 XML Tag.
 - :class:`hotkeynet.api.ClickMouse <hotkeynet.script.ClickMouse>`: 用来创建一个 ClickMouse 对象, 最终会在脚本中生成一个 XML Tag.
 - :class:`hotkeynet.api.KeyMaker <hotkeynet.maker.KeyMaker>`: 一个用来创建 :class:`hotkeynet.api.Key <hotkeynet.script.Key>` 对象的工厂类.
 - :class:`hotkeynet.api.ClickMaker <hotkeynet.maker.ClickMaker>`: 一个用来创建 :class:`hotkeynet.api.ClickMouse <hotkeynet.script.ClickMouse>` 对象的工厂类.
 - :class:`hotkeynet.api.ModifiedClickMaker <hotkeynet.maker.ModifiedClickMaker>`: 类似上面这个, 但是是 CTRL | ALT | SHIFT + Click.
 - :mod:`hotkeynet.api.CAN <hotkeynet.canned>`: :class:`hotkeynet.api.Key <hotkeynet.script.Key>` 和 :class:`hotkeynet.api.ClickMouse <hotkeynet.script.ClickMouse>` 是键盘和鼠标操作的基本单位. 这两个都是对象, 而在 Python 中对象是 mutable 的, 有可能造成一些很难 debug 的问题. 这个模块中枚举了很多 :class:`hotkeynet.api.KeyMaker <hotkeynet.maker.KeyMaker>` 和 :class:`hotkeynet.api.ClickMaker <hotkeynet.maker.ClickMaker>` 对象, 用于快速创建一个新的这些对象.
+
+.. dropdown:: 所有的 CANNED key enum 列表
+
+    .. literalinclude:: ../../../../hotkeynet/canned.py
+       :language: python
+       :linenos:
+
 - :class:`hotkeynet.api.SendLabel <hotkeynet.script.SendLabel>`: 在脚本中选择将 Key 和 ClickMouse 事件发送到多个窗口, 是脚本中的高频 API 之一.
 - :class:`hotkeynet.api.Hotkey <hotkeynet.script.Hotkey>`: 在脚本中定义的快捷键. Hotkey (快捷键) + SendLabel (决定发送到哪些窗口) + Key/ClickMouse (决定发送什么事件) 三者的排列组合就构成了千变万化的键盘鼠标自动化脚本.
 - :class:`hotkeynet.api.Script <hotkeynet.script.Script>`: 代表一个完整的 Hotkeynet script 文件, 也是一个其他所有对象的容器.
