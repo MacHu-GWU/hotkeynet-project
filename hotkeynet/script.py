@@ -7,7 +7,7 @@
 
 import typing as T
 
-import attr
+import attrs
 from attrs_mate import AttrsClass
 
 from . import keyname as KN
@@ -108,7 +108,7 @@ context = Context()  # 单例
 BLOCK = T.TypeVar("BLOCK")
 
 
-@attr.s
+@attrs.define
 class Block(AttrsClass, T.Generic[BLOCK]):
     """
     所有 HotkeyNet 代码块的基类.
@@ -117,8 +117,8 @@ class Block(AttrsClass, T.Generic[BLOCK]):
     :param blocks: 子 Block 的列表, 类似于 Tree 数据结构的叶子结点.
     """
 
-    id: str = attr.ib(factory=context.make_id)
-    blocks: T.List["Block"] = attr.ib(factory=list)
+    id: str = attrs.field(factory=context.make_id)
+    blocks: T.List["Block"] = attrs.field(factory=list)
 
     def __call__(self) -> BLOCK:
         return self
@@ -215,7 +215,7 @@ class Block(AttrsClass, T.Generic[BLOCK]):
             )
 
 
-@attr.s
+@attrs.define
 class Script(Block["Script"]):
     """
     代表着整个 HotkeyNet 脚本.
@@ -267,7 +267,7 @@ class SendModeEnum(BetterStrEnum):
     SendWinSF = "SendWinSF"
 
 
-@attr.s
+@attrs.define
 class Label(Block["Script"]):
     """
     用来给软件窗口加别名, 以便在 Command 获 Hotkey 中调用.
@@ -281,10 +281,10 @@ class Label(Block["Script"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Label/index.html
     """
 
-    name: str = attr.ib(default=None)
-    window: str = attr.ib(default=None)
-    ip: str = attr.ib(default="local")
-    send_mode: str = attr.ib(default=SendModeEnum.SendWinM.value)
+    name: str = attrs.field(default=None)
+    window: str = attrs.field(default=None)
+    ip: str = attrs.field(default="local")
+    send_mode: str = attrs.field(default=SendModeEnum.SendWinM.value)
 
     @classmethod
     def make(
@@ -307,7 +307,7 @@ class Label(Block["Script"]):
         return self.name is None
 
 
-@attr.s
+@attrs.define
 class Command(Block["Command"]):
     """
     代表着一个命令. 在 HotkeyNet 中相当于编程语言中的函数的概念.
@@ -322,7 +322,7 @@ class Command(Block["Command"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Command/index.html
     """
 
-    name: str = attr.ib(default=None)
+    name: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, name: str) -> "Command":
@@ -379,7 +379,7 @@ class CommandArgEnum:
             return arg
 
 
-@attr.s
+@attrs.define
 class CallCommand(Block["Command"]):
     """
     代表着在 HotkeyNet 中调用 Command 的代码块.
@@ -393,8 +393,8 @@ class CallCommand(Block["Command"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Command/index.html
     """
 
-    cmd: T.Union[str, Command] = attr.ib(default=None)
-    args: T.List[str] = attr.ib(factory=list)
+    cmd: T.Union[str, Command] = attrs.field(default=None)
+    args: T.List[str] = attrs.field(factory=list)
 
     @property
     def cmd_name(self) -> str:
@@ -417,7 +417,7 @@ class CallCommand(Block["Command"]):
             )
 
 
-@attr.s
+@attrs.define
 class SendPC(Block["SendPC.tpl"]):
     """
     将命令获 Hotkey 发送到本机或是网络上的另一台电脑上.
@@ -432,7 +432,7 @@ class SendPC(Block["SendPC.tpl"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SendPC/index.html
     """
 
-    ip: T.Optional[str] = attr.ib(default="local")
+    ip: T.Optional[str] = attrs.field(default="local")
 
     @classmethod
     def make(cls, ip: str) -> "SendPC":
@@ -449,7 +449,7 @@ class SendPC(Block["SendPC.tpl"]):
         return self.ip is None
 
 
-@attr.s
+@attrs.define
 class Run(Block["Run"]):
     """
     运行一个 Windows 程序.
@@ -459,7 +459,7 @@ class Run(Block["Run"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Run/index.html
     """
 
-    path: T.Optional[str] = attr.ib(default=None)
+    path: T.Optional[str] = attrs.field(default=None)
 
     @classmethod
     def make(cls, path: str) -> "Run":
@@ -476,7 +476,7 @@ class Run(Block["Run"]):
         return self.path is None
 
 
-@attr.s
+@attrs.define
 class Hotkey(Block["Hotkey"]):
     """
     代表着一个快捷键的具体效果. 也是 HotkeyNet 中最关键, 最常用的代码块.
@@ -491,7 +491,7 @@ class Hotkey(Block["Hotkey"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Hotkey/index.html
     """
 
-    key: str = attr.ib(default=None)
+    key: str = attrs.field(default=None)
 
     @property
     def title(self):
@@ -511,7 +511,7 @@ class Hotkey(Block["Hotkey"]):
         return self.title[1:-1]
 
 
-@attr.s
+@attrs.define
 class MovementHotkey(Block["MovementHotkey"]):
     """
     代表着一个用于保持按下状态的快捷键的具体效果. 常用于游戏中的人物移动.
@@ -526,7 +526,7 @@ class MovementHotkey(Block["MovementHotkey"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/MovementHotkey/index.html
     """
 
-    key: str = attr.ib(default=None)
+    key: str = attrs.field(default=None)
 
     @property
     def title(self) -> str:
@@ -539,7 +539,7 @@ class MovementHotkey(Block["MovementHotkey"]):
         return (self.key is None) or self.is_sub_blocks_all_null()
 
 
-@attr.s
+@attrs.define
 class Key(Block["Key"]):
     """
     代表单个键盘按键的效果.
@@ -553,7 +553,7 @@ class Key(Block["Key"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Key/index.html
     """
 
-    key: str = attr.ib(default=None)
+    key: str = attrs.field(default=None)
 
     @property
     def title(self):
@@ -574,7 +574,7 @@ class Key(Block["Key"]):
         return self.key is None
 
 
-@attr.s
+@attrs.define
 class KeyUp(Block["KeyUp"]):
     """
     代表松开键盘按键的效果. 常用于模拟组合按键, 例如 Ctrl + C.
@@ -590,7 +590,7 @@ class KeyUp(Block["KeyUp"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Key/index.html
     """
 
-    key: str = attr.ib(default=None)
+    key: str = attrs.field(default=None)
 
     @property
     def title(self):
@@ -603,7 +603,7 @@ class KeyUp(Block["KeyUp"]):
         return self.key is None
 
 
-@attr.s
+@attrs.define
 class KeyDown(Block["KeyDown"]):
     """
     代表按下键盘按键的效果. 常用于模拟组合按键, 例如 Ctrl + C.
@@ -619,7 +619,7 @@ class KeyDown(Block["KeyDown"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Key/index.html
     """
 
-    key: str = attr.ib(default=None)
+    key: str = attrs.field(default=None)
 
     @property
     def title(self):
@@ -632,7 +632,7 @@ class KeyDown(Block["KeyDown"]):
         return self.key is None
 
 
-@attr.s
+@attrs.define
 class SendLabel(Block["SendLabel"]):
     """
     将一堆按键发送到指定的窗口.
@@ -647,8 +647,8 @@ class SendLabel(Block["SendLabel"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SendLabel/index.html
     """
 
-    name: str = attr.ib(default=None)
-    to: T.List[str] = attr.ib(factory=list)
+    name: str = attrs.field(default=None)
+    to: T.List[str] = attrs.field(factory=list)
 
     @property
     def targets(self) -> str:
@@ -688,7 +688,7 @@ class MouseModeEnum(BetterStrEnum):
     Scale = "Scale"
 
 
-@attr.s
+@attrs.define
 class ClickMouse(Block["Mouse"]):
     """
     Click Mouse.
@@ -703,15 +703,15 @@ class ClickMouse(Block["Mouse"]):
     """
 
     # LButton, MButton, RButton, Button4, or Button5
-    button: str = attr.ib(default=None)
+    button: str = attrs.field(default=None)
     # Down, Up, Both, or NoClick
-    stroke: str = attr.ib(default="")
+    stroke: str = attrs.field(default="")
     # Window or Screen
-    target: str = attr.ib(default="")
+    target: str = attrs.field(default="")
     # NoMove, # #, Dupe, Scale, #% #%, ±# ±#
-    mode: str = attr.ib(default="")
+    mode: str = attrs.field(default="")
     # Restore or NoRestore
-    restore: str = attr.ib(default="")
+    restore: str = attrs.field(default="")
 
     @classmethod
     def make_left_click_on_window(cls) -> "ClickMouse":
@@ -831,7 +831,7 @@ class ClickMouse(Block["Mouse"]):
         return self.button is None
 
 
-@attr.s
+@attrs.define
 class MoveMouse(Block["MoveMouse"]):
     """
     将鼠标移动到窗口中的指定位置.
@@ -845,9 +845,9 @@ class MoveMouse(Block["MoveMouse"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/MoveMouse/index.html
     """
 
-    x: int = attr.ib(default=None)
-    y: int = attr.ib(default=None)
-    target: T.Optional[str] = attr.ib(default=None)
+    x: int = attrs.field(default=None)
+    y: int = attrs.field(default=None)
+    target: T.Optional[str] = attrs.field(default=None)
 
     def set_target_as_window(self) -> "MoveMouse":
         self.target = "window"
@@ -868,7 +868,7 @@ class MoveMouse(Block["MoveMouse"]):
         return (self.x is None) or (self.y is None)
 
 
-@attr.s
+@attrs.define
 class RenameWin(Block["RenameWin"]):
     """
     重名窗口.
@@ -882,8 +882,8 @@ class RenameWin(Block["RenameWin"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/RenameWin/index.html
     """
 
-    old: str = attr.ib(default=None)
-    new: str = attr.ib(default=None)
+    old: str = attrs.field(default=None)
+    new: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, old: str, new: str) -> "RenameWin":
@@ -903,7 +903,7 @@ class RenameWin(Block["RenameWin"]):
         return (self.old is None) or (self.new is None)
 
 
-@attr.s
+@attrs.define
 class TargetWin(Block["TargetWin"]):
     """
     Reference:
@@ -911,7 +911,7 @@ class TargetWin(Block["TargetWin"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/TargetWin/index.html
     """
 
-    window: str = attr.ib(default=None)
+    window: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, window: str) -> "TargetWin":
@@ -925,7 +925,7 @@ class TargetWin(Block["TargetWin"]):
         return self.window is None
 
 
-@attr.s
+@attrs.define
 class Wait(Block["Wait"]):
     """
     Example::
@@ -937,7 +937,7 @@ class Wait(Block["Wait"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Wait/index.html
     """
 
-    milli: T.Optional[int] = attr.ib(default=None)
+    milli: T.Optional[int] = attrs.field(default=None)
 
     @classmethod
     def make(cls, milli: int) -> "Wait":
@@ -951,7 +951,7 @@ class Wait(Block["Wait"]):
         return not bool(self.milli)
 
 
-@attr.s
+@attrs.define
 class WaitForWin(Block["WaitForWin"]):
     """
     等待一个窗口被完全打开.
@@ -965,8 +965,8 @@ class WaitForWin(Block["WaitForWin"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/WaitForWin/index.html
     """
 
-    window: T.Optional[str] = attr.ib(default=None)
-    timeout: T.Optional[int] = attr.ib(default=None)
+    window: T.Optional[str] = attrs.field(default=None)
+    timeout: T.Optional[int] = attrs.field(default=None)
 
     @classmethod
     def make(cls, window: str, timeout: int) -> "WaitForWin":
@@ -980,7 +980,7 @@ class WaitForWin(Block["WaitForWin"]):
         return (self.window is None) or (self.timeout is None)
 
 
-@attr.s
+@attrs.define
 class WaitForWinEnabled(Block["WaitForWinEnabled"]):
     """
     等待当前窗口被完全打开.
@@ -994,7 +994,7 @@ class WaitForWinEnabled(Block["WaitForWinEnabled"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/WaitForWinEnabled/index.html
     """
 
-    timeout: int = attr.ib(default=None)
+    timeout: int = attrs.field(default=None)
 
     @classmethod
     def make(cls, timeout: int) -> "WaitForWinEnabled":
@@ -1008,7 +1008,7 @@ class WaitForWinEnabled(Block["WaitForWinEnabled"]):
         return self.timeout is None
 
 
-@attr.s
+@attrs.define
 class SetForegroundWin(Block["SetForegroundWin"]):
     """
     Reference:
@@ -1021,7 +1021,7 @@ class SetForegroundWin(Block["SetForegroundWin"]):
         return "<SetForegroundWin>"
 
 
-@attr.s
+@attrs.define
 class SetActiveWin(Block["SetActiveWin"]):
     """
     Reference:
@@ -1034,7 +1034,7 @@ class SetActiveWin(Block["SetActiveWin"]):
         return "<SetActiveWin>"
 
 
-@attr.s
+@attrs.define
 class Toggle(Block["Toggle"]):
     """
     用 Round robin 的方式, 让你在按下同一个 Hotkey 的时候, 自动改变行为.
@@ -1059,7 +1059,7 @@ class Toggle(Block["Toggle"]):
         return "<Toggle>"
 
 
-@attr.s
+@attrs.define
 class ToggleHotkeys(Block["ToggleHotkeys"]):
     """
     Reference:
@@ -1072,7 +1072,7 @@ class ToggleHotkeys(Block["ToggleHotkeys"]):
         return "<ToggleHotkeys>"
 
 
-@attr.s
+@attrs.define
 class ToggleWin(Block["ToggleWin"]):
     """
     用 Round robin 的方式, 让你在按下同一个 Hotkey 的时候, 自动切换到队列中的下一个窗口.
@@ -1082,7 +1082,7 @@ class ToggleWin(Block["ToggleWin"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/ToggleWin/index.html
     """
 
-    windows: T.List[str] = attr.ib(factory=list)
+    windows: T.List[str] = attrs.field(factory=list)
 
     @classmethod
     def make(cls, windows: T.List[str]) -> "ToggleWin":
@@ -1096,7 +1096,7 @@ class ToggleWin(Block["ToggleWin"]):
         return len(self.windows) == 0
 
 
-@attr.s
+@attrs.define
 class SendWin(Block["SendWin"]):
     """
     将按键动作发送到指定窗口.  它会自动将该窗口设为当前活动窗口.
@@ -1106,7 +1106,7 @@ class SendWin(Block["SendWin"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWin/index.html
     """
 
-    window: str = attr.ib(default=None)
+    window: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, window: str) -> "SendWin":
@@ -1120,7 +1120,7 @@ class SendWin(Block["SendWin"]):
         return self.window is None
 
 
-@attr.s
+@attrs.define
 class SendWinM(Block["SendWinM"]):
     """
     将按键动作发送到指定后台窗口. 该窗口可以是后台窗口.
@@ -1130,7 +1130,7 @@ class SendWinM(Block["SendWinM"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWinM/index.html
     """
 
-    window: str = attr.ib(default=None)
+    window: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, window: str) -> "SendWinM":
@@ -1144,7 +1144,7 @@ class SendWinM(Block["SendWinM"]):
         return self.window is None
 
 
-@attr.s
+@attrs.define
 class SendWinMF(Block["SendWinMF"]):
     """
     Reference:
@@ -1152,7 +1152,7 @@ class SendWinMF(Block["SendWinMF"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWinMF/index.html
     """
 
-    window: str = attr.ib(default=None)
+    window: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, window: str) -> "SendWinMF":
@@ -1166,7 +1166,7 @@ class SendWinMF(Block["SendWinMF"]):
         return self.window is None
 
 
-@attr.s
+@attrs.define
 class SendWinS(Block["SendWinS"]):
     """
     Reference:
@@ -1174,7 +1174,7 @@ class SendWinS(Block["SendWinS"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWinS/index.html
     """
 
-    window: str = attr.ib(default=None)
+    window: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, window: str) -> "SendWinS":
@@ -1188,7 +1188,7 @@ class SendWinS(Block["SendWinS"]):
         return self.window is None
 
 
-@attr.s
+@attrs.define
 class SendWinSF(Block["SendWinSF"]):
     """
     Reference:
@@ -1196,7 +1196,7 @@ class SendWinSF(Block["SendWinSF"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWinSF/index.html
     """
 
-    window: str = attr.ib(default=None)
+    window: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, window: str) -> "SendWinSF":
@@ -1210,7 +1210,7 @@ class SendWinSF(Block["SendWinSF"]):
         return self.window is None
 
 
-@attr.s
+@attrs.define
 class SendFocusWin(Block["SendFocusWin"]):
     """
     将按键动作发送到当前活动窗口.
@@ -1225,7 +1225,7 @@ class SendFocusWin(Block["SendFocusWin"]):
         return f"<SendFocusWin>"
 
 
-@attr.s
+@attrs.define
 class SetWinPos(Block["SetWinPos"]):
     """
     设置窗口在桌面的位置..
@@ -1235,8 +1235,8 @@ class SetWinPos(Block["SetWinPos"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SetWinPos/index.html
     """
 
-    x: int = attr.ib(default=None)
-    y: int = attr.ib(default=None)
+    x: int = attrs.field(default=None)
+    y: int = attrs.field(default=None)
 
     @classmethod
     def make(cls, x: int, y: int) -> "SetWinPos":
@@ -1250,7 +1250,7 @@ class SetWinPos(Block["SetWinPos"]):
         return (self.x is None) or (self.y is None)
 
 
-@attr.s
+@attrs.define
 class SetWinSize(Block["SetWinSize"]):
     """
     设置窗口大小.
@@ -1260,8 +1260,8 @@ class SetWinSize(Block["SetWinSize"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SetWinSize/index.html
     """
 
-    x: int = attr.ib(default=None)
-    y: int = attr.ib(default=None)
+    x: int = attrs.field(default=None)
+    y: int = attrs.field(default=None)
 
     @classmethod
     def make(cls, x: int, y: int) -> "SetWinSize":
@@ -1275,7 +1275,7 @@ class SetWinSize(Block["SetWinSize"]):
         return (self.x is None) or (self.y is None)
 
 
-@attr.s
+@attrs.define
 class SetWinRect(Block["SetWinRect"]):
     """
     设置窗口的位置以及大小.
@@ -1285,10 +1285,10 @@ class SetWinRect(Block["SetWinRect"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SetWinRect/index.html
     """
 
-    x: int = attr.ib(default=None)
-    y: int = attr.ib(default=None)
-    width: int = attr.ib(default=None)
-    height: int = attr.ib(default=None)
+    x: int = attrs.field(default=None)
+    y: int = attrs.field(default=None)
+    width: int = attrs.field(default=None)
+    height: int = attrs.field(default=None)
 
     @classmethod
     def make(cls, x: int, y: int, width: int, height: int) -> "SetWinRect":
@@ -1307,7 +1307,7 @@ class SetWinRect(Block["SetWinRect"]):
         )
 
 
-@attr.s
+@attrs.define
 class Text(Block["Text"]):
     """
     用键盘输入文本.
@@ -1317,7 +1317,7 @@ class Text(Block["Text"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/Text/index.html
     """
 
-    text: str = attr.ib(default=None)
+    text: str = attrs.field(default=None)
 
     @classmethod
     def make(cls, text: str) -> "Text":
@@ -1331,7 +1331,7 @@ class Text(Block["Text"]):
         return self.text is None
 
 
-@attr.s
+@attrs.define
 class CreatePanel(Block["CreatePanel"]):
     """
     创建一个 Panel 按钮面板 widget.
@@ -1341,11 +1341,11 @@ class CreatePanel(Block["CreatePanel"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/CreatePanel/index.html
     """
 
-    name: str = attr.ib(default=None)
-    x: int = attr.ib(default=None)
-    y: int = attr.ib(default=None)
-    width: int = attr.ib(default=None)
-    height: int = attr.ib(default=None)
+    name: str = attrs.field(default=None)
+    x: int = attrs.field(default=None)
+    y: int = attrs.field(default=None)
+    width: int = attrs.field(default=None)
+    height: int = attrs.field(default=None)
 
     @classmethod
     def make(
@@ -1372,7 +1372,7 @@ class CreatePanel(Block["CreatePanel"]):
         )
 
 
-@attr.s
+@attrs.define
 class CreateButton(Block["CreateButton"]):
     """
     创建 Panel 按钮面板上的按钮.
@@ -1382,12 +1382,12 @@ class CreateButton(Block["CreateButton"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/CreateButton/index.html
     """
 
-    name: str = attr.ib(default=None)
-    x: int = attr.ib(default=None)
-    y: int = attr.ib(default=None)
-    width: int = attr.ib(default=None)
-    height: int = attr.ib(default=None)
-    text: T.Optional[str] = attr.ib(default=None)
+    name: str = attrs.field(default=None)
+    x: int = attrs.field(default=None)
+    y: int = attrs.field(default=None)
+    width: int = attrs.field(default=None)
+    height: int = attrs.field(default=None)
+    text: T.Optional[str] = attrs.field(default=None)
 
     @classmethod
     def make(
@@ -1427,7 +1427,7 @@ class CreateButton(Block["CreateButton"]):
         )
 
 
-@attr.s
+@attrs.define
 class CreatePictureButton(Block["CreatePictureButton"]):
     """
     创建 Panel 按钮面板上的带图标的按钮.
@@ -1437,11 +1437,11 @@ class CreatePictureButton(Block["CreatePictureButton"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/CreatePictureButton/index.html
     """
 
-    name: str = attr.ib(default=None)
-    x: int = attr.ib(default=None)
-    y: int = attr.ib(default=None)
-    file: str = attr.ib(default=None)
-    text: T.Optional[str] = attr.ib(default=None)
+    name: str = attrs.field(default=None)
+    x: int = attrs.field(default=None)
+    y: int = attrs.field(default=None)
+    file: str = attrs.field(default=None)
+    text: T.Optional[str] = attrs.field(default=None)
 
     @classmethod
     def make(
@@ -1473,7 +1473,7 @@ class CreatePictureButton(Block["CreatePictureButton"]):
         )
 
 
-@attr.s
+@attrs.define
 class CreateColoredButton(Block["CreateColoredButton"]):
     """
     创建 Panel 按钮面板上的色块的按钮.
@@ -1483,14 +1483,14 @@ class CreateColoredButton(Block["CreateColoredButton"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/CreateColoredButton/index.html
     """
 
-    name: str = attr.ib(default=None)
-    x: int = attr.ib(default=None)
-    y: int = attr.ib(default=None)
-    width: int = attr.ib(default=None)
-    height: int = attr.ib(default=None)
-    bkcolor: str = attr.ib(default=None)
-    textcolor: str = attr.ib(default=None)
-    text: T.Optional[str] = attr.ib(default=None)
+    name: str = attrs.field(default=None)
+    x: int = attrs.field(default=None)
+    y: int = attrs.field(default=None)
+    width: int = attrs.field(default=None)
+    height: int = attrs.field(default=None)
+    bkcolor: str = attrs.field(default=None)
+    textcolor: str = attrs.field(default=None)
+    text: T.Optional[str] = attrs.field(default=None)
 
     @classmethod
     def make(
@@ -1545,7 +1545,7 @@ class CreateColoredButton(Block["CreateColoredButton"]):
         )
 
 
-@attr.s
+@attrs.define
 class AddButtonToPanel(Block["AddButtonToPanel"]):
     """
     将按钮添加到 Panel 按钮面板中.
@@ -1555,12 +1555,12 @@ class AddButtonToPanel(Block["AddButtonToPanel"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/AddButtonToPanel/index.html
     """
 
-    button: str = attr.ib(default=None)
-    panel: str = attr.ib(default=None)
-    x: T.Optional[int] = attr.ib(default=0)
-    y: T.Optional[int] = attr.ib(default=0)
-    width: T.Optional[int] = attr.ib(default=None)
-    height: T.Optional[int] = attr.ib(default=None)
+    button: str = attrs.field(default=None)
+    panel: str = attrs.field(default=None)
+    x: T.Optional[int] = attrs.field(default=0)
+    y: T.Optional[int] = attrs.field(default=0)
+    width: T.Optional[int] = attrs.field(default=None)
+    height: T.Optional[int] = attrs.field(default=None)
 
     @classmethod
     def make(
@@ -1594,7 +1594,7 @@ class AddButtonToPanel(Block["AddButtonToPanel"]):
         return (self.button is None) or (self.panel is None)
 
 
-@attr.s
+@attrs.define
 class SetButtonHotkey(Block["SetButtonHotkey"]):
     """
     将按钮和 :class:`Hotkey` 绑定.
@@ -1604,8 +1604,8 @@ class SetButtonHotkey(Block["SetButtonHotkey"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SetButtonHotkey/index.html
     """
 
-    button: str = attr.ib(default=None)
-    hotkey: "Hotkey" = attr.ib(default=None)
+    button: str = attrs.field(default=None)
+    hotkey: "Hotkey" = attrs.field(default=None)
 
     @classmethod
     def make(
@@ -1623,7 +1623,7 @@ class SetButtonHotkey(Block["SetButtonHotkey"]):
         return (self.button is None) or (self.hotkey is None)
 
 
-@attr.s
+@attrs.define
 class SetButtonCommand(Block["SetButtonCommand"]):
     """
     将按钮和 :class:`Command` 绑定.
@@ -1633,9 +1633,9 @@ class SetButtonCommand(Block["SetButtonCommand"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SetButtonCommand/index.html
     """
 
-    button: str = attr.ib(default=None)
-    command: "Command" = attr.ib(default=None)
-    args: tuple = attr.ib(default=None)
+    button: str = attrs.field(default=None)
+    command: "Command" = attrs.field(default=None)
+    args: tuple = attrs.field(default=None)
 
     @classmethod
     def make(
@@ -1658,7 +1658,7 @@ class SetButtonCommand(Block["SetButtonCommand"]):
         return (self.button is None) or (self.command is None)
 
 
-@attr.s
+@attrs.define
 class AlwaysOnTop(Block["AlwaysOnTop"]):
     """
     将当前窗口设为桌面最上端的窗口
@@ -1668,7 +1668,7 @@ class AlwaysOnTop(Block["AlwaysOnTop"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/AlwaysOnTop/index.html
     """
 
-    on: bool = attr.ib(default=True)
+    on: bool = attrs.field(default=True)
 
     @classmethod
     def make(cls, on: bool = True) -> "AlwaysOnTop":
@@ -1682,7 +1682,7 @@ class AlwaysOnTop(Block["AlwaysOnTop"]):
             return f"<AlwaysOnTop off>"
 
 
-@attr.s
+@attrs.define
 class SetPanelLayout(Block["SetPanelLayout"]):
     """
     设置 Panel 按钮面板的布局.
@@ -1692,11 +1692,11 @@ class SetPanelLayout(Block["SetPanelLayout"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/SetPanelLayout/index.html
     """
 
-    panel: str = attr.ib(default=None)
-    row_length: int = attr.ib(default=None)
-    margin: int = attr.ib(default=None)
-    button_width: T.Optional[int] = attr.ib(default=None)
-    button_height: T.Optional[int] = attr.ib(default=None)
+    panel: str = attrs.field(default=None)
+    row_length: int = attrs.field(default=None)
+    margin: int = attrs.field(default=None)
+    button_width: T.Optional[int] = attrs.field(default=None)
+    button_height: T.Optional[int] = attrs.field(default=None)
 
     @classmethod
     def make(

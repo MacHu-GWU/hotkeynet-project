@@ -22,6 +22,7 @@ jobs:
 #        os: ["ubuntu-latest", ] # for debug only
         python-version: ["3.8", "3.9", "3.10", "3.11", "3.12"]
 #        python-version: ["3.8", ] # for debug only
+        attrs-version: [ "21.4.0", "22.2.0", "23.2.0" ]
         exclude:
           - os: windows-latest # this is a useless exclude rules for demonstration use only
             python-version: 2.7
@@ -38,6 +39,8 @@ jobs:
           python -VV
           python -m site
           python -m pip install --upgrade pip setuptools wheel virtualenv
+          echo attrs==${{ matrix.attrs-version }}
+          pip install attrs==${{ matrix.attrs-version }}
           pip install -r requirements.txt
           pip install -r requirements-test.txt
           pip install .
@@ -46,6 +49,8 @@ jobs:
         run: |
           python -m site
           python -m pip install --upgrade pip setuptools wheel virtualenv
+          echo attrs==${{ matrix.attrs-version }}
+          pip install attrs==${{ matrix.attrs-version }}
           pip install -r requirements.txt
           pip install -r requirements-test.txt
           pip install .
