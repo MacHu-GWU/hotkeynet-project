@@ -15,6 +15,13 @@ Release and Version History
 **Miscellaneous**
 
 
+0.1.6 (2024-07-02)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Minor Improvements**
+
+- Transition from ``attr.s`` styled APi to ``attrs.define`` styled API.
+
+
 0.1.5 (2024-07-01)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Minor Improvements**
