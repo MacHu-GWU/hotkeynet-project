@@ -1,9 +1,9 @@
 
 .. image:: https://readthedocs.org/projects/hotkeynet/badge/?version=latest
-    :target: https://hotkeynet.readthedocs.io/index.html
+    :target: https://hotkeynet.readthedocs.io/latest/index.html
     :alt: Documentation Status
 
-.. image:: https://github.com/MacHu-GWU/hotkeynet-project/workflows/CI/badge.svg
+.. image:: https://github.com/MacHu-GWU/hotkeynet-project/actions/workflows/main.yml/badge.svg
     :target: https://github.com/MacHu-GWU/hotkeynet-project/actions?query=workflow:CI
 
 .. image:: https://codecov.io/gh/MacHu-GWU/hotkeynet-project/branch/main/graph/badge.svg
@@ -24,13 +24,13 @@
 ------
 
 .. image:: https://img.shields.io/badge/Link-Document-blue.svg
-    :target: https://hotkeynet.readthedocs.io/index.html
+    :target: https://hotkeynet.readthedocs.io/latest/index.html
 
 .. image:: https://img.shields.io/badge/Link-API-blue.svg
-    :target: https://hotkeynet.readthedocs.io/py-modindex.html
+    :target: https://hotkeynet.readthedocs.io/latest/py-modindex.html
 
 .. image:: https://img.shields.io/badge/Link-Source_Code-blue.svg
-    :target: https://hotkeynet.readthedocs.io/py-modindex.html
+    :target: https://hotkeynet.readthedocs.io/latest/py-modindex.html
 
 .. image:: https://img.shields.io/badge/Link-Install-blue.svg
     :target: `install`_
@@ -50,6 +50,8 @@
 
 Welcome to ``hotkeynet`` Documentation
 ==============================================================================
+.. image:: https://hotkeynet.readthedocs.io/latest/_static/hotkeynet-logo.png
+    :target: https://hotkeynet.readthedocs.io/latest/
 
 
 Overview
@@ -66,7 +68,7 @@ HotkeyNet 脚本是一个类 XML 语法的 DSL (特定领域编程语言). 基�
 - 运行 Python 生成最终脚本
 - 打开 HotkeyNet 软件并使用该脚本
 
-由于 HotkeyNet 官方网站已经不在了, 本项目在 https://hotkeynet.readthedocs.io/index.html 维护了一个文档的镜像, 以供查阅.
+由于 HotkeyNet 官方网站已经不在了, 本项目在 https://hotkeynet.readthedocs.io/latest/index.html 维护了一个文档的镜像, 以供查阅.
 
 .. _install:
 

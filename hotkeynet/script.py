@@ -278,7 +278,7 @@ class Label(Block["Script"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Label/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Label/index.html
     """
 
     name: str = attr.ib(default=None)
@@ -319,7 +319,7 @@ class Command(Block["Command"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Command/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Command/index.html
     """
 
     name: str = attr.ib(default=None)
@@ -390,7 +390,7 @@ class CallCommand(Block["Command"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Command/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Command/index.html
     """
 
     cmd: T.Union[str, Command] = attr.ib(default=None)
@@ -429,7 +429,7 @@ class SendPC(Block["SendPC.tpl"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SendPC/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SendPC/index.html
     """
 
     ip: T.Optional[str] = attr.ib(default="local")
@@ -456,7 +456,7 @@ class Run(Block["Run"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Run/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Run/index.html
     """
 
     path: T.Optional[str] = attr.ib(default=None)
@@ -488,7 +488,7 @@ class Hotkey(Block["Hotkey"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Hotkey/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Hotkey/index.html
     """
 
     key: str = attr.ib(default=None)
@@ -523,7 +523,7 @@ class MovementHotkey(Block["MovementHotkey"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/MovementHotkey/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/MovementHotkey/index.html
     """
 
     key: str = attr.ib(default=None)
@@ -550,7 +550,7 @@ class Key(Block["Key"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Key/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Key/index.html
     """
 
     key: str = attr.ib(default=None)
@@ -587,7 +587,7 @@ class KeyUp(Block["KeyUp"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Key/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Key/index.html
     """
 
     key: str = attr.ib(default=None)
@@ -616,7 +616,7 @@ class KeyDown(Block["KeyDown"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Key/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Key/index.html
     """
 
     key: str = attr.ib(default=None)
@@ -644,7 +644,7 @@ class SendLabel(Block["SendLabel"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SendLabel/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SendLabel/index.html
     """
 
     name: str = attr.ib(default=None)
@@ -699,7 +699,7 @@ class ClickMouse(Block["Mouse"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/ClickMouse/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/ClickMouse/index.html
     """
 
     # LButton, MButton, RButton, Button4, or Button5
@@ -842,7 +842,7 @@ class MoveMouse(Block["MoveMouse"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/MoveMouse/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/MoveMouse/index.html
     """
 
     x: int = attr.ib(default=None)
@@ -879,7 +879,7 @@ class RenameWin(Block["RenameWin"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/RenameWin/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/RenameWin/index.html
     """
 
     old: str = attr.ib(default=None)
@@ -908,7 +908,7 @@ class TargetWin(Block["TargetWin"]):
     """
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/TargetWin/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/TargetWin/index.html
     """
 
     window: str = attr.ib(default=None)
@@ -934,7 +934,7 @@ class Wait(Block["Wait"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Wait/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Wait/index.html
     """
 
     milli: T.Optional[int] = attr.ib(default=None)
@@ -962,7 +962,7 @@ class WaitForWin(Block["WaitForWin"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/WaitForWin/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/WaitForWin/index.html
     """
 
     window: T.Optional[str] = attr.ib(default=None)
@@ -991,7 +991,7 @@ class WaitForWinEnabled(Block["WaitForWinEnabled"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/WaitForWinEnabled/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/WaitForWinEnabled/index.html
     """
 
     timeout: int = attr.ib(default=None)
@@ -1013,7 +1013,7 @@ class SetForegroundWin(Block["SetForegroundWin"]):
     """
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SetForegroundWin/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SetForegroundWin/index.html
     """
 
     @property
@@ -1026,7 +1026,7 @@ class SetActiveWin(Block["SetActiveWin"]):
     """
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SetActiveWin/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SetActiveWin/index.html
     """
 
     @property
@@ -1051,7 +1051,7 @@ class Toggle(Block["Toggle"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Toggle/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Toggle/index.html
     """
 
     @property
@@ -1064,7 +1064,7 @@ class ToggleHotkeys(Block["ToggleHotkeys"]):
     """
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/ToggleHotkeys/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/ToggleHotkeys/index.html
     """
 
     @property
@@ -1079,7 +1079,7 @@ class ToggleWin(Block["ToggleWin"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/ToggleWin/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/ToggleWin/index.html
     """
 
     windows: T.List[str] = attr.ib(factory=list)
@@ -1103,7 +1103,7 @@ class SendWin(Block["SendWin"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SendWin/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWin/index.html
     """
 
     window: str = attr.ib(default=None)
@@ -1127,7 +1127,7 @@ class SendWinM(Block["SendWinM"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SendWinM/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWinM/index.html
     """
 
     window: str = attr.ib(default=None)
@@ -1149,7 +1149,7 @@ class SendWinMF(Block["SendWinMF"]):
     """
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SendWinMF/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWinMF/index.html
     """
 
     window: str = attr.ib(default=None)
@@ -1171,7 +1171,7 @@ class SendWinS(Block["SendWinS"]):
     """
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SendWinS/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWinS/index.html
     """
 
     window: str = attr.ib(default=None)
@@ -1193,7 +1193,7 @@ class SendWinSF(Block["SendWinSF"]):
     """
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SendWinSF/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SendWinSF/index.html
     """
 
     window: str = attr.ib(default=None)
@@ -1217,7 +1217,7 @@ class SendFocusWin(Block["SendFocusWin"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SendFocusWin/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SendFocusWin/index.html
     """
 
     @property
@@ -1232,7 +1232,7 @@ class SetWinPos(Block["SetWinPos"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SetWinPos/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SetWinPos/index.html
     """
 
     x: int = attr.ib(default=None)
@@ -1257,7 +1257,7 @@ class SetWinSize(Block["SetWinSize"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SetWinSize/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SetWinSize/index.html
     """
 
     x: int = attr.ib(default=None)
@@ -1282,7 +1282,7 @@ class SetWinRect(Block["SetWinRect"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SetWinRect/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SetWinRect/index.html
     """
 
     x: int = attr.ib(default=None)
@@ -1314,7 +1314,7 @@ class Text(Block["Text"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/Text/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/Text/index.html
     """
 
     text: str = attr.ib(default=None)
@@ -1338,7 +1338,7 @@ class CreatePanel(Block["CreatePanel"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/CreatePanel/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/CreatePanel/index.html
     """
 
     name: str = attr.ib(default=None)
@@ -1379,7 +1379,7 @@ class CreateButton(Block["CreateButton"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/CreateButton/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/CreateButton/index.html
     """
 
     name: str = attr.ib(default=None)
@@ -1434,7 +1434,7 @@ class CreatePictureButton(Block["CreatePictureButton"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/CreatePictureButton/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/CreatePictureButton/index.html
     """
 
     name: str = attr.ib(default=None)
@@ -1480,7 +1480,7 @@ class CreateColoredButton(Block["CreateColoredButton"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/CreateColoredButton/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/CreateColoredButton/index.html
     """
 
     name: str = attr.ib(default=None)
@@ -1552,7 +1552,7 @@ class AddButtonToPanel(Block["AddButtonToPanel"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/AddButtonToPanel/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/AddButtonToPanel/index.html
     """
 
     button: str = attr.ib(default=None)
@@ -1601,7 +1601,7 @@ class SetButtonHotkey(Block["SetButtonHotkey"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SetButtonHotkey/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SetButtonHotkey/index.html
     """
 
     button: str = attr.ib(default=None)
@@ -1630,7 +1630,7 @@ class SetButtonCommand(Block["SetButtonCommand"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SetButtonCommand/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SetButtonCommand/index.html
     """
 
     button: str = attr.ib(default=None)
@@ -1665,7 +1665,7 @@ class AlwaysOnTop(Block["AlwaysOnTop"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/AlwaysOnTop/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/AlwaysOnTop/index.html
     """
 
     on: bool = attr.ib(default=True)
@@ -1689,7 +1689,7 @@ class SetPanelLayout(Block["SetPanelLayout"]):
 
     Reference:
 
-    - https://hotkeynet.readthedocs.io/02-Reference/SetPanelLayout/index.html
+    - https://hotkeynet.readthedocs.io/latest/02-Reference/SetPanelLayout/index.html
     """
 
     panel: str = attr.ib(default=None)
