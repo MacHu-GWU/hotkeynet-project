@@ -15,6 +15,13 @@ Release and Version History
 **Miscellaneous**
 
 
+0.1.7 (2024-07-06)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+**Minor Improvements**
+
+- Now most of type hint of factory method arguments are changed from ``typing.List[str]`` to ``typing.Union[typing.Iterable[str], typing.List[str]]``.
+
+
 0.1.6 (2024-07-02)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 **Minor Improvements**

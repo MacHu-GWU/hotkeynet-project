@@ -648,7 +648,7 @@ class SendLabel(Block["SendLabel"]):
     """
 
     name: str = attrs.field(default=None)
-    to: T.List[str] = attrs.field(factory=list)
+    to: T.Union[T.List[str], T.Iterable[str]] = attrs.field(factory=list, converter=list)
 
     @property
     def targets(self) -> str:
@@ -1082,10 +1082,10 @@ class ToggleWin(Block["ToggleWin"]):
     - https://hotkeynet.readthedocs.io/latest/02-Reference/ToggleWin/index.html
     """
 
-    windows: T.List[str] = attrs.field(factory=list)
+    windows: T.Union[T.List[str], T.Iterable[str]] = attrs.field(factory=list, converter=list)
 
     @classmethod
-    def make(cls, windows: T.List[str]) -> "ToggleWin":
+    def make(cls, windows: T.Union[T.List[str], T.Iterable[str]]) -> "ToggleWin":
         return cls(windows=windows)
 
     @property
